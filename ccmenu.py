@@ -1,8 +1,13 @@
+# ccmenu.py
+# next task- take data from boxes and pass to character creation
 import pygame as pg
 from pygame.locals import QUIT, MOUSEBUTTONDOWN, KEYDOWN, K_BACKSPACE, K_RETURN
 from utils.names import get_random_name
 from utils.races import get_races, get_random_race
 import random
+import subprocess
+import json
+import os
 
 pg.init()
 
@@ -82,6 +87,7 @@ def randomize_all():
 running = True
 dropdown_open = None
 name_active = False
+finalized = False
 
 while running:
     screen.fill(BUFF_OFF_WHITE)
@@ -167,10 +173,33 @@ while running:
             elif 1510 <= x <= 1540 and 60 <= y <= 90:
                 selected_background = random.choice(backgrounds)
             elif finalize_button_rect.collidepoint(x, y):
-                if not selected_name:
-                    selected_name = get_random_name()
-                print("Finalize button clicked!")
-                # Here you can add the logic to finalize the character creation.
+                if not finalized:
+                    finalized = True
+                    if not selected_name:
+                        selected_name = get_random_name()
+                    print("Finalize button clicked!")
+                    
+                    # Prepare character data
+                    character_data = {
+                        "name": selected_name,
+                        "gender": selected_gender,
+                        "game_edition": selected_edition,
+                        "race": selected_race,
+                        "class": selected_class,
+                        "background": selected_background
+                    }
+
+                    # Save character data to JSON
+                    if not os.path.exists('./saves'):
+                        os.makedirs('./saves')
+                    with open(f'./saves/{selected_name}.json', 'w') as f:
+                        json.dump(character_data, f)
+                    
+                    # Call the creator.py script
+                    subprocess.run(['python', 'creator.py', f'./saves/{selected_name}.json'])
+
+                    # Call the csdisplay.py script to display the character sheet
+                    subprocess.run(['python', 'csdisplay.py', f'./saves/{selected_name}.json'])
             else:
                 dropdown_open = None  # Close any dropdown if clicked outside
 

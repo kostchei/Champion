@@ -1,3 +1,6 @@
+# exists.py
+# the idea here is to check the saves folder for existing files and load the most recent one that is not dead
+
 import os
 import json
 from datetime import datetime
