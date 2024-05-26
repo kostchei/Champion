@@ -22,11 +22,28 @@ terrain_types = {
     "settlement": os.path.join(script_dir, "images", "settlement.png")
 }
 
-# Load images
+# Define the probabilities for each terrain type
+terrain_probabilities = {
+    "forest": 0.75,
+    "hill": 0.10,
+    "open": 0.10,
+    "water": 0.03,
+    "settlement": 0.02
+}
+
+def scale_image(image, hex_radius):
+    # Calculate the new size preserving the aspect ratio
+    original_size = image.size
+    scale_ratio = (hex_radius * 1.9) / max(original_size)
+    new_size = tuple([int(dim * scale_ratio) for dim in original_size])
+    return image.resize(new_size, Image.Resampling.LANCZOS)
+
+# Load and scale images
 terrain_images = {}
 for key, value in terrain_types.items():
     try:
-        terrain_images[key] = Image.open(value)
+        image = Image.open(value)
+        terrain_images[key] = scale_image(image, HEX_RADIUS)
     except FileNotFoundError as e:
         print(f"Error loading image for terrain type '{key}': {value}")
         print(str(e))
@@ -95,8 +112,11 @@ class ExampleHexMap:
         axial_coordinates = hx.cube_to_axial(all_coordinates)
         axial_coordinates = axial_coordinates[np.random.choice(len(axial_coordinates), num_shown_hexes, replace=False)]
 
+        terrain_choices = list(terrain_probabilities.keys())
+        terrain_weights = list(terrain_probabilities.values())
+
         for i, axial in enumerate(axial_coordinates):
-            terrain = random.choices(list(terrain_types.keys()), k=1)[0]
+            terrain = random.choices(terrain_choices, weights=terrain_weights, k=1)[0]
             hexes.append(ExampleHex(axial, terrain, hex_radius))
             hexes[-1].set_value(i)
 
@@ -163,15 +183,16 @@ class ExampleHexMap:
         self.main_surf.blits((hexagon.image, hexagon.get_draw_position() + self.center) for hexagon in hexagons)
 
         for hexagon in list(self.hex_map.values()):
-            text = self.font.render(str(hexagon.value), False, (0, 0, 0))
-            text.set_alpha(160)
-            text_pos = hexagon.get_position() + self.center
-            text_pos -= (text.get_width() / 2, text.get_height() / 2)
-            self.main_surf.blit(text, text_pos)
+            # Comment out or remove the lines below to stop displaying numbers
+            # text = self.font.render(str(hexagon.value), False, (0, 0, 0))
+            # text.set_alpha(160)
+            # text_pos = hexagon.get_position() + self.center
+            # text_pos -= (text.get_width() / 2, text.get_height() / 2)
+             # self.main_surf.blit(text, text_pos)
 
-        mouse_pos = np.array([pg.mouse.get_pos()]) - self.center
-        mouse_pos_as_cube_coord = hx.pixel_to_cube(mouse_pos, self.hex_radius)[0]
-        selected_hexes_cube_coords = Selection.get_selection(self.selection_type.value, mouse_pos_as_cube_coord,
+            mouse_pos = np.array([pg.mouse.get_pos()]) - self.center
+            mouse_pos_as_cube_coord = hx.pixel_to_cube(mouse_pos, self.hex_radius)[0]
+            selected_hexes_cube_coords = Selection.get_selection(self.selection_type.value, mouse_pos_as_cube_coord,
                                                              self.selection_radius, self.clicked_hex_as_cube_coord)
 
         selected_hexes_axial_coords = hx.cube_to_axial(selected_hexes_cube_coords)
