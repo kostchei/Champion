@@ -1,8 +1,6 @@
-# ccmenu.py
-
 import pygame as pg
-from pygame.locals import QUIT, MOUSEBUTTONDOWN
-from utils.names import get_names, get_random_name
+from pygame.locals import QUIT, MOUSEBUTTONDOWN, KEYDOWN, K_BACKSPACE, K_RETURN
+from utils.names import get_random_name
 from utils.races import get_races, get_random_race
 import random
 
@@ -36,7 +34,6 @@ dice_icon = pg.image.load('./images/dice.png')
 dice_icon = pg.transform.scale(dice_icon, (30, 30))
 
 # Menu items
-names = get_names()
 genders = ["Male", "Female"]
 races = get_races()
 classes = ["Fighter", "Rogue"]
@@ -44,7 +41,7 @@ backgrounds = ["Outlander", "Ruined", "Soldier", "Folk Hero"]
 game_editions = ["Champion", "Skullduggery"]
 
 # Default values
-selected_name = None
+selected_name = ""
 selected_gender = None
 selected_race = None
 selected_class = None
@@ -84,6 +81,8 @@ def randomize_all():
 # Main loop
 running = True
 dropdown_open = None
+name_active = False
+
 while running:
     screen.fill(BUFF_OFF_WHITE)
     
@@ -92,20 +91,24 @@ while running:
     for i, label in enumerate(labels):
         draw_text(label, label_font, DARK_BLUE, screen, 50 + i * (BUTTON_WIDTH + LABEL_SPACING), 20)
     
+    # Draw name input box
+    name_rect = pg.Rect(50, 60, BUTTON_WIDTH, BUTTON_HEIGHT)
+    pg.draw.rect(screen, WHITE, name_rect, 2 if name_active else 0)  # Add border if active
+    draw_text(selected_name, button_font, DARK_BLUE, screen, 60, 65)
+    draw_random_button(screen, 260, 60)
+    
     # Draw dropdown menus and randomize buttons
-    draw_dropdown(screen, names, 50, 60, selected_name, dropdown_open == 'name')
     draw_dropdown(screen, genders, 50 + (BUTTON_WIDTH + LABEL_SPACING), 60, selected_gender, dropdown_open == 'gender')
     draw_dropdown(screen, game_editions, 50 + 2 * (BUTTON_WIDTH + LABEL_SPACING), 60, selected_edition, dropdown_open == 'edition')
     draw_dropdown(screen, races, 50 + 3 * (BUTTON_WIDTH + LABEL_SPACING), 60, selected_race, dropdown_open == 'race')
     draw_dropdown(screen, classes, 50 + 4 * (BUTTON_WIDTH + LABEL_SPACING), 60, selected_class, dropdown_open == 'class')
     draw_dropdown(screen, backgrounds, 50 + 5 * (BUTTON_WIDTH + LABEL_SPACING), 60, selected_background, dropdown_open == 'background')
 
-    draw_random_button(screen, 250, 60)
-    draw_random_button(screen, 500, 60)
-    draw_random_button(screen, 750, 60)
-    draw_random_button(screen, 1000, 60)
-    draw_random_button(screen, 1250, 60)
-    draw_random_button(screen, 1500, 60)
+    draw_random_button(screen, 510, 60)
+    draw_random_button(screen, 760, 60)
+    draw_random_button(screen, 1010, 60)
+    draw_random_button(screen, 1260, 60)
+    draw_random_button(screen, 1510, 60)
     
     # Draw finalize button
     finalize_button_rect = pg.Rect(SCREEN_WIDTH - 250, 20, 200, BUTTON_HEIGHT)
@@ -120,53 +123,65 @@ while running:
             x, y = event.pos
             dropdown_open = None  # Reset dropdown_open initially
             
-            if 50 <= x <= 50 + BUTTON_WIDTH:
-                if 60 <= y <= 60 + BUTTON_HEIGHT:
-                    dropdown_open = 'name' if dropdown_open != 'name' else None
-                elif 60 < y <= 60 + (len(names) + 1) * BUTTON_HEIGHT:
-                    selected_name = names[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 250 <= x <= 280 and 60 <= y <= 90:
+            if name_rect.collidepoint(x, y):
+                name_active = True
+            else:
+                name_active = False
+                
+            if 260 <= x <= 290 and 60 <= y <= 90:
                 selected_name = get_random_name()
-            elif 50 + (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
+                
+            if 50 + (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
                 if 60 <= y <= 60 + BUTTON_HEIGHT:
                     dropdown_open = 'gender' if dropdown_open != 'gender' else None
                 elif 60 < y <= 60 + (len(genders) + 1) * BUTTON_HEIGHT:
                     selected_gender = genders[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 500 <= x <= 530 and 60 <= y <= 90:
+            elif 510 <= x <= 540 and 60 <= y <= 90:
                 selected_gender = random.choice(genders)
             elif 50 + 2 * (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + 2 * (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
                 if 60 <= y <= 60 + BUTTON_HEIGHT:
                     dropdown_open = 'edition' if dropdown_open != 'edition' else None
                 elif 60 < y <= 60 + (len(game_editions) + 1) * BUTTON_HEIGHT:
                     selected_edition = game_editions[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 750 <= x <= 780 and 60 <= y <= 90:
+            elif 760 <= x <= 790 and 60 <= y <= 90:
                 selected_edition = random.choice(game_editions)
             elif 50 + 3 * (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + 3 * (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
                 if 60 <= y <= 60 + BUTTON_HEIGHT:
                     dropdown_open = 'race' if dropdown_open != 'race' else None
                 elif 60 < y <= 60 + (len(races) + 1) * BUTTON_HEIGHT:
                     selected_race = races[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 1000 <= x <= 1030 and 60 <= y <= 90:
+            elif 1010 <= x <= 1040 and 60 <= y <= 90:
                 selected_race = get_random_race()
             elif 50 + 4 * (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + 4 * (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
                 if 60 <= y <= 60 + BUTTON_HEIGHT:
                     dropdown_open = 'class' if dropdown_open != 'class' else None
                 elif 60 < y <= 60 + (len(classes) + 1) * BUTTON_HEIGHT:
                     selected_class = classes[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 1250 <= x <= 1280 and 60 <= y <= 90:
+            elif 1260 <= x <= 1290 and 60 <= y <= 90:
                 selected_class = random.choice(classes)
             elif 50 + 5 * (BUTTON_WIDTH + LABEL_SPACING) <= x <= 50 + 5 * (BUTTON_WIDTH + LABEL_SPACING) + BUTTON_WIDTH:
                 if 60 <= y <= 60 + BUTTON_HEIGHT:
                     dropdown_open = 'background' if dropdown_open != 'background' else None
                 elif 60 < y <= 60 + (len(backgrounds) + 1) * BUTTON_HEIGHT:
                     selected_background = backgrounds[(y - 60) // BUTTON_HEIGHT - 1]
-            elif 1500 <= x <= 1530 and 60 <= y <= 90:
+            elif 1510 <= x <= 1540 and 60 <= y <= 90:
                 selected_background = random.choice(backgrounds)
             elif finalize_button_rect.collidepoint(x, y):
+                if not selected_name:
+                    selected_name = get_random_name()
                 print("Finalize button clicked!")
                 # Here you can add the logic to finalize the character creation.
             else:
                 dropdown_open = None  # Close any dropdown if clicked outside
+
+        if event.type == KEYDOWN:
+            if name_active:  # Check if name box is active
+                if event.key == K_RETURN:  # Handle Enter key press
+                    name_active = False
+                elif event.key == K_BACKSPACE:
+                    selected_name = selected_name[:-1]  # Remove last character
+                else:
+                    selected_name += event.unicode  # Add typed character
 
     pg.display.flip()
 
