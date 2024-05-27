@@ -1,0 +1,14 @@
+{
+    "name": "Drew",
+    "gender": "Male",
+    "game_edition": "Champion",
+    "race": "Olve,Elf",
+    "class": "Rogue",
+    "background": "Folk Hero",
+    "strength": 11,
+    "intelligence": 14,
+    "wisdom": 10,
+    "dexterity": 14,
+    "constitution": 13,
+    "charisma": 15
+}

@@ -1,13 +1,12 @@
 # ccmenu.py
-# next task- take data from boxes and pass to character creation
 import pygame as pg
 from pygame.locals import QUIT, MOUSEBUTTONDOWN, KEYDOWN, K_BACKSPACE, K_RETURN
 from utils.names import get_random_name
 from utils.races import get_races, get_random_race
 import random
-import subprocess
 import json
 import os
+import subprocess
 
 pg.init()
 
@@ -17,9 +16,9 @@ SCREEN_HEIGHT = 1080
 
 # Colors
 BUFF_OFF_WHITE = (247, 246, 237)
-DARK_BLUE = (34, 43, 56)
+DARK_BLUE = (30, 40, 50)
 WHITE = (237, 243, 252)
-GREY = (100, 100, 100)
+GREY = (240, 240, 230)
 
 # Fonts
 label_font = pg.font.Font(None, 36)
@@ -192,14 +191,13 @@ while running:
                     # Save character data to JSON
                     if not os.path.exists('./saves'):
                         os.makedirs('./saves')
-                    with open(f'./saves/{selected_name}.json', 'w') as f:
+                    with open('./saves/character.json', 'w') as f:
                         json.dump(character_data, f)
-                    
-                    # Call the creator.py script
-                    subprocess.run(['python', 'creator.py', f'./saves/{selected_name}.json'])
 
-                    # Call the csdisplay.py script to display the character sheet
-                    subprocess.run(['python', 'csdisplay.py', f'./saves/{selected_name}.json'])
+                    # Call the creator.py script
+                    subprocess.run(['python', 'creator.py', './saves/character.json'])
+                    
+                    running = False  # Exit the current script after handing off to creator.py
             else:
                 dropdown_open = None  # Close any dropdown if clicked outside
 
