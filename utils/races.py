@@ -1,9 +1,5 @@
 # utils/races.py
 
-import random
-
 def get_races():
-    return ["Oerdian,Human", "Olve,Elf"]
+    return ["Human", "Race2", "Race3"]
 
-def get_random_race():
-    return random.choice(get_races())

@@ -1,0 +1,44 @@
+{
+    "classes": {
+      "Fighter": {
+        "skills": ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],
+        "number_skills": 2,
+        "features": {
+          "Fighting Style": ["Defense", "Dueling", "Great Weapon Fighting", "Two Weapon Fighting"],
+          "Second Wind": {"level": 1, "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."}
+        },
+        "class_equipment": {
+          "Heavy": ["Ring Mail", "Battle Axe", "Maul", "Hand Axe", "Shield", "Horned Helmet", "25 gold"],
+          "Medium": ["Scale Mail", "Long Sword", "Short Sword", "Shield", "Plumed Helmet", "5 gold"],
+          "Light": ["Studded Leather", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
+        },
+        "attributes": {
+          "primary": "Strength",
+          "secondary": "Constitution",
+          "tertiary": "Dexterity"
+        },
+        "saving_throws": ["Strength", "Constitution"]
+      },
+      "Rogue": {
+        "skills": ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Sleight of Hand", "Stealth"],
+        "number_skills": 4,
+        "features": {
+          "Sneak Attack": {"level": 1, "description": "Deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll."},
+          "Thieves' Cant": {"level": 1, "description": "You can speak in a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation."}
+        },
+        "class_equipment": {
+          "Heavy": [],
+          "Medium": ["Half Plate", "Breastplate"],
+          "Light": ["Leather Armor", "Padded Armor", "Studded Leather Armor"]
+        },
+        "attributes": {
+          "primary": "Dexterity",
+          "secondary": "Intelligence",
+          "tertiary": "Charisma"
+        },
+        "saving_throws": ["Dexterity", "Intelligence"]
+      }
+    }
+  }
+  
+  
