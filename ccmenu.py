@@ -3,10 +3,11 @@ from tkinter import ttk
 import json
 import os
 import subprocess
+import random  # Ensure to import random module
 from PIL import Image, ImageTk
 from utils.names import get_random_name
 from utils.game_editions import get_game_editions
-from utils.races import get_races
+from utils.races import get_races, get_race_details
 from utils.classes import get_classes, get_class_details
 from utils.backgrounds import get_backgrounds, get_background_details
 
@@ -62,7 +63,7 @@ def randomize_edition():
     selected_edition.set(random.choice(game_editions))
 
 def randomize_race():
-    selected_race.set(get_random_race())
+    selected_race.set(random.choice(races))
 
 def randomize_class():
     selected_class.set(random.choice(classes))
@@ -103,6 +104,10 @@ def finalize_character():
     class_details = get_class_details(character_data["class"])
     character_data.update(class_details)
     
+    # Get detailed race information
+    race_details = get_race_details(character_data["race"])
+    character_data.update(race_details)
+
     # Get detailed background information
     background_details = get_background_details(character_data["background"])
     character_data.update(background_details)

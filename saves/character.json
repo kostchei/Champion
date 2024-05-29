@@ -1,8 +1,8 @@
 {
-    "name": "Chad",
+    "name": "Bryn",
     "gender": "Male",
     "game_edition": "Champion",
-    "race": "Human",
+    "race": "Custom Lineage",
     "class": "Fighter",
     "background": "Outlander",
     "skills": [
@@ -11,7 +11,6 @@
         "Language",
         "Musical Instrument"
     ],
-    "number_skills": 2,
     "features": {
         "Fighting Style": [
             "Defense",
@@ -24,32 +23,7 @@
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
         }
     },
-    "class_equipment": {
-        "Heavy": [
-            "Ring Mail",
-            "Battle Axe",
-            "Maul",
-            "Hand Axe",
-            "Shield",
-            "Horned Helmet",
-            "25 gold"
-        ],
-        "Medium": [
-            "Scale Mail",
-            "Long Sword",
-            "Short Sword",
-            "Shield",
-            "Plumed Helmet",
-            "5 gold"
-        ],
-        "Light": [
-            "Studded Leather",
-            "Rapier",
-            "Short Sword",
-            "Shield",
-            "Fancy Hat with Feather"
-        ]
-    },
+    "class_equipment": [],
     "attributes": {
         "primary": "Strength",
         "secondary": "Constitution",
@@ -59,6 +33,38 @@
         "Strength",
         "Constitution"
     ],
+    "ability_score_increase": {
+        "description": "One ability score of your choice increases by 2.",
+        "type": "choice",
+        "values": {
+            "Strength": 2,
+            "Dexterity": 2,
+            "Constitution": 2,
+            "Intelligence": 2,
+            "Wisdom": 2,
+            "Charisma": 2
+        }
+    },
+    "size": {
+        "options": [
+            "Small",
+            "Medium"
+        ],
+        "choice": true
+    },
+    "speed": 30,
+    "feat": "One feat of your choice for which you qualify.",
+    "variable_trait": {
+        "options": [
+            "darkvision with a range of 60 feet",
+            "proficiency in one skill of your choice"
+        ],
+        "choice": true
+    },
+    "languages": [
+        "Common",
+        "One other language"
+    ],
     "equipment": [
         "A staff",
         "A hunting trap",
@@ -66,10 +72,29 @@
         "A set of traveler's clothes"
     ],
     "feature": "Wanderer",
-    "strength": 16,
+    "strength": 15,
     "intelligence": 15,
-    "wisdom": 12,
-    "dexterity": 14,
-    "constitution": 10,
-    "charisma": 12
+    "wisdom": 17,
+    "dexterity": 16,
+    "constitution": 12,
+    "charisma": 13,
+    "class_features": {
+        "Fighting Style": [
+            "Defense",
+            "Dueling",
+            "Great Weapon Fighting",
+            "Two Weapon Fighting"
+        ],
+        "Second Wind": {
+            "level": 1,
+            "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+        }
+    },
+    "background_features": [],
+    "background_equipment": [
+        "A staff",
+        "A hunting trap",
+        "A trophy from an animal you killed",
+        "A set of traveler's clothes"
+    ]
 }
