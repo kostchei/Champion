@@ -1,3 +1,5 @@
+# csdisplay.py
+
 import json
 import sys
 import tkinter as tk
@@ -28,11 +30,11 @@ def display_character_sheet(character_data):
 
     # Create a canvas for scrolling
     canvas = tk.Canvas(root, bg=BUFF_OFF_WHITE)
-    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=20, pady=20)
 
     # Add a scrollbar
     scrollbar = tk.Scrollbar(root, orient=tk.VERTICAL, command=canvas.yview)
-    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y, padx=20, pady=20)
 
     # Configure canvas scrolling
     canvas.configure(yscrollcommand=scrollbar.set)
@@ -52,12 +54,11 @@ def display_character_sheet(character_data):
         ("Background", character_data['background'])
     ]
 
-    # Arrange details in two rows
     for i, (label, value) in enumerate(details):
         row = i // 3
         col = (i % 3) * 2
-        tk.Label(frame, text=f"{label}:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row, column=col, sticky="w")
-        tk.Label(frame, text=value, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row, column=col + 1, sticky="w")
+        tk.Label(frame, text=f"{label}:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row, column=col, sticky="w", padx=10, pady=5)
+        tk.Label(frame, text=value, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row, column=col + 1, sticky="w", padx=10, pady=5)
 
     # Character attributes and skills in the preferred order
     attributes_skills = [
@@ -69,34 +70,46 @@ def display_character_sheet(character_data):
         ("Charisma", ["Saving Throw", "Deception", "Intimidation", "Performance", "Persuasion"])
     ]
 
+    saving_throws = character_data.get("saving_throws", [])
+
     row_offset = 2
     for i, (attribute, skills) in enumerate(attributes_skills):
         # Display attribute label and value
-        tk.Label(frame, text=f"{attribute}:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset + i * 8, column=0, sticky="w")
-        tk.Label(frame, text=character_data[attribute.lower()], font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset + i * 8, column=1, sticky="w")
+        tk.Label(frame, text=f"{attribute}:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=0, sticky="w", padx=10, pady=5)
+        tk.Label(frame, text=character_data[attribute.lower()], font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=1, sticky="w", padx=10, pady=5)
+        row_offset += 1
         
         for j, skill in enumerate(skills):
-            has_skill = character_data.get(skill.lower().replace(" ", "_"), False)  # Change this as per your logic
+            skill_key = skill.lower().replace(" ", "_")
+            has_skill = character_data.get(skill_key, False) or skill == "Saving Throw" and attribute in saving_throws
             bullet = "●" if has_skill else "○"
-            tk.Label(frame, text=f"{bullet} {skill}", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset + i * 8 + j + 1, column=1, sticky="w")
+            tk.Label(frame, text=f"{bullet} {skill}", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=1, sticky="w", padx=10, pady=2)
+            row_offset += 1
 
     # Realm selection
-    tk.Label(frame, text="Realm:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset + len(attributes_skills) * 8, column=0, sticky="w")
+    tk.Label(frame, text="Realm:", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=0, sticky="w", padx=10, pady=5)
     realm_var = tk.StringVar(value="tier_1")
     realm_entry = tk.Entry(frame, textvariable=realm_var, font=("Arial", 14), bg=WHITE, fg=DARK_BLUE)
-    realm_entry.grid(row=row_offset + len(attributes_skills) * 8, column=1, sticky="w")
+    realm_entry.grid(row=row_offset, column=1, sticky="w", padx=10, pady=5)
+    row_offset += 1
 
-    # Lists: Attacks, Features, Reputation, Equipment
-    list_titles = ["Attacks", "Features", "Reputation", "Equipment"]
-    list_row_counts = [3, 10, 3, 15]  
-    list_start_row = 2
+    # Create a separate frame for lists to avoid interference with skills
+    list_frame = tk.Frame(frame, bg=BUFF_OFF_WHITE)
+    list_frame.grid(row=0, column=4, rowspan=row_offset, sticky="n")
 
-    # Placing lists adjacent to the Background row
-    for i, (title, row_count) in enumerate(zip(list_titles, list_row_counts)):
-        tk.Label(frame, text=title, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=list_start_row, column=4, sticky="w")
-        for j in range(row_count):
-            tk.Entry(frame, bg=WHITE, fg=DARK_BLUE, width=60).grid(row=list_start_row + j + 1, column=4, pady=2, padx=5)  
-        list_start_row += row_count + 1
+    # Display Features and Equipment
+    def create_readonly_listbox(parent, title, items):
+        tk.Label(parent, text=title, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).pack(anchor="w", padx=10, pady=5)
+        listbox = tk.Listbox(parent, height=len(items), bg=WHITE, fg=DARK_BLUE, font=("Arial", 14))
+        for item in items:
+            listbox.insert(tk.END, item)
+        listbox.pack(anchor="w", padx=10, pady=2)
+        listbox.config(state=tk.DISABLED)  # Make the listbox read-only
+
+    create_readonly_listbox(list_frame, "Attacks", character_data.get("attacks", []))
+    create_readonly_listbox(list_frame, "Features", character_data.get("class_features", []))
+    create_readonly_listbox(list_frame, "Reputation", character_data.get("reputation", []))
+    create_readonly_listbox(list_frame, "Equipment", character_data.get("equipment", []))
 
     # OK button to save the data
     ok_button = tk.Button(root, text="OK", command=lambda: save_character(character_data), bg=GREY, fg=DARK_BLUE)
@@ -106,8 +119,8 @@ def display_character_sheet(character_data):
 
 if __name__ == "__main__":
     input_file = sys.argv[1]
-    
+
     with open(input_file, 'r') as f:
         character_data = json.load(f)
-    
+
     display_character_sheet(character_data)

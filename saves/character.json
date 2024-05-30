@@ -2,8 +2,8 @@
     "name": "Bryn",
     "gender": "Male",
     "game_edition": "Champion",
-    "race": "Custom Lineage",
-    "class": "Fighter",
+    "race": "Human",
+    "class": "Rogue",
     "background": "Outlander",
     "skills": [
         "Athletics",
@@ -12,82 +12,78 @@
         "Musical Instrument"
     ],
     "features": {
-        "Fighting Style": [
-            "Defense",
-            "Dueling",
-            "Great Weapon Fighting",
-            "Two Weapon Fighting"
-        ],
-        "Second Wind": {
+        "Sneak Attack": {
             "level": 1,
-            "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+            "description": "Deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll."
+        },
+        "Thieves' Cant": {
+            "level": 1,
+            "description": "You can speak in a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation."
         }
     },
-    "class_equipment": [],
+    "class_equipment": {
+        "options": [
+            "Dagger",
+            "Short Bow",
+            "Short Sword",
+            "Hooded Lantern",
+            "Studded Leather Armor"
+        ],
+        "choice": false
+    },
     "attributes": {
-        "primary": "Strength",
-        "secondary": "Constitution",
-        "tertiary": "Dexterity"
+        "primary": "Dexterity",
+        "secondary": "Intelligence",
+        "tertiary": "Charisma"
     },
     "saving_throws": [
-        "Strength",
-        "Constitution"
+        "Dexterity",
+        "Intelligence"
     ],
     "ability_score_increase": {
-        "description": "One ability score of your choice increases by 2.",
-        "type": "choice",
+        "description": "Your ability scores each increase by 1.",
+        "type": "fixed",
         "values": {
-            "Strength": 2,
-            "Dexterity": 2,
-            "Constitution": 2,
-            "Intelligence": 2,
-            "Wisdom": 2,
-            "Charisma": 2
+            "Strength": 1,
+            "Dexterity": 1,
+            "Constitution": 1,
+            "Intelligence": 1,
+            "Wisdom": 1,
+            "Charisma": 1
         }
     },
-    "size": {
-        "options": [
-            "Small",
-            "Medium"
-        ],
-        "choice": true
-    },
+    "size": "Medium",
     "speed": 30,
-    "feat": "One feat of your choice for which you qualify.",
-    "variable_trait": {
-        "options": [
-            "darkvision with a range of 60 feet",
-            "proficiency in one skill of your choice"
-        ],
-        "choice": true
-    },
     "languages": [
         "Common",
-        "One other language"
+        "One extra language of your choice"
     ],
     "equipment": [
+        "Dagger",
+        "Short Bow",
+        "Short Sword",
+        "Hooded Lantern",
+        "Studded Leather Armor",
         "A staff",
         "A hunting trap",
         "A trophy from an animal you killed",
         "A set of traveler's clothes"
     ],
     "feature": "Wanderer",
-    "strength": 15,
-    "intelligence": 15,
+    "strength": 13,
+    "intelligence": 12,
     "wisdom": 17,
     "dexterity": 16,
     "constitution": 12,
-    "charisma": 13,
+    "charisma": 19,
     "class_features": {
-        "Fighting Style": [
-            "Defense",
-            "Dueling",
-            "Great Weapon Fighting",
-            "Two Weapon Fighting"
-        ],
-        "Second Wind": {
+        "Sneak Attack": {
             "level": 1,
-            "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+            "description": "Deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll."
+        },
+        "Thieves' Cant": {
+            "level": 1,
+            "description": "You can speak in a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation."
         }
     },
     "background_features": [],

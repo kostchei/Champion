@@ -1,3 +1,5 @@
+# creator.py
+
 import json
 import sys
 import random
@@ -92,12 +94,25 @@ def apply_race_bonuses(character_data, race_details):
                 root.quit()
             root.destroy()
 
+def choose_fighter_equipment(character_data):
+    dexterity = character_data["dexterity"]
+    class_details = get_class_details(character_data["class"])
+    
+    if dexterity <= 11:
+        equipment = class_details["class_equipment"]["options"]["Heavy"]
+    elif 12 <= dexterity <= 15:
+        equipment = class_details["class_equipment"]["options"]["Medium"]
+    else:
+        equipment = class_details["class_equipment"]["options"]["Light"]
+    
+    return equipment
+
 def finalize_character(character_data):
     # Get detailed class information
     class_details = get_class_details(character_data["class"])
     character_data.update({
         "class_features": class_details.get("features", {}),
-        "class_equipment": class_details.get("equipment", [])
+        "class_equipment": class_details.get("class_equipment", [])
     })
     
     # Apply class requirements
@@ -116,6 +131,13 @@ def finalize_character(character_data):
         "background_features": background_details.get("features", []),
         "background_equipment": background_details.get("equipment", [])
     })
+
+    # Add class equipment
+    if character_data["class"] == "Fighter":
+        fighter_equipment = choose_fighter_equipment(character_data)
+        character_data["equipment"] = fighter_equipment + background_details.get("equipment", [])
+    else:
+        character_data["equipment"] = class_details.get("class_equipment", {}).get("options", []) + background_details.get("equipment", [])
 
     if not os.path.exists('./saves'):
         os.makedirs('./saves')
