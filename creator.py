@@ -12,6 +12,29 @@ from utils.classes import get_class_details  # Import the function from classes.
 from utils.races import get_race_details  # Import the function from races.py
 from utils.backgrounds import get_background_details  # Import the function from backgrounds.py
 
+def load_json(file_path):
+    with open(file_path, 'r') as f:
+        return json.load(f)
+
+def calculate_stat_modifier(score):
+    stat_bonus = load_json('./utils/stat_bonus.json')["stat_bonus"]
+    for bonus in stat_bonus:
+        if '-' in bonus["score_range"]:
+            min_score, max_score = map(int, bonus["score_range"].split('-'))
+            if min_score <= score <= max_score:
+                return bonus["modifier"]
+        elif int(bonus["score_range"]) == score:
+            return bonus["modifier"]
+    return 0
+
+def get_proficiency_bonus(experience_points):
+    experience_table = load_json('./utils/experience.json')["experience"]
+    for entry in experience_table:
+        if experience_points < entry["experience_points"]:
+            return previous_entry["proficiency_bonus"], previous_entry["level"]
+        previous_entry = entry
+    return experience_table[-1]["proficiency_bonus"], experience_table[-1]["level"]
+
 def generate_character_stats(character_data):
     def roll_dice():
         # Roll 4 six-sided dice and take the sum of the highest 3
@@ -138,6 +161,15 @@ def finalize_character(character_data):
         character_data["equipment"] = fighter_equipment + background_details.get("equipment", [])
     else:
         character_data["equipment"] = class_details.get("class_equipment", {}).get("options", []) + background_details.get("equipment", [])
+
+    # Calculate and store stat modifiers
+    for stat in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:
+        character_data[f"{stat}_modifier"] = calculate_stat_modifier(character_data[stat])
+    
+    # Set initial level, experience points, and proficiency bonus
+    character_data["experience_points"] = 0
+    character_data["level"] = 1
+    character_data["proficiency_bonus"] = 2
 
     if not os.path.exists('./saves'):
         os.makedirs('./saves')
