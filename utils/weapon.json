@@ -1,0 +1,54 @@
+{
+    "weapons": [
+      {
+        "name": "Battleaxe",
+        "cost": "10 gp",
+        "damage": "1d8 slashing",
+        "weight": "4 lb.",
+        "properties": "Versatile (1d10)"
+      },
+      {
+        "name": "Greataxe",
+        "cost": "30 gp",
+        "damage": "1d12 slashing",
+        "weight": "7 lb.",
+        "properties": "Heavy, two-handed"
+      },
+      {
+        "name": "Greatsword",
+        "cost": "50 gp",
+        "damage": "2d6 slashing",
+        "weight": "6 lb.",
+        "properties": "Heavy, two-handed"
+      },
+      {
+        "name": "Longsword",
+        "cost": "15 gp",
+        "damage": "1d8 slashing",
+        "weight": "3 lb.",
+        "properties": "Versatile (1d10)"
+      },
+      {
+        "name": "Maul",
+        "cost": "10 gp",
+        "damage": "2d6 bludgeoning",
+        "weight": "10 lb.",
+        "properties": "Heavy, two-handed"
+      },
+      {
+        "name": "Rapier",
+        "cost": "25 gp",
+        "damage": "1d8 piercing",
+        "weight": "2 lb.",
+        "properties": "Finesse"
+      },
+      {
+        "name": "Shortsword",
+        "cost": "10 gp",
+        "damage": "1d6 piercing",
+        "weight": "2 lb.",
+        "properties": "Finesse, light"
+      }
+    ]
+  }
+  

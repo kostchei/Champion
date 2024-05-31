@@ -130,6 +130,37 @@ def choose_fighter_equipment(character_data):
     
     return equipment
 
+def calculate_hit_points(character_data, class_details):
+    level = character_data["level"]
+    constitution_modifier = character_data["constitution_modifier"]
+    base_hp = class_details["hit_points"]["level_1"]
+    if level > 1:
+        base_hp += sum(max(random.randint(1, int(class_details["hit_points"]["other_levels"]["die"][2:])), 
+                           class_details["hit_points"]["other_levels"]["minimum"]) + constitution_modifier for _ in range(1, level))
+    return base_hp + constitution_modifier * level
+
+def calculate_armor_class(character_data):
+    armor_data = load_json('./utils/armor.json')["armor"]
+    equipped_armor = character_data.get("equipment", [])
+    dex_modifier = character_data["dexterity_modifier"]
+    
+    ac = 10 + dex_modifier  # Default AC if no armor is found
+    
+    for item in equipped_armor:
+        for armor in armor_data:
+            if armor["name"].lower() == item.lower():
+                if armor["type"] == "Light":
+                    ac = armor["armor_class"] + dex_modifier
+                elif armor["type"] == "Medium":
+                    ac = armor["armor_class"] + min(dex_modifier, 2)
+                elif armor["type"] == "Heavy":
+                    ac = armor["armor_class"]
+                if "shield" in item.lower():
+                    ac += 2
+                break
+    
+    return ac
+
 def finalize_character(character_data):
     # Get detailed class information
     class_details = get_class_details(character_data["class"])
@@ -170,6 +201,12 @@ def finalize_character(character_data):
     character_data["experience_points"] = 0
     character_data["level"] = 1
     character_data["proficiency_bonus"] = 2
+
+    # Calculate and store hit points
+    character_data["hit_points"] = calculate_hit_points(character_data, class_details)
+
+    # Calculate and store armor class
+    character_data["armor_class"] = calculate_armor_class(character_data)
 
     if not os.path.exists('./saves'):
         os.makedirs('./saves')

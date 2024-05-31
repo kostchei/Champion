@@ -1,0 +1,101 @@
+{
+    "armor": [
+      {
+        "name": "Leather",
+        "cost": "10 gp",
+        "armor_class": 11,
+        "type": "Light",
+        "stealth": "None",
+        "weight": "10 lb."
+      },
+      {
+        "name": "Studded leather",
+        "cost": "45 gp",
+        "armor_class": 12,
+        "type": "Light",
+        "stealth": "None",
+        "weight": "13 lb."
+      },
+      {
+        "name": "Hide",
+        "cost": "10 gp",
+        "armor_class": 12,
+        "type": "Medium",
+        "stealth": "None",
+        "weight": "12 lb."
+      },
+      {
+        "name": "Chain shirt",
+        "cost": "50 gp",
+        "armor_class": 13,
+        "type": "Medium",
+        "stealth": "None",
+        "weight": "20 lb."
+      },
+      {
+        "name": "Scale mail",
+        "cost": "50 gp",
+        "armor_class": 14,
+        "type": "Medium",
+        "stealth": "Disadvantage",
+        "weight": "45 lb."
+      },
+      {
+        "name": "Breastplate",
+        "cost": "400 gp",
+        "armor_class": 14,
+        "type": "Medium",
+        "stealth": "None",
+        "weight": "20 lb."
+      },
+      {
+        "name": "Half plate",
+        "cost": "750 gp",
+        "armor_class": 15,
+        "type": "Medium",
+        "stealth": "Disadvantage",
+        "weight": "40 lb."
+      },
+      {
+        "name": "Ring mail",
+        "cost": "30 gp",
+        "armor_class": 14,
+        "type": "Heavy",
+        "stealth": "Disadvantage",
+        "weight": "40 lb."
+      },
+      {
+        "name": "Chain mail",
+        "cost": "75 gp",
+        "armor_class": 16,
+        "type": "Heavy",
+        "stealth": "Disadvantage",
+        "weight": "55 lb."
+      },
+      {
+        "name": "Splint",
+        "cost": "200 gp",
+        "armor_class": 17,
+        "type": "Heavy",
+        "stealth": "Disadvantage",
+        "weight": "60 lb."
+      },
+      {
+        "name": "Plate",
+        "cost": "1,500 gp",
+        "armor_class": 18,
+        "type": "Heavy",
+        "stealth": "Disadvantage",
+        "weight": "65 lb."
+      },
+      {
+        "name": "Shield",
+        "cost": "10 gp",
+        "armor_class": "+2",
+        "type": "Left Hand",
+        "stealth": "None",
+        "weight": "6 lb."
+      }
+    ]
+  }
+  

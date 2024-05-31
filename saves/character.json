@@ -1,5 +1,5 @@
 {
-    "name": "Alex",
+    "name": "Ash",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
@@ -12,12 +12,14 @@
         "Musical Instrument"
     ],
     "features": {
-        "Fighting Style": [
-            "Defense",
-            "Dueling",
-            "Great Weapon Fighting",
-            "Two Weapon Fighting"
-        ],
+        "Fighting Style": {
+            "choices": [
+                "Defense",
+                "Dueling",
+                "Great Weapon Fighting",
+                "Two Weapon Fighting"
+            ]
+        },
         "Second Wind": {
             "level": 1,
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
@@ -43,7 +45,7 @@
                 "5 gold"
             ],
             "Light": [
-                "Studded Leather",
+                "Studded Armour",
                 "Rapier",
                 "Short Sword",
                 "Shield",
@@ -61,6 +63,7 @@
         "Strength",
         "Constitution"
     ],
+    "hit_points": 12,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -93,18 +96,20 @@
     ],
     "feature": "Wanderer",
     "strength": 16,
-    "intelligence": 15,
-    "wisdom": 18,
+    "intelligence": 17,
+    "wisdom": 14,
     "dexterity": 13,
     "constitution": 14,
-    "charisma": 15,
+    "charisma": 14,
     "class_features": {
-        "Fighting Style": [
-            "Defense",
-            "Dueling",
-            "Great Weapon Fighting",
-            "Two Weapon Fighting"
-        ],
+        "Fighting Style": {
+            "choices": [
+                "Defense",
+                "Dueling",
+                "Great Weapon Fighting",
+                "Two Weapon Fighting"
+            ]
+        },
         "Second Wind": {
             "level": 1,
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
@@ -120,10 +125,11 @@
     "strength_modifier": 3,
     "dexterity_modifier": 1,
     "constitution_modifier": 2,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 4,
+    "intelligence_modifier": 3,
+    "wisdom_modifier": 2,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
-    "proficiency_bonus": 2
+    "proficiency_bonus": 2,
+    "armor_class": 17
 }

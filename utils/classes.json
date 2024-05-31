@@ -6,7 +6,9 @@
         "number_skills": 2
       },
       "features": {
-        "Fighting Style": ["Defense", "Dueling", "Great Weapon Fighting", "Two Weapon Fighting"],
+        "Fighting Style": {
+          "choices": ["Defense", "Dueling", "Great Weapon Fighting", "Two Weapon Fighting"]
+        },
         "Second Wind": {
           "level": 1,
           "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
@@ -16,7 +18,7 @@
         "options": {
           "Heavy": ["Ring Mail", "Battle Axe", "Maul", "Hand Axe", "Shield", "Horned Helmet", "25 gold"],
           "Medium": ["Scale Mail", "Long Sword", "Short Sword", "Shield", "Plumed Helmet", "5 gold"],
-          "Light": ["Studded Leather", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
+          "Light": ["Studded Armour", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
         },
         "choice": true
       },
@@ -25,7 +27,14 @@
         "secondary": "Constitution",
         "tertiary": "Dexterity"
       },
-      "saving_throws": ["Strength", "Constitution"]
+      "saving_throws": ["Strength", "Constitution"],
+      "hit_points": {
+        "level_1": 10,
+        "other_levels": {
+          "die": "1d10",
+          "minimum": 6
+        }
+      }
     },
     "Rogue": {
       "skills": {
@@ -43,7 +52,7 @@
         }
       },
       "class_equipment": {
-        "options": ["Dagger", "Short Bow", "Short Sword", "Hooded Lantern", "Studded Leather Armor"],
+        "options": ["Dagger", "Short Bow", "Short Sword", "Hooded Lantern", "Studded Armor"],
         "choice": false
       },
       "attributes": {
@@ -51,7 +60,14 @@
         "secondary": "Intelligence",
         "tertiary": "Charisma"
       },
-      "saving_throws": ["Dexterity", "Intelligence"]
+      "saving_throws": ["Dexterity", "Intelligence"],
+      "hit_points": {
+        "level_1": 8,
+        "other_levels": {
+          "die": "1d8",
+          "minimum": 5
+        }
+      }
     }
   }
 }
