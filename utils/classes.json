@@ -16,8 +16,8 @@
       },
       "class_equipment": {
         "options": {
-          "Heavy": ["Ring Mail", "Battle Axe", "Maul", "Hand Axe", "Shield", "Horned Helmet", "25 gold"],
-          "Medium": ["Scale Mail", "Long Sword", "Short Sword", "Shield", "Plumed Helmet", "5 gold"],
+          "Heavy": ["Ring Mail", "Battleaxe", "Maul", "Hand Axe", "Shield", "Horned Helmet", "25 gold"],
+          "Medium": ["Scale Mail", "Longsword", "Short Sword", "Shield", "Plumed Helmet", "5 gold"],
           "Light": ["Studded Armour", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
         },
         "choice": true
@@ -27,7 +27,7 @@
         "secondary": "Constitution",
         "tertiary": "Dexterity"
       },
-      "saving_throws": ["Strength", "Constitution"],
+      "saving_throws": ["Str Save", "Con Save"],
       "hit_points": {
         "level_1": 10,
         "other_levels": {
@@ -60,7 +60,7 @@
         "secondary": "Intelligence",
         "tertiary": "Charisma"
       },
-      "saving_throws": ["Dexterity", "Intelligence"],
+      "saving_throws": ["Dex Save", "Int Save"],
       "hit_points": {
         "level_1": 8,
         "other_levels": {

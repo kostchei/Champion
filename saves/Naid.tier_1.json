@@ -1,15 +1,15 @@
 {
-    "name": "Ash",
+    "name": "Naid",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Outlander",
+    "background": "Soldier",
     "skills": [
         "Athletics",
-        "Survival",
-        "Language",
-        "Musical Instrument"
+        "Intimidation",
+        "Land Vehicles",
+        "Gaming Set"
     ],
     "features": {
         "Fighting Style": {
@@ -29,7 +29,7 @@
         "options": {
             "Heavy": [
                 "Ring Mail",
-                "Battle Axe",
+                "Battleaxe",
                 "Maul",
                 "Hand Axe",
                 "Shield",
@@ -38,7 +38,7 @@
             ],
             "Medium": [
                 "Scale Mail",
-                "Long Sword",
+                "Longsword",
                 "Short Sword",
                 "Shield",
                 "Plumed Helmet",
@@ -60,10 +60,10 @@
         "tertiary": "Dexterity"
     },
     "saving_throws": [
-        "Strength",
-        "Constitution"
+        "Str Save",
+        "Con Save"
     ],
-    "hit_points": 12,
+    "hit_points": 13,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -84,23 +84,23 @@
     ],
     "equipment": [
         "Scale Mail",
-        "Long Sword",
+        "Longsword",
         "Short Sword",
         "Shield",
         "Plumed Helmet",
         "5 gold",
-        "A staff",
-        "A hunting trap",
-        "A trophy from an animal you killed",
-        "A set of traveler's clothes"
+        "An insignia of rank",
+        "A trophy taken from a fallen enemy",
+        "A set of bone dice",
+        "A set of common clothes"
     ],
-    "feature": "Wanderer",
+    "feature": "Military Rank",
     "strength": 16,
-    "intelligence": 17,
+    "intelligence": 16,
     "wisdom": 14,
     "dexterity": 13,
-    "constitution": 14,
-    "charisma": 14,
+    "constitution": 17,
+    "charisma": 13,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -117,19 +117,52 @@
     },
     "background_features": [],
     "background_equipment": [
-        "A staff",
-        "A hunting trap",
-        "A trophy from an animal you killed",
-        "A set of traveler's clothes"
+        "An insignia of rank",
+        "A trophy taken from a fallen enemy",
+        "A set of bone dice",
+        "A set of common clothes"
     ],
     "strength_modifier": 3,
     "dexterity_modifier": 1,
-    "constitution_modifier": 2,
+    "constitution_modifier": 3,
     "intelligence_modifier": 3,
     "wisdom_modifier": 2,
-    "charisma_modifier": 2,
+    "charisma_modifier": 1,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 17
+    "armor_class": 17,
+    "attack": {
+        "name": "Longsword",
+        "to_hit": "+5",
+        "damage": "1d8 slashing + 3"
+    },
+    "athletics_bonus": 5,
+    "acrobatics_bonus": 1,
+    "sleight_of_hand_bonus": 1,
+    "stealth_bonus": 1,
+    "arcana_bonus": 3,
+    "history_bonus": 5,
+    "investigation_bonus": 3,
+    "nature_bonus": 3,
+    "religion_bonus": 3,
+    "animal_handling_bonus": 2,
+    "insight_bonus": 4,
+    "medicine_bonus": 2,
+    "perception_bonus": 2,
+    "survival_bonus": 2,
+    "deception_bonus": 1,
+    "intimidation_bonus": 3,
+    "performance_bonus": 1,
+    "persuasion_bonus": 1,
+    "str_save_bonus": 5,
+    "dex_save_bonus": 1,
+    "con_save_bonus": 5,
+    "int_save_bonus": 3,
+    "wis_save_bonus": 2,
+    "cha_save_bonus": 1,
+    "class_skills": [
+        "Insight",
+        "History"
+    ]
 }

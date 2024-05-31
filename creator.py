@@ -208,6 +208,39 @@ def finalize_character(character_data):
     # Calculate and store armor class
     character_data["armor_class"] = calculate_armor_class(character_data)
 
+    # Load weapons data
+    weapons_data = load_json('./utils/weapon.json')["weapons"]
+    equipped_weapon = next((weapon for weapon in weapons_data if weapon["name"] in character_data["equipment"]), None)
+
+    if equipped_weapon:
+        weapon_name = equipped_weapon["name"]
+        weapon_damage = equipped_weapon["damage"]
+        finesse = "finesse" in equipped_weapon["properties"].lower()
+
+        # Calculate to-hit and damage bonuses
+        strength_modifier = character_data["strength_modifier"]
+        dexterity_modifier = character_data["dexterity_modifier"]
+        proficiency_bonus = character_data["proficiency_bonus"]
+
+        if finesse and dexterity_modifier > strength_modifier:
+            to_hit_bonus = dexterity_modifier + proficiency_bonus
+            damage_bonus = dexterity_modifier
+        else:
+            to_hit_bonus = strength_modifier + proficiency_bonus
+            damage_bonus = strength_modifier
+
+        character_data["attack"] = {
+            "name": weapon_name,
+            "to_hit": f"+{to_hit_bonus}",
+            "damage": f"{weapon_damage} + {damage_bonus}"
+        }
+    else:
+        character_data["attack"] = {
+            "name": "None",
+            "to_hit": "+0",
+            "damage": "0"
+        }
+
     if not os.path.exists('./saves'):
         os.makedirs('./saves')
     with open('./saves/character.json', 'w') as f:

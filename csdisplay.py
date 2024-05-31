@@ -3,8 +3,7 @@
 import json
 import sys
 import tkinter as tk
-from tkinter import messagebox, simpledialog
-from tkinter import ttk  # Import ttk module from tkinter
+from tkinter import messagebox, simpledialog, ttk
 
 BUFF_OFF_WHITE = "#F7F6ED"
 DARK_BLUE = "#1E2832"
@@ -18,9 +17,8 @@ def save_character(character_data):
         realm = "tier_1"
     filename = f"./saves/{character_name}.{realm}.json"
     with open(filename, 'w') as f:
-        json.dump(character_data, f)
+        json.dump(character_data, f, indent=4)
     messagebox.showinfo("Saved", f"Character saved as {filename}")
-    root.quit()
 
 def choose_realm():
     realm = simpledialog.askstring("Choose Realm", "Enter the realm:")
@@ -31,6 +29,68 @@ def get_class_details(class_name):
     with open('./utils/classes.json', 'r') as file:
         data = json.load(file)
     return data['classes'].get(class_name, {})
+
+def calculate_skill_and_saving_throw_bonuses(character_data):
+    proficiency_bonus = character_data['proficiency_bonus']
+    saving_throws = character_data.get("saving_throws", [])
+    background_skills = set(character_data.get("skills", []))
+    class_skills = set(character_data.get("class_skills", []))
+
+    skills = {
+        "Strength": ["Athletics"],
+        "Dexterity": ["Acrobatics", "Sleight of Hand", "Stealth"],
+        "Constitution": [],
+        "Intelligence": ["Arcana", "History", "Investigation", "Nature", "Religion"],
+        "Wisdom": ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
+        "Charisma": ["Deception", "Intimidation", "Performance", "Persuasion"]
+    }
+
+    saving_throws_dict = {
+        "Str Save": "strength",
+        "Dex Save": "dexterity",
+        "Con Save": "constitution",
+        "Int Save": "intelligence",
+        "Wis Save": "wisdom",
+        "Cha Save": "charisma"
+    }
+
+    # Calculate skill bonuses
+    for attribute, skill_list in skills.items():
+        for skill in skill_list:
+            skill_key = skill.lower().replace(" ", "_")
+            attribute_key = attribute.lower()
+            modifier = character_data[f"{attribute_key}_modifier"]
+            if skill in background_skills or skill in class_skills:
+                character_data[f"{skill_key}_bonus"] = modifier + proficiency_bonus
+            else:
+                character_data[f"{skill_key}_bonus"] = modifier
+
+    # Calculate saving throw bonuses
+    for save, attribute in saving_throws_dict.items():
+        attribute_key = attribute.lower()
+        modifier = character_data[f"{attribute_key}_modifier"]
+        if save in saving_throws:
+            character_data[f"{save.lower().replace(' ', '_')}_bonus"] = modifier + proficiency_bonus
+        else:
+            character_data[f"{save.lower().replace(' ', '_')}_bonus"] = modifier
+
+def choose_class_features(character_data):
+    class_name = character_data['class']
+    class_details = get_class_details(class_name)
+    features = class_details.get('features', {})
+    
+    for feature_name, feature_details in features.items():
+        if isinstance(feature_details, dict) and 'choices' in feature_details:
+            feature_choices = feature_details['choices']
+            dialog = FeatureSelectionDialog(root, f"Choose {feature_name}", feature_name, feature_choices)
+            chosen_feature = dialog.show()
+            if chosen_feature in feature_choices:
+                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = chosen_feature
+            else:
+                messagebox.showerror("Invalid Choice", f"You must choose a valid {feature_name}.")
+    
+    save_character(character_data)
+    display_character_sheet(character_data)  # Refresh the character sheet
 
 class FeatureSelectionDialog(tk.Toplevel):
     def __init__(self, parent, title, feature_name, feature_choices):
@@ -60,20 +120,52 @@ class FeatureSelectionDialog(tk.Toplevel):
         self.wait_window()
         return self.selected_feature
 
-def choose_class_features(character_data):
+class SkillSelectionDialog(tk.Toplevel):
+    def __init__(self, parent, title, skill_choices, num_skills):
+        super().__init__(parent)
+        self.title(title)
+        self.geometry("300x300")
+        self.resizable(False, False)
+        self.selected_skills = []
+
+        tk.Label(self, text=f"Choose {num_skills} skills:", font=("Arial", 12)).pack(pady=10)
+        
+        self.var = tk.StringVar(self)
+        
+        self.listbox = tk.Listbox(self, selectmode=tk.MULTIPLE, exportselection=0)
+        for skill in skill_choices:
+            self.listbox.insert(tk.END, skill)
+        self.listbox.pack(pady=10)
+        
+        tk.Button(self, text="OK", command=self.on_select).pack(pady=10)
+
+    def on_select(self):
+        selected_indices = self.listbox.curselection()
+        self.selected_skills = [self.listbox.get(i) for i in selected_indices]
+        self.destroy()
+
+    def show(self):
+        self.wm_deiconify()
+        self.wait_window()
+        return self.selected_skills
+
+def choose_class_skills(character_data):
     class_name = character_data['class']
     class_details = get_class_details(class_name)
-    features = class_details.get('features', {})
+    skill_options = set(class_details['skills']['options'])
+    num_skills = class_details['skills']['number_skills']
+    background_skills = set(character_data.get("skills", []))
     
-    for feature_name, feature_details in features.items():
-        if isinstance(feature_details, dict) and 'choices' in feature_details:
-            feature_choices = feature_details['choices']
-            dialog = FeatureSelectionDialog(root, f"Choose {feature_name}", feature_name, feature_choices)
-            chosen_feature = dialog.show()
-            if chosen_feature in feature_choices:
-                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = chosen_feature
-            else:
-                messagebox.showerror("Invalid Choice", f"You must choose a valid {feature_name}.")
+    available_skills = skill_options - background_skills
+
+    dialog = SkillSelectionDialog(root, "Choose Class Skills", list(available_skills), num_skills)
+    chosen_skills = dialog.show()
+
+    if len(chosen_skills) == num_skills:
+        character_data['class_skills'] = chosen_skills
+        calculate_skill_and_saving_throw_bonuses(character_data)  # Recalculate skill bonuses
+    else:
+        messagebox.showerror("Invalid Choice", f"You must choose exactly {num_skills} skills.")
     
     save_character(character_data)
     display_character_sheet(character_data)  # Refresh the character sheet
@@ -138,17 +230,18 @@ def display_character_sheet(character_data):
 
     # Character attributes and skills in the preferred order
     attributes_skills = {
-        "Strength": ["Saving Throw", "Athletics", ],
-        "Intelligence": ["Saving Throw", "Arcana", "History", "Investigation", "Nature", "Religion"],
-        "Wisdom": ["Saving Throw", "Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
-        "Dexterity": ["Saving Throw", "Acrobatics", "Sleight of Hand", "Stealth"],
-        "Constitution": ["Saving Throw"],
-        "Charisma": ["Saving Throw", "Deception", "Intimidation", "Performance", "Persuasion"]
+        "Strength": ["Str Save", "Athletics"],
+        "Dexterity": ["Dex Save", "Acrobatics", "Sleight of Hand", "Stealth"],
+        "Constitution": ["Con Save"],
+        "Intelligence": ["Int Save", "Arcana", "History", "Investigation", "Nature", "Religion"],
+        "Wisdom": ["Wis Save", "Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
+        "Charisma": ["Cha Save", "Deception", "Intimidation", "Performance", "Persuasion"]
     }
 
     saving_throws = character_data.get("saving_throws", [])
     background_skills = set(character_data.get("skills", []))
-    unassigned_skills = background_skills.copy()
+    class_skills = set(character_data.get("class_skills", []))
+    unassigned_skills = background_skills.union(class_skills)
 
     row_offset = 0
     for attribute, skills in attributes_skills.items():
@@ -161,11 +254,12 @@ def display_character_sheet(character_data):
 
         for skill in skills:
             skill_key = skill.lower().replace(" ", "_")
-            has_skill = character_data.get(skill_key, False) or skill == "Saving Throw" and attribute in saving_throws
-            bullet = "●" if has_skill or skill in background_skills else "○"
-            if skill in background_skills:
+            has_skill = character_data.get(skill_key, False) or skill in saving_throws
+            bullet = "●" if has_skill or skill in unassigned_skills else "○"
+            if skill in unassigned_skills:
                 unassigned_skills.discard(skill)
-            tk.Label(attributes_frame, text=f"{bullet} {skill}", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=1, sticky="w", padx=10, pady=2)
+            skill_bonus = character_data.get(f"{skill_key}_bonus", 0)
+            tk.Label(attributes_frame, text=f"{bullet} {skill} ({skill_bonus:+})", font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).grid(row=row_offset, column=1, sticky="w", padx=10, pady=2)
             row_offset += 1
 
     # Lists frame
@@ -181,7 +275,12 @@ def display_character_sheet(character_data):
         listbox.pack(anchor="w", padx=10, pady=2)
         listbox.config(state=tk.DISABLED)  # Make the listbox read-only
 
-    create_readonly_listbox(list_frame, "Attacks", character_data.get("attacks", []))
+    # Convert attack information to a displayable format
+    attack_info = [
+        f'{character_data["attack"]["name"]}, {character_data["attack"]["to_hit"]} to hit, {character_data["attack"]["damage"]}'
+    ] if "attack" in character_data else []
+
+    create_readonly_listbox(list_frame, "Attack", attack_info)
     create_readonly_listbox(list_frame, "Features", character_data.get("class_features", []))
     create_readonly_listbox(list_frame, "Reputation", character_data.get("reputation", []))
     create_readonly_listbox(list_frame, "Equipment", character_data.get("equipment", []))
@@ -192,9 +291,9 @@ def display_character_sheet(character_data):
     actions_frame.grid(row=1, column=3, sticky="nsew")
 
     # Add buttons for actions
-    tk.Button(actions_frame, text="Save Changes", command=lambda: save_character(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
+    tk.Button(actions_frame, text="Save Changes", command=lambda: [calculate_skill_and_saving_throw_bonuses(character_data), save_character(character_data)], bg=GREY, fg=DARK_BLUE).pack(pady=10)
     tk.Button(actions_frame, text="Choose Class Features", command=lambda: choose_class_features(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
-    tk.Button(actions_frame, text="Choose Class Skills", command=lambda: print("Choose Class Skills"), bg=GREY, fg=DARK_BLUE).pack(pady=10)
+    tk.Button(actions_frame, text="Choose Class Skills", command=lambda: choose_class_skills(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
     tk.Button(actions_frame, text="Choose Realm", command=choose_realm, bg=GREY, fg=DARK_BLUE).pack(pady=10)
 
     realm_var = tk.StringVar(value="tier_1")
@@ -207,4 +306,5 @@ if __name__ == "__main__":
     with open(input_file, 'r') as f:
         character_data = json.load(f)
 
+    calculate_skill_and_saving_throw_bonuses(character_data)
     display_character_sheet(character_data)
