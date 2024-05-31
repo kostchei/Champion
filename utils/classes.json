@@ -18,7 +18,7 @@
         "options": {
           "Heavy": ["Ring Mail", "Battleaxe", "Maul", "Hand Axe", "Shield", "Horned Helmet", "25 gold"],
           "Medium": ["Scale Mail", "Longsword", "Short Sword", "Shield", "Plumed Helmet", "5 gold"],
-          "Light": ["Studded Armour", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
+          "Light": ["Studded leather", "Rapier", "Short Sword", "Shield", "Fancy Hat with Feather"]
         },
         "choice": true
       },
@@ -52,7 +52,7 @@
         }
       },
       "class_equipment": {
-        "options": ["Dagger", "Short Bow", "Short Sword", "Hooded Lantern", "Studded Armor"],
+        "options": ["Dagger", "Short Bow", "Short Sword", "Hooded Lantern", "Studded leather"],
         "choice": false
       },
       "attributes": {

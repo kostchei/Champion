@@ -220,9 +220,9 @@ def display_character_sheet(character_data):
 
     # Column configuration
     main_frame.columnconfigure(0, weight=1, minsize=300)
-    main_frame.columnconfigure(1, weight=1, minsize=300)
-    main_frame.columnconfigure(2, weight=1, minsize=300)
-    main_frame.columnconfigure(3, weight=1, minsize=300)
+    main_frame.columnconfigure(1, weight=1, minsize=200)
+    main_frame.columnconfigure(2, weight=1, minsize=400)
+    main_frame.columnconfigure(3, weight=1, minsize=200)
 
     # Character attributes and skills frame
     attributes_frame = tk.Frame(main_frame, bg=BUFF_OFF_WHITE)
@@ -231,10 +231,10 @@ def display_character_sheet(character_data):
     # Character attributes and skills in the preferred order
     attributes_skills = {
         "Strength": ["Str Save", "Athletics"],
-        "Dexterity": ["Dex Save", "Acrobatics", "Sleight of Hand", "Stealth"],
-        "Constitution": ["Con Save"],
         "Intelligence": ["Int Save", "Arcana", "History", "Investigation", "Nature", "Religion"],
         "Wisdom": ["Wis Save", "Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
+        "Dexterity": ["Dex Save", "Acrobatics", "Sleight of Hand", "Stealth"],
+        "Constitution": ["Con Save"],
         "Charisma": ["Cha Save", "Deception", "Intimidation", "Performance", "Persuasion"]
     }
 
@@ -267,9 +267,9 @@ def display_character_sheet(character_data):
     list_frame.grid(row=1, column=2, sticky="nsew")
 
     # Display Features, Equipment, and Unassigned Skills
-    def create_readonly_listbox(parent, title, items):
+    def create_readonly_listbox(parent, title, items ,width=30):
         tk.Label(parent, text=title, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).pack(anchor="w", padx=10, pady=5)
-        listbox = tk.Listbox(parent, height=len(items), bg=WHITE, fg=DARK_BLUE, font=("Arial", 14))
+        listbox = tk.Listbox(parent, height=len(items), width=width, bg=WHITE, fg=DARK_BLUE, font=("Arial", 14))
         for item in items:
             listbox.insert(tk.END, item)
         listbox.pack(anchor="w", padx=10, pady=2)
