@@ -148,8 +148,8 @@ def main_menu():
                                 filename = os.path.join(maps_dir, latest_map)
                                 print(f"Loading the most recent map: {filename}")
                                 run_script("explorer.py", filename)
-                            elif text == "Icon Allocation":
-                                run_script("uiallocation.py")
+                            #elif text == "Icon Allocation":
+                            #    run_script("./utils/uiallocation.py") not happy with progress, redo
                             elif text == "Backpack":
                                 run_script("inventory.py")
                             elif text == "Level Up":

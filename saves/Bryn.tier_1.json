@@ -168,5 +168,38 @@
         "name": "Longsword",
         "to_hit": "+5",
         "damage": "1d8 slashing + 3"
-    }
+    },
+    "athletics_bonus": 5,
+    "arcana_bonus": 2,
+    "history_bonus": 2,
+    "investigation_bonus": 2,
+    "nature_bonus": 2,
+    "religion_bonus": 2,
+    "animal_handling_bonus": 3,
+    "insight_bonus": 1,
+    "medicine_bonus": 1,
+    "perception_bonus": 1,
+    "survival_bonus": 3,
+    "acrobatics_bonus": 4,
+    "sleight_of_hand_bonus": 2,
+    "stealth_bonus": 2,
+    "deception_bonus": 1,
+    "intimidation_bonus": 1,
+    "performance_bonus": 1,
+    "persuasion_bonus": 1,
+    "str_save_bonus": 5,
+    "int_save_bonus": 2,
+    "wis_save_bonus": 1,
+    "dex_save_bonus": 2,
+    "con_save_bonus": 5,
+    "cha_save_bonus": 1,
+    "chosen_fighting_style": {
+        "name": "Dueling",
+        "description": "+2 to damage 1 weapon",
+        "effect": "+2 damage"
+    },
+    "class_skills": [
+        "Athletics",
+        "Acrobatics"
+    ]
 }
