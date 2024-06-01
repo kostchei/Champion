@@ -12,14 +12,17 @@ HEX_RADIUS = 30
 VIEWPORT_PIXEL_SIZE = (1600, 1600)
 SOFT_BROWN_GREEN = (231, 247, 161)
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
+# Absolute paths
+script_dir = os.path.abspath(os.path.dirname(__file__))
+images_dir = os.path.join(script_dir, "images")
+maps_dir = os.path.join(script_dir, "maps")
 
 terrain_types = {
-    "forest": os.path.join(script_dir, "images", "forest.png"),
-    "open": os.path.join(script_dir, "images", "open.png"),
-    "hill": os.path.join(script_dir, "images", "hill.png"),
-    "water": os.path.join(script_dir, "images", "water.png"),
-    "settlement": os.path.join(script_dir, "images", "settlement.png")
+    "forest": os.path.join(images_dir, "forest.png"),
+    "open": os.path.join(images_dir, "open.png"),
+    "hill": os.path.join(images_dir, "hill.png"),
+    "water": os.path.join(images_dir, "water.png"),
+    "settlement": os.path.join(images_dir, "settlement.png")
 }
 
 def scale_image(image, hex_radius):

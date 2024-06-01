@@ -10,14 +10,14 @@ pg.init()
 pg.font.init()
 
 # Constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 1000  # Increased height
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 800  # Increased height
 BUTTON_WIDTH, BUTTON_HEIGHT = 250, 60
 BUTTON_PADDING = 20
-BUTTON_COLOR = (247, 246, 237)  # Pale tan/buff
-BUTTON_HOVER_COLOR = (237, 243, 252)  # Lightest blue
-BUTTON_TEXT_COLOR = (0, 0, 50)  # Very dark blue, almost black
-BACKGROUND_COLOR = (250, 250, 250)  # White
-BUTTON_SHADOW_COLOR = (129, 59, 9)  # Light brown shadow
+BUTTON_COLOR = (240, 240, 230)  # GREY
+BUTTON_HOVER_COLOR = (237, 243, 252)  # WHITE
+BUTTON_TEXT_COLOR = (30, 40, 50)  # DARK_BLUE
+BACKGROUND_COLOR = (247, 246, 237)  # BUFF_OFF_WHITE
+BUTTON_SHADOW_COLOR = (200, 200, 180)  # Light brown shadow (not provided, derived for shadow)
 FONT = pg.font.SysFont('Arial', 24)
 POPUP_FONT = pg.font.SysFont('Arial', 20)
 
@@ -26,6 +26,7 @@ screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pg.display.set_caption("Main Menu")
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+maps_dir = os.path.join(script_dir, "maps")
 
 def run_script(script_name, *args):
     script_path = os.path.join(script_dir, script_name)
@@ -130,21 +131,21 @@ def main_menu():
                                 run_script("ccmenu.py")
                             elif text == "New Map":
                                 run_script("overland.py")
-                                generated_files = [f for f in os.listdir(script_dir) if f.startswith("hex_map_") and f.endswith(".json")]
+                                generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
                                 if not generated_files:
                                     print("No maps generated. Returning to main menu.")
                                     continue
-                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(script_dir, f)))
-                                filename = os.path.join(script_dir, latest_map)
+                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
+                                filename = os.path.join(maps_dir, latest_map)
                                 print(f"Loading the latest generated map: {filename}")
                                 run_script("explorer.py", filename)
                             elif text == "Continue Game":
-                                generated_files = [f for f in os.listdir(script_dir) if f.startswith("hex_map_") and f.endswith(".json")]
+                                generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
                                 if not generated_files:
                                     print("No maps found. Returning to main menu.")
                                     continue
-                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(script_dir, f)))
-                                filename = os.path.join(script_dir, latest_map)
+                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
+                                filename = os.path.join(maps_dir, latest_map)
                                 print(f"Loading the most recent map: {filename}")
                                 run_script("explorer.py", filename)
                             elif text == "Icon Allocation":

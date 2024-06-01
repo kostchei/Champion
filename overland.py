@@ -6,9 +6,12 @@ import random
 from datetime import datetime
 
 HEX_RADIUS = 30
-script_dir = os.path.dirname(os.path.abspath(__file__))
+# Absolute paths
+script_dir = os.path.abspath(os.path.dirname(__file__))
 images_dir = os.path.join(script_dir, "images")
+maps_dir = os.path.join(script_dir, "maps")
 
+# Define terrain types and their corresponding images
 terrain_types = {
     "forest": "forest.png",
     "open": "open.png",
@@ -23,6 +26,10 @@ for terrain, filename in terrain_types.items():
     if not os.path.isfile(image_path):
         print(f"Error: Image file for terrain '{terrain}' not found at '{image_path}'")
         exit(1)
+
+# Ensure the maps directory exists
+if not os.path.exists(maps_dir):
+    os.makedirs(maps_dir)
 
 terrain_probabilities = {
     "forest": 0.75,
@@ -62,7 +69,7 @@ try:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"hex_map_{timestamp}.json"
 
-    hex_map.save_to_json(os.path.join(script_dir, filename))
-    print(f"Map saved as {filename}")
+    hex_map.save_to_json(os.path.join(maps_dir, filename))
+    print(f"Map saved as {os.path.join(maps_dir, filename)}")
 except Exception as e:
     print(f"An error occurred: {e}")
