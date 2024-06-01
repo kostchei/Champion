@@ -1,3 +1,4 @@
+# csdisplay.py
 import json
 import sys
 import tkinter as tk
@@ -177,7 +178,7 @@ def display_character_sheet(character_data):
     global root, realm_var
     root = tk.Tk()
     root.title("Character Sheet")
-    root.geometry("1200x1000")
+    root.geometry("1200x1400")
     root.configure(bg=BUFF_OFF_WHITE)
 
     # Create a canvas for scrolling

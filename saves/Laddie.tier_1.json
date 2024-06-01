@@ -1,14 +1,14 @@
 {
-    "name": "Rannie",
+    "name": "Laddie",
     "gender": "Male",
     "game_edition": "Champion",
-    "race": "Human",
+    "race": "Custom Lineage",
     "class": "Fighter",
-    "background": "Ruined",
+    "background": "Soldier",
     "skills": [
-        "Sleight of Hand",
-        "Stealth",
-        "Language",
+        "Athletics",
+        "Intimidation",
+        "Land Vehicles",
         "Gaming Set"
     ],
     "features": {
@@ -81,46 +81,55 @@
     ],
     "hit_points": 12,
     "ability_score_increase": {
-        "description": "Your ability scores each increase by 1.",
-        "type": "fixed",
+        "description": "One ability score of your choice increases by 2.",
+        "type": "choice",
         "values": {
-            "Strength": 1,
-            "Dexterity": 1,
-            "Constitution": 1,
-            "Intelligence": 1,
-            "Wisdom": 1,
-            "Charisma": 1
+            "Strength": 2,
+            "Dexterity": 2,
+            "Constitution": 2,
+            "Intelligence": 2,
+            "Wisdom": 2,
+            "Charisma": 2
         }
     },
-    "size": "Medium",
+    "size": {
+        "options": [
+            "Small",
+            "Medium"
+        ],
+        "choice": true
+    },
     "speed": 30,
+    "feat": "One feat of your choice for which you qualify.",
+    "variable_trait": {
+        "options": [
+            "darkvision with a range of 60 feet",
+            "proficiency in one skill of your choice"
+        ],
+        "choice": true
+    },
     "languages": [
         "Common",
-        "One extra language of your choice"
+        "One other language"
     ],
     "equipment": [
-        "Scale Mail",
-        "Longsword",
+        "Studded leather",
+        "Rapier",
         "Short Sword",
         "Shield",
-        "Plumed Helmet",
-        "5 gold",
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
-        "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "Fancy Hat with Feather",
+        "insignia of rank",
+        "trophy",
+        "bone dice",
+        "common clothes"
     ],
-    "feature": "Still Standing",
+    "feature": "Military Rank",
     "strength": 16,
-    "intelligence": 15,
+    "intelligence": 8,
     "wisdom": 15,
-    "dexterity": 13,
-    "constitution": 14,
-    "charisma": 17,
+    "dexterity": 17,
+    "constitution": 15,
+    "charisma": 8,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -153,57 +162,57 @@
     },
     "background_features": [],
     "background_equipment": [
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
-        "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "insignia of rank",
+        "trophy",
+        "bone dice",
+        "common clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 1,
+    "dexterity_modifier": 3,
     "constitution_modifier": 2,
-    "intelligence_modifier": 2,
+    "intelligence_modifier": -1,
     "wisdom_modifier": 2,
-    "charisma_modifier": 3,
+    "charisma_modifier": -1,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
     "armor_class": 17,
     "attack": {
-        "name": "Longsword",
+        "name": "Rapier",
         "to_hit": "+5",
-        "damage": "1d8 slashing + 3"
+        "damage": "1d8 piercing + 3"
     },
-    "athletics_bonus": 3,
-    "arcana_bonus": 2,
-    "history_bonus": 2,
-    "investigation_bonus": 2,
-    "nature_bonus": 2,
-    "religion_bonus": 2,
+    "athletics_bonus": 5,
+    "arcana_bonus": -1,
+    "history_bonus": -1,
+    "investigation_bonus": -1,
+    "nature_bonus": -1,
+    "religion_bonus": -1,
     "animal_handling_bonus": 2,
     "insight_bonus": 2,
     "medicine_bonus": 2,
-    "perception_bonus": 2,
+    "perception_bonus": 4,
     "survival_bonus": 2,
-    "acrobatics_bonus": 1,
+    "acrobatics_bonus": 5,
     "sleight_of_hand_bonus": 3,
     "stealth_bonus": 3,
-    "deception_bonus": 3,
-    "intimidation_bonus": 3,
-    "performance_bonus": 3,
-    "persuasion_bonus": 3,
+    "deception_bonus": -1,
+    "intimidation_bonus": 1,
+    "performance_bonus": -1,
+    "persuasion_bonus": -1,
     "str_save_bonus": 5,
-    "int_save_bonus": 2,
+    "int_save_bonus": -1,
     "wis_save_bonus": 2,
-    "dex_save_bonus": 1,
+    "dex_save_bonus": 3,
     "con_save_bonus": 4,
-    "cha_save_bonus": 3,
+    "cha_save_bonus": -1,
     "chosen_fighting_style": {
         "name": "Dueling",
         "description": "+2 to damage 1 weapon",
         "effect": "+2 damage"
-    }
+    },
+    "class_skills": [
+        "Perception",
+        "Acrobatics"
+    ]
 }
