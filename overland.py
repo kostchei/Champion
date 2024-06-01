@@ -33,12 +33,12 @@ terrain_probabilities = {
 }
 
 class ExampleHex:
-    def __init__(self, axial_coordinates, terrain):
-        self.axial_coordinates = axial_coordinates
+    def __init__(self, cube_coordinates, terrain):
+        self.cube_coordinates = cube_coordinates
         self.terrain = terrain
 
 class ExampleHexMap:
-    def __init__(self, max_coord=8):
+    def __init__(self, max_coord=15):
         self.hex_map = {}
         self.max_coord = max_coord
 
@@ -46,13 +46,12 @@ class ExampleHexMap:
         terrain_choices = list(terrain_probabilities.keys())
         terrain_weights = list(terrain_probabilities.values())
 
-        for axial in hx.cube_to_axial(all_coordinates):
+        for cube in all_coordinates:
             terrain = random.choices(terrain_choices, weights=terrain_weights, k=1)[0]
-            self.hex_map[tuple(axial)] = ExampleHex(axial.tolist(), terrain)
+            self.hex_map[tuple(cube)] = ExampleHex(cube.tolist(), terrain)
 
     def save_to_json(self, filename):
-        # Convert tuple keys to strings
-        hex_map_data = {json.dumps(key): {"axial": hex.axial_coordinates, "terrain": hex.terrain} for key, hex in self.hex_map.items()}
+        hex_map_data = {json.dumps(key): {"cube": hex.cube_coordinates, "terrain": hex.terrain} for key, hex in self.hex_map.items()}
         with open(filename, 'w') as file:
             json.dump(hex_map_data, file)
 

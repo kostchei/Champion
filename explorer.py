@@ -47,10 +47,10 @@ def pil_to_pygame(image):
 terrain_surfaces = {key: pil_to_pygame(image) for key, image in terrain_images.items()}
 
 class ExampleHex:
-    def __init__(self, axial_coordinates, terrain, radius):
-        self.axial_coordinates = np.array([axial_coordinates])
-        self.cube_coordinates = hx.axial_to_cube(self.axial_coordinates)
-        self.position = hx.axial_to_pixel(self.axial_coordinates, radius)
+    def __init__(self, cube_coordinates, terrain, radius):
+        self.cube_coordinates = np.array([cube_coordinates])
+        self.axial_coordinates = hx.cube_to_axial(self.cube_coordinates)[0]
+        self.position = hx.cube_to_pixel(self.cube_coordinates, radius)
         self.terrain = terrain
         self.radius = radius
         self.image = terrain_surfaces[terrain]
@@ -92,9 +92,9 @@ class ExampleHexMap:
         hexes = []
         coordinates = []
         for key, value in hex_map_data.items():
-            axial = np.array(value['axial'])
+            cube = np.array(value['cube'])
             terrain = value['terrain']
-            hex = ExampleHex(axial, terrain, hex_radius)
+            hex = ExampleHex(cube, terrain, hex_radius)
             hexes.append(hex)
             coordinates.append(hex.cube_coordinates[0])
         
@@ -130,9 +130,8 @@ class ExampleHexMap:
 
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    self._clicked_hex_as_cube_coord = hx.pixel_to_cube(
-                        np.array([pg.mouse.get_pos() - self.center]),
-                        self.hex_radius)
+                    mouse_pos = np.array([pg.mouse.get_pos()]) - self.center
+                    self._clicked_hex_as_cube_coord = hx.pixel_to_cube(mouse_pos, self.hex_radius)
                 if event.button == 3:
                     self.selection_type += 1
                 if event.button == 4:
@@ -165,8 +164,7 @@ class ExampleHexMap:
         selected_hexes_cube_coords = Selection.get_selection(self.selection_type.value, mouse_pos_as_cube_coord,
                                                              self.selection_radius, self.clicked_hex_as_cube_coord)
 
-        selected_hexes_axial_coords = hx.cube_to_axial(selected_hexes_cube_coords)
-        selected_hexes = self.hex_map[selected_hexes_axial_coords]
+        selected_hexes = self.hex_map[selected_hexes_cube_coords]
         deque(map(self.draw_selected_hex, selected_hexes), maxlen=0)
 
         self.draw_HUD(mouse_pos, selected_hexes_cube_coords)
