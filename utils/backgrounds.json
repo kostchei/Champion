@@ -2,27 +2,27 @@
     "backgrounds": {
       "Folk Hero": {
         "skills": ["Animal Handling", "Survival", "Artisan Tools", "Land Vehicles" ],
-        "equipment": ["A set of artisan's tools", "A shovel", "An iron pot", "A set of common clothes"],
+        "equipment": ["artisan tools", "shovel", "iron pot", "common clothes"],
         "feature": "Rustic Hospitality"
       },
       "Soldier": {
         "skills": ["Athletics", "Intimidation", "Land Vehicles","Gaming Set" ],
-        "equipment": ["An insignia of rank", "A trophy taken from a fallen enemy", "A set of bone dice", "A set of common clothes"],
+        "equipment": ["insignia of rank", "trophy", "bone dice", "common clothes"],
         "feature": "Military Rank"
       },
       "Ruined": {
         "skills": ["Sleight of Hand", "Stealth" , "Language" , "Gaming Set"],
-        "equipment": ["A cracked hourglass, a set of rusty manacles, a half-empty bottle, a hunting trap, a gaming set (matching your chosen proficiency), a set of traveler's clothes, and a pouch containing 13 gp"],
+        "equipment": ["cracked hourglass", "rusty manacles", "half-empty bottle", "hunting trap", "gaming set", "traveling clothes", "pouch",  "13 gp"],
         "feature": "Still Standing" 
       },
       "Outlander": {
         "skills": ["Athletics", "Survival", "Language" , "Musical Instrument"],
-        "equipment": ["A staff", "A hunting trap", "A trophy from an animal you killed", "A set of traveler's clothes"],
+        "equipment": ["staff", "hunting trap", "trophy", "traveling clothes"],
         "feature": "Wanderer"
       },
       "Noble": {
         "skills": ["History", "Persuasion", "Language" , "Gaming Set"],
-        "equipment": ["A set of fine clothes", "A signet ring", "A scroll of pedigree", "A purse containing 25 gp"],
+        "equipment": ["fine clothes", "signet ring", "scroll of pedigree", "purse", "25 gp"],
         "feature": "Position of Privilege"
       }
     }

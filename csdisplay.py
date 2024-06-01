@@ -1,5 +1,3 @@
-# csdisplay.py
-
 import json
 import sys
 import tkinter as tk
@@ -26,9 +24,9 @@ def choose_realm():
         realm_var.set(realm)
 
 def get_class_details(class_name):
-    with open('./utils/classes.json', 'r') as file:
+    with open(f'./classes/{class_name}.json', 'r') as file:
         data = json.load(file)
-    return data['classes'].get(class_name, {})
+    return data
 
 def calculate_skill_and_saving_throw_bonuses(character_data):
     proficiency_bonus = character_data['proficiency_bonus']
@@ -38,19 +36,19 @@ def calculate_skill_and_saving_throw_bonuses(character_data):
 
     skills = {
         "Strength": ["Athletics"],
-        "Dexterity": ["Acrobatics", "Sleight of Hand", "Stealth"],
-        "Constitution": [],
         "Intelligence": ["Arcana", "History", "Investigation", "Nature", "Religion"],
         "Wisdom": ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
+        "Dexterity": ["Acrobatics", "Sleight of Hand", "Stealth"],
+        "Constitution": [],
         "Charisma": ["Deception", "Intimidation", "Performance", "Persuasion"]
     }
 
     saving_throws_dict = {
         "Str Save": "strength",
-        "Dex Save": "dexterity",
-        "Con Save": "constitution",
         "Int Save": "intelligence",
         "Wis Save": "wisdom",
+        "Dex Save": "dexterity",
+        "Con Save": "constitution",
         "Cha Save": "charisma"
     }
 
@@ -78,14 +76,18 @@ def choose_class_features(character_data):
     class_name = character_data['class']
     class_details = get_class_details(class_name)
     features = class_details.get('features', {})
-    
+
     for feature_name, feature_details in features.items():
         if isinstance(feature_details, dict) and 'choices' in feature_details:
             feature_choices = feature_details['choices']
             dialog = FeatureSelectionDialog(root, f"Choose {feature_name}", feature_name, feature_choices)
             chosen_feature = dialog.show()
-            if chosen_feature in feature_choices:
-                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = chosen_feature
+            if chosen_feature:
+                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = {
+                    "name": chosen_feature['name'],
+                    "description": chosen_feature['description'],
+                    "effect": chosen_feature['effect']
+                }
             else:
                 messagebox.showerror("Invalid Choice", f"You must choose a valid {feature_name}.")
     
@@ -100,19 +102,20 @@ class FeatureSelectionDialog(tk.Toplevel):
         self.resizable(False, False)
         self.feature_name = feature_name
         self.selected_feature = None
+        self.feature_choices = feature_choices
 
         tk.Label(self, text=f"Choose one of the following {feature_name}:", font=("Arial", 12)).pack(pady=10)
-        
+
         self.var = tk.StringVar(self)
-        self.var.set(feature_choices[0])
-        
-        self.dropdown = ttk.Combobox(self, textvariable=self.var, values=feature_choices)
+        feature_display = [f"{choice['name']}: {choice['description']}" for choice in feature_choices]
+        self.dropdown = ttk.Combobox(self, textvariable=self.var, values=feature_display)
         self.dropdown.pack(pady=10)
-        
+
         tk.Button(self, text="OK", command=self.on_select).pack(pady=10)
 
     def on_select(self):
-        self.selected_feature = self.var.get()
+        selected_index = self.dropdown.current()
+        self.selected_feature = self.feature_choices[selected_index] if selected_index != -1 else None
         self.destroy()
 
     def show(self):
@@ -267,7 +270,7 @@ def display_character_sheet(character_data):
     list_frame.grid(row=1, column=2, sticky="nsew")
 
     # Display Features, Equipment, and Unassigned Skills
-    def create_readonly_listbox(parent, title, items ,width=30):
+    def create_readonly_listbox(parent, title, items, width=30):
         tk.Label(parent, text=title, font=("Arial", 14), bg=BUFF_OFF_WHITE, fg=DARK_BLUE).pack(anchor="w", padx=10, pady=5)
         listbox = tk.Listbox(parent, height=len(items), width=width, bg=WHITE, fg=DARK_BLUE, font=("Arial", 14))
         for item in items:
