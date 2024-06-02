@@ -2,7 +2,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsView, QGraphicsRectItem, QGraphicsPixmapItem, QGraphicsItem
 from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import Qt, QRectF
+from PyQt6.QtCore import Qt, QPointF
 
 class InventoryItem(QGraphicsPixmapItem):
     def __init__(self, pixmap, item_type):
@@ -14,16 +14,15 @@ class InventoryItem(QGraphicsPixmapItem):
     
     def itemChange(self, change, value):
         if change == QGraphicsItem.GraphicsItemChange.ItemPositionChange:
-            new_pos = value.toPointF()
-            self.snap_to_grid(new_pos)
-            return new_pos
+            new_pos = value
+            return self.snap_to_grid(new_pos)
         return super().itemChange(change, value)
     
     def snap_to_grid(self, pos):
         grid_size = 50  # Assuming each slot is 50x50
         x = round(pos.x() / grid_size) * grid_size
         y = round(pos.y() / grid_size) * grid_size
-        self.setPos(x, y)
+        return QPointF(x, y)  # Return the snapped position
 
 class PaperdollSlot(QGraphicsRectItem):
     def __init__(self, x, y, width, height, slot_type):
@@ -88,3 +87,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
+
