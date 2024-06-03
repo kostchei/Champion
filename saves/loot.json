@@ -1,0 +1,6 @@
+[
+    {"type": "head", "image": "fancyhat.png", "name": "Fancy Hat with Feather"},
+    {"type": "body", "image": "studdedleather.png", "name": "Studded Leather"},
+    {"type": "left_hand", "image": "shield.png", "name": "Shield"},
+    {"type": "right_hand", "image": "rapier.png", "name": "Rapier"}
+]
