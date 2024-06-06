@@ -8,14 +8,12 @@ import pygame as pg
 
 # Constants
 ENCOUNTER_PROBABILITY = 0.1
-ENCOUNTERS_DIR = "encounters"
 
 def load_json(file_path):
     with open(file_path, 'r') as f:
         return json.load(f)
 
 def save_json(data, file_path):
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
 
@@ -35,9 +33,8 @@ def generate_encounter(player_name, hex_coordinates):
     }
 
     # Save the encounter data to a file
-    hex_coordinates_str = "_".join(map(str, hex_coordinates))  # Convert coordinates to string
-    encounter_filename = f"encounter_{player_name}_{hex_coordinates_str}.json"
-    encounter_filepath = os.path.join(ENCOUNTERS_DIR, encounter_filename)
+    encounter_filename = f"encounter_{player_name}_{hex_coordinates}.json"
+    encounter_filepath = os.path.join("encounters", encounter_filename)
     save_json(encounter_data, encounter_filepath)
 
     # Launch the combat GUI
@@ -55,5 +52,5 @@ def check_for_encounter(player_name, hex_coordinates):
 
 if __name__ == "__main__":
     player_name = sys.argv[1]
-    hex_coordinates = eval(sys.argv[2])  # Assuming hex_coordinates are passed as a string representation of a list
+    hex_coordinates = sys.argv[2]
     check_for_encounter(player_name, hex_coordinates)

@@ -1,4 +1,4 @@
-# explorer.py
+#explorer.py
 import json
 import os
 import sys
@@ -7,7 +7,6 @@ import hexy as hx
 import pygame as pg
 from PIL import Image, ImageDraw
 from collections import deque
-import subprocess
 
 TARGET_FPS = 60
 HEX_RADIUS = 30
@@ -18,7 +17,6 @@ SOFT_BROWN_GREEN = (231, 247, 161)
 script_dir = os.path.abspath(os.path.dirname(__file__))
 images_dir = os.path.join(script_dir, "images")
 maps_dir = os.path.join(script_dir, "maps")
-encounters_dir = os.path.join(script_dir, "encounters")
 
 terrain_types = {
     "forest": os.path.join(images_dir, "forest.png"),
@@ -117,7 +115,7 @@ class ExampleHexMap:
 
     @property
     def clicked_hex_axial_coord(self):
-        return hx.cube_to_axial(self._clicked_hex_as_cube_coord)[0]  # Ensure correct format
+        return hx.cube_to_axial(self._clicked_hex_as_cube_coord)
 
     def init_pg(self):
         pg.init()
@@ -138,9 +136,6 @@ class ExampleHexMap:
                 if event.button == 1:
                     mouse_pos = np.array([pg.mouse.get_pos()]) - self.center
                     self._clicked_hex_as_cube_coord = hx.pixel_to_cube(mouse_pos, self.hex_radius)
-                    print(f"Clicked hex axial coordinates: {self.clicked_hex_axial_coord}")  # Debugging statement
-                    # Check for encounter when a hex is clicked
-                    self.check_for_encounter("player1", self.clicked_hex_axial_coord)
                 if event.button == 3:
                     self.selection_type += 1
                 if event.button == 4:
@@ -214,14 +209,6 @@ class ExampleHexMap:
     def quit_app(self):
         pg.quit()
         raise SystemExit
-
-    def check_for_encounter(self, player_name, hex_coordinates):
-        # Ensure hex_coordinates is properly formatted as a list or tuple
-        if isinstance(hex_coordinates, np.ndarray):
-            hex_coordinates = hex_coordinates.tolist()
-        hex_coordinates_str = str(hex_coordinates)  # Convert coordinates to string
-        encounter_script = os.path.join(script_dir, "encounter.py")
-        subprocess.run([sys.executable, encounter_script, player_name, hex_coordinates_str])
 
 class ClampedInteger:
     def __init__(self, initial_value, lower_limit, upper_limit):
