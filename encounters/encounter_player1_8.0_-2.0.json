@@ -1,0 +1,14 @@
+{
+    "encounter": [],
+    "difficulty": "medium",
+    "xp_budget": 100,
+    "encounter_distance": 120,
+    "wind": "no wind",
+    "precipitation": "light rain or snow (\u00bd Cover over 100ft)",
+    "light_level": "Dusk, dim",
+    "player": "player1",
+    "hex": [
+        8.0,
+        -2.0
+    ]
+}

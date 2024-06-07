@@ -1,4 +1,3 @@
-# combat_gui.py
 import json
 import os
 import sys
@@ -36,7 +35,7 @@ def combat_loop(player_data, monsters_data):
 
         for idx, monster in enumerate(monsters_data):
             draw_text(screen, f"Monster {idx + 1}: {monster['name']}", (20, 100 + idx * 50), FONT)
-            draw_text(screen, f"HP: {monster['hit_points']}", (20, 130 + idx * 50), FONT)
+            draw_text(screen, f"HP: {monster.get('hit_points', 'N/A')}", (20, 130 + idx * 50), FONT)
 
         pg.display.flip()
 
@@ -46,8 +45,8 @@ if __name__ == "__main__":
 
     player_data = {
         "name": encounter_data["player"],
-        "hit_points": 100,  # Replace with actual player hit points
+        "hit_points": 100,  # Replace with actual player hit points if available
     }
-    monsters_data = encounter_data["monsters"]
+    monsters_data = encounter_data["encounter"]
 
     combat_loop(player_data, monsters_data)

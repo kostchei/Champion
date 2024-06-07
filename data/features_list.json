@@ -1,0 +1,29 @@
+{
+    "featuresList": [
+      { "name": "Crevasse, rock, ice or lava - across path", "heightModifier": -1 },
+      { "name": "Crevasse, rock, ice or lava - parallel to path", "heightModifier": -1 },
+      { "name": "Cave or sinkhole: rock, ice or lava", "heightModifier": -1 },
+      { "name": "Steep slope up - moderate athletics or treat as difficult (or ½ move), easy athletics or acrobatics to go down (or ½ move)", "heightModifier": 0.5 },
+      { "name": "Steep slope down - easy athletics or acrobatics to go down (or ½ move), moderate athletics or treat as difficult to go up (or ½ move)", "heightModifier": -0.5 },
+      { "name": "Peak", "heightModifier": 1 },
+      { "name": "Cliff up - climb DC 10, but half speed, across line of travel", "heightModifier": 1 },
+      { "name": "Cliff down - climb DC 10, but half speed, across line of travel", "heightModifier": -1 },
+      { "name": "Boulders or other broken ground", "heightModifier": 0.2 },
+      { "name": "Light Foliage - bushes, heather or saplings", "heightModifier": 0.1 },
+      { "name": "Snow or sand dunes or hillocks or dense thick trees (full cover)", "heightModifier": 0.4 },
+      { "name": "Medium intermittent cover - ice formations, medium size trees etc, ¾ cover", "heightModifier": 0.2 },
+      { "name": "Ridgeline - assumes above you unless you are on it, across your path", "heightModifier": 0.5 },
+      { "name": "Ridgeline - assumes above you unless you are on it, parallel to your path", "heightModifier": 0.5 },
+      { "name": "Gully - assumes below you unless you are on it, across your path", "heightModifier": -0.3 },
+      { "name": "Gully - assumes below you unless you are on it, parallel to your path", "heightModifier": -0.3 },
+      { "name": "River or water course, parallel to your path", "heightModifier": -0.1 },
+      { "name": "River or water course, across your path", "heightModifier": -0.1 },
+      { "name": "Slippery surface - ice, wet rock, fallen trees, wet grass, loose shale" },
+      { "name": "Very Soft ground - snow drifts, mud, floating plants, soft fine sand" },
+      { "name": "Bridge, rail or guided path, no cover except prone", "heightModifier": 0.1 },
+      { "name": "Ruin ¾ cover, no roof", "areaModifier": 0.5, "heightModifier": 0.3 },
+      { "name": "Building full cover, roof", "areaModifier": 0.5, "heightModifier": 0.2 },
+      { "name": "Monument, way marker, shrine, well or cache ¾ cover", "areaModifier": 0.1, "heightModifier": 0.1 }
+  ]
+  }
+ 
