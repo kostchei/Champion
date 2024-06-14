@@ -1,8 +1,7 @@
-#main.py
+# main.py
 import os
 import subprocess
 import sys
-import json
 import pygame as pg
 from datetime import datetime
 
@@ -11,7 +10,7 @@ pg.init()
 pg.font.init()
 
 # Constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 800  # Increased height
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 920
 BUTTON_WIDTH, BUTTON_HEIGHT = 250, 60
 BUTTON_PADDING = 20
 BUTTON_COLOR = (240, 240, 230)  # GREY
@@ -22,7 +21,7 @@ BUTTON_SHADOW_COLOR = (200, 200, 180)  # Light brown shadow (not provided, deriv
 FONT = pg.font.SysFont('Arial', 24)
 POPUP_FONT = pg.font.SysFont('Arial', 20)
 
-# Set up the screen
+# Set up the screen with calculated size
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pg.display.set_caption("Main Menu")
 
@@ -95,21 +94,20 @@ def choose_character():
 
 def main_menu():
     running = True
-    scroll_offset = 0
     while running:
         screen.fill(BACKGROUND_COLOR)  # Background color
 
         # Draw buttons
         buttons = [
-            ("Create Character", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + scroll_offset)),
-            ("New Map", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + BUTTON_HEIGHT + BUTTON_PADDING + scroll_offset)),
-            ("Continue Game", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 2*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Icon Allocation", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 3*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Backpack", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 4*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Level Up", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 5*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Camp", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 6*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Choose Character", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 7*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
-            ("Exit", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 8*(BUTTON_HEIGHT + BUTTON_PADDING) + scroll_offset)),
+            ("Create Character", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100)),
+            ("New Map", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + BUTTON_HEIGHT + BUTTON_PADDING)),
+            ("Continue Game", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 2*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Generate Encounter", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 3*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Backpack", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 4*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Level Up", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 5*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Camp", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 6*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Choose Character", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 7*(BUTTON_HEIGHT + BUTTON_PADDING))),
+            ("Exit", (SCREEN_WIDTH//2 - BUTTON_WIDTH//2, 100 + 8*(BUTTON_HEIGHT + BUTTON_PADDING))),
         ]
 
         button_rects = []
@@ -121,46 +119,41 @@ def main_menu():
             if event.type == pg.QUIT:
                 running = False
             elif event.type == pg.MOUSEBUTTONDOWN:
-                if event.button == 4:  # Mouse wheel up
-                    scroll_offset += 20
-                elif event.button == 5:  # Mouse wheel down
-                    scroll_offset -= 20
-                else:
-                    for text, rect in button_rects:
-                        if rect.collidepoint(event.pos):
-                            if text == "Create Character":
-                                run_script("ccmenu.py")
-                            elif text == "New Map":
-                                run_script("overland.py")
-                                generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
-                                if not generated_files:
-                                    print("No maps generated. Returning to main menu.")
-                                    continue
-                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
-                                filename = os.path.join(maps_dir, latest_map)
-                                print(f"Loading the latest generated map: {filename}")
-                                run_script("explorer.py", filename)
-                            elif text == "Continue Game":
-                                generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
-                                if not generated_files:
-                                    print("No maps found. Returning to main menu.")
-                                    continue
-                                latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
-                                filename = os.path.join(maps_dir, latest_map)
-                                print(f"Loading the most recent map: {filename}")
-                                run_script("explorer.py", filename)
-                            #elif text == "Icon Allocation":
-                            #    run_script("./utils/uiallocation.py") not happy with progress, redo
-                            elif text == "Backpack":
-                                run_script("inventory.py")
-                            elif text == "Level Up":
-                                run_script("leveling.py")
-                            elif text == "Camp":
-                                run_script("camp.py")
-                            elif text == "Choose Character":
-                                choose_character()
-                            elif text == "Exit":
-                                running = False
+                for text, rect in button_rects:
+                    if rect.collidepoint(event.pos):
+                        if text == "Create Character":
+                            run_script("ccmenu.py")
+                        elif text == "New Map":
+                            run_script("overland.py")
+                            generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
+                            if not generated_files:
+                                print("No maps generated. Returning to main menu.")
+                                continue
+                            latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
+                            filename = os.path.join(maps_dir, latest_map)
+                            print(f"Loading the latest generated map: {filename}")
+                            run_script("explorer.py", filename)
+                        elif text == "Continue Game":
+                            generated_files = [f for f in os.listdir(maps_dir) if f.startswith("hex_map_") and f.endswith(".json")]
+                            if not generated_files:
+                                print("No maps found. Returning to main menu.")
+                                continue
+                            latest_map = max(generated_files, key=lambda f: os.path.getctime(os.path.join(maps_dir, f)))
+                            filename = os.path.join(maps_dir, latest_map)
+                            print(f"Loading the most recent map: {filename}")
+                            run_script("explorer.py", filename)
+                        elif text == "Generate Encounter":
+                            run_script("DM_Enc_tool.py")
+                        elif text == "Backpack":
+                            run_script("inventory.py")
+                        elif text == "Level Up":
+                            run_script("leveling.py")
+                        elif text == "Camp":
+                            run_script("camp.py")
+                        elif text == "Choose Character":
+                            choose_character()
+                        elif text == "Exit":
+                            running = False
 
         pg.display.flip()
     pg.quit()

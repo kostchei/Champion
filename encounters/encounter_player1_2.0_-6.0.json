@@ -1,0 +1,14 @@
+{
+    "encounter": [],
+    "difficulty": "medium",
+    "xp_budget": 100,
+    "encounter_distance": 70,
+    "wind": "light wind",
+    "precipitation": "none",
+    "light_level": "Night, dark",
+    "player": "player1",
+    "hex": [
+        2.0,
+        -6.0
+    ]
+}

@@ -16,10 +16,10 @@ def save_json(data, file_path):
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
 
-def generate_encounter(player_name, hex_coordinates, party_size, party_level, terrain, faction):
+def generate_encounter(player_name, hex_coordinates, party_size, party_level, realm):
     monsters_by_cr = load_json('data/monsters_by_cr.json')
 
-    encounter_data = generate_encounter_data(party_size, party_level, "random", terrain, faction, monsters_by_cr)
+    encounter_data = generate_encounter_data(party_size, party_level, "random", realm, monsters_by_cr)
 
     encounter_data["player"] = player_name
     encounter_data["hex"] = hex_coordinates
@@ -37,9 +37,9 @@ def run_script(script_name, *args):
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), script_name)
     subprocess.run([sys.executable, script_path, *args])
 
-def check_for_encounter(player_name, hex_coordinates, party_size, party_level, terrain, faction):
+def check_for_encounter(player_name, hex_coordinates, party_size, party_level, realm):
     if random.random() < ENCOUNTER_PROBABILITY:
-        generate_encounter(player_name, hex_coordinates, party_size, party_level, terrain, faction)
+        generate_encounter(player_name, hex_coordinates, party_size, party_level, realm)
         return True
     return False
 
@@ -49,6 +49,6 @@ if __name__ == "__main__":
     party_size = 2
     party_level = 1
     terrain = "forest"
-    faction = "Elvish"
+    realm = "Elvish"
 
-    check_for_encounter(player_name, hex_coordinates, party_size, party_level, terrain, faction)
+    check_for_encounter(player_name, hex_coordinates, party_size, party_level, realm)

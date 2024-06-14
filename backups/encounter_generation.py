@@ -1,11 +1,8 @@
+# encounter_generator.py
 import json
 import random
-import sys
-import os
-import subprocess
-from dice import roll_dice
+from utils.dice import roll_dice
 
-# Function to load JSON data from a file
 def load_json(file_path):
     try:
         with open(file_path, 'r') as f:
@@ -17,20 +14,25 @@ def load_json(file_path):
         print(f"Error decoding JSON from file: {file_path}")
         return {}
 
-# Define the base path
-base_path = os.path.dirname(os.path.abspath(__file__))
+# Load data
+terrain_distance_map = load_json('data/terrain_distance_map.json')
+monsters_by_cr = load_json('data/monsters_by_cr.json')
+difficulty_thresholds = load_json('data/difficulty_thresholds.json')
+challenge_rating_list = load_json('data/challenge_rating_list.json')
 
-# Load data using the base path
-monsters_by_cr = load_json(os.path.join(base_path, '../data/monsters_by_cr.json'))
-difficulty_thresholds = load_json(os.path.join(base_path, '../data/difficulty_thresholds.json'))
-challenge_rating_list = load_json(os.path.join(base_path, '../data/challenge_rating_list.json'))
+def generate_encounter_distance(terrain):
+    if terrain in terrain_distance_map:
+        dice = terrain_distance_map[terrain]['dice']
+        multiplier = terrain_distance_map[terrain]['multiplier']
+        return roll_dice(dice[0], dice[1]) * multiplier
+    return 0
 
-def filter_monsters_by_terrain_and_realm(monsters_by_cr, terrain, realm):
+def filter_monsters_by_terrain_and_faction(monsters_by_cr, terrain, faction):
     filtered_monsters_by_cr = {}
     for cr, monsters in monsters_by_cr.items():
         filtered_monsters = [
             monster for monster in monsters
-            if terrain in monster['terrain'] and (random.random() <= 0.75 and realm in monster['realm'])
+            if terrain in monster['terrain'] and (random.random() <= 0.75 and faction in monster['faction'])
         ]
         if filtered_monsters:
             filtered_monsters_by_cr[cr] = filtered_monsters
@@ -96,8 +98,8 @@ def get_party_xp_threshold(party_size, party_level, difficulty):
             return threshold[difficulty] * party_size
     return 0
 
-def generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr):
-    filtered_monsters_by_cr = filter_monsters_by_terrain_and_realm(monsters_by_cr, terrain, realm)
+def generate_encounter_data(party_size, party_level, difficulty, terrain, faction, monsters_by_cr):
+    filtered_monsters_by_cr = filter_monsters_by_terrain_and_faction(monsters_by_cr, terrain, faction)
     
     if difficulty == "random":
         difficulty = random.choices(["easy", "medium", "hard", "deadly"], [0.14, 0.68, 0.13, 0.05])[0]
@@ -105,10 +107,13 @@ def generate_encounter_data(party_size, party_level, difficulty, terrain, realm,
     xp_budget = get_party_xp_threshold(party_size, party_level, difficulty)
     encounter = generate_encounter(xp_budget, filtered_monsters_by_cr)
 
+    encounter_distance = generate_encounter_distance(terrain)
+
     return {
         "encounter": encounter,
         "difficulty": difficulty,
         "xp_budget": xp_budget,
+        "encounter_distance": encounter_distance,
     }
 
 def save_encounter_data(encounter_data, file_path):
@@ -116,16 +121,12 @@ def save_encounter_data(encounter_data, file_path):
         json.dump(encounter_data, f, indent=4)
 
 if __name__ == "__main__":
-    # Get parameters from command line arguments
-    party_size = int(sys.argv[1])
-    party_level = int(sys.argv[2])
-    difficulty = sys.argv[3]
-    terrain = sys.argv[4]
-    realm = sys.argv[5]
+    party_size = 4
+    party_level = 3
+    difficulty = "medium"
+    terrain = "forest"
+    faction = "Wildthings"
 
-    encounter_data = generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr)
+    encounter_data = generate_encounter_data(party_size, party_level, difficulty, terrain, faction, monsters_by_cr)
     save_encounter_data(encounter_data, 'encounter_data.json')
     print(f"Encounter data saved to 'encounter_data.json'")
-
-    # Run combat_gui.py
-    subprocess.run([sys.executable, os.path.join(base_path, '../combat_gui.py'), 'encounter_data.json'])

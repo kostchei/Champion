@@ -3,7 +3,7 @@ import random
 import sys
 import os
 import subprocess
-from dice import roll_dice
+from utils.dice import roll_dice
 
 # Function to load JSON data from a file
 def load_json(file_path):

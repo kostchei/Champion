@@ -1,8 +1,7 @@
 {
-    "desert": {"dice": [6, 6], "multiplier": 10},
-    "arctic": {"dice": [6, 6], "multiplier": 10},
+    "open": {"dice": [6, 6], "multiplier": 10},
     "forest": {"dice": [2, 8], "multiplier": 10},
     "hills": {"dice": [2, 10], "multiplier": 10},
     "mountains": {"dice": [4, 10], "multiplier": 10},
-    "jungle": {"dice": [2, 6], "multiplier": 10}
+    "dense": {"dice": [2, 6], "multiplier": 10}
 }

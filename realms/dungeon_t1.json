@@ -1,0 +1,530 @@
+{
+    "1/8": [
+        {
+            "name": "Boggle",
+            "cr": "1/8",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Old Troglodyte",
+            "cr": "1/8",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Neogi Hatchling",
+            "cr": "1/8",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Hoard Scarab",
+            "cr": "1/8",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ],
+    "1/4": [
+        {
+            "name": "Wretched Sorrowsworn",
+            "cr": "1/4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Night Blade",
+            "cr": "1/4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Acolyte",
+            "size": "M",
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "A"
+            ],
+            "ac": "10",
+            "hp": {
+                "average": 9,
+                "formula": "2d8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "cr": "1/4",
+            "str": " 10",
+            "dex": " 10",
+            "con": " 10",
+            "int": " 10",
+            "wis": " 14",
+            "cha": " 11",
+            "action": [
+                "Club: Melee Weapon Attack: {@hit +2} to hit, reach 5 ft., one target. Hit: 2 ({@dice 1d4}) bludgeoning damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Skeleton",
+            "size": "M",
+            "type": "undead",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": "13 (armor scraps)",
+            "hp": {
+                "average": 13,
+                "formula": "2d8+4"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "cr": "1/4",
+            "str": " 10",
+            "dex": " 14",
+            "con": " 15",
+            "int": " 6",
+            "wis": " 8",
+            "cha": " 5",
+            "action": [
+                "Shortsword: Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 5 ({@dice 1d6+2}) piercing damage.",
+                "Shortbow: Ranged Weapon Attack: {@hit +4} to hit, range 80/320 ft., one target. Hit: 5 ({@dice 1d6+2}) piercing damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Zombie",
+            "size": "M",
+            "type": "undead",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": "8",
+            "hp": {
+                "average": 22,
+                "formula": "3d8+9"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "cr": "1/4",
+            "str": " 13",
+            "dex": " 6",
+            "con": " 16",
+            "int": " 3",
+            "wis": " 6",
+            "cha": " 5",
+            "action": [
+                "Slam: Melee Weapon Attack: {@hit +3} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d6+1}) bludgeoning damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        }
+    ],
+    "1/2": [
+        {
+            "name": "Shadow",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Soldier",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Redbrand Ruffian",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Swarm of Rotgrubs",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Gazer",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ],
+    "1": [
+        {
+            "name": "Deep Dragon Wyrmling",
+            "cr": "1",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Evil Mage",
+            "cr": "1",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Meazel",
+            "cr": "1",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Tin Soldier",
+            "cr": "1",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Spectre",
+            "cr": "1",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ],
+    "2": [
+        {
+            "name": "Gargoyle",
+            "cr": "2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Ogre",
+            "cr": "2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Mimic",
+            "size": "M",
+            "type": {
+                "type": "monstrosity",
+                "tags": [
+                    "shapechanger"
+                ]
+            },
+            "alignment": [
+                "N"
+            ],
+            "ac": "12 (natural armor)",
+            "hp": {
+                "average": 58,
+                "formula": "9d8+18"
+            },
+            "speed": {
+                "walk": 15
+            },
+            "cr": "2",
+            "str": " 17",
+            "dex": " 12",
+            "con": " 15",
+            "int": " 5",
+            "wis": " 13",
+            "cha": " 8",
+            "action": [
+                "Pseudopod: Melee Weapon Attack: {@hit +5} to hit, reach 5 ft., one target. Hit: 7 ({@dice 1d8+3}) bludgeoning damage. If the mimic is in object form, the target is subjected to its Adhesive trait.",
+                "Bite: Melee Weapon Attack: {@hit +5} to hit, reach 5 ft., one target. Hit: 7 ({@dice 1d8+3}) piercing damage plus 4 ({@dice 1d8}) acid damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Darkling Elder",
+            "cr": "2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "White Dragon Wrymling",
+            "cr": "2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ],
+    "3": [
+        {
+            "name": "Redcap",
+            "cr": "3",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Basilisk",
+            "size": "M",
+            "type": "monstrosity",
+            "alignment": [
+                "U"
+            ],
+            "ac": "12 (natural armor)",
+            "hp": {
+                "average": 52,
+                "formula": "8d8+16"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "cr": "3",
+            "str": " 16",
+            "dex": " 8",
+            "con": " 15",
+            "int": " 2",
+            "wis": " 8",
+            "cha": " 7",
+            "action": [
+                "Bite: Melee Weapon Attack: {@hit +5} to hit, reach 5 ft., one target. Hit: 10 ({@dice 2d6+3}) piercing damage plus 7 ({@dice 2d6}) poison damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Minotaur",
+            "size": "L",
+            "type": "monstrosity",
+            "alignment": [
+                "C",
+                "E"
+            ],
+            "ac": "14 (natural armor)",
+            "hp": {
+                "average": 76,
+                "formula": "9d10+27"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "cr": "3",
+            "str": " 18",
+            "dex": " 11",
+            "con": " 16",
+            "int": " 6",
+            "wis": " 16",
+            "cha": " 9",
+            "action": [
+                "Greataxe: Melee Weapon Attack: {@hit +6} to hit, reach 5 ft., one target. Hit: 17 ({@dice 2d12+4}) slashing damage.",
+                "Gore: Melee Weapon Attack: {@hit +6} to hit, reach 5 ft., one target. Hit: 13 ({@dice 2d8+4}) piercing damage."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Illusionist Wizard",
+            "cr": "3",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Trapper",
+            "cr": "3",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ],
+    "4": [
+        {
+            "name": "Lamia",
+            "size": "L",
+            "type": "monstrosity",
+            "alignment": [
+                "C",
+                "E"
+            ],
+            "ac": "13 (natural armor)",
+            "hp": {
+                "average": 97,
+                "formula": "13d10+26"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "cr": "4",
+            "str": " 16",
+            "dex": " 13",
+            "con": " 15",
+            "int": " 14",
+            "wis": " 15",
+            "cha": " 16",
+            "action": [
+                "Multiattack: The lamia makes two attacks: one with its claws and one with its dagger or Intoxicating Touch.",
+                "Claws: Melee Weapon Attack: {@hit +5} to hit, reach 5 ft., one target. Hit: 14 ({@dice 2d10+3}) slashing damage.",
+                "Dagger: Melee Weapon Attack: {@hit +5} to hit, reach 5 ft., one target. Hit: 5 ({@dice 1d4+3}) piercing damage.",
+                "Intoxicating Touch: Melee Spell Attack: {@hit +5} to hit, reach 5 ft., one creature. Hit: The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
+            ],
+            "realm": [
+                "dungeon_t1"
+            ],
+            "terrain": [
+                "dense"
+            ]
+        },
+        {
+            "name": "Oread",
+            "cr": "4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Witherbloom Pledgemage",
+            "cr": "4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Clockwork Iron Cobra",
+            "cr": "4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Grell Psychic",
+            "cr": "4",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        }
+    ]
+}

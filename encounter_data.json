@@ -1,0 +1,41 @@
+{
+    "encounter": [
+        {
+            "name": "Eagle",
+            "size": "S",
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": "12",
+            "hp": {
+                "average": 3,
+                "formula": "1d6"
+            },
+            "speed": {
+                "walk": 10,
+                "fly": 60
+            },
+            "cr": "0",
+            "str": " 6",
+            "dex": " 15",
+            "con": " 10",
+            "int": " 2",
+            "wis": " 14",
+            "cha": " 7",
+            "action": [
+                "Talons: Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d4+2}) slashing damage."
+            ],
+            "realm": [
+                "greyhawk",
+                "kalanthia"
+            ],
+            "terrain": [
+                "arctic",
+                "mountains"
+            ]
+        }
+    ],
+    "difficulty": "hard",
+    "xp_budget": 225
+}
