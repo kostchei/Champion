@@ -1,6 +1,7 @@
 import json
 import sys
 import pygame as pg
+from collections import Counter
 
 # Initialize Pygame
 pg.init()
@@ -52,6 +53,13 @@ def draw_button(text, position):
 
     return button_rect
 
+def draw_columns(screen, columns, font):
+    for col in columns:
+        x, y = col['position']
+        for line in col['content']:
+            draw_text(screen, line, (x, y), font)
+            y += font.get_linesize()
+
 def combat_loop(player_data, encounter_data):
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pg.display.set_caption("Combat GUI")
@@ -77,39 +85,54 @@ def combat_loop(player_data, encounter_data):
         # Define column positions
         column_width = SCREEN_WIDTH // 6
         column_positions = [i * column_width for i in range(6)]
+        font_linesize = FONT.get_linesize()
 
-        # Display player data in columns 1 and 2
-        draw_text(screen, f"Player: {player_data['name']}", (column_positions[0] + 20, 100), FONT)
-        draw_text(screen, f"HP: {player_data['hit_points']}", (column_positions[0] + 20, 130), FONT)
+        # Prepare content for columns
+        columns = [
+            {'position': (column_positions[0], 100), 'content': []},
+            {'position': (column_positions[1], 100), 'content': []},
+            {'position': (column_positions[2], 100), 'content': []},
+            {'position': (column_positions[3], 100), 'content': []},
+            {'position': (column_positions[4], 100), 'content': []},
+            {'position': (column_positions[5], 100), 'content': []},
+        ]
 
-        # Display encounter details in column 3
-        draw_text(screen, f"Difficulty: {encounter_data['difficulty']}", (column_positions[2] + 20, 100), FONT)
-        draw_text(screen, f"XP Budget: {encounter_data['xp_budget']}", (column_positions[2] + 20, 130), FONT)
+        # Add player data to columns 1 and 2
+        columns[0]['content'].append(f"Player: {player_data['name']}")
+        columns[0]['content'].append(f"HP: {player_data['hit_points']}")
 
-        # Access and display monster data in columns 4 and 5
+        # Add encounter details to column 3
+        columns[2]['content'].append(f"Difficulty: {encounter_data['difficulty']}")
+        columns[2]['content'].append(f"XP Budget: {encounter_data['xp_budget']}")
+
+        # Count monsters and prepare content for columns 4 and 5
         monsters_data = encounter_data['encounter']
-        for idx, monster in enumerate(monsters_data):
-            y_offset = 160 + idx * 420
-            x_offset = column_positions[3] + 20
-            draw_text(screen, f"Monster {idx + 1}: {monster['name']}", (x_offset, y_offset), FONT)
-            draw_text(screen, f"Size: {monster.get('size', 'N/A')}", (x_offset, y_offset + 30), FONT)
-            draw_text(screen, f"Type: {monster.get('type', 'N/A')}", (x_offset, y_offset + 60), FONT)
-            draw_text(screen, f"Alignment: {', '.join(monster.get('alignment', ['N/A']))}", (x_offset, y_offset + 90), FONT)
-            draw_text(screen, f"HP: {monster.get('hp', {}).get('average', 'N/A')} ({monster.get('hp', {}).get('formula', 'N/A')})", (x_offset, y_offset + 120), FONT)
-            draw_text(screen, f"AC: {monster.get('ac', 'N/A')}", (x_offset, y_offset + 150), FONT)
-            draw_text(screen, f"Speed: {monster.get('speed', {}).get('walk', 'N/A')} ft.", (x_offset, y_offset + 180), FONT)
-            draw_text(screen, f"CR: {monster.get('cr', 'N/A')}", (x_offset, y_offset + 210), FONT)
-            draw_text(screen, f"STR: {monster.get('str', 'N/A')}", (x_offset, y_offset + 240), FONT)
-            draw_text(screen, f"DEX: {monster.get('dex', 'N/A')}", (x_offset, y_offset + 270), FONT)
-            draw_text(screen, f"CON: {monster.get('con', 'N/A')}", (x_offset, y_offset + 300), FONT)
-            draw_text(screen, f"INT: {monster.get('int', 'N/A')}", (x_offset, y_offset + 330), FONT)
-            draw_text(screen, f"WIS: {monster.get('wis', 'N/A')}", (x_offset, y_offset + 360), FONT)
-            draw_text(screen, f"CHA: {monster.get('cha', 'N/A')}", (x_offset, y_offset + 390), FONT)
-            draw_text(screen, f"Actions:", (x_offset, y_offset + 420), FONT)
+        monster_counts = Counter(monster['name'] for monster in monsters_data)
+        
+        for idx, (monster_name, count) in enumerate(monster_counts.items()):
+            monster_info = next(monster for monster in monsters_data if monster['name'] == monster_name)
+            column_index = 3 if idx % 2 == 0 else 4
+            columns[column_index]['content'].append(f"Monster {idx + 1}: {monster_name} x{count}")
+            columns[column_index]['content'].append(f"Size: {monster_info.get('size', 'N/A')}")
+            columns[column_index]['content'].append(f"Type: {monster_info.get('type', 'N/A')}")
+            columns[column_index]['content'].append(f"Alignment: {', '.join(monster_info.get('alignment', ['N/A']))}")
+            columns[column_index]['content'].append(f"HP: {monster_info.get('hp', {}).get('average', 'N/A')} ({monster_info.get('hp', {}).get('formula', 'N/A')})")
+            columns[column_index]['content'].append(f"AC: {monster_info.get('ac', 'N/A')}")
+            columns[column_index]['content'].append(f"Speed: {monster_info.get('speed', {}).get('walk', 'N/A')} ft.")
+            columns[column_index]['content'].append(f"CR: {monster_info.get('cr', 'N/A')}")
+            columns[column_index]['content'].append(f"STR: {monster_info.get('str', 'N/A')}")
+            columns[column_index]['content'].append(f"DEX: {monster_info.get('dex', 'N/A')}")
+            columns[column_index]['content'].append(f"CON: {monster_info.get('con', 'N/A')}")
+            columns[column_index]['content'].append(f"INT: {monster_info.get('int', 'N/A')}")
+            columns[column_index]['content'].append(f"WIS: {monster_info.get('wis', 'N/A')}")
+            columns[column_index]['content'].append(f"CHA: {monster_info.get('cha', 'N/A')}")
+            columns[column_index]['content'].append(f"Actions:")
+            actions = monster_info.get('action', [])
+            for action in actions:
+                columns[column_index]['content'].append(f"- {action}")
 
-            actions = monster.get('action', [])
-            for action_idx, action in enumerate(actions):
-                draw_text(screen, f"- {action}", (x_offset + 20, y_offset + 450 + action_idx * 30), FONT)
+        # Draw all columns
+        draw_columns(screen, columns, FONT)
 
         pg.display.flip()
 

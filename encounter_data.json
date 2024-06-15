@@ -1,7 +1,7 @@
 {
     "encounter": [
         {
-            "name": "Gazer",
+            "name": "Redbrand Ruffian",
             "cr": "1/2",
             "terrain": [
                 "dense"
@@ -11,7 +11,7 @@
             ]
         },
         {
-            "name": "Gazer",
+            "name": "Redbrand Ruffian",
             "cr": "1/2",
             "terrain": [
                 "dense"
@@ -21,7 +21,7 @@
             ]
         },
         {
-            "name": "Gazer",
+            "name": "Redbrand Ruffian",
             "cr": "1/2",
             "terrain": [
                 "dense"
@@ -31,7 +31,37 @@
             ]
         },
         {
-            "name": "Soldier",
+            "name": "Shadow",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Shadow",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Shadow",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Shadow",
             "cr": "1/2",
             "terrain": [
                 "dense"
@@ -41,7 +71,7 @@
             ]
         }
     ],
-    "difficulty": "hard",
-    "xp_budget": 1500,
+    "difficulty": "medium",
+    "xp_budget": 34200,
     "terrain": "open"
 }
