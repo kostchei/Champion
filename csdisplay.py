@@ -1,8 +1,8 @@
-# csdisplay.py
 import json
 import sys
 import tkinter as tk
-from tkinter import messagebox, simpledialog, ttk
+from tkinter import messagebox, ttk
+import os
 
 BUFF_OFF_WHITE = "#F7F6ED"
 DARK_BLUE = "#1E2832"
@@ -20,9 +20,11 @@ def save_character(character_data):
     messagebox.showinfo("Saved", f"Character saved as {filename}")
 
 def choose_realm():
-    realm = simpledialog.askstring("Choose Realm", "Enter the realm:")
-    if realm:
-        realm_var.set(realm)
+    realms = [f.split('.')[0] for f in os.listdir("./realms") if f.endswith(".json")]
+    dialog = RealmSelectionDialog(root, realms)
+    selected_realm = dialog.show()
+    if selected_realm:
+        realm_var.set(selected_realm)
 
 def get_class_details(class_name):
     with open(f'./classes/{class_name}.json', 'r') as file:
@@ -91,6 +93,9 @@ def choose_class_features(character_data):
                 }
             else:
                 messagebox.showerror("Invalid Choice", f"You must choose a valid {feature_name}.")
+        else:
+            # Add default feature
+            character_data[f"default_{feature_name.lower().replace(' ', '_')}"] = feature_details
     
     save_character(character_data)
     display_character_sheet(character_data)  # Refresh the character sheet
@@ -123,6 +128,34 @@ class FeatureSelectionDialog(tk.Toplevel):
         self.wm_deiconify()
         self.wait_window()
         return self.selected_feature
+
+class RealmSelectionDialog(tk.Toplevel):
+    def __init__(self, parent, options):
+        super().__init__(parent)
+        self.title("Choose Realm")
+        self.geometry("300x100")
+        self.resizable(False, False)
+
+        self.var = tk.StringVar(self)
+        self.var.set(options[0])
+
+        label = tk.Label(self, text="Choose a realm:")
+        label.pack(pady=10)
+
+        self.dropdown = ttk.Combobox(self, textvariable=self.var, values=options)
+        self.dropdown.pack(pady=5)
+
+        button = tk.Button(self, text="OK", command=self.on_select)
+        button.pack(pady=5)
+
+    def on_select(self):
+        self.selected_option = self.var.get()
+        self.destroy()
+
+    def show(self):
+        self.wm_deiconify()
+        self.wait_window()
+        return getattr(self, "selected_option", None)
 
 class SkillSelectionDialog(tk.Toplevel):
     def __init__(self, parent, title, skill_choices, num_skills):
@@ -285,7 +318,15 @@ def display_character_sheet(character_data):
     ] if "attack" in character_data else []
 
     create_readonly_listbox(list_frame, "Attack", attack_info)
-    create_readonly_listbox(list_frame, "Features", character_data.get("class_features", []))
+
+    # Display class features with descriptions
+    class_features = []
+    for feature_key, feature in character_data.items():
+        if feature_key.startswith("chosen_") or feature_key.startswith("default_"):
+            class_features.append(f"{feature['name']}: {feature['description']}\nEffect: {feature['effect']}")
+    
+    create_readonly_listbox(list_frame, "Class Features", class_features)
+    
     create_readonly_listbox(list_frame, "Reputation", character_data.get("reputation", []))
     create_readonly_listbox(list_frame, "Equipment", character_data.get("equipment", []))
     create_readonly_listbox(list_frame, "Unassigned Skills", list(unassigned_skills))
