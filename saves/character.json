@@ -1,5 +1,5 @@
 {
-    "name": "Valerius",
+    "name": "ted",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
@@ -99,11 +99,12 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Studded leather",
-        "Rapier",
+        "Scale Mail",
+        "Longsword",
         "Short Sword",
         "Shield",
-        "Fancy Hat with Feather",
+        "Plumed Helmet",
+        "5 gold",
         "cracked hourglass",
         "rusty manacles",
         "half-empty bottle",
@@ -115,11 +116,11 @@
     ],
     "feature": "Still Standing",
     "strength": 16,
-    "intelligence": 18,
-    "wisdom": 12,
-    "dexterity": 16,
+    "intelligence": 14,
+    "wisdom": 11,
+    "dexterity": 14,
     "constitution": 17,
-    "charisma": 14,
+    "charisma": 15,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -162,18 +163,18 @@
         "13 gp"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 3,
+    "dexterity_modifier": 2,
     "constitution_modifier": 3,
-    "intelligence_modifier": 4,
-    "wisdom_modifier": 1,
+    "intelligence_modifier": 2,
+    "wisdom_modifier": 0,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 17,
+    "armor_class": 18,
     "attack": {
-        "name": "Rapier",
+        "name": "Longsword",
         "to_hit": "+5",
-        "damage": "1d8 piercing + 3"
+        "damage": "1d8 slashing + 3"
     }
 }

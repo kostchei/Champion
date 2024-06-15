@@ -3,65 +3,333 @@
         {
             "name": "Boggle",
             "cr": "1/8",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Fey",
+            "alignment": "Typically Chaotic Neutral",
+            "ac": "14",
+            "hp": {
+                "average": 18,
+                "formula": "4d6 + 4"
+            },
+            "speed": {
+                "walk": 30,
+                "climb": 30
+            },
+            "str": 8,
+            "dex": 18,
+            "con": 13,
+            "int": 6,
+            "wis": 12,
+            "cha": 7,
+            "skills": {
+                "Perception": "+5",
+                "Sleight of Hand": "+6",
+                "Stealth": "+6"
+            },
+            "damage_resistances": "fire",
+            "senses": "darkvision 60 ft., passive Perception 15",
+            "languages": "Sylvan",
+            "action": [
+                {
+                    "name": "Pummel",
+                    "desc": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) bludgeoning damage."
+                },
+                {
+                    "name": "Oil Puddle",
+                    "desc": "The boggle creates a puddle of nonflammable oil. It has the choice of making the oil slippery or sticky, affecting creatures' movement and ability to stay upright."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "bonus_action": [
+                {
+                    "name": "Boggle Oil",
+                    "desc": "The boggle excretes nonflammable oil from its pores, giving itself benefits like escaping grapples or enhancing grappling capabilities."
+                },
+                {
+                    "name": "Dimensional Rift",
+                    "desc": "The boggle creates an invisible and immobile rift within an opening or frame it can see within 5 feet of it. Only the boggle can use the rift, and it lasts until the end of the boggle's next turn."
+                }
             ]
         },
+        {
+            "name": "Xvart Speaker",
+            "cr": "1/8",
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Humanoid",
+            "subtype": "Xvart",
+            "alignment": "Chaotic Evil",
+            "ac": "13 (leather armor)",
+            "hp": {
+                "average": 7,
+                "formula": "2d6"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 8,
+            "dex": 14,
+            "con": 10,
+            "int": 13,
+            "wis": 7,
+            "cha": 7,
+            "skills": {
+                "Stealth": "+4"
+            },
+            "senses": "darkvision 30 ft., passive Perception 8",
+            "languages": "Abyssal and one additional language (usually Common or Goblin)",
+            "special_abilities": [
+                {
+                    "name": "Low Cunning",
+                    "desc": "The xvart can take the Disengage action as a bonus action on each of its turns."
+                },
+                {
+                    "name": "Overbearing Pack",
+                    "desc": "The xvart has advantage on Strength (Athletics) checks to shove a creature if at least one of the xvart's allies is within 5 feet of the target and the ally isn't incapacitated."
+                },
+                {
+                    "name": "Raxivort's Tongue",
+                    "desc": "The xvart can communicate with ordinary bats and rats, as well as giant bats and giant rats."
+                }
+            ],
+            "action": [
+                {
+                    "name": "Shortsword",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+                },
+                {
+                    "name": "Sling",
+                    "desc": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage."
+                }
+            ]
+        },     
         {
             "name": "Old Troglodyte",
             "cr": "1/8",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Humanoid",
+            "subtype": "Troglodyte",
+            "alignment": "Chaotic Evil",
+            "ac": "11 (natural armor)",
+            "hp": {
+                "average": 13,
+                "formula": "2d8 + 4"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 14,
+            "dex": 10,
+            "con": 14,
+            "int": 6,
+            "wis": 10,
+            "cha": 6,
+            "skills": {
+                "Stealth": "+2"
+            },
+            "senses": "darkvision 60 ft., passive Perception 10",
+            "languages": "Troglodyte",
+            "special_abilities": [
+                {
+                    "name": "Chameleon Skin",
+                    "desc": "The troglodyte has advantage on Dexterity (Stealth) checks made to hide."
+                },
+                {
+                    "name": "Stench",
+                    "desc": "Any creature other than a troglodyte that starts its turn within 5 feet of the troglodyte must succeed on a DC 12 Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all troglodytes for 1 hour."
+                },
+                {
+                    "name": "Sunlight Sensitivity",
+                    "desc": "While in sunlight, the troglodyte has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
-            ]
-        },
-        {
-            "name": "Neogi Hatchling",
-            "cr": "1/8",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "desc": "The troglodyte makes two claw attacks."
+                },
+                {
+                    "name": "Claw",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) slashing damage."
+                }
             ]
         },
         {
             "name": "Hoard Scarab",
             "cr": "1/8",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Monstrosity",
+            "alignment": "Unaligned",
+            "ac": "14 (natural armor)",
+            "hp": {
+                "average": 7,
+                "formula": "3d4"
+            },
+            "speed": {
+                "walk": 20,
+                "burrow": 20,
+                "fly": 20
+            },
+            "str": 4,
+            "dex": 16,
+            "con": 11,
+            "int": 3,
+            "wis": 8,
+            "cha": 6,
+            "senses": "darkvision 60 ft., tremorsense 60 ft., passive Perception 9",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "False Appearance",
+                    "desc": "If the scarab is motionless at the start of combat, it has advantage on its initiative roll. Moreover, if a creature hasn't observed the scarab move or act, that creature must succeed on a DC 18 Intelligence (Investigation) check to discern that the scarab is animate."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Bite",
+                    "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage. If the target is a creature, it has disadvantage on attack rolls until the start of its next turn."
+                }
+            ],
+            "bonus_action": [
+                {
+                    "name": "Scale Dust",
+                    "desc": "The scarab releases magical glittering dust from its wings. Each creature within 5 feet of the scarab must succeed on a DC 13 Dexterity saving throw or be outlined in blue light for 10 minutes. While outlined, a creature sheds dim light in a 10-foot radius and can't benefit from being invisible. Moreover, every Dragon within 1 mile becomes aware of it and can unerringly track the creature. Casting dispel magic on the creature ends the effect on it."
+                }
+            ]
+        },
+        {
+            "name": "Xvart",
+            "cr": "1/8",
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Monstrosity",
+            "alignment": "Typically Chaotic Evil",
+            "ac": "13 (leather armor)",
+            "hp": {
+                "average": 7,
+                "formula": "2d6"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 8,
+            "dex": 14,
+            "con": 10,
+            "int": 8,
+            "wis": 7,
+            "cha": 7,
+            "skills": {
+                "Stealth": "+4"
+            },
+            "senses": "darkvision 30 ft., passive Perception 8",
+            "languages": "Abyssal",
+            "special_abilities": [
+                {
+                    "name": "Raxivort's Tongue",
+                    "desc": "The xvart can communicate with ordinary bats and rats, as well as giant bats and giant rats."
+                }
+            ],
+            "action": [
+                {
+                    "name": "Shortsword",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage. If at least one of the xvart's allies is within 5 feet of the target, the xvart can push the target 5 feet if the target is a Medium or smaller creature."
+                },
+                {
+                    "name": "Sling",
+                    "desc": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage."
+                }
+            ],
+            "bonus_action": [
+                {
+                    "name": "Low Cunning",
+                    "desc": "The xvart takes the Disengage action."
+                }
+            ]
+        },
+        {
+            "name": "Giant Rat",
+            "cr": "1/8",
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Beast",
+            "alignment": "Unaligned",
+            "ac": "12",
+            "hp": {
+                "average": 7,
+                "formula": "2d6"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 7,
+            "dex": 15,
+            "con": 11,
+            "int": 2,
+            "wis": 10,
+            "cha": 4,
+            "senses": "darkvision 60 ft., passive Perception 10",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Keen Smell",
+                    "desc": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
+                },
+                {
+                    "name": "Pack Tactics",
+                    "desc": "The rat has advantage on an attack roll against a creature if at least one of the rat's allies is within 5 feet of the creature and the ally isn't incapacitated."
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage."
+                }
+            ]
+        },           
+        {
+            "name": "Bridesmaid of Zuggtmoy",
+            "cr": "1/8",
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Plant",
+            "alignment": "Chaotic Evil",
+            "ac": "13 (natural armor)",
+            "hp": {
+                "average": 22,
+                "formula": "5d8"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "str": 14,
+            "dex": 11,
+            "con": 11,
+            "int": 14,
+            "wis": 8,
+            "cha": 18,
+            "senses": "darkvision 60 ft., passive Perception 9",
+            "languages": "understands Abyssal but can't speak",
+            "action": [
+                {
+                    "name": "Hallucination Spores",
+                    "desc": "The bridesmaid ejects spores at one creature it can see within 5 feet of it. The target must succeed on a DC 10 Constitution saving throw or be poisoned for 1 minute. While poisoned in this way, the target is incapacitated. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+                },
+                {
+                    "name": "Infestation Spores",
+                    "desc": "The bridesmaid releases spores that burst out in a cloud that fills a 10-foot-radius sphere centered on it, and the cloud lingers for 1 minute. Any flesh-and-blood creature in the cloud when it appears, or that enters it later, must make a DC 10 Constitution saving throw. On a failed save, the creature is infected with a disease called the spores of Zuggtmoy and also gains a random form of indefinite madness."
+                }
+            ],
+            "special_abilities": [
+                {
+                    "name": "Fungus Stride",
+                    "desc": "Once on its turn, the bridesmaid can use 10 feet of its movement to step magically into one living mushroom or fungus patch within 5 feet and emerge from another within 60 feet of the first one, appearing in an unoccupied space within 5 feet of the second mushroom or fungus patch. The mushrooms and patches must be large or bigger."
+                }
             ]
         }
     ],
     "1/4": [
-        {
-            "name": "Wretched Sorrowsworn",
-            "cr": "1/4",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
-            ]
-        },
-        {
-            "name": "Night Blade",
-            "cr": "1/4",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
-            ]
-        },
         {
             "name": "Acolyte",
             "size": "M",
@@ -97,6 +365,47 @@
             ],
             "terrain": [
                 "dense"
+            ]
+        },
+        {
+            "name": "Giant Bat",
+            "cr": "1/4",
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Beast",
+            "alignment": "Unaligned",
+            "ac": "13",
+            "hp": {
+                "average": 22,
+                "formula": "4d10"
+            },
+            "speed": {
+                "walk": 10,
+                "fly": 60
+            },
+            "str": 15,
+            "dex": 16,
+            "con": 11,
+            "int": 2,
+            "wis": 12,
+            "cha": 6,
+            "senses": "blindsight 60 ft., passive Perception 11",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Echolocation",
+                    "desc": "The bat can't use its blindsight while deafened."
+                },
+                {
+                    "name": "Keen Hearing",
+                    "desc": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage."
+                }
             ]
         },
         {
@@ -171,93 +480,423 @@
         {
             "name": "Shadow",
             "cr": "1/2",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Undead",
+            "alignment": "Chaotic Evil",
+            "ac": "12",
+            "hp": {
+                "average": 16,
+                "formula": "3d8 + 3"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 6,
+            "dex": 14,
+            "con": 13,
+            "int": 6,
+            "wis": 10,
+            "cha": 8,
+            "skills": {
+                "Stealth": "+4"
+            },
+            "damage_vulnerabilities": "radiant",
+            "damage_resistances": "acid, cold, fire, lightning, thunder; bludgeoning, piercing, and slashing from nonmagical attacks",
+            "damage_immunities": "necrotic, poison",
+            "condition_immunities": "exhaustion, frightened, grappled, paralyzed, petrified, poisoned, prone, restrained",
+            "senses": "darkvision 60 ft., passive Perception 10",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Amorphous",
+                    "desc": "The shadow can move through a space as narrow as 1 inch wide without squeezing."
+                },
+                {
+                    "name": "Shadow Stealth",
+                    "desc": "While in dim light or darkness, the shadow can take the Hide action as a bonus action. Its stealth bonus is also improved to +6."
+                },
+                {
+                    "name": "Sunlight Weakness",
+                    "desc": "While in sunlight, the shadow has disadvantage on attack rolls, ability checks, and saving throws."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Strength Drain",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 9 (2d6 + 2) necrotic damage, and the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest. If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+                }
             ]
         },
         {
             "name": "Soldier",
             "cr": "1/2",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Humanoid",
+            "subtype": "Any Race",
+            "alignment": "Any Alignment",
+            "ac": "18 (chain mail, shield)",
+            "hp": {
+                "average": 16,
+                "formula": "3d8 + 3"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 13,
+            "dex": 12,
+            "con": 12,
+            "int": 10,
+            "wis": 11,
+            "cha": 11,
+            "skills": {
+                "Athletics": "+3",
+                "Perception": "+2"
+            },
+            "senses": "passive Perception 12",
+            "languages": "any one language (usually Common)",
+            "special_abilities": [
+                {
+                    "name": "Formation Tactics",
+                    "desc": "The soldier has advantage on saving throws against being charmed, frightened, grappled, or restrained while it is within 5 feet of at least one ally."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "desc": "The soldier makes two melee attacks."
+                },
+                {
+                    "name": "Longsword",
+                    "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands."
+                }
             ]
         },
         {
             "name": "Redbrand Ruffian",
             "cr": "1/2",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Humanoid",
+            "subtype": "Any Race",
+            "alignment": "Typically Neutral Evil",
+            "ac": "11 (leather armor)",
+            "hp": {
+                "average": 16,
+                "formula": "3d8 + 3"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 14,
+            "dex": 10,
+            "con": 12,
+            "int": 9,
+            "wis": 9,
+            "cha": 11,
+            "skills": {
+                "Intimidation": "+2"
+            },
+            "senses": "passive Perception 9",
+            "languages": "Common",
+            "action": [
+                {
+                    "name": "Shortsword",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+                }
             ]
         },
         {
-            "name": "Swarm of Rotgrubs",
+            "name": "Swarm of Rot Grubs",
             "cr": "1/2",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Swarm of Tiny Beasts",
+            "alignment": "Unaligned",
+            "ac": "8",
+            "hp": {
+                "average": 22,
+                "formula": "5d8"
+            },
+            "speed": {
+                "walk": 5,
+                "climb": 5
+            },
+            "str": 2,
+            "dex": 7,
+            "con": 10,
+            "int": 1,
+            "wis": 2,
+            "cha": 1,
+            "damage_vulnerabilities": "fire",
+            "damage_resistances": "piercing, slashing",
+            "condition_immunities": "charmed, frightened, grappled, paralyzed, petrified, prone, restrained",
+            "senses": "blindsight 10 ft., passive Perception 6",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Swarm",
+                    "desc": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny maggot. The swarm can't regain hit points or gain temporary hit points."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Bites",
+                    "desc": "Melee Weapon Attack: +0 to hit, reach 0 ft., one creature in the swarm's space. Hit: 7 (2d6) piercing damage, and the target must succeed on a DC 10 Constitution saving throw or be poisoned. At the end of each of the poisoned target's turns, the target takes 3 (1d6) poison damage. Whenever the poisoned target takes fire damage, the target can repeat the saving throw, ending the effect on itself on a success. If the poisoned target ends its turn with 0 hit points, it dies."
+                }
             ]
         },
         {
             "name": "Gazer",
             "cr": "1/2",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Aberration",
+            "subtype": "Beholder",
+            "alignment": "Typically Neutral Evil",
+            "ac": "13",
+            "hp": {
+                "average": 13,
+                "formula": "3d4 + 6"
+            },
+            "speed": {
+                "fly": 30,
+                "hover": true
+            },
+            "str": 3,
+            "dex": 17,
+            "con": 14,
+            "int": 3,
+            "wis": 10,
+            "cha": 7,
+            "saving_throws": {
+                "Wis": "+2"
+            },
+            "skills": {
+                "Perception": "+4",
+                "Stealth": "+5"
+            },
+            "condition_immunities": "prone",
+            "senses": "darkvision 60 ft., passive Perception 14",
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Mimicry",
+                    "desc": "The gazer can mimic simple sounds of speech it has heard, in any language. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Bite",
+                    "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+                },
+                {
+                    "name": "Eye Rays",
+                    "desc": "The gazer shoots two of the following magical eye rays at random, choosing one or two targets it can see within 60 feet of it: 1. Dazing Ray, 2. Fear Ray, 3. Frost Ray, 4. Telekinetic Ray."
+                }
+            ],
+            "bonus_action": [
+                {
+                    "name": "Aggressive",
+                    "desc": "The gazer moves up to its speed toward a hostile creature that it can see."
+                }
             ]
         }
+        
     ],
     "1": [
         {
             "name": "Deep Dragon Wyrmling",
             "cr": "1",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Dragon",
+            "alignment": "Typically Neutral Evil",
+            "ac": "15 (natural armor)",
+            "hp": {
+                "average": 27,
+                "formula": "5d8 + 5"
+            },
+            "speed": {
+                "walk": 30,
+                "burrow": 15,
+                "fly": 60,
+                "swim": 30
+            },
+            "str": 14,
+            "dex": 11,
+            "con": 12,
+            "int": 11,
+            "wis": 12,
+            "cha": 13,
+            "saving_throws": {
+                "Dex": "+2",
+                "Con": "+3",
+                "Wis": "+3",
+                "Cha": "+3"
+            },
+            "skills": {
+                "Perception": "+3",
+                "Persuasion": "+3",
+                "Stealth": "+4"
+            },
+            "damage_resistances": "poison, psychic",
+            "condition_immunities": "charmed, frightened, poisoned",
+            "senses": {
+                "blindsight": "10 ft.",
+                "darkvision": "90 ft.",
+                "passive_perception": "13"
+            },
+            "languages": "Draconic",
+            "action": [
+                {
+                    "name": "Bite",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage."
+                },
+                {
+                    "name": "Nightmare Breath",
+                    "desc": "The dragon exhales a cloud of spores in a 15-foot cone. Each creature in that area must make a DC 11 Wisdom saving throw. On a failed save, the creature takes 5 (1d10) psychic damage, and it is frightened of the dragon for 1 minute. On a successful save, the creature takes half as much damage with no additional effects. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+                }
             ]
         },
         {
             "name": "Evil Mage",
             "cr": "1",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Humanoid",
+            "subtype": "Human",
+            "alignment": "Lawful Evil",
+            "ac": "12",
+            "hp": {
+                "average": 22,
+                "formula": "5d8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 9,
+            "dex": 14,
+            "con": 11,
+            "int": 17,
+            "wis": 12,
+            "cha": 11,
+            "saving_throws": {
+                "Int": "+5",
+                "Wis": "+3"
+            },
+            "skills": {
+                "Arcana": "+5",
+                "History": "+5"
+            },
+            "senses": "passive Perception 11",
+            "languages": "Common, Draconic, Dwarvish, Elvish",
+            "special_abilities": [
+                {
+                    "name": "Spellcasting",
+                    "desc": "The mage is a 4th-level spellcaster that uses Intelligence as its spellcasting ability (spell save DC 13; +5 to hit with spell attacks). The mage knows the following spells from the wizard's spell list: Cantrips (at will): light, mage hand, shocking grasp; 1st level (4 slots): charm person, magic missile; 2nd level (3 slots): hold person, misty step."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Quarterstaff",
+                    "desc": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 3 (1d8 - 1) bludgeoning damage."
+                }
             ]
-        },
+        }   ,
         {
             "name": "Meazel",
             "cr": "1",
-            "terrain": [
-                "dense"
-            ],
-            "realm": [
-                "dungeon_t1"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Monstrosity",
+            "alignment": "Typically Neutral Evil",
+            "ac": "13",
+            "hp": {
+                "average": 35,
+                "formula": "10d8 - 10"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 8,
+            "dex": 17,
+            "con": 9,
+            "int": 14,
+            "wis": 13,
+            "cha": 10,
+            "skills": {
+                "Perception": "+3",
+                "Stealth": "+5"
+            },
+            "senses": {
+                "darkvision": "120 ft.",
+                "passive_perception": "13"
+            },
+            "languages": "Common",
+            "action": [
+                {
+                    "name": "Garrote",
+                    "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target of the meazel's size or smaller. Hit: 6 (1d6 + 3) bludgeoning damage, and the target is grappled (escape DC 13 with disadvantage). Until the grapple ends, the target takes 10 (2d6 + 3) bludgeoning damage at the start of each of the meazel's turns. The meazel can't make weapon attacks while grappling a creature in this way."
+                },
+                {
+                    "name": "Shortsword",
+                    "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage plus 3 (1d6) necrotic damage."
+                },
+                {
+                    "name": "Shadow Teleport",
+                    "desc": "Recharge 5–6. The meazel, any equipment it is wearing or carrying, and any creature it is grappling teleport to an unoccupied space within 500 feet of it, provided that the starting space and the destination are in dim light or darkness. The destination must be a place the meazel has seen before, but it need not be within line of sight. If the destination space is occupied, the teleportation leads to the nearest unoccupied space. Any other creature the meazel teleports becomes cursed for 1 hour or until the curse is ended by remove curse or greater restoration. Until this curse ends, every Undead and every creature native to the Shadowfell within 300 feet of the cursed creature can sense it, which prevents that creature from hiding from them."
+                }
             ]
         },
         {
             "name": "Tin Soldier",
             "cr": "1",
-            "terrain": [
-                "dense"
+            "terrain": ["dense"],
+            "realm": ["dungeon_t1"],
+            "type": "Construct",
+            "alignment": "Unaligned",
+            "ac": "18 (natural armor)",
+            "hp": {
+                "average": 27,
+                "formula": "6d6 + 6"
+            },
+            "speed": {
+                "walk": 25
+            },
+            "str": 14,
+            "dex": 11,
+            "con": 13,
+            "int": 1,
+            "wis": 3,
+            "cha": 1,
+            "damage_immunities": "poison, psychic",
+            "condition_immunities": "blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned",
+            "senses": {
+                "blindsight": "60 ft. (blind beyond this radius)",
+                "passive_perception": "6"
+            },
+            "languages": "",
+            "special_abilities": [
+                {
+                    "name": "Antimagic Susceptibility",
+                    "desc": "The tin soldier is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the tin soldier must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+                },
+                {
+                    "name": "False Appearance",
+                    "desc": "While the tin soldier remains motionless, it is indistinguishable from a normal suit of armor."
+                }
             ],
-            "realm": [
-                "dungeon_t1"
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "desc": "The tin soldier makes two melee attacks."
+                },
+                {
+                    "name": "Slam",
+                    "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage."
+                }
             ]
         },
         {
@@ -558,7 +1197,7 @@
                     "description": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
                 }
             ],
-            "actions": [
+            "action": [
                 {
                     "name": "Bite",
                     "type": "Melee Weapon Attack",
@@ -610,7 +1249,7 @@
                     "description": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
                 }
             ],
-            "actions": [
+            "action": [
                 {
                     "name": "Bite",
                     "type": "Melee Weapon Attack",
