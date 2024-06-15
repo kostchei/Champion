@@ -1,39 +1,47 @@
 {
     "encounter": [
         {
-            "name": "Zombie",
-            "size": "M",
-            "type": "undead",
-            "alignment": [
-                "L",
-                "E"
-            ],
-            "ac": "8",
-            "hp": {
-                "average": 22,
-                "formula": "3d8+9"
-            },
-            "speed": {
-                "walk": 20
-            },
-            "cr": "1/4",
-            "str": " 13",
-            "dex": " 6",
-            "con": " 16",
-            "int": " 3",
-            "wis": " 6",
-            "cha": " 5",
-            "action": [
-                "Slam: Melee Weapon Attack: {@hit +3} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d6+1}) bludgeoning damage."
+            "name": "Gazer",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
             ],
             "realm": [
                 "dungeon_t1"
-            ],
+            ]
+        },
+        {
+            "name": "Gazer",
+            "cr": "1/2",
             "terrain": [
                 "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Gazer",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
+            ]
+        },
+        {
+            "name": "Soldier",
+            "cr": "1/2",
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
             ]
         }
     ],
-    "difficulty": "medium",
-    "xp_budget": 50
+    "difficulty": "hard",
+    "xp_budget": 1500,
+    "terrain": "open"
 }

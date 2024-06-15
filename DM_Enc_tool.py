@@ -1,15 +1,21 @@
-# DM_Enc_tool.py
 import tkinter as tk
 from tkinter import ttk
 import os
 import subprocess
 import sys
 
+# Colors and fonts consistent with main.py
+BG_COLOR = "#F7F6ED"  # Buff color
+TEXT_COLOR = "#1E2832"  # Dark blue
+BUTTON_BG_COLOR = "#F0F0E6"  # Grey (light background for buttons)
+BUTTON_FG_COLOR = "#1E2832"  # Dark blue (text on buttons)
+FONT = ("Arial", 18)  # Smaller font
+
 # Create the main application window
 root = tk.Tk()
 root.title("Encounter Generator")
-root.geometry("800x600")
-root.configure(bg="#F7F6ED")  # Buff color
+root.geometry("1920x1080")
+root.configure(bg=BG_COLOR)
 
 # Options for dropdowns
 num_characters = [str(i) for i in range(1, 7)]
@@ -38,29 +44,36 @@ def run_encounter_generation():
     # Run the encounter generation script
     subprocess.run([sys.executable, script_path, party_size, party_level, difficulty, terrain, realm])
     
-# Create and place widgets
-tk.Label(root, text="Number of Characters:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(pady=10)
-num_char_dropdown = ttk.Combobox(root, values=num_characters, textvariable=selected_characters, font=("Arial", 24))
-num_char_dropdown.pack()
+# Create and place widgets with consistent styling
+def create_label(text):
+    return tk.Label(root, text=text, bg=BG_COLOR, fg=TEXT_COLOR, font=FONT)
 
-tk.Label(root, text="Level of Characters:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(pady=10)
-level_dropdown = ttk.Combobox(root, values=character_levels, textvariable=selected_level, font=("Arial", 24))
-level_dropdown.pack()
+def create_dropdown(values, variable):
+    dropdown = ttk.Combobox(root, values=values, textvariable=variable, font=FONT)
+    dropdown.pack(pady=10)
+    return dropdown
 
-tk.Label(root, text="Difficulty Level:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(pady=10)
-difficulty_dropdown = ttk.Combobox(root, values=difficulty_levels, textvariable=selected_difficulty, font=("Arial", 24))
-difficulty_dropdown.pack()
+def create_button(text, command):
+    button = tk.Button(root, text=text, command=command, bg=BUTTON_BG_COLOR, fg=BUTTON_FG_COLOR, font=FONT)
+    button.pack(pady=20)
+    return button
 
-tk.Label(root, text="Terrain Type:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(pady=10)
-terrain_dropdown = ttk.Combobox(root, values=terrain_types, textvariable=selected_terrain, font=("Arial", 24))
-terrain_dropdown.pack()
+create_label("Number of Characters:").pack(pady=10)
+create_dropdown(num_characters, selected_characters)
 
-tk.Label(root, text="Realm:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(pady=10)
-realm_dropdown = ttk.Combobox(root, values=realm_files, textvariable=selected_realm, font=("Arial", 24))
-realm_dropdown.pack()
+create_label("Level of Characters:").pack(pady=10)
+create_dropdown(character_levels, selected_level)
 
-generate_button = tk.Button(root, text="Generate", command=run_encounter_generation, bg="#F7F6ED", fg="darkblue", font=("Arial", 24))
-generate_button.pack(pady=20)
+create_label("Difficulty Level:").pack(pady=10)
+create_dropdown(difficulty_levels, selected_difficulty)
+
+create_label("Terrain Type:").pack(pady=10)
+create_dropdown(terrain_types, selected_terrain)
+
+create_label("Realm:").pack(pady=10)
+create_dropdown(realm_files, selected_realm)
+
+create_button("Generate", run_encounter_generation)
 
 # Run the Tkinter event loop
 root.mainloop()

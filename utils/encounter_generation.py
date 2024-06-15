@@ -24,12 +24,12 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 difficulty_thresholds = load_json(os.path.join(base_path, '../data/difficulty_thresholds.json'))
 challenge_rating_list = load_json(os.path.join(base_path, '../data/challenge_rating_list.json'))
 
-def filter_monsters_by_terrain_and_realm(monsters_by_cr, terrain, realm):
+def filter_monsters_by_realm(monsters_by_cr, realm):
     filtered_monsters_by_cr = {}
     for cr, monsters in monsters_by_cr.items():
         filtered_monsters = [
             monster for monster in monsters
-            if terrain in monster['terrain'] and (random.random() <= 0.75 and realm in monster['realm'])
+            if realm in monster['realm']
         ]
         if filtered_monsters:
             filtered_monsters_by_cr[cr] = filtered_monsters
@@ -103,7 +103,7 @@ def get_party_xp_threshold(party_size, party_level, difficulty):
     return 0
 
 def generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr):
-    filtered_monsters_by_cr = filter_monsters_by_terrain_and_realm(monsters_by_cr, terrain, realm)
+    filtered_monsters_by_cr = filter_monsters_by_realm(monsters_by_cr, realm)
     
     if difficulty == "random":
         difficulty = random.choices(["easy", "medium", "hard", "deadly"], [0.14, 0.68, 0.13, 0.05])[0]
@@ -115,6 +115,7 @@ def generate_encounter_data(party_size, party_level, difficulty, terrain, realm,
         "encounter": encounter,
         "difficulty": difficulty,
         "xp_budget": xp_budget,
+        "terrain": terrain
     }
 
 def save_encounter_data(encounter_data, file_path):
