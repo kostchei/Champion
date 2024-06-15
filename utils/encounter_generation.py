@@ -20,8 +20,7 @@ def load_json(file_path):
 # Define the base path
 base_path = os.path.dirname(os.path.abspath(__file__))
 
-# Load data using the base path
-monsters_by_cr = load_json(os.path.join(base_path, '../data/monsters_by_cr.json'))
+# Load global data using the base path
 difficulty_thresholds = load_json(os.path.join(base_path, '../data/difficulty_thresholds.json'))
 challenge_rating_list = load_json(os.path.join(base_path, '../data/challenge_rating_list.json'))
 
@@ -50,10 +49,17 @@ def generate_encounter(xp_budget, filtered_monsters_by_cr):
         nonlocal xp_budget
         xp_budget -= next(cr_item['xp'] for cr_item in challenge_rating_list if cr_item['cr'] == cr)
 
-    method = random.choices(
-        [1, 2, 3, 4], 
-        [0.75, 0.5 if xp_budget >= 600 else 0, 0.25 if xp_budget >= 3000 else 0, 1]
-    )[0]
+    # Check feasible methods based on the XP budget
+    feasible_methods = [1]  # Method 1 (Single high CR monster) is always possible
+
+    if xp_budget >= 30:
+        feasible_methods.append(2)  # Method 2 (Pair of monsters)
+    if xp_budget >= 120:
+        feasible_methods.append(3)  # Method 3 (Minions)
+    if xp_budget >= 600:
+        feasible_methods.append(4)  # Method 4 (Swarm)
+
+    method = random.choice(feasible_methods)
 
     if method == 1:
         cr = find_highest_cr(xp_budget, filtered_monsters_by_cr)
@@ -122,6 +128,9 @@ if __name__ == "__main__":
     difficulty = sys.argv[3]
     terrain = sys.argv[4]
     realm = sys.argv[5]
+
+    # Load monsters data based on the realm
+    monsters_by_cr = load_json(os.path.join(base_path, f'../realms/{realm}.json'))
 
     encounter_data = generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr)
     save_encounter_data(encounter_data, 'encounter_data.json')

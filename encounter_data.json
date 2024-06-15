@@ -1,41 +1,39 @@
 {
     "encounter": [
         {
-            "name": "Eagle",
-            "size": "S",
-            "type": "beast",
+            "name": "Zombie",
+            "size": "M",
+            "type": "undead",
             "alignment": [
-                "U"
+                "L",
+                "E"
             ],
-            "ac": "12",
+            "ac": "8",
             "hp": {
-                "average": 3,
-                "formula": "1d6"
+                "average": 22,
+                "formula": "3d8+9"
             },
             "speed": {
-                "walk": 10,
-                "fly": 60
+                "walk": 20
             },
-            "cr": "0",
-            "str": " 6",
-            "dex": " 15",
-            "con": " 10",
-            "int": " 2",
-            "wis": " 14",
-            "cha": " 7",
+            "cr": "1/4",
+            "str": " 13",
+            "dex": " 6",
+            "con": " 16",
+            "int": " 3",
+            "wis": " 6",
+            "cha": " 5",
             "action": [
-                "Talons: Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d4+2}) slashing damage."
+                "Slam: Melee Weapon Attack: {@hit +3} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d6+1}) bludgeoning damage."
             ],
             "realm": [
-                "greyhawk",
-                "kalanthia"
+                "dungeon_t1"
             ],
             "terrain": [
-                "arctic",
-                "mountains"
+                "dense"
             ]
         }
     ],
-    "difficulty": "hard",
-    "xp_budget": 225
+    "difficulty": "medium",
+    "xp_budget": 50
 }
