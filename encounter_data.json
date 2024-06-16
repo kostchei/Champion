@@ -1,190 +1,112 @@
 {
     "encounter": [
         {
-            "name": "Cultist",
-            "source": "MM",
-            "page": 345,
-            "srd": true,
-            "basicRules": true,
+            "name": "Xvart",
+            "source": "MPMM",
+            "page": 267,
             "otherSources": [
                 {
-                    "source": "CoS"
-                },
-                {
-                    "source": "HotDQ"
-                },
-                {
-                    "source": "LMoP"
-                },
-                {
-                    "source": "PotA"
-                },
-                {
-                    "source": "RoT"
-                },
-                {
-                    "source": "SKT"
-                },
-                {
-                    "source": "WDH"
-                },
-                {
-                    "source": "WDMM"
-                },
-                {
-                    "source": "GoS"
-                },
-                {
-                    "source": "DC"
-                },
-                {
-                    "source": "DIP"
-                },
-                {
-                    "source": "SLW"
-                },
-                {
-                    "source": "BGDIA"
-                },
-                {
-                    "source": "RMBRE"
-                },
-                {
-                    "source": "IMR"
-                },
-                {
-                    "source": "EGW"
-                },
-                {
-                    "source": "MOT"
-                },
-                {
-                    "source": "IDRotF"
-                },
-                {
-                    "source": "CM"
-                },
-                {
-                    "source": "JttRC"
-                },
-                {
-                    "source": "KftGV"
-                },
-                {
-                    "source": "HftT"
-                },
-                {
-                    "source": "PaBTSO"
-                },
-                {
-                    "source": "AATM"
-                },
-                {
-                    "source": "BMT"
-                },
-                {
-                    "source": "GHLoE"
-                },
-                {
-                    "source": "DoDk"
-                },
-                {
-                    "source": "VEoR"
+                    "source": "VGM",
+                    "page": 200
                 }
             ],
             "size": [
-                "M"
+                "S"
             ],
-            "type": {
-                "type": "humanoid",
-                "tags": [
-                    "any race"
-                ]
-            },
+            "type": "monstrosity",
             "alignment": [
-                "L",
-                "NX",
                 "C",
-                "NY",
                 "E"
             ],
+            "alignmentPrefix": "Typically ",
             "ac": [
                 {
-                    "ac": 12,
+                    "ac": 13,
                     "from": [
-                        "{@item leather armor|phb}"
+                        "{@item leather armor|PHB}"
                     ]
                 }
             ],
             "hp": {
-                "average": 9,
-                "formula": "2d8"
+                "average": 7,
+                "formula": "2d6"
             },
             "speed": {
                 "walk": 30
             },
-            "str": 11,
-            "dex": 12,
+            "str": 8,
+            "dex": 14,
             "con": 10,
-            "int": 10,
-            "wis": 11,
-            "cha": 10,
+            "int": 8,
+            "wis": 7,
+            "cha": 7,
             "skill": {
-                "deception": "+2",
-                "religion": "+2"
+                "stealth": "+4"
             },
-            "passive": 10,
+            "senses": [
+                "darkvision 30 ft."
+            ],
+            "passive": 8,
             "languages": [
-                "any one language (usually Common)"
+                "Abyssal"
             ],
             "cr": "1/8",
             "trait": [
                 {
-                    "name": "Dark Devotion",
+                    "name": "Raxivort's Tongue",
                     "entries": [
-                        "The cultist has advantage on saving throws against being {@condition charmed} or {@condition frightened}."
+                        "The xvart can communicate with ordinary {@creature bat|mm|bats} and {@creature rat|mm|rats}, as well as {@creature giant bat|mm|giant bats} and {@creature giant rat|mm|giant rats}."
                     ]
                 }
             ],
             "action": [
                 {
-                    "name": "Scimitar",
+                    "name": "Shortsword",
                     "entries": [
-                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d6 + 1}) slashing damage."
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}5 ({@dice 1d6 + 2}) piercing damage. If at least one of the xvart's allies is within 5 feet of the target, the xvart can push the target 5 feet if the target is a Medium or smaller creature."
+                    ]
+                },
+                {
+                    "name": "Sling",
+                    "entries": [
+                        "{@atk rw} {@hit 4} to hit, range 30/120 ft., one target. {@h}4 ({@damage 1d4 + 2}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "bonus": [
+                {
+                    "name": "Low Cunning",
+                    "entries": [
+                        "The xvart takes the {@action Disengage} action."
                     ]
                 }
             ],
             "environment": [
-                "urban"
+                "hill",
+                "underdark"
             ],
             "soundClip": {
                 "type": "internal",
-                "path": "bestiary/cultist.mp3"
+                "path": "bestiary/xvart.mp3"
             },
-            "altArt": [
-                {
-                    "name": "Diabolical Cultist",
-                    "source": "MTF",
-                    "page": 18
-                },
-                {
-                    "name": "Cultist",
-                    "source": "RMBRE"
-                }
-            ],
             "attachedItems": [
-                "scimitar|phb"
+                "shortsword|phb",
+                "sling|phb"
+            ],
+            "senseTags": [
+                "D"
             ],
             "languageTags": [
-                "C",
-                "X"
+                "AB"
             ],
             "damageTags": [
-                "S"
+                "P"
             ],
             "miscTags": [
                 "MLW",
-                "MW"
+                "MW",
+                "RNG",
+                "RW"
             ],
             "hasToken": true,
             "hasFluff": true,

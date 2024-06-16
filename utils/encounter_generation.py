@@ -134,5 +134,5 @@ if __name__ == "__main__":
     save_encounter_data(encounter_data, 'encounter_data.json')
     print(f"Encounter data saved to 'encounter_data.json'")
 
-    # Run combat_gui.py
-    subprocess.run([sys.executable, os.path.join(base_path, '../combat_gui.py'), 'encounter_data.json'])
+    # Run combat_gui.py and pass the realm as an argument
+    subprocess.run([sys.executable, os.path.join(base_path, '../combat_gui.py'), 'encounter_data.json', realm])

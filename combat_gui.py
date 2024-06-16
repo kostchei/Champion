@@ -1,7 +1,9 @@
 import json
 import sys
+import os
 import pygame as pg
 from collections import Counter
+from glob import glob
 
 # Initialize Pygame
 pg.init()
@@ -16,7 +18,7 @@ BUTTON_HOVER_COLOR = (237, 243, 252)  # WHITE
 BUTTON_TEXT_COLOR = (30, 40, 50)  # DARK_BLUE
 BACKGROUND_COLOR = (247, 246, 237)  # BUFF_OFF_WHITE
 BUTTON_SHADOW_COLOR = (200, 200, 180)  # Light brown shadow (not provided, derived for shadow)
-FONT = pg.font.SysFont('Arial', 18)  # Smaller font
+FONT = pg.font.SysFont('Arial', 14)  # Reduced font size to 75%
 
 # Set up the screen
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -69,9 +71,9 @@ def draw_columns(screen, columns, font, column_width):
         for line in col['content']:
             y = draw_text(screen, line, (x, y), font, max_width=x + column_width)
 
-def get_field_value(monster_info, key):
-    if key in monster_info:
-        value = monster_info[key]
+def get_field_value(data, key):
+    if key in data:
+        value = data[key]
         if isinstance(value, list):
             return ', '.join(map(str, value))
         elif isinstance(value, dict):
@@ -79,6 +81,20 @@ def get_field_value(monster_info, key):
         else:
             return str(value)
     return 'N/A'
+
+def find_latest_character_file(realm):
+    save_files = glob('./saves/*.json')
+    realm_files = [f for f in save_files if f.endswith(f'.{realm}.json')]
+    if not realm_files:
+        return None
+    latest_file = max(realm_files, key=os.path.getctime)
+    return latest_file
+
+def load_character_data(realm):
+    latest_file = find_latest_character_file(realm)
+    if latest_file:
+        return load_json(latest_file)
+    return {}
 
 def combat_loop(player_data, encounter_data):
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -93,14 +109,21 @@ def combat_loop(player_data, encounter_data):
         screen.fill(BACKGROUND_COLOR)  # Buff Off White background
 
         # Draw top bar buttons
-        top_buttons = ["Attack", "Bells", "Weather", "Features"]
-        for i, button_text in enumerate(top_buttons):
-            draw_button(button_text, (i * (BUTTON_WIDTH + BUTTON_PADDING), 0))
+        top_buttons = ["Initiative", "Hour", "Skies", "Scape"]
+        bottom_buttons = ["Engage", "Morale", "Loot", "Flee"]
 
-        # Draw bottom bar buttons
-        bottom_buttons = ["Loot", "Morale Check", "Flee"]
+        # Calculate the starting x position to center the buttons
+        total_button_width = len(top_buttons) * (BUTTON_WIDTH + BUTTON_PADDING) - BUTTON_PADDING
+        start_x_top = (SCREEN_WIDTH - total_button_width) // 2
+        start_x_bottom = start_x_top
+
+        # Draw top buttons centered
+        for i, button_text in enumerate(top_buttons):
+            draw_button(button_text, (start_x_top + i * (BUTTON_WIDTH + BUTTON_PADDING), 0))
+
+        # Draw bottom buttons centered
         for i, button_text in enumerate(bottom_buttons):
-            draw_button(button_text, (i * (BUTTON_WIDTH + BUTTON_PADDING), SCREEN_HEIGHT - BUTTON_HEIGHT))
+            draw_button(button_text, (start_x_bottom + i * (BUTTON_WIDTH + BUTTON_PADDING), SCREEN_HEIGHT - BUTTON_HEIGHT))
 
         # Define column positions
         column_width = SCREEN_WIDTH // 6
@@ -118,8 +141,52 @@ def combat_loop(player_data, encounter_data):
         ]
 
         # Add player data to columns 1 and 2
-        columns[0]['content'].append(f"Player: {player_data['name']}")
-        columns[0]['content'].append(f"HP: {player_data['hit_points']}")
+        columns[0]['content'].append(f"Player: {player_data.get('name', 'N/A')}")
+        columns[0]['content'].append(f"HP: {player_data.get('hit_points', 'N/A')}")
+
+        # Add character data to column 1
+        if player_data:
+            columns[0]['content'].append(f"Character: {player_data.get('name', 'N/A')}")
+            columns[0]['content'].append(f"Race: {player_data.get('race', 'N/A')}")
+            columns[0]['content'].append(f"Class: {player_data.get('class', 'N/A')}")
+            columns[0]['content'].append(f"HP: {player_data.get('hit_points', 'N/A')}")
+            columns[0]['content'].append(f"AC: {player_data.get('armor_class', 'N/A')}")
+            columns[0]['content'].append(f"Speed: {player_data.get('speed', 'N/A')}")
+
+            # Skills and skill bonuses
+            columns[0]['content'].append("Skills:")
+            skill_fields = ['athletics_bonus', 'arcana_bonus', 'history_bonus', 'investigation_bonus',
+                            'nature_bonus', 'religion_bonus', 'animal_handling_bonus', 'insight_bonus',
+                            'medicine_bonus', 'perception_bonus', 'survival_bonus', 'acrobatics_bonus',
+                            'sleight_of_hand_bonus', 'stealth_bonus', 'deception_bonus', 'intimidation_bonus',
+                            'performance_bonus', 'persuasion_bonus']
+            for skill in player_data.get('skills', []):
+                columns[0]['content'].append(f"  {skill}")
+
+            for skill_field in skill_fields:
+                if skill_field in player_data:
+                    columns[0]['content'].append(f"  {skill_field.replace('_bonus', '').replace('_', ' ').capitalize()}: {player_data[skill_field]}")
+
+            columns[0]['content'].append("Saving Throws:")
+            for save in player_data.get('saving_throws', []):
+                columns[0]['content'].append(f"  {save}")
+
+            columns[0]['content'].append("Features:")
+            for feature_name, feature in player_data.get('features', {}).items():
+                columns[0]['content'].append(f"{feature_name}: {feature.get('description', 'N/A')}")
+
+            chosen_fighting_style = player_data.get('chosen_fighting_style', {})
+            if chosen_fighting_style:
+                columns[0]['content'].append(f"Chosen Fighting Style: {chosen_fighting_style.get('name', 'N/A')}")
+                columns[0]['content'].append(f"  {chosen_fighting_style.get('description', 'N/A')}")
+
+            # Add attacks
+            if 'attack' in player_data:
+                attack = player_data['attack']
+                columns[0]['content'].append("Attack:")
+                columns[0]['content'].append(f"  Name: {attack.get('name', 'N/A')}")
+                columns[0]['content'].append(f"  To Hit: {attack.get('to_hit', 'N/A')}")
+                columns[0]['content'].append(f"  Damage: {attack.get('damage', 'N/A')}")
 
         # Add encounter details to column 3
         columns[2]['content'].append(f"Difficulty: {encounter_data['difficulty']}")
@@ -153,14 +220,20 @@ def combat_loop(player_data, encounter_data):
 
 if __name__ == "__main__":
     # Load encounter data from JSON file specified as a command-line argument
+    if len(sys.argv) < 3:
+        print("Usage: python combat_gui.py <encounter_file> <realm>")
+        sys.exit(1)
+
     encounter_file = sys.argv[1]
+    realm = sys.argv[2]
+    
     encounter_data = load_json(encounter_file)
 
-    # Example player data (hardcoded for now)
-    player_data = {
-        "name": "Player 1",  # Hardcoded; replace with actual player data if available
-        "hit_points": 100,   # Hardcoded; replace with actual player hit points if available
-    }
+    # Load character data
+    player_data = load_character_data(realm)
+
+    # Debugging: Print loaded character data
+    print(f"Loaded character data for realm '{realm}': {player_data}")
 
     # Run the combat loop
     combat_loop(player_data, encounter_data)
