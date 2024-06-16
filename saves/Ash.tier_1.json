@@ -1,15 +1,15 @@
 {
-    "name": "Drew",
+    "name": "Ash",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Folk Hero",
+    "background": "Outlander",
     "skills": [
-        "Animal Handling",
+        "Athletics",
         "Survival",
-        "Artisan Tools",
-        "Land Vehicles"
+        "Language",
+        "Musical Instrument"
     ],
     "features": {
         "Fighting Style": {
@@ -105,18 +105,18 @@
         "Shield",
         "Plumed Helmet",
         "5 gold",
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
-    "feature": "Rustic Hospitality",
-    "strength": 16,
-    "intelligence": 15,
-    "wisdom": 15,
+    "feature": "Wanderer",
+    "strength": 17,
+    "intelligence": 16,
+    "wisdom": 8,
     "dexterity": 13,
-    "constitution": 15,
-    "charisma": 14,
+    "constitution": 14,
+    "charisma": 17,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -149,17 +149,17 @@
     },
     "background_features": [],
     "background_equipment": [
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
     "strength_modifier": 3,
     "dexterity_modifier": 1,
     "constitution_modifier": 2,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
-    "charisma_modifier": 2,
+    "intelligence_modifier": 3,
+    "wisdom_modifier": -1,
+    "charisma_modifier": 3,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
@@ -168,5 +168,38 @@
         "name": "Longsword",
         "to_hit": "+5",
         "damage": "1d8 slashing + 3"
+    },
+    "athletics_bonus": 5,
+    "arcana_bonus": 3,
+    "history_bonus": 3,
+    "investigation_bonus": 3,
+    "nature_bonus": 3,
+    "religion_bonus": 3,
+    "animal_handling_bonus": -1,
+    "insight_bonus": -1,
+    "medicine_bonus": -1,
+    "perception_bonus": -1,
+    "survival_bonus": 1,
+    "acrobatics_bonus": 1,
+    "sleight_of_hand_bonus": 1,
+    "stealth_bonus": 1,
+    "deception_bonus": 3,
+    "intimidation_bonus": 3,
+    "performance_bonus": 3,
+    "persuasion_bonus": 3,
+    "str_save_bonus": 5,
+    "int_save_bonus": 3,
+    "wis_save_bonus": -1,
+    "dex_save_bonus": 1,
+    "con_save_bonus": 4,
+    "cha_save_bonus": 3,
+    "default_second_wind": {
+        "level": 1,
+        "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+    },
+    "default_fighting_style": {
+        "name": "Defense",
+        "description": "+1 to armor class",
+        "effect": "+1 AC"
     }
 }

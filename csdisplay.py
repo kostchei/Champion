@@ -10,6 +10,18 @@ WHITE = "#EDF3FC"
 GREY = "#F0F0E6"
 
 def save_character(character_data):
+    # Clean up features
+    if 'features' in character_data:
+        for feature_name in list(character_data['features'].keys()):
+            if 'choices' in character_data['features'][feature_name]:
+                del character_data['features'][feature_name]
+    
+    # Clean up class equipment
+    if 'class_equipment' in character_data and 'options' in character_data['class_equipment']:
+        del character_data['class_equipment']['options']
+        if 'choice' in character_data['class_equipment']:
+            del character_data['class_equipment']['choice']
+    
     character_name = character_data['name']
     realm = realm_var.get()
     if not realm:
@@ -86,7 +98,7 @@ def choose_class_features(character_data):
             dialog = FeatureSelectionDialog(root, f"Choose {feature_name}", feature_name, feature_choices)
             chosen_feature = dialog.show()
             if chosen_feature:
-                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = {
+                character_data[f"default_{feature_name.lower().replace(' ', '_')}"] = {
                     "name": chosen_feature['name'],
                     "description": chosen_feature['description'],
                     "effect": chosen_feature['effect']
@@ -97,8 +109,13 @@ def choose_class_features(character_data):
             # Add default feature
             character_data[f"default_{feature_name.lower().replace(' ', '_')}"] = feature_details
     
+    # Remove unselected choices from features
+    for feature_name in list(character_data['features'].keys()):
+        if 'choices' in character_data['features'][feature_name]:
+            del character_data['features'][feature_name]
+
     save_character(character_data)
-    display_character_sheet(character_data)  # Refresh the character sheet
+    update_character_sheet(character_data)  # Refresh the character sheet
 
 class FeatureSelectionDialog(tk.Toplevel):
     def __init__(self, parent, title, feature_name, feature_choices):
@@ -205,7 +222,7 @@ def choose_class_skills(character_data):
         messagebox.showerror("Invalid Choice", f"You must choose exactly {num_skills} skills.")
     
     save_character(character_data)
-    display_character_sheet(character_data)  # Refresh the character sheet
+    update_character_sheet(character_data)  # Refresh the character sheet
 
 def display_character_sheet(character_data):
     global root, realm_var
@@ -227,8 +244,20 @@ def display_character_sheet(character_data):
     canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
     # Create a frame inside the canvas
+    global main_frame
     main_frame = tk.Frame(canvas, bg=BUFF_OFF_WHITE)
     canvas.create_window((0, 0), window=main_frame, anchor="nw")
+
+    render_character_sheet(character_data)
+
+    realm_var = tk.StringVar(value="tier_1")
+
+    root.mainloop()
+
+def render_character_sheet(character_data):
+    # Clear the existing widgets
+    for widget in main_frame.winfo_children():
+        widget.destroy()
 
     # Character details frame
     details_frame = tk.Frame(main_frame, bg=BUFF_OFF_WHITE)
@@ -322,8 +351,9 @@ def display_character_sheet(character_data):
     # Display class features with descriptions
     class_features = []
     for feature_key, feature in character_data.items():
-        if feature_key.startswith("chosen_") or feature_key.startswith("default_"):
-            class_features.append(f"{feature['name']}: {feature['description']}\nEffect: {feature['effect']}")
+        if feature_key.startswith("default_"):
+            if isinstance(feature, dict) and 'name' in feature and 'description' in feature and 'effect' in feature:
+                class_features.append(f"{feature['name']}: {feature['description']}\nEffect: {feature['effect']}")
     
     create_readonly_listbox(list_frame, "Class Features", class_features)
     
@@ -341,9 +371,8 @@ def display_character_sheet(character_data):
     tk.Button(actions_frame, text="Choose Class Skills", command=lambda: choose_class_skills(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
     tk.Button(actions_frame, text="Choose Realm", command=choose_realm, bg=GREY, fg=DARK_BLUE).pack(pady=10)
 
-    realm_var = tk.StringVar(value="tier_1")
-
-    root.mainloop()
+def update_character_sheet(character_data):
+    render_character_sheet(character_data)
 
 if __name__ == "__main__":
     input_file = sys.argv[1]

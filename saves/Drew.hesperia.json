@@ -12,64 +12,12 @@
         "Land Vehicles"
     ],
     "features": {
-        "Fighting Style": {
-            "choices": [
-                {
-                    "name": "Defense",
-                    "description": "+1 to armor class",
-                    "effect": "+1 AC"
-                },
-                {
-                    "name": "Dueling",
-                    "description": "+2 to damage 1 weapon",
-                    "effect": "+2 damage"
-                },
-                {
-                    "name": "Great Weapon Fighting",
-                    "description": "Reroll 1 and 2 on 2handed damage dice",
-                    "effect": "if dice = 1,2 reroll"
-                },
-                {
-                    "name": "Two Weapon Fighting",
-                    "description": "Add ability modifier to off hand damage",
-                    "effect": "if off hand ability modifier equals dexterity bonus"
-                }
-            ]
-        },
         "Second Wind": {
             "level": 1,
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
         }
     },
-    "class_equipment": {
-        "options": {
-            "Heavy": [
-                "Ring Mail",
-                "Battleaxe",
-                "Maul",
-                "Hand Axe",
-                "Shield",
-                "Horned Helmet",
-                "25 gold"
-            ],
-            "Medium": [
-                "Scale Mail",
-                "Longsword",
-                "Short Sword",
-                "Shield",
-                "Plumed Helmet",
-                "5 gold"
-            ],
-            "Light": [
-                "Studded leather",
-                "Rapier",
-                "Short Sword",
-                "Shield",
-                "Fancy Hat with Feather"
-            ]
-        },
-        "choice": true
-    },
+    "class_equipment": {},
     "attributes": {
         "primary": "Strength",
         "secondary": "Constitution",
@@ -168,5 +116,42 @@
         "name": "Longsword",
         "to_hit": "+5",
         "damage": "1d8 slashing + 3"
-    }
+    },
+    "athletics_bonus": 5,
+    "arcana_bonus": 2,
+    "history_bonus": 2,
+    "investigation_bonus": 2,
+    "nature_bonus": 2,
+    "religion_bonus": 2,
+    "animal_handling_bonus": 4,
+    "insight_bonus": 4,
+    "medicine_bonus": 2,
+    "perception_bonus": 2,
+    "survival_bonus": 4,
+    "acrobatics_bonus": 1,
+    "sleight_of_hand_bonus": 1,
+    "stealth_bonus": 1,
+    "deception_bonus": 2,
+    "intimidation_bonus": 2,
+    "performance_bonus": 2,
+    "persuasion_bonus": 2,
+    "str_save_bonus": 5,
+    "int_save_bonus": 2,
+    "wis_save_bonus": 2,
+    "dex_save_bonus": 1,
+    "con_save_bonus": 4,
+    "cha_save_bonus": 2,
+    "default_fighting_style": {
+        "name": "Great Weapon Fighting",
+        "description": "Reroll 1 and 2 on 2handed damage dice",
+        "effect": "if dice = 1,2 reroll"
+    },
+    "default_second_wind": {
+        "level": 1,
+        "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+    },
+    "class_skills": [
+        "Insight",
+        "Athletics"
+    ]
 }

@@ -1,15 +1,15 @@
 {
-    "name": "Drew",
+    "name": "Bryn",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Folk Hero",
+    "background": "Outlander",
     "skills": [
-        "Animal Handling",
+        "Athletics",
         "Survival",
-        "Artisan Tools",
-        "Land Vehicles"
+        "Language",
+        "Musical Instrument"
     ],
     "features": {
         "Fighting Style": {
@@ -79,7 +79,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 12,
+    "hit_points": 13,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -105,18 +105,18 @@
         "Shield",
         "Plumed Helmet",
         "5 gold",
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
-    "feature": "Rustic Hospitality",
+    "feature": "Wanderer",
     "strength": 16,
     "intelligence": 15,
-    "wisdom": 15,
-    "dexterity": 13,
-    "constitution": 15,
-    "charisma": 14,
+    "wisdom": 17,
+    "dexterity": 12,
+    "constitution": 17,
+    "charisma": 12,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -149,17 +149,17 @@
     },
     "background_features": [],
     "background_equipment": [
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
     "strength_modifier": 3,
     "dexterity_modifier": 1,
-    "constitution_modifier": 2,
+    "constitution_modifier": 3,
     "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
-    "charisma_modifier": 2,
+    "wisdom_modifier": 3,
+    "charisma_modifier": 1,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
@@ -168,5 +168,42 @@
         "name": "Longsword",
         "to_hit": "+5",
         "damage": "1d8 slashing + 3"
-    }
+    },
+    "athletics_bonus": 5,
+    "arcana_bonus": 2,
+    "history_bonus": 2,
+    "investigation_bonus": 2,
+    "nature_bonus": 2,
+    "religion_bonus": 2,
+    "animal_handling_bonus": 3,
+    "insight_bonus": 5,
+    "medicine_bonus": 3,
+    "perception_bonus": 5,
+    "survival_bonus": 5,
+    "acrobatics_bonus": 1,
+    "sleight_of_hand_bonus": 1,
+    "stealth_bonus": 1,
+    "deception_bonus": 1,
+    "intimidation_bonus": 1,
+    "performance_bonus": 1,
+    "persuasion_bonus": 1,
+    "str_save_bonus": 5,
+    "int_save_bonus": 2,
+    "wis_save_bonus": 3,
+    "dex_save_bonus": 1,
+    "con_save_bonus": 5,
+    "cha_save_bonus": 1,
+    "default_second_wind": {
+        "level": 1,
+        "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+    },
+    "default_fighting_style": {
+        "name": "Dueling",
+        "description": "+2 to damage 1 weapon",
+        "effect": "+2 damage"
+    },
+    "class_skills": [
+        "Insight",
+        "Perception"
+    ]
 }

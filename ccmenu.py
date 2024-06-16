@@ -115,7 +115,7 @@ def finalise_character():
     race_details = get_race_details(character_data["race"])
     character_data.update(race_details)
 
-    # Get detailed background information
+    # Get detailed background information , note this does not the background features like rustic hospitality yet. No feats etc
     background_details = get_background_details(character_data["background"])
     character_data.update(background_details)
 
