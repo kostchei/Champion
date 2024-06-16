@@ -1,56 +1,106 @@
 {
     "encounter": [
         {
-            "name": "Soldier",
-            "cr": "1/2",
+            "name": "Bat",
+            "size": "Tiny",
+            "type": "Beast",
+            "alignment": "Unaligned",
+            "ac": "12",
+            "hp": {
+                "average": 1,
+                "formula": "1d4 - 1"
+            },
+            "speed": {
+                "walk": 5,
+                "fly": 30
+            },
+            "cr": "0",
+            "str": "2 (-4)",
+            "dex": "15 (+2)",
+            "con": "8 (-1)",
+            "int": "2 (-4)",
+            "wis": "12 (+1)",
+            "cha": "4 (-3)",
+            "senses": "blindsight 60 ft., passive Perception 11",
+            "languages": "\u2014",
+            "challenge": "0 (10 XP)",
+            "proficiency_bonus": "+2",
+            "special_abilities": [
+                {
+                    "name": "Echolocation",
+                    "description": "The bat can't use its blindsight while deafened."
+                },
+                {
+                    "name": "Keen Hearing",
+                    "description": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "type": "Melee Weapon Attack",
+                    "attack_bonus": "+0",
+                    "reach": "5 ft.",
+                    "target": "one creature",
+                    "damage": "1 piercing damage"
+                }
+            ],
             "terrain": [
                 "dense"
             ],
             "realm": [
                 "dungeon_t1"
-            ],
-            "type": "Humanoid",
-            "subtype": "Any Race",
-            "alignment": "Any Alignment",
-            "ac": "18 (chain mail, shield)",
+            ]
+        },
+        {
+            "name": "Rat",
+            "size": "Tiny",
+            "type": "Beast",
+            "alignment": "Unaligned",
+            "ac": "10",
             "hp": {
-                "average": 16,
-                "formula": "3d8 + 3"
+                "average": 1,
+                "formula": "1d4 - 1"
             },
             "speed": {
-                "walk": 30
+                "walk": 20
             },
-            "str": 13,
-            "dex": 12,
-            "con": 12,
-            "int": 10,
-            "wis": 11,
-            "cha": 11,
-            "skills": {
-                "Athletics": "+3",
-                "Perception": "+2"
-            },
-            "senses": "passive Perception 12",
-            "languages": "any one language (usually Common)",
+            "cr": "0",
+            "str": "2 (-4)",
+            "dex": "11 (+0)",
+            "con": "9 (-1)",
+            "int": "2 (-4)",
+            "wis": "10 (+0)",
+            "cha": "4 (-3)",
+            "senses": "darkvision 30 ft., passive Perception 10",
+            "languages": "\u2014",
+            "challenge": "0 (10 XP)",
+            "proficiency_bonus": "+2",
             "special_abilities": [
                 {
-                    "name": "Formation Tactics",
-                    "desc": "The soldier has advantage on saving throws against being charmed, frightened, grappled, or restrained while it is within 5 feet of at least one ally."
+                    "name": "Keen Smell",
+                    "description": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
                 }
             ],
             "action": [
                 {
-                    "name": "Multiattack",
-                    "desc": "The soldier makes two melee attacks."
-                },
-                {
-                    "name": "Longsword",
-                    "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) slashing damage, or 7 (1d10 + 2) slashing damage if used with two hands."
+                    "name": "Bite",
+                    "type": "Melee Weapon Attack",
+                    "attack_bonus": "+0",
+                    "reach": "5 ft.",
+                    "target": "one target",
+                    "damage": "1 piercing damage"
                 }
+            ],
+            "terrain": [
+                "dense"
+            ],
+            "realm": [
+                "dungeon_t1"
             ]
         }
     ],
     "difficulty": "medium",
-    "xp_budget": 100,
+    "xp_budget": 50,
     "terrain": "open"
 }

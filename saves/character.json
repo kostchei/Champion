@@ -1,15 +1,15 @@
 {
-    "name": "ted",
+    "name": "Blake",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Ruined",
+    "background": "Outlander",
     "skills": [
-        "Sleight of Hand",
-        "Stealth",
+        "Athletics",
+        "Survival",
         "Language",
-        "Gaming Set"
+        "Musical Instrument"
     ],
     "features": {
         "Fighting Style": {
@@ -79,7 +79,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 13,
+    "hit_points": 14,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -105,22 +105,18 @@
         "Shield",
         "Plumed Helmet",
         "5 gold",
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
+        "staff",
         "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "trophy",
+        "traveling clothes"
     ],
-    "feature": "Still Standing",
+    "feature": "Wanderer",
     "strength": 16,
-    "intelligence": 14,
-    "wisdom": 11,
-    "dexterity": 14,
-    "constitution": 17,
-    "charisma": 15,
+    "intelligence": 10,
+    "wisdom": 12,
+    "dexterity": 13,
+    "constitution": 18,
+    "charisma": 14,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -153,25 +149,21 @@
     },
     "background_features": [],
     "background_equipment": [
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
+        "staff",
         "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "trophy",
+        "traveling clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 2,
-    "constitution_modifier": 3,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 0,
+    "dexterity_modifier": 1,
+    "constitution_modifier": 4,
+    "intelligence_modifier": 0,
+    "wisdom_modifier": 1,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 18,
+    "armor_class": 17,
     "attack": {
         "name": "Longsword",
         "to_hit": "+5",

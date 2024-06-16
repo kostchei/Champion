@@ -1,0 +1,5794 @@
+{
+    "monster": [
+        {
+            "name": "Giant Ox",
+            "source": "BGG",
+            "page": 152,
+            "size": [
+                "H"
+            ],
+            "type": "fey",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 12,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 105,
+                "formula": "10d12 + 40"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 22,
+            "dex": 10,
+            "con": 19,
+            "int": 4,
+            "wis": 11,
+            "cha": 9,
+            "passive": 10,
+            "languages": [
+                "understands Giant and Sylvan but can't speak"
+            ],
+            "cr": "3",
+            "trait": [
+                {
+                    "name": "Beast of Burden",
+                    "entries": [
+                        "The ox is considered to be one size larger for the purpose of determining its carrying capacity."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Gore",
+                    "entries": [
+                        "{@atk mw} {@hit 8} to hit, reach 10 ft., one target. {@h}13 ({@damage 2d6 + 6}) piercing damage. If the ox moved at least 20 feet straight toward the target immediately before the hit, the target takes an extra 7 ({@damage 2d6}) piercing damage, and it must succeed on a {@dc 16} Strength saving throw or have the {@condition prone} condition."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Beast of Burden"
+            ],
+            "languageTags": [
+                "CS",
+                "GI",
+                "S"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW",
+                "RCH"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Spotted Lion",
+            "source": "BGG",
+            "page": 177,
+            "size": [
+                "H"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 66,
+                "formula": "7d12 + 21"
+            },
+            "speed": {
+                "walk": 60
+            },
+            "str": 23,
+            "dex": 14,
+            "con": 17,
+            "int": 5,
+            "wis": 13,
+            "cha": 10,
+            "skill": {
+                "perception": "+5",
+                "stealth": "+6"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 15,
+            "cr": "3",
+            "trait": [
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The lion has advantage on an attack roll against a creature if at least one of the lion's allies is within 5 feet of the target and the ally doesn't have the {@condition incapacitated} condition."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Rend",
+                    "entries": [
+                        "{@atk mw} {@hit 8} to hit, reach 10 ft., one target. {@h}15 ({@damage 2d8 + 6}) piercing damage. If the lion moved at least 20 feet straight toward the target immediately before the hit, the target must succeed on a {@dc 16} Strength saving throw or have the {@condition prone} condition. If the target has the {@condition prone} condition, the lion can make another Rend attack against it as a bonus action."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Pack Tactics"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW",
+                "RCH"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Sivak Draconian",
+            "source": "DSotDQ",
+            "page": 199,
+            "size": [
+                "L"
+            ],
+            "type": "monstrosity",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "alignmentPrefix": "typically ",
+            "ac": [
+                {
+                    "ac": 16,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 57,
+                "formula": "6d10 + 24"
+            },
+            "speed": {
+                "walk": 30,
+                "fly": 60
+            },
+            "str": 18,
+            "dex": 10,
+            "con": 18,
+            "int": 13,
+            "wis": 10,
+            "cha": 10,
+            "save": {
+                "str": "+6",
+                "wis": "+2"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 10,
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "4",
+            "trait": [
+                {
+                    "name": "Death Throes",
+                    "entries": [
+                        "When the draconian is reduced to 0 hit points by a creature that is Large or smaller, the draconian crumbles into dust that then forms a spectral, shrieking image of the creature that killed it. The image lasts for 1 minute. Each creature hostile to the draconian within 10 feet of the image must succeed on a {@dc 14} Wisdom saving throw or be {@condition frightened} of the spectral image for 1 minute. A {@condition frightened} creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The draconian makes two Serrated Sword attacks and one Tail attack."
+                    ]
+                },
+                {
+                    "name": "Serrated Sword",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}13 ({@damage 2d8 + 4}) slashing damage."
+                    ]
+                },
+                {
+                    "name": "Tail",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}8 ({@damage 1d8 + 4}) bludgeoning damage. If the target is a Large or smaller creature, it must succeed on a {@dc 14} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "reaction": [
+                {
+                    "name": "Shape Theft",
+                    "entries": [
+                        "After the draconian kills a Medium or smaller Humanoid, the draconian magically cloaks itself in an illusion to look and feel like that creature while retaining the draconian's game statistics (other than its size). This transformation lasts until the draconian dies or uses a bonus action to end it."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Death Burst"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "B",
+                "S"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "frightened",
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength",
+                "wisdom"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Deep Dragon Wyrmling",
+            "source": "FTD",
+            "page": 175,
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "N",
+                "E"
+            ],
+            "alignmentPrefix": "typically ",
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 27,
+                "formula": "5d8 + 5"
+            },
+            "speed": {
+                "walk": 30,
+                "burrow": 15,
+                "fly": 60,
+                "swim": 30
+            },
+            "str": 14,
+            "dex": 11,
+            "con": 12,
+            "int": 11,
+            "wis": 12,
+            "cha": 13,
+            "save": {
+                "dex": "+2",
+                "con": "+3",
+                "wis": "+3",
+                "cha": "+3"
+            },
+            "skill": {
+                "perception": "+3",
+                "persuasion": "+3",
+                "stealth": "+4"
+            },
+            "senses": [
+                "blindsight 10 ft.",
+                "darkvision 90 ft."
+            ],
+            "passive": 13,
+            "resist": [
+                "poison",
+                "psychic"
+            ],
+            "conditionImmune": [
+                "charmed",
+                "frightened",
+                "poisoned"
+            ],
+            "languages": [
+                "Draconic"
+            ],
+            "cr": "1",
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d10 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Nightmare Breath {@recharge 5}",
+                    "entries": [
+                        "The dragon exhales a cloud of spores in a 15-foot cone. Each creature in that area must make a {@dc 11} Wisdom saving throw. On a failed save, the creature takes 5 ({@damage 1d10}) psychic damage, and it is {@condition frightened} of the dragon for 1 minute. On a successful save, the creature takes half as much damage with no additional effects. A {@condition frightened} creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "inset",
+                    "name": "Customizing Dragons",
+                    "source": "FTD",
+                    "page": 33,
+                    "entries": [
+                        "You can customize any dragon's stat block to reflect the dragon's unique character. Minor changes such as those below are easy to make and have no impact on a dragon's challenge rating.",
+                        {
+                            "type": "entries",
+                            "name": "Languages",
+                            "entries": [
+                                "Most dragons prefer to speak Draconic but learn Common for dealing with allies and minions. But given their high Intelligence and long life span, dragons can easily learn additional languages. You can add languages to a dragon's stat block."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Skills",
+                            "entries": [
+                                "Most dragons are proficient in the {@skill Perception} and {@skill Stealth} skills, and many dragons have additional skill proficiencies. As with languages, you can customize a dragon's skill list (even doubling their proficiency bonus with certain skills) to reflect particular interests and activities. You can also give a dragon tool proficiencies, particularly if the dragon spends time in Humanoid form."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Spells",
+                            "entries": [
+                                "{@note See the \"Variant: Dragons as Innate Spellcasters\" inset(s), below.}"
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Other Traits and Actions",
+                            "entries": [
+                                "You can borrow traits and actions from other monsters to add unique flavor to a dragon. Consider these examples:",
+                                {
+                                    "type": "list",
+                                    "style": "list-hang-notitle",
+                                    "items": [
+                                        {
+                                            "type": "item",
+                                            "name": "Change Shape",
+                                            "entries": [
+                                                "You can decide that a dragon acquires this action at a younger age than usual, particularly if you want to feature a dragon in Humanoid form in your campaign:",
+                                                "The dragon magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).",
+                                                "In a new form, the dragon retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Flyby",
+                                            "entries": [
+                                                "The dragon is an agile flier, quick to fly out of enemies' reach.",
+                                                "The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Mimicry",
+                                            "entries": [
+                                                "Impersonating characters or their allies could be a fun trick for a crafty dragon.",
+                                                "The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful {@dc 9} Wisdom ({@skill Insight}) check."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Rejuvenation",
+                                            "entries": [
+                                                "You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery.",
+                                                "If it has an essence-preserving object, a destroyed dragon gains a new body in {@dice 1d10} days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Special Senses",
+                                            "entries": [
+                                                "Most dragons have {@sense blindsight} and {@sense darkvision}. You might upgrade {@sense blindsight} to {@sense truesight}, or you could give a dragon with a burrowing speed {@sense tremorsense|MM}."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Tunneler",
+                                            "entries": [
+                                                "The dragon can burrow through solid rock at half its burrowing speed and leaves a tunnel in its wake."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "dragonAge": "wyrmling",
+            "senseTags": [
+                "B",
+                "D"
+            ],
+            "actionTags": [
+                "Breath Weapon"
+            ],
+            "languageTags": [
+                "DR"
+            ],
+            "damageTags": [
+                "P",
+                "Y"
+            ],
+            "miscTags": [
+                "AOE",
+                "MW"
+            ],
+            "conditionInflict": [
+                "frightened"
+            ],
+            "savingThrowForced": [
+                "wisdom"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Draconian Foot Soldier",
+            "source": "FTD",
+            "page": 178,
+            "size": [
+                "M"
+            ],
+            "type": "monstrosity",
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 22,
+                "formula": "4d8 + 4"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 13,
+            "dex": 11,
+            "con": 13,
+            "int": 8,
+            "wis": 8,
+            "cha": 10,
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 9,
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "1/2",
+            "trait": [
+                {
+                    "name": "Controlled Fall",
+                    "entries": [
+                        "When the draconian falls and isn't {@condition incapacitated}, it subtracts up to 100 feet from the fall when calculating the fall's damage."
+                    ]
+                },
+                {
+                    "name": "Death Throes",
+                    "entries": [
+                        "When the draconian is reduced to 0 hit points, its body turns to stone and releases a petrifying gas. Each creature within 5 feet of the draconian must succeed on a {@dc 11} Constitution saving throw or be {@condition restrained} as it begins to turn to stone. The {@condition restrained} creature must repeat the saving throw at the end of its next turn. On a success, the effect ends; otherwise the creature is {@condition petrified} for 1 minute. After 1 minute, the body of the draconian crumbles to dust."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The draconian makes two Shortsword attacks."
+                    ]
+                },
+                {
+                    "name": "Shortsword",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d6 + 1}) piercing damage."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "shortsword|phb"
+            ],
+            "traitTags": [
+                "Death Burst"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "AOE",
+                "MLW",
+                "MW"
+            ],
+            "conditionInflict": [
+                "petrified",
+                "restrained"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Dragonnel",
+            "source": "FTD",
+            "page": 190,
+            "size": [
+                "L"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "N"
+            ],
+            "alignmentPrefix": "typically ",
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 58,
+                "formula": "9d10 + 9"
+            },
+            "speed": {
+                "walk": 30,
+                "fly": 60
+            },
+            "str": 16,
+            "dex": 15,
+            "con": 12,
+            "int": 8,
+            "wis": 13,
+            "cha": 10,
+            "skill": {
+                "perception": "+3"
+            },
+            "senses": [
+                "blindsight 30 ft.",
+                "darkvision 120 ft."
+            ],
+            "passive": 13,
+            "languages": [
+                "understands Draconic and Common but can't speak"
+            ],
+            "cr": "2",
+            "trait": [
+                {
+                    "name": "Flyby",
+                    "entries": [
+                        "The dragonnel doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The dragonnel makes two Rend attacks."
+                    ]
+                },
+                {
+                    "name": "Rend",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}10 ({@damage 2d6 + 3}) slashing damage."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Flyby"
+            ],
+            "senseTags": [
+                "B",
+                "SD"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "CS",
+                "DR"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Anarch",
+            "source": "GGR",
+            "page": 239,
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "C",
+                "N"
+            ],
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "{@item hide armor|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 11,
+                "formula": "2d8 + 2"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 14,
+            "dex": 13,
+            "con": 12,
+            "int": 9,
+            "wis": 11,
+            "cha": 10,
+            "skill": {
+                "perception": "+2",
+                "survival": "+2"
+            },
+            "passive": 12,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "1/4",
+            "trait": [
+                {
+                    "name": "Aggressive",
+                    "entries": [
+                        "As a bonus action, the anarch can move up to its speed toward a hostile creature it can see."
+                    ]
+                },
+                {
+                    "name": "Siege Monster",
+                    "entries": [
+                        "The anarch deals double damage to objects and structures."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Spiked Club",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d8 + 2}) piercing damage, or 7 ({@damage 1d10 + 2}) piercing damage if used with two hands."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Aggressive",
+                "Siege Monster"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Soldier",
+            "source": "GGR",
+            "page": 226,
+            "otherSources": [
+                {
+                    "source": "MOT"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                {
+                    "ac": 18,
+                    "from": [
+                        "{@item chain mail|phb}",
+                        "{@item shield|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 16,
+                "formula": "3d8 + 3"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 13,
+            "dex": 12,
+            "con": 12,
+            "int": 10,
+            "wis": 11,
+            "cha": 11,
+            "skill": {
+                "perception": "+2",
+                "athletics": "+3"
+            },
+            "passive": 12,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "1/2",
+            "trait": [
+                {
+                    "name": "Formation Tactics",
+                    "entries": [
+                        "The soldier has advantage on saving throws against being {@condition charmed}, {@condition frightened}, {@condition grappled}, or {@condition restrained} while it is within 5 feet of at least one ally."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The soldier makes two melee attacks."
+                    ]
+                },
+                {
+                    "name": "Longsword",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d8 + 2}) slashing damage, or 7 ({@damage 1d10 + 2}) slashing damage if used with two hands."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "longsword|phb"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Giant Coral Snake",
+            "source": "GoS",
+            "page": 236,
+            "size": [
+                "L"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                13
+            ],
+            "hp": {
+                "average": 90,
+                "formula": "12d10 + 24"
+            },
+            "speed": {
+                "walk": 30,
+                "swim": 30
+            },
+            "str": 12,
+            "dex": 16,
+            "con": 14,
+            "int": 2,
+            "wis": 10,
+            "cha": 3,
+            "skill": {
+                "perception": "+2"
+            },
+            "senses": [
+                "blindsight 10 ft."
+            ],
+            "passive": 12,
+            "cr": "4",
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}8 ({@damage 2d4 + 3}) piercing damage, and the target must succeed on a {@dc 12} Constitution saving throw or be {@condition stunned} until the end of its next turn. On a failed save, the target begins to hallucinate and is afflicted with a {@table short-term madness|DMG} effect (determined randomly or by the DM; see \"Madness\" in chapter 8 of the {@book Dungeon Master's Guide|dmg|8|madness}). The effect lasts 10 minutes."
+                    ]
+                }
+            ],
+            "senseTags": [
+                "B"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "stunned"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Pirate First Mate",
+            "source": "GoS",
+            "page": 248,
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                {
+                    "ac": 16,
+                    "from": [
+                        "{@item chain mail|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 26,
+                "formula": "4d8 + 8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 14,
+            "dex": 11,
+            "con": 14,
+            "int": 11,
+            "wis": 10,
+            "cha": 13,
+            "skill": {
+                "athletics": "+4",
+                "intimidation": "+3"
+            },
+            "passive": 10,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "1",
+            "trait": [
+                {
+                    "name": "Sea Legs",
+                    "entries": [
+                        "The first mate has advantage on ability checks and saving throws to resist being knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The first mate makes two attacks with its longsword."
+                    ]
+                },
+                {
+                    "name": "Longsword",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d8 + 2}) slashing damage, or 7 ({@damage 1d10 + 2}) slashing damage if used with two hands. If the target is a creature, the first mate can choose to deal no damage with the attack to disarm the target. The target must succeed on a {@dc 14} Strength saving throw or drop one item it is holding on the ground."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "longsword|phb"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Ambush Drake",
+            "source": "HotDQ",
+            "page": 88,
+            "otherSources": [
+                {
+                    "source": "ToD",
+                    "page": 180
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 22,
+                "formula": "4d6 + 8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 13,
+            "dex": 15,
+            "con": 14,
+            "int": 4,
+            "wis": 11,
+            "cha": 6,
+            "skill": {
+                "perception": "+4",
+                "stealth": "+4"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 14,
+            "resist": [
+                "poison"
+            ],
+            "languages": [
+                "understands Draconic but can't speak it"
+            ],
+            "cr": "1/2",
+            "trait": [
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The drake has advantage on an attack roll against a creature if at least one of the drake's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                },
+                {
+                    "name": "Surprise Attack",
+                    "entries": [
+                        "If the drake surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 ({@dice 2d6}) damage from the attack."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d6 + 1}) piercing damage."
+                    ]
+                }
+            ],
+            "traitTags": [
+                "Pack Tactics"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "languageTags": [
+                "CS",
+                "DR"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Dragonclaw",
+            "source": "HotDQ",
+            "page": 89,
+            "otherSources": [
+                {
+                    "source": "RoT",
+                    "page": 89
+                },
+                {
+                    "source": "ToD",
+                    "page": 182
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "human"
+                ]
+            },
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "{@item leather armor|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 16,
+                "formula": "3d8 + 3"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 9,
+            "dex": 16,
+            "con": 13,
+            "int": 11,
+            "wis": 10,
+            "cha": 12,
+            "save": {
+                "wis": "+2"
+            },
+            "skill": {
+                "deception": "+3",
+                "stealth": "+5"
+            },
+            "passive": 10,
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "1",
+            "trait": [
+                {
+                    "name": "Dragon Fanatic",
+                    "entries": [
+                        "The dragonclaw has advantage on saving throws against being {@condition charmed} or {@condition frightened}. While the dragonclaw can see a dragon or higher-ranking Cult of the Dragon cultist friendly to it, the dragonclaw ignores the effects of being {@condition charmed} or {@condition frightened}."
+                    ]
+                },
+                {
+                    "name": "Fanatic Advantage",
+                    "entries": [
+                        "Once per turn, if the dragonclaw makes a weapon attack with advantage on the attack roll and hits, it deals an extra 7 ({@dice 2d6}) damage."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The dragonclaw has advantage on an attack roll against a creature if at least one of the dragonclaw's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The dragonclaw attacks twice with its scimitar."
+                    ]
+                },
+                {
+                    "name": "Scimitar",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d6 + 3}) slashing damage."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "scimitar|phb"
+            ],
+            "traitTags": [
+                "Pack Tactics"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Guard Drake",
+            "source": "HotDQ",
+            "page": 91,
+            "otherSources": [
+                {
+                    "source": "RoT",
+                    "page": 90
+                },
+                {
+                    "source": "ToD",
+                    "page": 185
+                }
+            ],
+            "reprintedAs": [
+                "Guard Drake|MPMM"
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 52,
+                "formula": "7d8 + 21"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 16,
+            "dex": 11,
+            "con": 16,
+            "int": 4,
+            "wis": 10,
+            "cha": 7,
+            "skill": {
+                "perception": "+2"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 12,
+            "resist": [
+                "lightning"
+            ],
+            "languages": [
+                "understands Draconic but can't speak it"
+            ],
+            "cr": "2",
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The drake attacks twice, once with its bite and once with its tail."
+                    ]
+                },
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d8 + 3}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Tail",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d6 + 3}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/guard-drake.mp3"
+            },
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "CS",
+                "DR"
+            ],
+            "damageTags": [
+                "B",
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Bat",
+            "source": "MM",
+            "page": 318,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "WBtW"
+                },
+                {
+                    "source": "PSX"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "T"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 1,
+                "formula": "1d4 - 1"
+            },
+            "speed": {
+                "walk": 5,
+                "fly": 30
+            },
+            "str": 2,
+            "dex": 15,
+            "con": 8,
+            "int": 2,
+            "wis": 12,
+            "cha": 4,
+            "senses": [
+                "blindsight 60 ft."
+            ],
+            "passive": 11,
+            "cr": "0",
+            "trait": [
+                {
+                    "name": "Echolocation",
+                    "entries": [
+                        "The bat can't use its blindsight while {@condition deafened}."
+                    ]
+                },
+                {
+                    "name": "Keen Hearing",
+                    "entries": [
+                        "The bat has advantage on Wisdom ({@skill Perception}) checks that rely on hearing."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one creature. {@h}1 piercing damage."
+                    ]
+                }
+            ],
+            "familiar": true,
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/bat.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "senseTags": [
+                "B"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Berserker",
+            "source": "MM",
+            "page": 344,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DC"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "SLW"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "CRCotN"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "ToFW"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "C",
+                "G",
+                "NY",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "{@item hide armor|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 67,
+                "formula": "9d8 + 27"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 16,
+            "dex": 12,
+            "con": 17,
+            "int": 9,
+            "wis": 11,
+            "cha": 9,
+            "passive": 10,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "2",
+            "trait": [
+                {
+                    "name": "Reckless",
+                    "entries": [
+                        "At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Greataxe",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}9 ({@damage 1d12 + 3}) slashing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "coastal",
+                "mountain",
+                "hill",
+                "arctic",
+                "forest",
+                "desert"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/berserker.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Diabolical Berserker",
+                    "source": "MTF",
+                    "page": 18
+                }
+            ],
+            "attachedItems": [
+                "greataxe|phb"
+            ],
+            "traitTags": [
+                "Reckless"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Black Bear",
+            "source": "MM",
+            "page": 318,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "ToFW"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 11,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 19,
+                "formula": "3d8 + 6"
+            },
+            "speed": {
+                "walk": 40,
+                "climb": 30
+            },
+            "str": 15,
+            "dex": 10,
+            "con": 14,
+            "int": 2,
+            "wis": 12,
+            "cha": 7,
+            "skill": {
+                "perception": "+3"
+            },
+            "passive": 13,
+            "cr": "1/2",
+            "trait": [
+                {
+                    "name": "Keen Smell",
+                    "entries": [
+                        "The bear has advantage on Wisdom ({@skill Perception}) checks that rely on smell."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The bear makes two attacks: one with its bite and one with its claws."
+                    ]
+                },
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d6 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Claws",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}7 ({@damage 2d4 + 2}) slashing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/black-bear.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "damageTags": [
+                "P",
+                "S"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Blue Dragon Wyrmling",
+            "group": [
+                "Chromatic Dragon"
+            ],
+            "source": "MM",
+            "page": 91,
+            "srd": true,
+            "otherSources": [
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "DoSI"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 17,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 52,
+                "formula": "8d8 + 16"
+            },
+            "speed": {
+                "walk": 30,
+                "burrow": 15,
+                "fly": 60
+            },
+            "str": 17,
+            "dex": 10,
+            "con": 15,
+            "int": 12,
+            "wis": 11,
+            "cha": 15,
+            "save": {
+                "dex": "+2",
+                "con": "+4",
+                "wis": "+2",
+                "cha": "+4"
+            },
+            "skill": {
+                "perception": "+4",
+                "stealth": "+2"
+            },
+            "senses": [
+                "blindsight 10 ft.",
+                "darkvision 60 ft."
+            ],
+            "passive": 14,
+            "immune": [
+                "lightning"
+            ],
+            "languages": [
+                "Draconic"
+            ],
+            "cr": "3",
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}8 ({@damage 1d10 + 3}) piercing damage plus 3 ({@damage 1d6}) lightning damage."
+                    ]
+                },
+                {
+                    "name": "Lightning Breath {@recharge 5}",
+                    "entries": [
+                        "The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a {@dc 12} Dexterity saving throw, taking 22 ({@damage 4d10}) lightning damage on a failed save, or half as much damage on a successful one."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "inset",
+                    "name": "Customizing Dragons",
+                    "source": "FTD",
+                    "page": 33,
+                    "entries": [
+                        "You can customize any dragon's stat block to reflect the dragon's unique character. Minor changes such as those below are easy to make and have no impact on a dragon's challenge rating.",
+                        {
+                            "type": "entries",
+                            "name": "Languages",
+                            "entries": [
+                                "Most dragons prefer to speak Draconic but learn Common for dealing with allies and minions. But given their high Intelligence and long life span, dragons can easily learn additional languages. You can add languages to a dragon's stat block."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Skills",
+                            "entries": [
+                                "Most dragons are proficient in the {@skill Perception} and {@skill Stealth} skills, and many dragons have additional skill proficiencies. As with languages, you can customize a dragon's skill list (even doubling their proficiency bonus with certain skills) to reflect particular interests and activities. You can also give a dragon tool proficiencies, particularly if the dragon spends time in Humanoid form."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Spells",
+                            "entries": [
+                                "{@note See the \"Variant: Dragons as Innate Spellcasters\" inset(s), below.}"
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Other Traits and Actions",
+                            "entries": [
+                                "You can borrow traits and actions from other monsters to add unique flavor to a dragon. Consider these examples:",
+                                {
+                                    "type": "list",
+                                    "style": "list-hang-notitle",
+                                    "items": [
+                                        {
+                                            "type": "item",
+                                            "name": "Flyby",
+                                            "entries": [
+                                                "The dragon is an agile flier, quick to fly out of enemies' reach.",
+                                                "The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Mimicry",
+                                            "entries": [
+                                                "Impersonating characters or their allies could be a fun trick for a crafty dragon.",
+                                                "The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful {@dc 10} Wisdom ({@skill Insight}) check."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Rejuvenation",
+                                            "entries": [
+                                                "You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery.",
+                                                "If it has an essence-preserving object, a destroyed dragon gains a new body in {@dice 1d10} days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Special Senses",
+                                            "entries": [
+                                                "Most dragons have {@sense blindsight} and {@sense darkvision}. You might upgrade {@sense blindsight} to {@sense truesight}, or you could give a dragon with a burrowing speed {@sense tremorsense|MM}."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Tunneler",
+                                            "entries": [
+                                                "The dragon can burrow through solid rock at half its burrowing speed and leaves a tunnel in its wake."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "dragonAge": "wyrmling",
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/blue-dragon-wyrmling.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Blue Dragon Wyrmling",
+                    "source": "DoSI"
+                }
+            ],
+            "senseTags": [
+                "B",
+                "D"
+            ],
+            "actionTags": [
+                "Breath Weapon"
+            ],
+            "languageTags": [
+                "DR"
+            ],
+            "damageTags": [
+                "L",
+                "P"
+            ],
+            "miscTags": [
+                "AOE",
+                "MW"
+            ],
+            "savingThrowForced": [
+                "dexterity"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Commoner",
+            "source": "MM",
+            "page": 345,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "LMoP"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DC"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "SLW"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "RMBRE"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "TCE"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "WBtW"
+                },
+                {
+                    "source": "CRCotN"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "LoX"
+                },
+                {
+                    "source": "DSotDQ"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "GotSF"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "AATM"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "ToFW"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "HFStCM"
+                },
+                {
+                    "source": "GHLoE"
+                },
+                {
+                    "source": "DoDk"
+                },
+                {
+                    "source": "VEoR"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                10
+            ],
+            "hp": {
+                "average": 4,
+                "formula": "1d8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 10,
+            "dex": 10,
+            "con": 10,
+            "int": 10,
+            "wis": 10,
+            "cha": 10,
+            "passive": 10,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "0",
+            "action": [
+                {
+                    "name": "Club",
+                    "entries": [
+                        "{@atk mw} {@hit 2} to hit, reach 5 ft., one target. {@h}2 ({@damage 1d4}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "arctic",
+                "desert",
+                "coastal",
+                "grassland",
+                "hill",
+                "urban",
+                "forest"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/commoner.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Commoner",
+                    "source": "EGW"
+                }
+            ],
+            "attachedItems": [
+                "club|phb"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "B"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Cultist",
+            "source": "MM",
+            "page": 345,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "LMoP"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DC"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "SLW"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "RMBRE"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "HftT"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "AATM"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "GHLoE"
+                },
+                {
+                    "source": "DoDk"
+                },
+                {
+                    "source": "VEoR"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "L",
+                "NX",
+                "C",
+                "NY",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 12,
+                    "from": [
+                        "{@item leather armor|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 9,
+                "formula": "2d8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 11,
+            "dex": 12,
+            "con": 10,
+            "int": 10,
+            "wis": 11,
+            "cha": 10,
+            "skill": {
+                "deception": "+2",
+                "religion": "+2"
+            },
+            "passive": 10,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "1/8",
+            "trait": [
+                {
+                    "name": "Dark Devotion",
+                    "entries": [
+                        "The cultist has advantage on saving throws against being {@condition charmed} or {@condition frightened}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Scimitar",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d6 + 1}) slashing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/cultist.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Diabolical Cultist",
+                    "source": "MTF",
+                    "page": 18
+                },
+                {
+                    "name": "Cultist",
+                    "source": "RMBRE"
+                }
+            ],
+            "attachedItems": [
+                "scimitar|phb"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Deer",
+            "source": "MM",
+            "page": 321,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "DIP"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                13
+            ],
+            "hp": {
+                "average": 4,
+                "formula": "1d8"
+            },
+            "speed": {
+                "walk": 50
+            },
+            "str": 11,
+            "dex": 16,
+            "con": 11,
+            "int": 2,
+            "wis": 14,
+            "cha": 5,
+            "passive": 12,
+            "cr": "0",
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 2} to hit, reach 5 ft., one target. {@h}2 ({@damage 1d4}) piercing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "grassland",
+                "forest"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/deer.mp3"
+            },
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Dire Wolf",
+            "source": "MM",
+            "page": 321,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "ToFW"
+                }
+            ],
+            "size": [
+                "L"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 37,
+                "formula": "5d10 + 10"
+            },
+            "speed": {
+                "walk": 50
+            },
+            "str": 17,
+            "dex": 15,
+            "con": 15,
+            "int": 3,
+            "wis": 12,
+            "cha": 7,
+            "skill": {
+                "perception": "+3",
+                "stealth": "+4"
+            },
+            "passive": 13,
+            "cr": "1",
+            "trait": [
+                {
+                    "name": "Keen Hearing and Smell",
+                    "entries": [
+                        "The wolf has advantage on Wisdom ({@skill Perception}) checks that rely on hearing or smell."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}10 ({@damage 2d6 + 3}) piercing damage. If the target is a creature, it must succeed on a {@dc 13} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/dire-wolf.mp3"
+            },
+            "traitTags": [
+                "Keen Senses",
+                "Pack Tactics"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Doppelganger",
+            "source": "MM",
+            "page": 82,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "LMoP"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "HftT"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "ToFW"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "monstrosity",
+                "tags": [
+                    "shapechanger"
+                ]
+            },
+            "alignment": [
+                "N"
+            ],
+            "ac": [
+                14
+            ],
+            "hp": {
+                "average": 52,
+                "formula": "8d8 + 16"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 11,
+            "dex": 18,
+            "con": 14,
+            "int": 11,
+            "wis": 12,
+            "cha": 14,
+            "skill": {
+                "deception": "+6",
+                "insight": "+3"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 11,
+            "conditionImmune": [
+                "charmed"
+            ],
+            "languages": [
+                "Common"
+            ],
+            "cr": "3",
+            "trait": [
+                {
+                    "name": "Shapechanger",
+                    "entries": [
+                        "The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+                    ]
+                },
+                {
+                    "name": "Ambusher",
+                    "entries": [
+                        "In the first round of a combat, the doppelganger has advantage on attack rolls against any creature it {@quickref Surprise|PHB|3|0|surprised}."
+                    ]
+                },
+                {
+                    "name": "Surprise Attack",
+                    "entries": [
+                        "If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 ({@dice 3d6}) damage from the attack."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The doppelganger makes two melee attacks."
+                    ]
+                },
+                {
+                    "name": "Slam",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d6 + 4}) bludgeoning damage."
+                    ]
+                },
+                {
+                    "name": "Read Thoughts",
+                    "entries": [
+                        "The doppelganger magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's {@status concentration} isn't broken (as if {@status concentration||concentrating} on a spell). While reading the target's mind, the doppelganger has advantage on Wisdom ({@skill Insight}) and Charisma ({@skill Deception}, {@skill Intimidation}, and {@skill Persuasion}) checks against the target."
+                    ]
+                }
+            ],
+            "environment": [
+                "underdark",
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/doppelganger.mp3"
+            },
+            "traitTags": [
+                "Ambusher",
+                "Shapechanger"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C"
+            ],
+            "damageTags": [
+                "B"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Giant Bat",
+            "source": "MM",
+            "page": 323,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "TCE"
+                },
+                {
+                    "source": "PSX"
+                }
+            ],
+            "size": [
+                "L"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                13
+            ],
+            "hp": {
+                "average": 22,
+                "formula": "4d10"
+            },
+            "speed": {
+                "walk": 10,
+                "fly": 60
+            },
+            "str": 15,
+            "dex": 16,
+            "con": 11,
+            "int": 2,
+            "wis": 12,
+            "cha": 6,
+            "senses": [
+                "blindsight 60 ft."
+            ],
+            "passive": 11,
+            "cr": "1/4",
+            "trait": [
+                {
+                    "name": "Echolocation",
+                    "entries": [
+                        "The bat can't use its blindsight while {@condition deafened}."
+                    ]
+                },
+                {
+                    "name": "Keen Hearing",
+                    "entries": [
+                        "The bat has advantage on Wisdom ({@skill Perception}) checks that rely on hearing."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one creature. {@h}5 ({@damage 1d6 + 2}) piercing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "underdark",
+                "forest"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/giant-bat.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "senseTags": [
+                "B"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Giant Boar",
+            "source": "MM",
+            "page": 323,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "PSI"
+                },
+                {
+                    "source": "BMT"
+                }
+            ],
+            "size": [
+                "L"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 12,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 42,
+                "formula": "5d10 + 15"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 17,
+            "dex": 10,
+            "con": 16,
+            "int": 2,
+            "wis": 7,
+            "cha": 5,
+            "passive": 8,
+            "cr": "2",
+            "trait": [
+                {
+                    "name": "Charge",
+                    "entries": [
+                        "If the boar moves at least 20 feet straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 7 ({@damage 2d6}) slashing damage. If the target is a creature, it must succeed on a {@dc 13} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                },
+                {
+                    "name": "Relentless (Recharges after a Short or Long Rest)",
+                    "entries": [
+                        "If the boar takes 10 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Tusk",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}10 ({@damage 2d6 + 3}) slashing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "grassland",
+                "forest",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/giant-boar.mp3"
+            },
+            "traitTags": [
+                "Charge"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Giant Elk",
+            "source": "MM",
+            "page": 325,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "SKT"
+                }
+            ],
+            "size": [
+                "H"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 42,
+                "formula": "5d12 + 10"
+            },
+            "speed": {
+                "walk": 60
+            },
+            "str": 19,
+            "dex": 16,
+            "con": 14,
+            "int": 7,
+            "wis": 14,
+            "cha": 10,
+            "skill": {
+                "perception": "+4"
+            },
+            "passive": 14,
+            "languages": [
+                "Giant Elk",
+                "understands Common, Elvish, Sylvan but can't speak them"
+            ],
+            "cr": "2",
+            "trait": [
+                {
+                    "name": "Charge",
+                    "entries": [
+                        "If the elk moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 ({@dice 2d6}) damage. If the target is a creature, it must succeed on a {@dc 14} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Ram",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 10 ft., one target. {@h}11 ({@damage 2d6 + 4}) bludgeoning damage."
+                    ]
+                },
+                {
+                    "name": "Hooves",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one {@condition prone} creature. {@h}22 ({@damage 4d8 + 4}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "mountain",
+                "grassland",
+                "forest",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/giant-elk.mp3"
+            },
+            "traitTags": [
+                "Charge"
+            ],
+            "languageTags": [
+                "C",
+                "CS",
+                "E",
+                "OTH",
+                "S"
+            ],
+            "damageTags": [
+                "B"
+            ],
+            "miscTags": [
+                "MW",
+                "RCH"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true
+        },
+        {
+            "name": "Giant Rat",
+            "source": "MM",
+            "page": 327,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "WBtW"
+                },
+                {
+                    "source": "GHLoE"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "S"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 7,
+                "formula": "2d6"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 7,
+            "dex": 15,
+            "con": 11,
+            "int": 2,
+            "wis": 10,
+            "cha": 4,
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 10,
+            "cr": "1/8",
+            "trait": [
+                {
+                    "name": "Keen Smell",
+                    "entries": [
+                        "The rat has advantage on Wisdom ({@skill Perception}) checks that rely on smell."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The rat has advantage on an attack roll against a creature if at least one of the rat's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d4 + 2}) piercing damage."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "variant",
+                    "name": "Diseased Giant Rats",
+                    "entries": [
+                        "Some giant rats carry vile diseases that they spread with their bites.",
+                        {
+                            "type": "entries",
+                            "name": "Bite",
+                            "entries": [
+                                "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d4 + 2}) piercing damage. If the target is a creature, it must succeed on a {@dc 10} Constitution saving throw or contract a disease. Until the disease is cured, the target can't regain hit points except by magical means, and the target's hit point maximum decreases by 3 ({@dice 1d6}) every 24 hours. If the target's hit point maximum drops to 0 as a result of this disease, the target dies."
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "environment": [
+                "underdark",
+                "forest",
+                "swamp",
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/giant-rat.mp3"
+            },
+            "traitTags": [
+                "Keen Senses",
+                "Pack Tactics"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true,
+            "_versions": [
+                {
+                    "name": "Giant Rat (Diseased)",
+                    "source": "MM",
+                    "action": [
+                        {
+                            "name": "Bite",
+                            "entries": [
+                                "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d4 + 2}) piercing damage. If the target is a creature, it must succeed on a {@dc 10} Constitution saving throw or contract a disease. Until the disease is cured, the target can't regain hit points except by magical means, and the target's hit point maximum decreases by 3 ({@dice 1d6}) every 24 hours. If the target's hit point maximum drops to 0 as a result of this disease, the target dies."
+                            ]
+                        }
+                    ],
+                    "variant": null
+                }
+            ]
+        },
+        {
+            "name": "Giant Wasp",
+            "source": "MM",
+            "page": 329,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "PSX"
+                },
+                {
+                    "source": "PSA"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 13,
+                "formula": "3d8"
+            },
+            "speed": {
+                "walk": 10,
+                "fly": 50
+            },
+            "str": 10,
+            "dex": 14,
+            "con": 10,
+            "int": 1,
+            "wis": 10,
+            "cha": 3,
+            "passive": 10,
+            "cr": "1/2",
+            "action": [
+                {
+                    "name": "Sting",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one creature. {@h}5 ({@damage 1d6 + 2}) piercing damage, and the target must make a {@dc 11} Constitution saving throw, taking 10 ({@damage 3d6}) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but {@condition poisoned} for 1 hour, even after regaining hit points, and is {@condition paralyzed} while {@condition poisoned} in this way."
+                    ]
+                }
+            ],
+            "environment": [
+                "grassland",
+                "forest",
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/giant-wasp.mp3"
+            },
+            "damageTags": [
+                "I",
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "paralyzed",
+                "poisoned"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Green Dragon Wyrmling",
+            "group": [
+                "Chromatic Dragon"
+            ],
+            "source": "MM",
+            "page": 95,
+            "srd": true,
+            "otherSources": [
+                {
+                    "source": "WBtW"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 17,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 38,
+                "formula": "7d8 + 7"
+            },
+            "speed": {
+                "walk": 30,
+                "fly": 60,
+                "swim": 30
+            },
+            "str": 15,
+            "dex": 12,
+            "con": 13,
+            "int": 14,
+            "wis": 11,
+            "cha": 13,
+            "save": {
+                "dex": "+3",
+                "con": "+3",
+                "wis": "+2",
+                "cha": "+3"
+            },
+            "skill": {
+                "perception": "+4",
+                "stealth": "+3"
+            },
+            "senses": [
+                "blindsight 10 ft.",
+                "darkvision 60 ft."
+            ],
+            "passive": 14,
+            "immune": [
+                "poison"
+            ],
+            "conditionImmune": [
+                "poisoned"
+            ],
+            "languages": [
+                "Draconic"
+            ],
+            "cr": "2",
+            "trait": [
+                {
+                    "name": "Amphibious",
+                    "entries": [
+                        "The dragon can breathe air and water."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d10 + 2}) piercing damage plus 3 ({@damage 1d6}) poison damage."
+                    ]
+                },
+                {
+                    "name": "Poison Breath {@recharge 5}",
+                    "entries": [
+                        "The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a {@dc 11} Constitution saving throw, taking 21 ({@damage 6d6}) poison damage on a failed save, or half as much damage on a successful one."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "inset",
+                    "name": "Customizing Dragons",
+                    "source": "FTD",
+                    "page": 33,
+                    "entries": [
+                        "You can customize any dragon's stat block to reflect the dragon's unique character. Minor changes such as those below are easy to make and have no impact on a dragon's challenge rating.",
+                        {
+                            "type": "entries",
+                            "name": "Languages",
+                            "entries": [
+                                "Most dragons prefer to speak Draconic but learn Common for dealing with allies and minions. But given their high Intelligence and long life span, dragons can easily learn additional languages. You can add languages to a dragon's stat block."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Skills",
+                            "entries": [
+                                "Most dragons are proficient in the {@skill Perception} and {@skill Stealth} skills, and many dragons have additional skill proficiencies. As with languages, you can customize a dragon's skill list (even doubling their proficiency bonus with certain skills) to reflect particular interests and activities. You can also give a dragon tool proficiencies, particularly if the dragon spends time in Humanoid form."
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Spells",
+                            "entries": [
+                                "{@note See the \"Variant: Dragons as Innate Spellcasters\" inset(s), below.}"
+                            ]
+                        },
+                        {
+                            "type": "entries",
+                            "name": "Other Traits and Actions",
+                            "entries": [
+                                "You can borrow traits and actions from other monsters to add unique flavor to a dragon. Consider these examples:",
+                                {
+                                    "type": "list",
+                                    "style": "list-hang-notitle",
+                                    "items": [
+                                        {
+                                            "type": "item",
+                                            "name": "Flyby",
+                                            "entries": [
+                                                "The dragon is an agile flier, quick to fly out of enemies' reach.",
+                                                "The dragon doesn't provoke an opportunity attack when it flies out of an enemy's reach."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Mimicry",
+                                            "entries": [
+                                                "Impersonating characters or their allies could be a fun trick for a crafty dragon.",
+                                                "The dragon can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful {@dc 9} Wisdom ({@skill Insight}) check."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Rejuvenation",
+                                            "entries": [
+                                                "You might decide that dragons in your campaign, being an essential part of the Material Plane, are nearly impossible to destroy. A dragon's life essence might be preserved in the egg from which it first emerged, in its hoard, or in a cavernous hall at the center of the world, just as a lich's essence is hidden in a phylactery.",
+                                                "If it has an essence-preserving object, a destroyed dragon gains a new body in {@dice 1d10} days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the object."
+                                            ]
+                                        },
+                                        {
+                                            "type": "item",
+                                            "name": "Special Senses",
+                                            "entries": [
+                                                "Most dragons have {@sense blindsight} and {@sense darkvision}. You might upgrade {@sense blindsight} to {@sense truesight}, or you could give a dragon with a burrowing speed {@sense tremorsense|MM}."
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "dragonAge": "wyrmling",
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/green-dragon-wyrmling.mp3"
+            },
+            "traitTags": [
+                "Amphibious"
+            ],
+            "senseTags": [
+                "B",
+                "D"
+            ],
+            "actionTags": [
+                "Breath Weapon"
+            ],
+            "languageTags": [
+                "DR"
+            ],
+            "damageTags": [
+                "I",
+                "P"
+            ],
+            "miscTags": [
+                "AOE",
+                "MW"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Kobold",
+            "source": "MM",
+            "page": 195,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "DoSI"
+                },
+                {
+                    "source": "GHLoE"
+                }
+            ],
+            "size": [
+                "S"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "kobold"
+                ]
+            },
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 5,
+                "formula": "2d6 - 2"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 7,
+            "dex": 15,
+            "con": 9,
+            "int": 8,
+            "wis": 7,
+            "cha": 8,
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 8,
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "1/8",
+            "trait": [
+                {
+                    "name": "Sunlight Sensitivity",
+                    "entries": [
+                        "While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom ({@skill Perception}) checks that rely on sight."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Dagger",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d4 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Sling",
+                    "entries": [
+                        "{@atk rw} {@hit 4} to hit, range 30/120 ft., one target. {@h}4 ({@damage 1d4 + 2}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest",
+                "swamp",
+                "hill",
+                "urban",
+                "desert",
+                "coastal",
+                "arctic",
+                "mountain",
+                "underdark"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/kobold.mp3"
+            },
+            "attachedItems": [
+                "dagger|phb",
+                "sling|phb"
+            ],
+            "traitTags": [
+                "Pack Tactics",
+                "Sunlight Sensitivity"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "B",
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RNG",
+                "RW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Mastiff",
+            "source": "MM",
+            "page": 332,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "DSotDQ"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "ToFW"
+                },
+                {
+                    "source": "BMT"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 5,
+                "formula": "1d8 + 1"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 13,
+            "dex": 14,
+            "con": 12,
+            "int": 3,
+            "wis": 12,
+            "cha": 7,
+            "skill": {
+                "perception": "+3"
+            },
+            "passive": 13,
+            "cr": "1/8",
+            "trait": [
+                {
+                    "name": "Keen Hearing and Smell",
+                    "entries": [
+                        "The mastiff has advantage on Wisdom ({@skill Perception}) checks that rely on hearing or smell."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d6 + 1}) piercing damage. If the target is a creature, it must succeed on a {@dc 11} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest",
+                "hill",
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/mastiff.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Noble",
+            "source": "MM",
+            "page": 348,
+            "srd": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DC"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "WBtW"
+                },
+                {
+                    "source": "CRCotN"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "DSotDQ"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "ToFW"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "GHLoE"
+                },
+                {
+                    "source": "DoDk"
+                },
+                {
+                    "source": "VEoR"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "{@item breastplate|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 9,
+                "formula": "2d8"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 11,
+            "dex": 12,
+            "con": 11,
+            "int": 12,
+            "wis": 14,
+            "cha": 16,
+            "skill": {
+                "deception": "+5",
+                "insight": "+4",
+                "persuasion": "+5"
+            },
+            "passive": 12,
+            "languages": [
+                "any two languages"
+            ],
+            "cr": "1/8",
+            "action": [
+                {
+                    "name": "Rapier",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d8 + 1}) piercing damage."
+                    ]
+                }
+            ],
+            "reaction": [
+                {
+                    "name": "Parry",
+                    "entries": [
+                        "The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon."
+                    ]
+                }
+            ],
+            "environment": [
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/noble.mp3"
+            },
+            "attachedItems": [
+                "rapier|phb"
+            ],
+            "actionTags": [
+                "Parry"
+            ],
+            "languageTags": [
+                "X"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Pseudodragon",
+            "source": "MM",
+            "page": 254,
+            "srd": true,
+            "otherSources": [
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "T"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "N",
+                "G"
+            ],
+            "ac": [
+                13
+            ],
+            "hp": {
+                "average": 7,
+                "formula": "2d4 + 2"
+            },
+            "speed": {
+                "walk": 15,
+                "fly": 60
+            },
+            "str": 6,
+            "dex": 15,
+            "con": 13,
+            "int": 10,
+            "wis": 12,
+            "cha": 10,
+            "skill": {
+                "perception": "+3",
+                "stealth": "+4"
+            },
+            "senses": [
+                "blindsight 10 ft.",
+                "darkvision 60 ft."
+            ],
+            "passive": 13,
+            "languages": [
+                "understands Common and Draconic but can't speak"
+            ],
+            "cr": "1/4",
+            "trait": [
+                {
+                    "name": "Keen Senses",
+                    "entries": [
+                        "The pseudodragon has advantage on Wisdom ({@skill Perception}) checks that rely on sight, hearing, or smell."
+                    ]
+                },
+                {
+                    "name": "Magic Resistance",
+                    "entries": [
+                        "The pseudodragon has advantage on saving throws against spells and other magical effects."
+                    ]
+                },
+                {
+                    "name": "Limited Telepathy",
+                    "entries": [
+                        "The pseudodragon can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 feet of it that can understand a language."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}4 ({@damage 1d4 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Sting",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d4 + 2}) piercing damage, and the target must succeed on a {@dc 11} Constitution saving throw or become {@condition poisoned} for 1 hour. If the saving throw fails by 5 or more, the target falls {@condition unconscious} for the same duration, or until it takes damage or another creature uses an action to shake it awake."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "variant",
+                    "name": "Pseudodragon Familiar",
+                    "entries": [
+                        "Some pseudodragons are willing to serve spellcasters as a familiar. Such pseudodragons have the following trait.",
+                        {
+                            "name": "Familiar",
+                            "type": "entries",
+                            "entries": [
+                                "The pseudodragon can serve another creature as a familiar, forming a magic, telepathic bond with that willing companion. While the two are bonded, the companion can sense what the pseudodragon senses as long as they are within 1 mile of each other. While the pseudodragon is within 10 feet of its companion, the companion shares the pseudodragon's Magic Resistance trait. At any time and for any reason, the pseudodragon can end its service as a familiar, ending the telepathic bond."
+                            ]
+                        }
+                    ],
+                    "_version": {
+                        "addHeadersAs": "trait"
+                    }
+                }
+            ],
+            "environment": [
+                "mountain",
+                "forest",
+                "hill",
+                "urban",
+                "desert",
+                "coastal"
+            ],
+            "familiar": true,
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/pseudodragon.mp3"
+            },
+            "traitTags": [
+                "Keen Senses",
+                "Magic Resistance"
+            ],
+            "senseTags": [
+                "B",
+                "D"
+            ],
+            "languageTags": [
+                "C",
+                "CS",
+                "DR"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "poisoned",
+                "unconscious"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Rat",
+            "source": "MM",
+            "page": 335,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "T"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                10
+            ],
+            "hp": {
+                "average": 1,
+                "formula": "1d4 - 1"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "str": 2,
+            "dex": 11,
+            "con": 9,
+            "int": 2,
+            "wis": 10,
+            "cha": 4,
+            "senses": [
+                "darkvision 30 ft."
+            ],
+            "passive": 10,
+            "cr": "0",
+            "trait": [
+                {
+                    "name": "Keen Smell",
+                    "entries": [
+                        "The rat has advantage on Wisdom ({@skill Perception}) checks that rely on smell."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one target. {@h}1 piercing damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "swamp",
+                "urban"
+            ],
+            "familiar": true,
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/rat.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Succubus",
+            "source": "MM",
+            "page": 285,
+            "srd": true,
+            "otherSources": [
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "TCE"
+                },
+                {
+                    "source": "CRCotN"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "GHLoE"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "fiend",
+                "tags": [
+                    "shapechanger"
+                ]
+            },
+            "alignment": [
+                "N",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 66,
+                "formula": "12d8 + 12"
+            },
+            "speed": {
+                "walk": 30,
+                "fly": 60
+            },
+            "str": 8,
+            "dex": 17,
+            "con": 13,
+            "int": 15,
+            "wis": 12,
+            "cha": 20,
+            "skill": {
+                "deception": "+9",
+                "insight": "+5",
+                "perception": "+5",
+                "persuasion": "+9",
+                "stealth": "+7"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 15,
+            "resist": [
+                "cold",
+                "fire",
+                "lightning",
+                "poison",
+                {
+                    "resist": [
+                        "bludgeoning",
+                        "piercing",
+                        "slashing"
+                    ],
+                    "note": "from nonmagical attacks",
+                    "cond": true
+                }
+            ],
+            "languages": [
+                "Abyssal",
+                "Common",
+                "Infernal",
+                "telepathy 60 ft."
+            ],
+            "cr": "4",
+            "trait": [
+                {
+                    "name": "Telepathic Bond",
+                    "entries": [
+                        "The fiend ignores the range restriction on its telepathy when communicating with a creature it has {@condition charmed}. The two don't even need to be on the same plane of existence."
+                    ]
+                },
+                {
+                    "name": "Shapechanger",
+                    "entries": [
+                        "The fiend can use its action to polymorph into a Small or Medium humanoid, or back into its true form. Without wings, the fiend loses its flying speed. Other than its size and speed, its statistics are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Claw (Fiend Form Only)",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d6 + 3}) slashing damage."
+                    ]
+                },
+                {
+                    "name": "Charm",
+                    "entries": [
+                        "One humanoid the fiend can see within 30 feet of it must succeed on a {@dc 15} Wisdom saving throw or be magically {@condition charmed} for 1 day. The {@condition charmed} target obeys the fiend's verbal or telepathic commands. If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.",
+                        "The fiend can have only one target {@condition charmed} at a time. If it charms another, the effect on the previous target ends."
+                    ]
+                },
+                {
+                    "name": "Draining Kiss",
+                    "entries": [
+                        "The fiend kisses a creature {@condition charmed} by it or a willing creature. The target must make a {@dc 15} Constitution saving throw against this magic, taking 32 ({@damage 5d10 + 5}) psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+                    ]
+                },
+                {
+                    "name": "Etherealness",
+                    "entries": [
+                        "The fiend magically enters the Ethereal Plane from the Material Plane, or vice versa."
+                    ]
+                }
+            ],
+            "environment": [
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/succubus-incubus.mp3"
+            },
+            "traitTags": [
+                "Shapechanger"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "languageTags": [
+                "AB",
+                "C",
+                "I",
+                "TP"
+            ],
+            "damageTags": [
+                "S",
+                "Y"
+            ],
+            "miscTags": [
+                "HPR",
+                "MW"
+            ],
+            "conditionInflict": [
+                "charmed"
+            ],
+            "savingThrowForced": [
+                "constitution",
+                "wisdom"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Wolf",
+            "source": "MM",
+            "page": 341,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "HotDQ"
+                },
+                {
+                    "source": "LMoP"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "TCE"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "HftT"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "LK"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "GHLoE"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 11,
+                "formula": "2d8 + 2"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 12,
+            "dex": 15,
+            "con": 12,
+            "int": 3,
+            "wis": 12,
+            "cha": 6,
+            "skill": {
+                "perception": "+3",
+                "stealth": "+4"
+            },
+            "passive": 13,
+            "cr": "1/4",
+            "trait": [
+                {
+                    "name": "Keen Hearing and Smell",
+                    "entries": [
+                        "The wolf has advantage on Wisdom ({@skill Perception}) checks that rely on hearing or smell."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one target. {@h}7 ({@damage 2d4 + 2}) piercing damage. If the target is a creature, it must succeed on a {@dc 11} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "environment": [
+                "grassland",
+                "forest",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/wolf.mp3"
+            },
+            "traitTags": [
+                "Keen Senses",
+                "Pack Tactics"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Guard Drake",
+            "source": "MPMM",
+            "page": 151,
+            "otherSources": [
+                {
+                    "source": "HotDQ",
+                    "page": 91
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 52,
+                "formula": "7d8 + 21"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 16,
+            "dex": 11,
+            "con": 16,
+            "int": 4,
+            "wis": 10,
+            "cha": 7,
+            "skill": {
+                "perception": "+2"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 12,
+            "languages": [
+                "understands Draconic but can't speak"
+            ],
+            "cr": "2",
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The guard drake makes one Bite attack and one Tail attack."
+                    ]
+                },
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d8 + 3}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Tail",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d6 + 3}) bludgeoning damage."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "variant",
+                    "name": "Chromatic Drakes",
+                    "entries": [
+                        "Each type of chromatic dragon's scales creates a guard drake that resembles a wingless, stunted version of that type of dragon, with unique abilities related to that type. Each has the special features described below.",
+                        {
+                            "name": "Black Guard Drake",
+                            "type": "entries",
+                            "entries": [
+                                "The drake can breathe air and water, has a swimming speed of 30 feet, and has resistance to acid damage."
+                            ]
+                        },
+                        {
+                            "name": "Blue Guard Drake",
+                            "type": "entries",
+                            "entries": [
+                                "The drake has a burrowing speed of 20 feet and resistance to lightning damage."
+                            ]
+                        },
+                        {
+                            "name": "Green Guard Drake",
+                            "type": "entries",
+                            "entries": [
+                                "The drake can breathe air and water, has a swimming speed of 30 feet, and has resistance to poison damage."
+                            ]
+                        },
+                        {
+                            "name": "Red Guard Drake",
+                            "type": "entries",
+                            "entries": [
+                                "The drake has climbing speed of 30 feet and resistance to fire damage."
+                            ]
+                        },
+                        {
+                            "name": "White Guard Drake",
+                            "type": "entries",
+                            "entries": [
+                                "The drake has a burrowing speed of 20 feet, a climbing speed of 30 feet, and resistance to cold damage."
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "environment": [
+                "arctic",
+                "desert",
+                "forest",
+                "mountain",
+                "swamp",
+                "underdark",
+                "urban"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/guard-drake.mp3"
+            },
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "CS",
+                "DR"
+            ],
+            "damageTags": [
+                "B",
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true,
+            "_versions": [
+                {
+                    "name": "Guard Drake (Black)",
+                    "source": "MPMM",
+                    "_mod": {
+                        "trait": {
+                            "mode": "appendArr",
+                            "items": {
+                                "name": "Amphibious",
+                                "entries": [
+                                    "The drake can breathe air and water."
+                                ]
+                            }
+                        }
+                    },
+                    "speed": {
+                        "walk": 30,
+                        "swim": 30
+                    },
+                    "resist": [
+                        "acid"
+                    ],
+                    "variant": null
+                },
+                {
+                    "name": "Guard Drake (Blue)",
+                    "source": "MPMM",
+                    "speed": {
+                        "walk": 30,
+                        "burrow": 20
+                    },
+                    "resist": [
+                        "lightning"
+                    ],
+                    "variant": null
+                },
+                {
+                    "name": "Guard Drake (Green)",
+                    "source": "MPMM",
+                    "_mod": {
+                        "trait": {
+                            "mode": "appendArr",
+                            "items": {
+                                "name": "Amphibious",
+                                "entries": [
+                                    "The drake can breathe air and water."
+                                ]
+                            }
+                        }
+                    },
+                    "speed": {
+                        "walk": 30,
+                        "swim": 30
+                    },
+                    "resist": [
+                        "poison"
+                    ],
+                    "variant": null
+                },
+                {
+                    "name": "Guard Drake (Red)",
+                    "source": "MPMM",
+                    "speed": {
+                        "walk": 30,
+                        "climb": 30
+                    },
+                    "resist": [
+                        "fire"
+                    ],
+                    "variant": null
+                },
+                {
+                    "name": "Guard Drake (White)",
+                    "source": "MPMM",
+                    "speed": {
+                        "walk": 30,
+                        "climb": 30,
+                        "burrow": 20
+                    },
+                    "resist": [
+                        "cold"
+                    ],
+                    "variant": null
+                }
+            ]
+        },
+        {
+            "name": "Kobold Dragonshield",
+            "source": "MPMM",
+            "page": 163,
+            "otherSources": [
+                {
+                    "source": "VGM",
+                    "page": 165
+                }
+            ],
+            "size": [
+                "S"
+            ],
+            "type": "dragon",
+            "alignment": [
+                "A"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "{@item leather armor|PHB|leather}",
+                        "{@item shield|PHB}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 44,
+                "formula": "8d6 + 16"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "str": 12,
+            "dex": 15,
+            "con": 14,
+            "int": 8,
+            "wis": 9,
+            "cha": 10,
+            "skill": {
+                "perception": "+1"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 11,
+            "resist": [
+                {
+                    "special": "see Dragon's Resistance below"
+                }
+            ],
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "1",
+            "trait": [
+                {
+                    "name": "Dragon's Resistance",
+                    "entries": [
+                        "The kobold has resistance to a type of damage based on the color of dragon that invested it with power (choose or roll a {@dice d10}): 1\u20132, acid (black or copper); 3\u20134, cold (silver or white); 5\u20136, fire (brass, gold, or red); 7\u20138, lightning (blue or bronze); 9\u201310, poison (green)."
+                    ]
+                },
+                {
+                    "name": "Heart of the Dragon",
+                    "entries": [
+                        "If the kobold is {@condition frightened} or {@condition paralyzed} by an effect that allows a saving throw, it can repeat the save at the start of its turn to end the effect on itself and all kobolds within 30 feet of it. Any kobold that benefits from this trait (including the dragonshield) has advantage on its next attack roll."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                },
+                {
+                    "name": "Sunlight Sensitivity",
+                    "entries": [
+                        "While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom ({@skill Perception}) checks that rely on sight."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The kobold makes two Spear attacks."
+                    ]
+                },
+                {
+                    "name": "Spear",
+                    "entries": [
+                        "{@atk mw,rw} {@hit 3} to hit, reach 5 ft. or range 20/60 ft., one target. {@h}4 ({@damage 1d6 + 1}) piercing damage, or 5 ({@damage 1d8 + 1}) piercing damage if used with two hands to make a melee attack."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest",
+                "hill",
+                "mountain",
+                "underdark"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/kobold-dragonshield.mp3"
+            },
+            "attachedItems": [
+                "spear|phb"
+            ],
+            "traitTags": [
+                "Pack Tactics",
+                "Sunlight Sensitivity"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RW",
+                "THW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Redcap",
+            "source": "MPMM",
+            "page": 208,
+            "otherSources": [
+                {
+                    "source": "VGM",
+                    "page": 188
+                }
+            ],
+            "size": [
+                "S"
+            ],
+            "type": "fey",
+            "alignment": [
+                "C",
+                "E"
+            ],
+            "alignmentPrefix": "Typically ",
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 45,
+                "formula": "6d6 + 24"
+            },
+            "speed": {
+                "walk": 25
+            },
+            "str": 18,
+            "dex": 13,
+            "con": 18,
+            "int": 10,
+            "wis": 12,
+            "cha": 9,
+            "skill": {
+                "athletics": "+6",
+                "perception": "+3"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 13,
+            "languages": [
+                "Common",
+                "Sylvan"
+            ],
+            "cr": "3",
+            "trait": [
+                {
+                    "name": "Iron Boots",
+                    "entries": [
+                        "The redcap has disadvantage on Dexterity ({@skill Stealth}) checks."
+                    ]
+                },
+                {
+                    "name": "Outsize Strength",
+                    "entries": [
+                        "While grappling, the redcap is considered to be Medium. Also, wielding a heavy weapon doesn't impose disadvantage on its attack rolls."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The redcap makes three Wicked Sickle attacks."
+                    ]
+                },
+                {
+                    "name": "Wicked Sickle",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}9 ({@damage 2d4 + 4}) slashing damage."
+                    ]
+                },
+                {
+                    "name": "Ironbound Pursuit",
+                    "entries": [
+                        "The redcap moves up to its speed to a creature it can see and kicks with its iron boots. The target must succeed on a {@dc 14} Dexterity saving throw or take 20 ({@damage 3d10 + 4}) bludgeoning damage and be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "environment": [
+                "forest",
+                "hill",
+                "swamp"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/redcap.mp3"
+            },
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "S"
+            ],
+            "damageTags": [
+                "B",
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "dexterity"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Lords' Alliance Guard",
+            "source": "OotA",
+            "page": 131,
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "dwarf"
+                ]
+            },
+            "alignment": [
+                "C",
+                "G"
+            ],
+            "ac": [
+                {
+                    "ac": 16,
+                    "from": [
+                        "{@item chain shirt|phb}",
+                        "{@item shield|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 11,
+                "formula": "2d8 + 2"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 14,
+            "dex": 12,
+            "con": 12,
+            "int": 10,
+            "wis": 11,
+            "cha": 10,
+            "skill": {
+                "perception": "+2"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 12,
+            "cr": "1/4",
+            "trait": [
+                {
+                    "name": "Dwarven Resilience",
+                    "entries": [
+                        "The guard has advantage on saving throws against poison."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Halberd",
+                    "entries": [
+                        "{@atk mw} {@hit 4} to hit, reach 10 ft., one target. {@h}7 ({@damage 1d10 + 2}) slashing damage."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "halberd|phb"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RCH"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Black Earth Guard",
+            "source": "PotA",
+            "page": 195,
+            "size": [
+                "M"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "human"
+                ]
+            },
+            "alignment": [
+                "N",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 18,
+                    "from": [
+                        "{@item plate armor|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 39,
+                "formula": "6d8 + 12"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 17,
+            "dex": 11,
+            "con": 14,
+            "int": 10,
+            "wis": 10,
+            "cha": 9,
+            "skill": {
+                "intimidation": "+1",
+                "perception": "+2"
+            },
+            "passive": 12,
+            "languages": [
+                "Common"
+            ],
+            "cr": "2",
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The guard makes two melee attacks."
+                    ]
+                },
+                {
+                    "name": "Morningstar",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}7 ({@damage 1d8 + 3}) piercing damage."
+                    ]
+                }
+            ],
+            "reaction": [
+                {
+                    "name": "Unyielding",
+                    "entries": [
+                        "When the guard is subjected to an effect that would move it, knock it {@condition prone}, or both, it can use its reaction to be neither moved nor knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "morningstar|phb"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Giant Raven",
+            "source": "SKT",
+            "page": 66,
+            "_copy": {
+                "name": "Giant Vulture",
+                "source": "MM",
+                "_mod": {
+                    "*": {
+                        "mode": "replaceTxt",
+                        "replace": "vulture",
+                        "with": "raven"
+                    }
+                }
+            },
+            "hasToken": true
+        },
+        {
+            "name": "Giant Subterranean Lizard",
+            "source": "TftYP",
+            "page": 236,
+            "size": [
+                "H"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 14,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 66,
+                "formula": "7d12 + 21"
+            },
+            "speed": {
+                "walk": 30,
+                "swim": 50
+            },
+            "str": 21,
+            "dex": 9,
+            "con": 17,
+            "int": 2,
+            "wis": 10,
+            "cha": 7,
+            "skill": {
+                "stealth": "+3"
+            },
+            "passive": 10,
+            "cr": "4",
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The lizard makes two attacks: one with its bite and one with its tail. One attack can be replaced by Swallow."
+                    ]
+                },
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 7} to hit, reach 5 ft., one target. {@h}16 ({@damage 2d10 + 5}) piercing damage and the target is {@condition grappled} (escape {@dc 15}). Until this grapple ends, the target is {@condition restrained}, and the lizard can't bite another target."
+                    ]
+                },
+                {
+                    "name": "Tail",
+                    "entries": [
+                        "{@atk mw} {@hit 7} to hit, reach 10 ft., one target. {@h}12 ({@damage 2d6 + 5}) piercing damage. If the target is a creature, it must succeed on a {@dc 15} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                },
+                {
+                    "name": "Swallow",
+                    "entries": [
+                        "{@atk mw} {@hit 7} to hit, reach 5 ft., one Medium or smaller creature the lizard is grappling. {@h}16 ({@damage 2d10 + 5}) piercing damage. The target is swallowed, and the grapple ends. The swallowed target is {@condition blinded} and {@condition restrained}, it has total cover against attacks and other effects outside the lizard, and it takes 10 ({@damage 3d6}) acid damage at the start of each of the lizard's turns. The lizard can have only one target swallowed at a time.",
+                        "If the lizard dies, a swallowed creature is no longer {@condition restrained} by it and can escape from the corpse using 10 feet of movement, exiting {@condition prone}."
+                    ]
+                }
+            ],
+            "actionTags": [
+                "Multiattack",
+                "Swallow"
+            ],
+            "damageTags": [
+                "A",
+                "P"
+            ],
+            "miscTags": [
+                "MW",
+                "RCH"
+            ],
+            "conditionInflict": [
+                "blinded",
+                "grappled",
+                "prone",
+                "restrained"
+            ],
+            "savingThrowForced": [
+                "strength"
+            ],
+            "hasToken": true
+        },
+        {
+            "name": "Redcap",
+            "source": "ToB1-2023",
+            "page": 306,
+            "size": [
+                "M"
+            ],
+            "type": "fey",
+            "alignment": [
+                "N",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 120,
+                "formula": "16d8 + 48"
+            },
+            "speed": {
+                "walk": 40
+            },
+            "str": 20,
+            "dex": 10,
+            "con": 17,
+            "int": 11,
+            "wis": 13,
+            "cha": 8,
+            "save": {
+                "con": "+6"
+            },
+            "skill": {
+                "athletics": "+8",
+                "intimidation": "+5"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 11,
+            "resist": [
+                {
+                    "resist": [
+                        "bludgeoning",
+                        "piercing",
+                        "slashing"
+                    ],
+                    "note": "from nonmagical attacks",
+                    "cond": true
+                }
+            ],
+            "conditionImmune": [
+                "charmed",
+                "frightened"
+            ],
+            "languages": [
+                "Common",
+                "Sylvan",
+                "Undercommon"
+            ],
+            "cr": "6",
+            "trait": [
+                {
+                    "name": "Red Cap",
+                    "entries": [
+                        "The redcap must soak its cap in the blood of a Humanoid that has been dead for no more than 1 hour at least once every 3 days. Every 24 hours past the third day that it goes without soaking its cap in blood in this way, it suffers one level of {@condition exhaustion}. This {@condition exhaustion} can be reduced only when the redcap finishes a long rest after soaking its cap in fresh Humanoid blood, which reduces its {@condition exhaustion} level to 0. If the redcap dies as a result of this {@condition exhaustion}, it crumbles to dust."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The redcap makes one Bleeding Bite attack and two Pike attacks."
+                    ]
+                },
+                {
+                    "name": "Bleeding Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 8} to hit, reach 5 ft., one target. {@h}14 ({@damage 2d8 + 5}) piercing damage. If the target is a creature other than a Construct or Undead, it must succeed on a {@dc 15} Constitution saving throw or lose 7 {@dice 2d6} hp at the start of each of its turns due to a bleeding wound. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Any creature can take an action to stanch the wound with a successful {@dc 13} Wisdom ({@skill Medicine}) check. The wound also closes if the target receives magical healing."
+                    ]
+                },
+                {
+                    "name": "Pike",
+                    "entries": [
+                        "{@atk mw} {@hit 8} to hit, reach 10 ft., one target. {@h}10 ({@damage 1d10 + 5}) piercing damage."
+                    ]
+                }
+            ],
+            "bonus": [
+                {
+                    "name": "Solid Kick",
+                    "entries": [
+                        "The redcap kicks a Medium or smaller creature within 5 feet of it. The target must succeed on a {@dc 15} Strength saving throw or be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "environment": [
+                "farmland",
+                "forest"
+            ],
+            "attachedItems": [
+                "pike|phb"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "S",
+                "U"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RCH"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "constitution",
+                "strength"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Kobold Dragonshield",
+            "source": "VGM",
+            "page": 165,
+            "otherSources": [
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "SLW"
+                }
+            ],
+            "reprintedAs": [
+                "Kobold Dragonshield|MPMM"
+            ],
+            "size": [
+                "S"
+            ],
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "kobold"
+                ]
+            },
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "{@item leather armor|phb}",
+                        "{@item shield|phb}"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 44,
+                "formula": "8d6 + 16"
+            },
+            "speed": {
+                "walk": 20
+            },
+            "str": 12,
+            "dex": 15,
+            "con": 14,
+            "int": 8,
+            "wis": 9,
+            "cha": 10,
+            "skill": {
+                "perception": "+1"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 11,
+            "languages": [
+                "Common",
+                "Draconic"
+            ],
+            "cr": "1",
+            "trait": [
+                {
+                    "name": "Dragon's Resistance",
+                    "entries": [
+                        "The kobold has resistance to a type of damage based on the color of dragon that invested it with power (choose or roll a {@dice d10}): 1\u20132, acid (black); 3\u20134, cold (white); 5\u20136, fire (red); 7\u20138, lightning (blue); 9\u201310, poison (green)."
+                    ]
+                },
+                {
+                    "name": "Heart of the Dragon",
+                    "entries": [
+                        "If the kobold is {@condition frightened} or {@condition paralyzed} by an effect that allows a saving throw, it can repeat the save at the start of its turn to end the effect on itself and all kobolds within 30 feet of it. Any kobold that benefits from this trait (including the dragonshield) has advantage on its next attack roll."
+                    ]
+                },
+                {
+                    "name": "Pack Tactics",
+                    "entries": [
+                        "The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't {@condition incapacitated}."
+                    ]
+                },
+                {
+                    "name": "Sunlight Sensitivity",
+                    "entries": [
+                        "While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom ({@skill Perception}) checks that rely on sight."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The kobold makes two melee attacks."
+                    ]
+                },
+                {
+                    "name": "Spear",
+                    "entries": [
+                        "{@atk mw,rw} {@hit 3} to hit, reach 5 ft. or range 20/60 ft., one target. {@h}4 ({@damage 1d6 + 1}) piercing damage, or 5 ({@damage 1d8 + 1}) piercing damage if used with two hands to make a melee attack."
+                    ]
+                }
+            ],
+            "environment": [
+                "underdark",
+                "mountain",
+                "forest",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/kobold-dragonshield.mp3"
+            },
+            "attachedItems": [
+                "spear|phb"
+            ],
+            "traitTags": [
+                "Pack Tactics",
+                "Sunlight Sensitivity"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "DR"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RW",
+                "THW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Redcap",
+            "source": "VGM",
+            "page": 188,
+            "otherSources": [
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "WBtW"
+                }
+            ],
+            "reprintedAs": [
+                "Redcap|MPMM"
+            ],
+            "size": [
+                "S"
+            ],
+            "type": "fey",
+            "alignment": [
+                "C",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 13,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 45,
+                "formula": "6d6 + 24"
+            },
+            "speed": {
+                "walk": 25
+            },
+            "str": 18,
+            "dex": 13,
+            "con": 18,
+            "int": 10,
+            "wis": 12,
+            "cha": 9,
+            "skill": {
+                "athletics": "+6",
+                "perception": "+3"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 13,
+            "languages": [
+                "Common",
+                "Sylvan"
+            ],
+            "cr": "3",
+            "trait": [
+                {
+                    "name": "Iron Boots",
+                    "entries": [
+                        "While moving, the redcap has disadvantage on Dexterity ({@skill Stealth}) checks."
+                    ]
+                },
+                {
+                    "name": "Outsize Strength",
+                    "entries": [
+                        "While grappling, the redcap is considered to be Medium. Also, wielding a heavy weapon doesn't impose disadvantage on its attack rolls."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The redcap makes three attacks with its wicked sickle."
+                    ]
+                },
+                {
+                    "name": "Wicked Sickle",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}9 ({@damage 2d4 + 4}) slashing damage."
+                    ]
+                },
+                {
+                    "name": "Ironbound Pursuit",
+                    "entries": [
+                        "The redcap moves up to its speed to a creature it can see and kicks with its iron boots. The target must succeed on a {@dc 14} Dexterity saving throw or take 20 ({@damage 3d10 + 4}) bludgeoning damage and be knocked {@condition prone}."
+                    ]
+                }
+            ],
+            "variant": [
+                {
+                    "type": "variant",
+                    "name": "Madcap",
+                    "entries": [
+                        "A madcap is a redcap that soaks its hat in demon ichor instead of blood. Contact with demon ichor makes the creature even more psychotic, causing it to brood over irrational hatreds. A group of madcaps will sometimes band together over a shared hatred of something, such as music, creatures with curly hair, the word \"cool,\" or the color blue.",
+                        "When a madcap drops to 0 hit points, its hateful existence comes to an end in spectacular fashion as it bursts into flames, reducing itself, its ichor-soaked hat, and its pants to ashes instantly while leaving behind its weapon and smoldering iron boots."
+                    ],
+                    "_version": {
+                        "name": "Madcap",
+                        "addAs": "trait"
+                    },
+                    "source": "BGDIA",
+                    "page": 240
+                }
+            ],
+            "environment": [
+                "forest",
+                "swamp",
+                "hill"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/redcap.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Madcap",
+                    "source": "BGDIA"
+                }
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C",
+                "S"
+            ],
+            "damageTags": [
+                "B",
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "conditionInflict": [
+                "prone"
+            ],
+            "savingThrowForced": [
+                "dexterity"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Nimblewright",
+            "source": "WDH",
+            "page": 212,
+            "size": [
+                "M"
+            ],
+            "type": "construct",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                {
+                    "ac": 18,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 45,
+                "formula": "6d8 + 18"
+            },
+            "speed": {
+                "walk": 60
+            },
+            "str": 12,
+            "dex": 18,
+            "con": 17,
+            "int": 8,
+            "wis": 10,
+            "cha": 6,
+            "save": {
+                "dex": "+6"
+            },
+            "skill": {
+                "acrobatics": "+8",
+                "perception": "+2"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 12,
+            "resist": [
+                {
+                    "resist": [
+                        "bludgeoning",
+                        "piercing",
+                        "slashing"
+                    ],
+                    "note": "from nonmagical attacks",
+                    "cond": true
+                }
+            ],
+            "conditionImmune": [
+                "exhaustion",
+                "frightened",
+                "petrified",
+                "poisoned"
+            ],
+            "languages": [
+                "understands one language known to its creator but can't speak"
+            ],
+            "cr": "4",
+            "trait": [
+                {
+                    "name": "Magic Resistance",
+                    "entries": [
+                        "The nimblewright has advantage on saving throws against spells and other magical effects."
+                    ]
+                },
+                {
+                    "name": "Magic Weapons",
+                    "entries": [
+                        "The nimblewright's weapon attacks are magical."
+                    ]
+                },
+                {
+                    "name": "Repairable",
+                    "entries": [
+                        "As long as it has at least 1 hit point remaining, the nimblewright regains 1 hit point when a {@spell mending} spell is cast on it."
+                    ]
+                },
+                {
+                    "name": "Sure-Footed",
+                    "entries": [
+                        "The nimblewright has advantage on Strength and Dexterity saving throws made against effects that would knock it {@condition prone}."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The nimblewright makes three attacks: two with its rapier and one with its dagger."
+                    ]
+                },
+                {
+                    "name": "Rapier",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}8 ({@damage 1d8 + 4}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Dagger",
+                    "entries": [
+                        "{@atk mw} {@hit 6} to hit, reach 5 ft., one target. {@h}6 ({@damage 1d4 + 4}) piercing damage. Or Ranged Weapon Attack: {@hit 6} to hit, range 20/60 ft., one target. {@h}6 ({@damage 1d4 + 4}) piercing damage."
+                    ]
+                }
+            ],
+            "reaction": [
+                {
+                    "name": "Parry",
+                    "entries": [
+                        "The nimblewright adds 2 to its AC against one melee attack that would hit it. To do so, the nimblewright must see the attacker and be wielding a melee weapon."
+                    ]
+                }
+            ],
+            "attachedItems": [
+                "dagger|phb",
+                "rapier|phb"
+            ],
+            "traitTags": [
+                "Magic Resistance",
+                "Magic Weapons"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack",
+                "Parry"
+            ],
+            "languageTags": [
+                "CS"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        }
+    ]
+}
