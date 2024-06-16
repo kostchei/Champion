@@ -1,106 +1,197 @@
 {
     "encounter": [
         {
-            "name": "Bat",
-            "size": "Tiny",
-            "type": "Beast",
-            "alignment": "Unaligned",
-            "ac": "12",
-            "hp": {
-                "average": 1,
-                "formula": "1d4 - 1"
-            },
-            "speed": {
-                "walk": 5,
-                "fly": 30
-            },
-            "cr": "0",
-            "str": "2 (-4)",
-            "dex": "15 (+2)",
-            "con": "8 (-1)",
-            "int": "2 (-4)",
-            "wis": "12 (+1)",
-            "cha": "4 (-3)",
-            "senses": "blindsight 60 ft., passive Perception 11",
-            "languages": "\u2014",
-            "challenge": "0 (10 XP)",
-            "proficiency_bonus": "+2",
-            "special_abilities": [
+            "name": "Cultist",
+            "source": "MM",
+            "page": 345,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
                 {
-                    "name": "Echolocation",
-                    "description": "The bat can't use its blindsight while deafened."
+                    "source": "CoS"
                 },
                 {
-                    "name": "Keen Hearing",
-                    "description": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
-                }
-            ],
-            "action": [
+                    "source": "HotDQ"
+                },
                 {
-                    "name": "Bite",
-                    "type": "Melee Weapon Attack",
-                    "attack_bonus": "+0",
-                    "reach": "5 ft.",
-                    "target": "one creature",
-                    "damage": "1 piercing damage"
+                    "source": "LMoP"
+                },
+                {
+                    "source": "PotA"
+                },
+                {
+                    "source": "RoT"
+                },
+                {
+                    "source": "SKT"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "DC"
+                },
+                {
+                    "source": "DIP"
+                },
+                {
+                    "source": "SLW"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "RMBRE"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "MOT"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "CM"
+                },
+                {
+                    "source": "JttRC"
+                },
+                {
+                    "source": "KftGV"
+                },
+                {
+                    "source": "HftT"
+                },
+                {
+                    "source": "PaBTSO"
+                },
+                {
+                    "source": "AATM"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "GHLoE"
+                },
+                {
+                    "source": "DoDk"
+                },
+                {
+                    "source": "VEoR"
                 }
             ],
-            "terrain": [
-                "dense"
+            "size": [
+                "M"
             ],
-            "realm": [
-                "dungeon_t1"
-            ]
-        },
-        {
-            "name": "Rat",
-            "size": "Tiny",
-            "type": "Beast",
-            "alignment": "Unaligned",
-            "ac": "10",
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "any race"
+                ]
+            },
+            "alignment": [
+                "L",
+                "NX",
+                "C",
+                "NY",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 12,
+                    "from": [
+                        "{@item leather armor|phb}"
+                    ]
+                }
+            ],
             "hp": {
-                "average": 1,
-                "formula": "1d4 - 1"
+                "average": 9,
+                "formula": "2d8"
             },
             "speed": {
-                "walk": 20
+                "walk": 30
             },
-            "cr": "0",
-            "str": "2 (-4)",
-            "dex": "11 (+0)",
-            "con": "9 (-1)",
-            "int": "2 (-4)",
-            "wis": "10 (+0)",
-            "cha": "4 (-3)",
-            "senses": "darkvision 30 ft., passive Perception 10",
-            "languages": "\u2014",
-            "challenge": "0 (10 XP)",
-            "proficiency_bonus": "+2",
-            "special_abilities": [
+            "str": 11,
+            "dex": 12,
+            "con": 10,
+            "int": 10,
+            "wis": 11,
+            "cha": 10,
+            "skill": {
+                "deception": "+2",
+                "religion": "+2"
+            },
+            "passive": 10,
+            "languages": [
+                "any one language (usually Common)"
+            ],
+            "cr": "1/8",
+            "trait": [
                 {
-                    "name": "Keen Smell",
-                    "description": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
+                    "name": "Dark Devotion",
+                    "entries": [
+                        "The cultist has advantage on saving throws against being {@condition charmed} or {@condition frightened}."
+                    ]
                 }
             ],
             "action": [
                 {
-                    "name": "Bite",
-                    "type": "Melee Weapon Attack",
-                    "attack_bonus": "+0",
-                    "reach": "5 ft.",
-                    "target": "one target",
-                    "damage": "1 piercing damage"
+                    "name": "Scimitar",
+                    "entries": [
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d6 + 1}) slashing damage."
+                    ]
                 }
             ],
-            "terrain": [
-                "dense"
+            "environment": [
+                "urban"
             ],
-            "realm": [
-                "dungeon_t1"
-            ]
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/cultist.mp3"
+            },
+            "altArt": [
+                {
+                    "name": "Diabolical Cultist",
+                    "source": "MTF",
+                    "page": 18
+                },
+                {
+                    "name": "Cultist",
+                    "source": "RMBRE"
+                }
+            ],
+            "attachedItems": [
+                "scimitar|phb"
+            ],
+            "languageTags": [
+                "C",
+                "X"
+            ],
+            "damageTags": [
+                "S"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
         }
     ],
-    "difficulty": "medium",
-    "xp_budget": 50,
+    "difficulty": "easy",
+    "xp_budget": 25,
     "terrain": "open"
 }

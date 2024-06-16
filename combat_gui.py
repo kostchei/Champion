@@ -33,9 +33,19 @@ def load_json(file_path):
         print(f"Error decoding JSON from file: {file_path}")
         return {}
 
-def draw_text(screen, text, position, font, color=(0, 0, 0)):
-    text_surface = font.render(text, True, color)
-    screen.blit(text_surface, position)
+def draw_text(screen, text, position, font, color=(0, 0, 0), max_width=None):
+    words = text.split(' ')
+    space_width, _ = font.size(' ')
+    x, y = position
+    for word in words:
+        word_surface = font.render(word, True, color)
+        word_width, word_height = word_surface.get_size()
+        if max_width is not None and x + word_width >= max_width:
+            x = position[0]  # Reset the x.
+            y += word_height  # Start on new row.
+        screen.blit(word_surface, (x, y))
+        x += word_width + space_width
+    return y + word_height
 
 def draw_button(text, position):
     mouse_pos = pg.mouse.get_pos()
@@ -53,12 +63,22 @@ def draw_button(text, position):
 
     return button_rect
 
-def draw_columns(screen, columns, font):
+def draw_columns(screen, columns, font, column_width):
     for col in columns:
         x, y = col['position']
         for line in col['content']:
-            draw_text(screen, line, (x, y), font)
-            y += font.get_linesize()
+            y = draw_text(screen, line, (x, y), font, max_width=x + column_width)
+
+def get_field_value(monster_info, key):
+    if key in monster_info:
+        value = monster_info[key]
+        if isinstance(value, list):
+            return ', '.join(map(str, value))
+        elif isinstance(value, dict):
+            return ', '.join(f"{k}: {v}" for k, v in value.items())
+        else:
+            return str(value)
+    return 'N/A'
 
 def combat_loop(player_data, encounter_data):
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -105,34 +125,29 @@ def combat_loop(player_data, encounter_data):
         columns[2]['content'].append(f"Difficulty: {encounter_data['difficulty']}")
         columns[2]['content'].append(f"XP Budget: {encounter_data['xp_budget']}")
 
+        # List of fields we are interested in
+        fields_of_interest = [
+            "name", "size", "type", "alignment", "ac", "hp", "speed", "str", "dex", "con", "int", "wis", "cha",
+            "skill", "senses", "cr", "immune", "vulnerable", "conditionImmune", "trait", "action", "reaction", "spellcasting"
+        ]
+
         # Count monsters and prepare content for columns 4 and 5
         monsters_data = encounter_data['encounter']
         monster_counts = Counter(monster['name'] for monster in monsters_data)
-        
+
         for idx, (monster_name, count) in enumerate(monster_counts.items()):
             monster_info = next(monster for monster in monsters_data if monster['name'] == monster_name)
             column_index = 3 if idx % 2 == 0 else 4
             columns[column_index]['content'].append(f"Monster {idx + 1}: {monster_name} x{count}")
-            columns[column_index]['content'].append(f"Size: {monster_info.get('size', 'N/A')}")
-            columns[column_index]['content'].append(f"Type: {monster_info.get('type', 'N/A')}")
-            columns[column_index]['content'].append(f"Alignment: {', '.join(monster_info.get('alignment', ['N/A']))}")
-            columns[column_index]['content'].append(f"HP: {monster_info.get('hp', {}).get('average', 'N/A')} ({monster_info.get('hp', {}).get('formula', 'N/A')})")
-            columns[column_index]['content'].append(f"AC: {monster_info.get('ac', 'N/A')}")
-            columns[column_index]['content'].append(f"Speed: {monster_info.get('speed', {}).get('walk', 'N/A')} ft.")
-            columns[column_index]['content'].append(f"CR: {monster_info.get('cr', 'N/A')}")
-            columns[column_index]['content'].append(f"STR: {monster_info.get('str', 'N/A')}")
-            columns[column_index]['content'].append(f"DEX: {monster_info.get('dex', 'N/A')}")
-            columns[column_index]['content'].append(f"CON: {monster_info.get('con', 'N/A')}")
-            columns[column_index]['content'].append(f"INT: {monster_info.get('int', 'N/A')}")
-            columns[column_index]['content'].append(f"WIS: {monster_info.get('wis', 'N/A')}")
-            columns[column_index]['content'].append(f"CHA: {monster_info.get('cha', 'N/A')}")
-            columns[column_index]['content'].append(f"Actions:")
-            actions = monster_info.get('action', [])
-            for action in actions:
-                columns[column_index]['content'].append(f"- {action}")
+
+            for key in fields_of_interest:
+                if key == "name":
+                    continue
+                value = get_field_value(monster_info, key)
+                columns[column_index]['content'].append(f"{key.capitalize()}: {value}")
 
         # Draw all columns
-        draw_columns(screen, columns, FONT)
+        draw_columns(screen, columns, FONT, column_width)
 
         pg.display.flip()
 

@@ -24,24 +24,15 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 difficulty_thresholds = load_json(os.path.join(base_path, '../data/difficulty_thresholds.json'))
 challenge_rating_list = load_json(os.path.join(base_path, '../data/challenge_rating_list.json'))
 
-def filter_monsters_by_realm(monsters_by_cr, realm):
-    filtered_monsters_by_cr = {}
-    for cr, monsters in monsters_by_cr.items():
-        filtered_monsters = [
-            monster for monster in monsters
-            if realm in monster['realm']
-        ]
-        if filtered_monsters:
-            filtered_monsters_by_cr[cr] = filtered_monsters
-    return filtered_monsters_by_cr
-
-def find_highest_cr(xp_budget, filtered_monsters_by_cr):
+def find_highest_cr(xp_budget, monsters):
     for cr_info in reversed(challenge_rating_list):
-        if cr_info['xp'] <= xp_budget and cr_info['cr'] in filtered_monsters_by_cr:
-            return cr_info['cr']
+        if cr_info['xp'] <= xp_budget:
+            for monster in monsters:
+                if monster['cr'] == cr_info['cr']:
+                    return cr_info['cr']
     return 0
 
-def generate_encounter(xp_budget, filtered_monsters_by_cr):
+def generate_encounter(xp_budget, monsters):
     encounter = []
 
     def add_to_encounter(monster, cr):
@@ -62,37 +53,45 @@ def generate_encounter(xp_budget, filtered_monsters_by_cr):
     method = random.choice(feasible_methods)
 
     if method == 1:
-        cr = find_highest_cr(xp_budget, filtered_monsters_by_cr)
-        if cr in filtered_monsters_by_cr:
-            selected_monster = random.choice(filtered_monsters_by_cr[cr])
-            add_to_encounter(selected_monster, cr)
-            xp_budget *= random.uniform(0.5, 1)
+        cr = find_highest_cr(xp_budget, monsters)
+        if cr:
+            selected_monsters = [monster for monster in monsters if monster['cr'] == cr]
+            if selected_monsters:
+                selected_monster = random.choice(selected_monsters)
+                add_to_encounter(selected_monster, cr)
+                xp_budget *= random.uniform(0.5, 1)
 
     elif method == 2:
         pair_budget = xp_budget / 3
         for _ in range(2):
-            cr = find_highest_cr(pair_budget, filtered_monsters_by_cr)
-            if cr in filtered_monsters_by_cr:
-                selected_monster = random.choice(filtered_monsters_by_cr[cr])
-                add_to_encounter(selected_monster, cr)
+            cr = find_highest_cr(pair_budget, monsters)
+            if cr:
+                selected_monsters = [monster for monster in monsters if monster['cr'] == cr]
+                if selected_monsters:
+                    selected_monster = random.choice(selected_monsters)
+                    add_to_encounter(selected_monster, cr)
 
     elif method == 3:
         minion_budget = xp_budget / 12
         for _ in range(2):
-            cr = find_highest_cr(minion_budget, filtered_monsters_by_cr)
-            if cr in filtered_monsters_by_cr:
-                selected_monster = random.choice(filtered_monsters_by_cr[cr])
-                for _ in range(random.randint(1, 6)):
-                    add_to_encounter(selected_monster, cr)
+            cr = find_highest_cr(minion_budget, monsters)
+            if cr:
+                selected_monsters = [monster for monster in monsters if monster['cr'] == cr]
+                if selected_monsters:
+                    selected_monster = random.choice(selected_monsters)
+                    for _ in range(random.randint(1, 6)):
+                        add_to_encounter(selected_monster, cr)
 
     elif method == 4:
         swarm_budget = xp_budget / 60
         for _ in range(3):
-            cr = find_highest_cr(swarm_budget, filtered_monsters_by_cr)
-            if cr in filtered_monsters_by_cr:
-                selected_monster = random.choice(filtered_monsters_by_cr[cr])
-                for _ in range(random.randint(1, 10)):
-                    add_to_encounter(selected_monster, cr)
+            cr = find_highest_cr(swarm_budget, monsters)
+            if cr:
+                selected_monsters = [monster for monster in monsters if monster['cr'] == cr]
+                if selected_monsters:
+                    selected_monster = random.choice(selected_monsters)
+                    for _ in range(random.randint(1, 10)):
+                        add_to_encounter(selected_monster, cr)
 
     return encounter
 
@@ -102,14 +101,15 @@ def get_party_xp_threshold(party_size, party_level, difficulty):
             return threshold[difficulty] * party_size
     return 0
 
-def generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr):
-    filtered_monsters_by_cr = filter_monsters_by_realm(monsters_by_cr, realm)
+def generate_encounter_data(party_size, party_level, difficulty, terrain, realm):
+    monsters_data = load_json(os.path.join(base_path, f'../realms/{realm}.json'))
+    monsters = monsters_data.get('monster', [])
     
     if difficulty == "random":
         difficulty = random.choices(["easy", "medium", "hard", "deadly"], [0.14, 0.68, 0.13, 0.05])[0]
 
     xp_budget = get_party_xp_threshold(party_size, party_level, difficulty)
-    encounter = generate_encounter(xp_budget, filtered_monsters_by_cr)
+    encounter = generate_encounter(xp_budget, monsters)
 
     return {
         "encounter": encounter,
@@ -130,10 +130,7 @@ if __name__ == "__main__":
     terrain = sys.argv[4]
     realm = sys.argv[5]
 
-    # Load monsters data based on the realm
-    monsters_by_cr = load_json(os.path.join(base_path, f'../realms/{realm}.json'))
-
-    encounter_data = generate_encounter_data(party_size, party_level, difficulty, terrain, realm, monsters_by_cr)
+    encounter_data = generate_encounter_data(party_size, party_level, difficulty, terrain, realm)
     save_encounter_data(encounter_data, 'encounter_data.json')
     print(f"Encounter data saved to 'encounter_data.json'")
 
