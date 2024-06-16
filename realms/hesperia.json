@@ -1983,59 +1983,6 @@
             "source": "MM",
             "page": 121,
             "srd": true,
-            "otherSources": [
-                {
-                    "source": "SKT"
-                },
-                {
-                    "source": "GoS"
-                },
-                {
-                    "source": "BGDIA"
-                },
-                {
-                    "source": "EGW"
-                },
-                {
-                    "source": "MOT"
-                },
-                {
-                    "source": "IDRotF"
-                },
-                {
-                    "source": "CM"
-                },
-                {
-                    "source": "WBtW"
-                },
-                {
-                    "source": "CRCotN"
-                },
-                {
-                    "source": "JttRC"
-                },
-                {
-                    "source": "KftGV"
-                },
-                {
-                    "source": "PSI"
-                },
-                {
-                    "source": "ToFW"
-                },
-                {
-                    "source": "BMT"
-                },
-                {
-                    "source": "GHLoE"
-                },
-                {
-                    "source": "DoDk"
-                },
-                {
-                    "source": "VEoR"
-                }
-            ],
             "size": [
                 "M"
             ],
@@ -2072,10 +2019,6 @@
                 "darkvision 60 ft."
             ],
             "passive": 14,
-            "languages": [
-                "Elvish",
-                "Sylvan"
-            ],
             "cr": "1",
             "spellcasting": [
                 {
@@ -5808,54 +5751,6 @@
             "hasToken": true
         },
         {
-            "name": "Dryad",
-            "source": "PSX",
-            "page": 38,
-            "_copy": {
-                "name": "Dryad",
-                "source": "MM"
-            },
-            "hasToken": true,
-            "hasFluff": true,
-            "hasFluffImages": true
-        },
-        {
-            "name": "Harpy",
-            "source": "PSX",
-            "page": 36,
-            "_copy": {
-                "name": "Harpy",
-                "source": "MM",
-                "_mod": {
-                    "action": [
-                        {
-                            "mode": "replaceArr",
-                            "replace": "Club",
-                            "items": {
-                                "name": "Bite",
-                                "entries": [
-                                    "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}3 ({@damage 1d4 + 1}) slashing damage. If the target is a creature, it must succeed on a DC 11 Constitution saving throw or contract a disease. Until the disease is cured, the target can't regain hit points except by magical means, and the target's hit point maximum decreases by 3 ({@dice 1d6}) every 24 hours. If the target's hit point maximum drops to 0 as a result of this disease, the target dies."
-                                ]
-                            }
-                        },
-                        {
-                            "mode": "replaceArr",
-                            "replace": "Multiattack",
-                            "items": {
-                                "name": "Multiattack",
-                                "entries": [
-                                    "The harpy makes two attacks: one with its claws and one with its bite."
-                                ]
-                            }
-                        }
-                    ]
-                }
-            },
-            "hasToken": true,
-            "hasFluff": true,
-            "hasFluffImages": true
-        },
-        {
             "name": "Crag Cat",
             "source": "SKT",
             "page": 240,
@@ -5950,23 +5845,6 @@
             "hasToken": true,
             "hasFluff": true,
             "hasFluffImages": true
-        },
-        {
-            "name": "Wild Dog",
-            "source": "ToA",
-            "page": 96,
-            "_copy": {
-                "name": "Jackal",
-                "source": "MM",
-                "_mod": {
-                    "*": {
-                        "mode": "replaceTxt",
-                        "replace": "jackal",
-                        "with": "dog"
-                    }
-                }
-            },
-            "hasToken": true
         },
         {
             "name": "Swashbuckler",

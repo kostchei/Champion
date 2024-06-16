@@ -6425,38 +6425,7 @@
             "hasToken": true,
             "hasFluff": true,
             "hasFluffImages": true
-        },
-        {
-            "name": "Old Troglodyte",
-            "source": "WDMM",
-            "page": 155,
-            "_copy": {
-                "name": "Troglodyte",
-                "source": "MM",
-                "_mod": {
-                    "action": [
-                        {
-                            "mode": "replaceArr",
-                            "replace": "Multiattack",
-                            "items": {
-                                "name": "Multiattack",
-                                "entries": [
-                                    "The troglodyte makes two claw attacks."
-                                ]
-                            }
-                        },
-                        {
-                            "mode": "removeArr",
-                            "names": "Bite"
-                        }
-                    ]
-                }
-            },
-            "cr": "1/8",
-            "damageTags": [
-                "S"
-            ],
-            "hasToken": true
         }
+
     ]
 }
