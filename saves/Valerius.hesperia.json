@@ -4,72 +4,20 @@
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Ruined",
+    "background": "Noble",
     "skills": [
-        "Sleight of Hand",
-        "Stealth",
+        "History",
+        "Persuasion",
         "Language",
         "Gaming Set"
     ],
     "features": {
-        "Fighting Style": {
-            "choices": [
-                {
-                    "name": "Defense",
-                    "description": "+1 to armor class",
-                    "effect": "+1 AC"
-                },
-                {
-                    "name": "Dueling",
-                    "description": "+2 to damage 1 weapon",
-                    "effect": "+2 damage"
-                },
-                {
-                    "name": "Great Weapon Fighting",
-                    "description": "Reroll 1 and 2 on 2handed damage dice",
-                    "effect": "if dice = 1,2 reroll"
-                },
-                {
-                    "name": "Two Weapon Fighting",
-                    "description": "Add ability modifier to off hand damage",
-                    "effect": "if off hand ability modifier equals dexterity bonus"
-                }
-            ]
-        },
         "Second Wind": {
             "level": 1,
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
         }
     },
-    "class_equipment": {
-        "options": {
-            "Heavy": [
-                "Ring Mail",
-                "Battleaxe",
-                "Maul",
-                "Hand Axe",
-                "Shield",
-                "Horned Helmet",
-                "25 gold"
-            ],
-            "Medium": [
-                "Scale Mail",
-                "Longsword",
-                "Short Sword",
-                "Shield",
-                "Plumed Helmet",
-                "5 gold"
-            ],
-            "Light": [
-                "Studded leather",
-                "Rapier",
-                "Short Sword",
-                "Shield",
-                "Fancy Hat with Feather"
-            ]
-        },
-        "choice": true
-    },
+    "class_equipment": {},
     "attributes": {
         "primary": "Strength",
         "secondary": "Constitution",
@@ -104,22 +52,19 @@
         "Short Sword",
         "Shield",
         "Fancy Hat with Feather",
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
-        "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "fine clothes",
+        "signet ring",
+        "scroll of pedigree",
+        "purse",
+        "25 gp"
     ],
-    "feature": "Still Standing",
+    "feature": "Position of Privilege",
     "strength": 16,
-    "intelligence": 18,
-    "wisdom": 12,
-    "dexterity": 16,
-    "constitution": 17,
-    "charisma": 14,
+    "intelligence": 13,
+    "wisdom": 9,
+    "dexterity": 18,
+    "constitution": 16,
+    "charisma": 15,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -152,20 +97,17 @@
     },
     "background_features": [],
     "background_equipment": [
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
-        "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "fine clothes",
+        "signet ring",
+        "scroll of pedigree",
+        "purse",
+        "25 gp"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 3,
+    "dexterity_modifier": 4,
     "constitution_modifier": 3,
-    "intelligence_modifier": 4,
-    "wisdom_modifier": 1,
+    "intelligence_modifier": 1,
+    "wisdom_modifier": -1,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
@@ -173,34 +115,34 @@
     "armor_class": 17,
     "attack": {
         "name": "Rapier",
-        "to_hit": "+5",
-        "damage": "1d8 piercing + 3"
+        "to_hit": "+6",
+        "damage": "1d8 piercing + 4"
     },
-    "athletics_bonus": 3,
-    "arcana_bonus": 4,
-    "history_bonus": 6,
-    "investigation_bonus": 4,
-    "nature_bonus": 4,
-    "religion_bonus": 4,
-    "animal_handling_bonus": 1,
-    "insight_bonus": 1,
-    "medicine_bonus": 1,
-    "perception_bonus": 3,
-    "survival_bonus": 1,
-    "acrobatics_bonus": 3,
-    "sleight_of_hand_bonus": 5,
-    "stealth_bonus": 5,
-    "deception_bonus": 2,
-    "intimidation_bonus": 2,
-    "performance_bonus": 2,
+    "athletics_bonus": 5,
+    "arcana_bonus": 2,
+    "history_bonus": 4,
+    "investigation_bonus": 2,
+    "nature_bonus": 2,
+    "religion_bonus": 2,
+    "animal_handling_bonus": 2,
+    "insight_bonus": 2,
+    "medicine_bonus": 2,
+    "perception_bonus": 2,
+    "survival_bonus": 2,
+    "acrobatics_bonus": 5,
+    "sleight_of_hand_bonus": 3,
+    "stealth_bonus": 3,
+    "deception_bonus": 0,
+    "intimidation_bonus": 0,
+    "performance_bonus": 0,
     "persuasion_bonus": 2,
     "str_save_bonus": 5,
-    "int_save_bonus": 4,
-    "wis_save_bonus": 1,
+    "int_save_bonus": 2,
+    "wis_save_bonus": 2,
     "dex_save_bonus": 3,
     "con_save_bonus": 5,
-    "cha_save_bonus": 2,
-    "chosen_fighting_style": {
+    "cha_save_bonus": 0,
+    "default_fighting_style": {
         "name": "Dueling",
         "description": "+2 to damage 1 weapon",
         "effect": "+2 damage"
@@ -210,7 +152,7 @@
         "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
     },
     "class_skills": [
-        "Perception",
-        "History"
+        "Athletics",
+        "Acrobatics"
     ]
 }

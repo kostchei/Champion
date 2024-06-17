@@ -1,5 +1,5 @@
 {
-    "name": "Blake",
+    "name": "laddie",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
@@ -59,12 +59,13 @@
     ],
     "feature": "Wanderer",
     "strength": 16,
-    "intelligence": 11,
-    "wisdom": 15,
-    "dexterity": 18,
-    "constitution": 15,
-    "charisma": 13,
+    "intelligence": 18,
+    "wisdom": 13,
+    "dexterity": 17,
+    "constitution": 14,
+    "charisma": 17,
     "class_features": {
+        "Fighting Style": {},
         "Second Wind": {
             "level": 1,
             "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
@@ -78,55 +79,55 @@
         "traveling clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 4,
+    "dexterity_modifier": 3,
     "constitution_modifier": 2,
-    "intelligence_modifier": 0,
-    "wisdom_modifier": 2,
-    "charisma_modifier": 1,
+    "intelligence_modifier": 4,
+    "wisdom_modifier": 1,
+    "charisma_modifier": 3,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 18,
+    "armor_class": 17,
     "attack": {
         "name": "Rapier",
-        "to_hit": "+6",
-        "damage": "1d8 piercing + 4"
+        "to_hit": "+5",
+        "damage": "1d8 piercing + 3"
     },
     "athletics_bonus": 5,
-    "arcana_bonus": 0,
-    "history_bonus": 0,
-    "investigation_bonus": 0,
-    "nature_bonus": 0,
-    "religion_bonus": 0,
-    "animal_handling_bonus": 2,
-    "insight_bonus": 2,
-    "medicine_bonus": 2,
-    "perception_bonus": 4,
-    "survival_bonus": 4,
-    "acrobatics_bonus": 6,
-    "sleight_of_hand_bonus": 4,
-    "stealth_bonus": 4,
-    "deception_bonus": 1,
-    "intimidation_bonus": 1,
-    "performance_bonus": 1,
-    "persuasion_bonus": 1,
+    "arcana_bonus": 4,
+    "history_bonus": 6,
+    "investigation_bonus": 4,
+    "nature_bonus": 4,
+    "religion_bonus": 4,
+    "animal_handling_bonus": 1,
+    "insight_bonus": 1,
+    "medicine_bonus": 1,
+    "perception_bonus": 1,
+    "survival_bonus": 3,
+    "acrobatics_bonus": 5,
+    "sleight_of_hand_bonus": 3,
+    "stealth_bonus": 3,
+    "deception_bonus": 3,
+    "intimidation_bonus": 3,
+    "performance_bonus": 3,
+    "persuasion_bonus": 3,
     "str_save_bonus": 5,
-    "int_save_bonus": 0,
-    "wis_save_bonus": 2,
-    "dex_save_bonus": 4,
+    "int_save_bonus": 4,
+    "wis_save_bonus": 1,
+    "dex_save_bonus": 3,
     "con_save_bonus": 4,
-    "cha_save_bonus": 1,
-    "chosen_fighting_style": {
-        "name": "Dueling",
-        "description": "+2 to damage 1 weapon",
-        "effect": "+2 damage"
+    "cha_save_bonus": 3,
+    "default_fighting_style": {
+        "name": "Great Weapon Fighting",
+        "description": "Reroll 1 and 2 on 2handed damage dice",
+        "effect": "if dice = 1,2 reroll"
     },
-    "chosen_second_wind": {
+    "default_second_wind": {
         "level": 1,
         "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
     },
     "class_skills": [
-        "Acrobatics",
-        "Perception"
+        "History",
+        "Acrobatics"
     ]
 }

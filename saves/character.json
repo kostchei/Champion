@@ -1,15 +1,15 @@
 {
-    "name": "Drew",
+    "name": "Valerius",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Folk Hero",
+    "background": "Ruined",
     "skills": [
-        "Animal Handling",
-        "Survival",
-        "Artisan Tools",
-        "Land Vehicles"
+        "Sleight of Hand",
+        "Stealth",
+        "Language",
+        "Gaming Set"
     ],
     "features": {
         "Fighting Style": {
@@ -79,7 +79,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 12,
+    "hit_points": 13,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -99,24 +99,27 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Scale Mail",
-        "Longsword",
+        "Studded leather",
+        "Rapier",
         "Short Sword",
         "Shield",
-        "Plumed Helmet",
-        "5 gold",
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "Fancy Hat with Feather",
+        "cracked hourglass",
+        "rusty manacles",
+        "half-empty bottle",
+        "hunting trap",
+        "gaming set",
+        "traveling clothes",
+        "pouch",
+        "13 gp"
     ],
-    "feature": "Rustic Hospitality",
+    "feature": "Still Standing",
     "strength": 16,
-    "intelligence": 15,
-    "wisdom": 15,
-    "dexterity": 13,
-    "constitution": 15,
-    "charisma": 14,
+    "intelligence": 13,
+    "wisdom": 10,
+    "dexterity": 17,
+    "constitution": 17,
+    "charisma": 17,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -149,24 +152,28 @@
     },
     "background_features": [],
     "background_equipment": [
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "cracked hourglass",
+        "rusty manacles",
+        "half-empty bottle",
+        "hunting trap",
+        "gaming set",
+        "traveling clothes",
+        "pouch",
+        "13 gp"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 1,
-    "constitution_modifier": 2,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
-    "charisma_modifier": 2,
+    "dexterity_modifier": 3,
+    "constitution_modifier": 3,
+    "intelligence_modifier": 1,
+    "wisdom_modifier": 0,
+    "charisma_modifier": 3,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
     "armor_class": 17,
     "attack": {
-        "name": "Longsword",
+        "name": "Rapier",
         "to_hit": "+5",
-        "damage": "1d8 slashing + 3"
+        "damage": "1d8 piercing + 3"
     }
 }

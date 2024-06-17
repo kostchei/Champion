@@ -1,15 +1,15 @@
 {
-    "name": "Drew",
+    "name": "Gauth",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Folk Hero",
+    "background": "Outlander",
     "skills": [
-        "Animal Handling",
+        "Athletics",
         "Survival",
-        "Artisan Tools",
-        "Land Vehicles"
+        "Language",
+        "Musical Instrument"
     ],
     "features": {
         "Second Wind": {
@@ -27,7 +27,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 12,
+    "hit_points": 13,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -47,23 +47,24 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Scale Mail",
-        "Longsword",
-        "Short Sword",
+        "Ring Mail",
+        "Battleaxe",
+        "Maul",
+        "Hand Axe",
         "Shield",
-        "Plumed Helmet",
-        "5 gold",
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "Horned Helmet",
+        "25 gold",
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
-    "feature": "Rustic Hospitality",
-    "strength": 16,
-    "intelligence": 15,
-    "wisdom": 15,
-    "dexterity": 13,
-    "constitution": 15,
+    "feature": "Wanderer",
+    "strength": 19,
+    "intelligence": 14,
+    "wisdom": 13,
+    "dexterity": 10,
+    "constitution": 17,
     "charisma": 14,
     "class_features": {
         "Fighting Style": {
@@ -97,61 +98,61 @@
     },
     "background_features": [],
     "background_equipment": [
-        "artisan tools",
-        "shovel",
-        "iron pot",
-        "common clothes"
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
     ],
-    "strength_modifier": 3,
-    "dexterity_modifier": 1,
-    "constitution_modifier": 2,
+    "strength_modifier": 4,
+    "dexterity_modifier": 0,
+    "constitution_modifier": 3,
     "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
+    "wisdom_modifier": 1,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 17,
+    "armor_class": 16,
     "attack": {
-        "name": "Longsword",
+        "name": "Battleaxe",
         "to_hit": "+5",
         "damage": "1d8 slashing + 3"
     },
-    "athletics_bonus": 5,
+    "athletics_bonus": 6,
     "arcana_bonus": 2,
     "history_bonus": 2,
     "investigation_bonus": 2,
     "nature_bonus": 2,
     "religion_bonus": 2,
-    "animal_handling_bonus": 4,
-    "insight_bonus": 4,
-    "medicine_bonus": 2,
-    "perception_bonus": 2,
-    "survival_bonus": 4,
-    "acrobatics_bonus": 1,
-    "sleight_of_hand_bonus": 1,
-    "stealth_bonus": 1,
+    "animal_handling_bonus": 1,
+    "insight_bonus": 1,
+    "medicine_bonus": 1,
+    "perception_bonus": 3,
+    "survival_bonus": 3,
+    "acrobatics_bonus": 0,
+    "sleight_of_hand_bonus": 0,
+    "stealth_bonus": 0,
     "deception_bonus": 2,
-    "intimidation_bonus": 2,
+    "intimidation_bonus": 4,
     "performance_bonus": 2,
     "persuasion_bonus": 2,
-    "str_save_bonus": 5,
+    "str_save_bonus": 6,
     "int_save_bonus": 2,
-    "wis_save_bonus": 2,
-    "dex_save_bonus": 1,
-    "con_save_bonus": 4,
+    "wis_save_bonus": 1,
+    "dex_save_bonus": 0,
+    "con_save_bonus": 5,
     "cha_save_bonus": 2,
     "default_fighting_style": {
-        "name": "Great Weapon Fighting",
-        "description": "Reroll 1 and 2 on 2handed damage dice",
-        "effect": "if dice = 1,2 reroll"
+        "name": "Defense",
+        "description": "+1 to armor class",
+        "effect": "+1 AC"
     },
     "default_second_wind": {
         "level": 1,
         "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
     },
     "class_skills": [
-        "Insight",
-        "Athletics"
+        "Intimidation",
+        "Perception"
     ]
 }
