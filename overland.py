@@ -13,7 +13,7 @@ maps_dir = os.path.join(script_dir, "maps")
 
 # Define terrain types and their corresponding images
 terrain_types = {
-    "forest": "forest.png",
+    "dense": "forest.png",
     "open": "open.png",
     "hill": "hill.png",
     "water": "water.png",
@@ -32,7 +32,7 @@ if not os.path.exists(maps_dir):
     os.makedirs(maps_dir)
 
 terrain_probabilities = {
-    "forest": 0.75,
+    "dense": 0.75,
     "hill": 0.10,
     "open": 0.10,
     "water": 0.03,

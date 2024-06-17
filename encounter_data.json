@@ -1,97 +1,93 @@
 {
     "encounter": [
         {
-            "name": "Neogi Hatchling",
-            "source": "VGM",
-            "page": 179,
-            "reprintedAs": [
-                "Neogi Hatchling|MPMM"
+            "name": "Abyssal Wretch",
+            "source": "MTF",
+            "page": 136,
+            "otherSources": [
+                {
+                    "source": "BGDIA"
+                }
             ],
             "size": [
-                "T"
+                "M"
             ],
-            "type": "aberration",
+            "type": {
+                "type": "fiend",
+                "tags": [
+                    "demon"
+                ]
+            },
             "alignment": [
-                "L",
+                "C",
                 "E"
             ],
             "ac": [
                 11
             ],
             "hp": {
-                "average": 7,
-                "formula": "3d4"
+                "average": 18,
+                "formula": "4d8"
             },
             "speed": {
-                "walk": 20,
-                "climb": 20
+                "walk": 20
             },
-            "str": 3,
-            "dex": 13,
-            "con": 10,
-            "int": 6,
-            "wis": 10,
-            "cha": 9,
+            "str": 9,
+            "dex": 12,
+            "con": 11,
+            "int": 5,
+            "wis": 8,
+            "cha": 5,
             "senses": [
-                "darkvision 60 ft."
+                "darkvision 120 ft."
             ],
-            "passive": 10,
-            "cr": "1/8",
-            "trait": [
-                {
-                    "name": "Mental Fortitude",
-                    "entries": [
-                        "The hatchling has advantage on saving throws against being {@condition charmed} or {@condition frightened}, and magic can't put the hatchling to sleep."
-                    ]
-                },
-                {
-                    "name": "Spider Climb",
-                    "entries": [
-                        "The hatchling can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
-                    ]
-                }
+            "passive": 9,
+            "resist": [
+                "cold",
+                "fire",
+                "lightning"
             ],
+            "immune": [
+                "poison"
+            ],
+            "conditionImmune": [
+                "charmed",
+                "frightened",
+                "poisoned"
+            ],
+            "languages": [
+                "understands Abyssal but can't speak"
+            ],
+            "cr": "1/4",
             "action": [
                 {
                     "name": "Bite",
                     "entries": [
-                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}3 ({@damage 1d4 + 1}) piercing damage plus 7 ({@damage 2d6}) poison damage, and the target must succeed on a {@dc 10} Constitution saving throw or become {@condition poisoned} for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d8 + 1}) slashing damage."
                     ]
                 }
             ],
-            "environment": [
-                "underdark",
-                "hill"
-            ],
             "soundClip": {
                 "type": "internal",
-                "path": "bestiary/neogi-hatchling.mp3"
+                "path": "bestiary/abyssal-wretch.mp3"
             },
-            "traitTags": [
-                "Spider Climb"
-            ],
             "senseTags": [
-                "D"
+                "SD"
+            ],
+            "languageTags": [
+                "AB",
+                "CS"
             ],
             "damageTags": [
-                "I",
-                "P"
+                "S"
             ],
             "miscTags": [
                 "MW"
             ],
-            "conditionInflict": [
-                "poisoned"
-            ],
-            "savingThrowForced": [
-                "constitution"
-            ],
-            "hasToken": true,
-            "hasFluff": true,
-            "hasFluffImages": true
+            "hasToken": true
         }
     ],
-    "difficulty": "easy",
-    "xp_budget": 25,
-    "terrain": "open"
+    "difficulty": "hard",
+    "xp_budget": 75,
+    "terrain": "dense"
 }

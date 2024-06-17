@@ -1,11 +1,10 @@
-# explorer.py
 import json
 import os
 import sys
 import numpy as np
 import hexy as hx
 import pygame as pg
-from PIL import Image, ImageDraw
+from PIL import Image
 from collections import deque
 import subprocess
 
@@ -18,10 +17,11 @@ SOFT_BROWN_GREEN = (231, 247, 161)
 script_dir = os.path.abspath(os.path.dirname(__file__))
 images_dir = os.path.join(script_dir, "images")
 maps_dir = os.path.join(script_dir, "maps")
-encounters_dir = os.path.join(script_dir, "encounters")
+saves_dir = os.path.join(script_dir, "saves")
+utils_dir = os.path.join(script_dir, "utils")
 
 terrain_types = {
-    "forest": os.path.join(images_dir, "forest.png"),
+    "dense": os.path.join(images_dir, "forest.png"),
     "open": os.path.join(images_dir, "open.png"),
     "hill": os.path.join(images_dir, "hill.png"),
     "water": os.path.join(images_dir, "water.png"),
@@ -138,9 +138,17 @@ class ExampleHexMap:
                 if event.button == 1:
                     mouse_pos = np.array([pg.mouse.get_pos()]) - self.center
                     self._clicked_hex_as_cube_coord = hx.pixel_to_cube(mouse_pos, self.hex_radius)
-                    print(f"Clicked hex axial coordinates: {self.clicked_hex_axial_coord}")  # Debugging statement
-                    # Check for encounter when a hex is clicked
-                    self.check_for_encounter("player1", self.clicked_hex_axial_coord)
+                    clicked_hexes = self.hex_map[self.clicked_hex_as_cube_coord]
+
+                    # Ensure we get a single hex object, not a list
+                    if clicked_hexes:
+                        clicked_hex = clicked_hexes[0]
+                        print(f"Clicked hex axial coordinates: {self.clicked_hex_axial_coord}, Terrain: {clicked_hex.terrain}")  # Debugging statement
+                        # Check for encounter when a hex is clicked
+                        self.check_for_encounter(self.clicked_hex_axial_coord, clicked_hex.terrain)
+                    else:
+                        print("No hex found at the clicked coordinates.")
+
                 if event.button == 3:
                     self.selection_type += 1
                 if event.button == 4:
@@ -215,13 +223,32 @@ class ExampleHexMap:
         pg.quit()
         raise SystemExit
 
-    def check_for_encounter(self, player_name, hex_coordinates):
-        # Ensure hex_coordinates is properly formatted as a list or tuple
-        if isinstance(hex_coordinates, np.ndarray):
-            hex_coordinates = hex_coordinates.tolist()
-        hex_coordinates_str = str(hex_coordinates)  # Convert coordinates to string
-        encounter_script = os.path.join(script_dir, "encounter.py")
-        subprocess.run([sys.executable, encounter_script, player_name, hex_coordinates_str])
+    def load_most_recent_character(self):
+        save_files = [f for f in os.listdir(saves_dir) if f.endswith(".json")]
+        if not save_files:
+            print("No save files found.")
+            return None
+        latest_save = max(save_files, key=lambda f: os.path.getctime(os.path.join(saves_dir, f)))
+        print(f"Loading most recent save file: {latest_save}")
+        name, realm = os.path.splitext(latest_save)[0].rsplit('.', 1)
+        with open(os.path.join(saves_dir, latest_save), 'r') as file:
+            character_data = json.load(file)
+            character_data['realm'] = realm
+            print(f"Loaded character data: {character_data}")
+            return character_data
+
+    def check_for_encounter(self, hex_coordinates, terrain):
+        character_data = self.load_most_recent_character()
+        if character_data:
+            player_name = character_data.get('name', 'Unknown')
+            party_level = character_data.get('level', 1)
+            realm = character_data.get('realm', 'Unknown')
+            print(f"Checking encounter for {player_name} at {hex_coordinates} with terrain {terrain} in realm {realm} at level {party_level}")
+            run_script("encounter_generation.py", '1', str(party_level), "random", terrain, realm)
+
+def run_script(script_name, *args):
+    script_path = os.path.join(utils_dir, script_name)  # Correct path to utils directory
+    subprocess.run([sys.executable, script_path, *args])
 
 class ClampedInteger:
     def __init__(self, initial_value, lower_limit, upper_limit):

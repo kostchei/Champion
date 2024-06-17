@@ -79,7 +79,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 12,
+    "hit_points": 13,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -99,12 +99,11 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Scale Mail",
-        "Longsword",
+        "Studded leather",
+        "Rapier",
         "Short Sword",
         "Shield",
-        "Plumed Helmet",
-        "5 gold",
+        "Fancy Hat with Feather",
         "staff",
         "hunting trap",
         "trophy",
@@ -112,10 +111,10 @@
     ],
     "feature": "Wanderer",
     "strength": 16,
-    "intelligence": 15,
-    "wisdom": 15,
-    "dexterity": 15,
-    "constitution": 14,
+    "intelligence": 10,
+    "wisdom": 17,
+    "dexterity": 17,
+    "constitution": 16,
     "charisma": 14,
     "class_features": {
         "Fighting Style": {
@@ -155,18 +154,18 @@
         "traveling clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 2,
-    "constitution_modifier": 2,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
+    "dexterity_modifier": 3,
+    "constitution_modifier": 3,
+    "intelligence_modifier": 0,
+    "wisdom_modifier": 3,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 18,
+    "armor_class": 17,
     "attack": {
-        "name": "Longsword",
+        "name": "Rapier",
         "to_hit": "+5",
-        "damage": "1d8 slashing + 3"
+        "damage": "1d8 piercing + 3"
     }
 }
