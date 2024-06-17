@@ -1,15 +1,15 @@
 {
-    "name": "Valerius",
+    "name": "Alex",
     "gender": "Male",
     "game_edition": "Champion",
     "race": "Human",
     "class": "Fighter",
-    "background": "Ruined",
+    "background": "Outlander",
     "skills": [
-        "Sleight of Hand",
-        "Stealth",
+        "Athletics",
+        "Survival",
         "Language",
-        "Gaming Set"
+        "Musical Instrument"
     ],
     "features": {
         "Fighting Style": {
@@ -79,7 +79,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 13,
+    "hit_points": 12,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -99,27 +99,24 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Studded leather",
-        "Rapier",
+        "Scale Mail",
+        "Longsword",
         "Short Sword",
         "Shield",
-        "Fancy Hat with Feather",
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
+        "Plumed Helmet",
+        "5 gold",
+        "staff",
         "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "trophy",
+        "traveling clothes"
     ],
-    "feature": "Still Standing",
+    "feature": "Wanderer",
     "strength": 16,
-    "intelligence": 13,
-    "wisdom": 10,
-    "dexterity": 17,
-    "constitution": 17,
-    "charisma": 17,
+    "intelligence": 15,
+    "wisdom": 15,
+    "dexterity": 15,
+    "constitution": 14,
+    "charisma": 14,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -152,28 +149,24 @@
     },
     "background_features": [],
     "background_equipment": [
-        "cracked hourglass",
-        "rusty manacles",
-        "half-empty bottle",
+        "staff",
         "hunting trap",
-        "gaming set",
-        "traveling clothes",
-        "pouch",
-        "13 gp"
+        "trophy",
+        "traveling clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 3,
-    "constitution_modifier": 3,
-    "intelligence_modifier": 1,
-    "wisdom_modifier": 0,
-    "charisma_modifier": 3,
+    "dexterity_modifier": 2,
+    "constitution_modifier": 2,
+    "intelligence_modifier": 2,
+    "wisdom_modifier": 2,
+    "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 17,
+    "armor_class": 18,
     "attack": {
-        "name": "Rapier",
+        "name": "Longsword",
         "to_hit": "+5",
-        "damage": "1d8 piercing + 3"
+        "damage": "1d8 slashing + 3"
     }
 }

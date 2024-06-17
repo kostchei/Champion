@@ -5,8 +5,13 @@ import sys
 import subprocess
 import pygame as pg
 
-from utils.encounter_generation import generate_encounter_data, load_json
+# Add the utils directory to the Python path
+script_dir = os.path.abspath(os.path.dirname(__file__))
+utils_dir = os.path.join(script_dir, "utils")
+sys.path.append(utils_dir)
 
+from utils.encounter_generation import generate_encounter_data, load_json
+from utils.dice import roll_dice  # Ensure dice is imported from utils
 # Constants
 ENCOUNTER_PROBABILITY = 0.1
 ENCOUNTERS_DIR = "encounters"

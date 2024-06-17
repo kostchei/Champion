@@ -1,0 +1,11 @@
+{
+    "encounter": [],
+    "difficulty": "medium",
+    "xp_budget": 100,
+    "terrain": "Elvish",
+    "player": "player1",
+    "hex": [
+        -2.0,
+        12.0
+    ]
+}

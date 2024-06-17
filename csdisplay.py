@@ -74,6 +74,14 @@ def calculate_skill_and_saving_throw_bonuses(character_data):
         else:
             character_data[f"{save.lower().replace(' ', '_')}_bonus"] = modifier
 
+def apply_fighting_style_bonuses(character_data):
+    chosen_fighting_style = character_data.get('chosen_fighting_style', {})
+    if chosen_fighting_style.get('name') == "Defense":
+        character_data['armor_class'] += 1
+    elif chosen_fighting_style.get('name') == "Dueling":
+        if 'attack' in character_data:
+            character_data['attack']['damage'] += " + 2"
+
 def choose_class_features(character_data):
     features = get_class_details(character_data['class']).get('features', {})
     for feature_name, feature_details in features.items():
@@ -88,6 +96,7 @@ def choose_class_features(character_data):
     
     if 'features' in character_data:
         clean_nested_fields(character_data['features'], [k for k in character_data['features'] if 'choices' in character_data['features'][k]])
+    apply_fighting_style_bonuses(character_data)
     save_character(character_data)
     update_character_sheet(character_data)
 
@@ -201,6 +210,9 @@ def render_character_sheet(character_data):
     details_frame = tk.Frame(main_frame, bg=BUFF_OFF_WHITE)
     details_frame.grid(row=0, column=0, columnspan=4, sticky="nsew")
 
+    if 'current_hp' not in character_data:
+        character_data['current_hp'] = character_data['hit_points']
+
     details = [
         ("Character Name", character_data['name']), ("Gender", character_data['gender']),
         ("Game Edition", character_data['game_edition']), ("Race", character_data['race']),
@@ -208,6 +220,7 @@ def render_character_sheet(character_data):
         ("Proficiency Bonus", character_data['proficiency_bonus']), 
         ("Experience", character_data['experience_points']), ("Level", f"Level {character_data['level']}"),
         ("Hit Points", character_data['hit_points']), 
+        ("Current HP", character_data['current_hp']),
         ("Armor Class", character_data.get('armor_class', 'None'))
     ]
 
@@ -277,4 +290,6 @@ if __name__ == "__main__":
     with open(input_file, 'r') as f:
         character_data = json.load(f)
     calculate_skill_and_saving_throw_bonuses(character_data)
+    if 'current_hp' not in character_data:
+        character_data['current_hp'] = character_data['hit_points']
     display_character_sheet(character_data)
