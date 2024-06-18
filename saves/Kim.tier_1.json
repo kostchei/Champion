@@ -1,0 +1,133 @@
+{
+    "name": "Kim",
+    "gender": "Male",
+    "game_edition": "Champion",
+    "race": "Human",
+    "class": "Fighter",
+    "background": "Outlander",
+    "skills": [
+        "Athletics",
+        "Survival",
+        "Language",
+        "Musical Instrument"
+    ],
+    "features": {
+        "Second Wind": {
+            "level": 1,
+            "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+        }
+    },
+    "class_equipment": {},
+    "attributes": {
+        "primary": "Strength",
+        "secondary": "Constitution",
+        "tertiary": "Dexterity"
+    },
+    "saving_throws": [
+        "Str Save",
+        "Con Save"
+    ],
+    "hit_points": 11,
+    "ability_score_increase": {
+        "description": "Your ability scores each increase by 1.",
+        "type": "fixed",
+        "values": {
+            "Strength": 1,
+            "Dexterity": 1,
+            "Constitution": 1,
+            "Intelligence": 1,
+            "Wisdom": 1,
+            "Charisma": 1
+        }
+    },
+    "size": "Medium",
+    "speed": 30,
+    "languages": [
+        "Common",
+        "One extra language of your choice"
+    ],
+    "equipment": [
+        "Studded leather",
+        "Rapier",
+        "Short Sword",
+        "Shield",
+        "Fancy Hat with Feather",
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
+    ],
+    "feature": "Wanderer",
+    "strength": 17,
+    "intelligence": 14,
+    "wisdom": 14,
+    "dexterity": 16,
+    "constitution": 13,
+    "charisma": 14,
+    "class_features": {
+        "Second Wind": {
+            "level": 1,
+            "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+        }
+    },
+    "background_features": [],
+    "background_equipment": [
+        "staff",
+        "hunting trap",
+        "trophy",
+        "traveling clothes"
+    ],
+    "strength_modifier": 3,
+    "dexterity_modifier": 3,
+    "constitution_modifier": 1,
+    "intelligence_modifier": 2,
+    "wisdom_modifier": 2,
+    "charisma_modifier": 2,
+    "experience_points": 0,
+    "level": 1,
+    "proficiency_bonus": 2,
+    "armor_class": 17,
+    "attack": {
+        "name": "Rapier",
+        "to_hit": "+5",
+        "damage": "1d8 piercing + 3 + 2"
+    },
+    "athletics_bonus": 5,
+    "arcana_bonus": 2,
+    "history_bonus": 4,
+    "investigation_bonus": 2,
+    "nature_bonus": 2,
+    "religion_bonus": 2,
+    "animal_handling_bonus": 2,
+    "insight_bonus": 4,
+    "medicine_bonus": 2,
+    "perception_bonus": 2,
+    "survival_bonus": 4,
+    "acrobatics_bonus": 3,
+    "sleight_of_hand_bonus": 3,
+    "stealth_bonus": 3,
+    "deception_bonus": 2,
+    "intimidation_bonus": 2,
+    "performance_bonus": 2,
+    "persuasion_bonus": 2,
+    "str_save_bonus": 5,
+    "int_save_bonus": 2,
+    "wis_save_bonus": 2,
+    "dex_save_bonus": 3,
+    "con_save_bonus": 3,
+    "cha_save_bonus": 2,
+    "current_hp": 11,
+    "chosen_fighting_style": {
+        "name": "Dueling",
+        "description": "+2 to damage 1 weapon",
+        "effect": "+2 damage"
+    },
+    "chosen_second_wind": {
+        "level": 1,
+        "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+    },
+    "class_skills": [
+        "Insight",
+        "History"
+    ]
+}

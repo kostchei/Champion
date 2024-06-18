@@ -1,93 +1,210 @@
 {
     "encounter": [
         {
-            "name": "Abyssal Wretch",
-            "source": "MTF",
-            "page": 136,
+            "name": "Rat",
+            "source": "MM",
+            "page": 335,
+            "srd": true,
+            "basicRules": true,
             "otherSources": [
                 {
+                    "source": "TftYP"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDH"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
                     "source": "BGDIA"
+                },
+                {
+                    "source": "EGW"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "BMT"
+                },
+                {
+                    "source": "DoDk"
                 }
             ],
             "size": [
-                "M"
+                "T"
             ],
-            "type": {
-                "type": "fiend",
-                "tags": [
-                    "demon"
-                ]
-            },
+            "type": "beast",
             "alignment": [
-                "C",
-                "E"
+                "U"
             ],
             "ac": [
-                11
+                10
             ],
             "hp": {
-                "average": 18,
-                "formula": "4d8"
+                "average": 1,
+                "formula": "1d4 - 1"
             },
             "speed": {
                 "walk": 20
             },
-            "str": 9,
-            "dex": 12,
-            "con": 11,
-            "int": 5,
-            "wis": 8,
-            "cha": 5,
+            "str": 2,
+            "dex": 11,
+            "con": 9,
+            "int": 2,
+            "wis": 10,
+            "cha": 4,
             "senses": [
-                "darkvision 120 ft."
+                "darkvision 30 ft."
             ],
-            "passive": 9,
-            "resist": [
-                "cold",
-                "fire",
-                "lightning"
+            "passive": 10,
+            "cr": "0",
+            "trait": [
+                {
+                    "name": "Keen Smell",
+                    "entries": [
+                        "The rat has advantage on Wisdom ({@skill Perception}) checks that rely on smell."
+                    ]
+                }
             ],
-            "immune": [
-                "poison"
-            ],
-            "conditionImmune": [
-                "charmed",
-                "frightened",
-                "poisoned"
-            ],
-            "languages": [
-                "understands Abyssal but can't speak"
-            ],
-            "cr": "1/4",
             "action": [
                 {
                     "name": "Bite",
                     "entries": [
-                        "{@atk mw} {@hit 3} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d8 + 1}) slashing damage."
+                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one target. {@h}1 piercing damage."
                     ]
                 }
             ],
+            "environment": [
+                "swamp",
+                "urban"
+            ],
+            "familiar": true,
             "soundClip": {
                 "type": "internal",
-                "path": "bestiary/abyssal-wretch.mp3"
+                "path": "bestiary/rat.mp3"
             },
-            "senseTags": [
-                "SD"
+            "traitTags": [
+                "Keen Senses"
             ],
-            "languageTags": [
-                "AB",
-                "CS"
+            "senseTags": [
+                "D"
             ],
             "damageTags": [
-                "S"
+                "P"
             ],
             "miscTags": [
                 "MW"
             ],
-            "hasToken": true
+            "hasToken": true,
+            "hasFluffImages": true
+        },
+        {
+            "name": "Bat",
+            "source": "MM",
+            "page": 318,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "CoS"
+                },
+                {
+                    "source": "ToA"
+                },
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "IDRotF"
+                },
+                {
+                    "source": "WBtW"
+                },
+                {
+                    "source": "PSX"
+                },
+                {
+                    "source": "DoDk"
+                }
+            ],
+            "size": [
+                "T"
+            ],
+            "type": "beast",
+            "alignment": [
+                "U"
+            ],
+            "ac": [
+                12
+            ],
+            "hp": {
+                "average": 1,
+                "formula": "1d4 - 1"
+            },
+            "speed": {
+                "walk": 5,
+                "fly": 30
+            },
+            "str": 2,
+            "dex": 15,
+            "con": 8,
+            "int": 2,
+            "wis": 12,
+            "cha": 4,
+            "senses": [
+                "blindsight 60 ft."
+            ],
+            "passive": 11,
+            "cr": "0",
+            "trait": [
+                {
+                    "name": "Echolocation",
+                    "entries": [
+                        "The bat can't use its blindsight while {@condition deafened}."
+                    ]
+                },
+                {
+                    "name": "Keen Hearing",
+                    "entries": [
+                        "The bat has advantage on Wisdom ({@skill Perception}) checks that rely on hearing."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Bite",
+                    "entries": [
+                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one creature. {@h}1 piercing damage."
+                    ]
+                }
+            ],
+            "familiar": true,
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/bat.mp3"
+            },
+            "traitTags": [
+                "Keen Senses"
+            ],
+            "senseTags": [
+                "B"
+            ],
+            "damageTags": [
+                "P"
+            ],
+            "miscTags": [
+                "MW"
+            ],
+            "hasToken": true,
+            "hasFluffImages": true
         }
     ],
-    "difficulty": "hard",
-    "xp_budget": 75,
+    "difficulty": "medium",
+    "xp_budget": 50,
     "terrain": "dense"
 }
