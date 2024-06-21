@@ -22,8 +22,16 @@ def create_database():
     CREATE TABLE IF NOT EXISTS derived_values (
         id INTEGER PRIMARY KEY,
         character_id INTEGER,
+        attribute_type TEXT,
         attribute TEXT,
-        value INTEGER,
+        value TEXT,
+        skill_proficiencies TEXT,
+        feature TEXT,
+        equipment TEXT,
+        languages TEXT,
+        tool_proficiencies TEXT,
+        feats TEXT,
+        spells TEXT,
         FOREIGN KEY(character_id) REFERENCES characters(id)
     )
     ''')
