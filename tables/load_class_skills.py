@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 # Load JSON data
-with open('fighter.json', 'r') as file:
+with open('warlock.json', 'r') as file:
     data = json.load(file)
 
 # Connect to SQLite database
