@@ -1,20 +1,17 @@
 {
     "encounter": [
         {
-            "name": "Rat",
+            "name": "Gnoll",
             "source": "MM",
-            "page": 335,
+            "page": 163,
             "srd": true,
             "basicRules": true,
             "otherSources": [
                 {
+                    "source": "PotA"
+                },
+                {
                     "source": "TftYP"
-                },
-                {
-                    "source": "ToA"
-                },
-                {
-                    "source": "WDH"
                 },
                 {
                     "source": "GoS"
@@ -23,10 +20,19 @@
                     "source": "BGDIA"
                 },
                 {
+                    "source": "ERLW"
+                },
+                {
                     "source": "EGW"
                 },
                 {
                     "source": "IDRotF"
+                },
+                {
+                    "source": "SatO"
+                },
+                {
+                    "source": "ToFW"
                 },
                 {
                     "source": "BMT"
@@ -36,38 +42,53 @@
                 }
             ],
             "size": [
-                "T"
+                "M"
             ],
-            "type": "beast",
+            "type": {
+                "type": "humanoid",
+                "tags": [
+                    "gnoll"
+                ]
+            },
             "alignment": [
-                "U"
+                "C",
+                "E"
             ],
             "ac": [
-                10
+                {
+                    "ac": 15,
+                    "from": [
+                        "{@item hide armor|phb}",
+                        "{@item shield|phb}"
+                    ]
+                }
             ],
             "hp": {
-                "average": 1,
-                "formula": "1d4 - 1"
+                "average": 22,
+                "formula": "5d8"
             },
             "speed": {
-                "walk": 20
+                "walk": 30
             },
-            "str": 2,
-            "dex": 11,
-            "con": 9,
-            "int": 2,
+            "str": 14,
+            "dex": 12,
+            "con": 11,
+            "int": 6,
             "wis": 10,
-            "cha": 4,
+            "cha": 7,
             "senses": [
-                "darkvision 30 ft."
+                "darkvision 60 ft."
             ],
             "passive": 10,
-            "cr": "0",
+            "languages": [
+                "Gnoll"
+            ],
+            "cr": "1/2",
             "trait": [
                 {
-                    "name": "Keen Smell",
+                    "name": "Rampage",
                     "entries": [
-                        "The rat has advantage on Wisdom ({@skill Perception}) checks that rely on smell."
+                        "When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack."
                     ]
                 }
             ],
@@ -75,136 +96,61 @@
                 {
                     "name": "Bite",
                     "entries": [
-                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one target. {@h}1 piercing damage."
+                        "{@atk mw} {@hit 4} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d4 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Spear",
+                    "entries": [
+                        "{@atk mw,rw} {@hit 4} to hit, reach 5 ft. or range 20/60 ft., one target. {@h}5 ({@damage 1d6 + 2}) piercing damage, or 6 ({@damage 1d8 + 2}) piercing damage if used with two hands to make a melee attack."
+                    ]
+                },
+                {
+                    "name": "Longbow",
+                    "entries": [
+                        "{@atk rw} {@hit 3} to hit, range 150/600 ft., one target. {@h}5 ({@damage 1d8 + 1}) piercing damage."
                     ]
                 }
             ],
             "environment": [
-                "swamp",
-                "urban"
+                "grassland",
+                "forest",
+                "hill",
+                "desert"
             ],
-            "familiar": true,
             "soundClip": {
                 "type": "internal",
-                "path": "bestiary/rat.mp3"
+                "path": "bestiary/gnoll.mp3"
             },
+            "attachedItems": [
+                "longbow|phb",
+                "spear|phb"
+            ],
             "traitTags": [
-                "Keen Senses"
+                "Rampage"
             ],
             "senseTags": [
                 "D"
             ],
-            "damageTags": [
-                "P"
-            ],
-            "miscTags": [
-                "MW"
-            ],
-            "hasToken": true,
-            "hasFluffImages": true
-        },
-        {
-            "name": "Bat",
-            "source": "MM",
-            "page": 318,
-            "srd": true,
-            "basicRules": true,
-            "otherSources": [
-                {
-                    "source": "CoS"
-                },
-                {
-                    "source": "ToA"
-                },
-                {
-                    "source": "WDMM"
-                },
-                {
-                    "source": "IDRotF"
-                },
-                {
-                    "source": "WBtW"
-                },
-                {
-                    "source": "PSX"
-                },
-                {
-                    "source": "DoDk"
-                }
-            ],
-            "size": [
-                "T"
-            ],
-            "type": "beast",
-            "alignment": [
-                "U"
-            ],
-            "ac": [
-                12
-            ],
-            "hp": {
-                "average": 1,
-                "formula": "1d4 - 1"
-            },
-            "speed": {
-                "walk": 5,
-                "fly": 30
-            },
-            "str": 2,
-            "dex": 15,
-            "con": 8,
-            "int": 2,
-            "wis": 12,
-            "cha": 4,
-            "senses": [
-                "blindsight 60 ft."
-            ],
-            "passive": 11,
-            "cr": "0",
-            "trait": [
-                {
-                    "name": "Echolocation",
-                    "entries": [
-                        "The bat can't use its blindsight while {@condition deafened}."
-                    ]
-                },
-                {
-                    "name": "Keen Hearing",
-                    "entries": [
-                        "The bat has advantage on Wisdom ({@skill Perception}) checks that rely on hearing."
-                    ]
-                }
-            ],
-            "action": [
-                {
-                    "name": "Bite",
-                    "entries": [
-                        "{@atk mw} {@hit 0} to hit, reach 5 ft., one creature. {@h}1 piercing damage."
-                    ]
-                }
-            ],
-            "familiar": true,
-            "soundClip": {
-                "type": "internal",
-                "path": "bestiary/bat.mp3"
-            },
-            "traitTags": [
-                "Keen Senses"
-            ],
-            "senseTags": [
-                "B"
+            "languageTags": [
+                "OTH"
             ],
             "damageTags": [
                 "P"
             ],
             "miscTags": [
-                "MW"
+                "MLW",
+                "MW",
+                "RNG",
+                "RW",
+                "THW"
             ],
             "hasToken": true,
+            "hasFluff": true,
             "hasFluffImages": true
         }
     ],
     "difficulty": "medium",
-    "xp_budget": 50,
-    "terrain": "dense"
+    "xp_budget": 6600,
+    "terrain": "open"
 }
