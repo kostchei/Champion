@@ -1,7 +1,10 @@
 {
     "name": "Kim",
     "gender": "Male",
-    "game_edition": "Champion",
+    "game_editions": [
+        "Champion",
+        "Arcane"
+    ],
     "race": "Human",
     "class": "Fighter",
     "background": "Outlander",
@@ -79,7 +82,7 @@
         "Str Save",
         "Con Save"
     ],
-    "hit_points": 11,
+    "hit_points": 12,
     "ability_score_increase": {
         "description": "Your ability scores each increase by 1.",
         "type": "fixed",
@@ -99,23 +102,25 @@
         "One extra language of your choice"
     ],
     "equipment": [
-        "Studded leather",
-        "Rapier",
+        "Scale Mail",
+        "Longsword",
         "Short Sword",
         "Shield",
-        "Fancy Hat with Feather",
+        "Plumed Helmet",
+        "5 gold",
         "staff",
         "hunting trap",
         "trophy",
         "traveling clothes"
     ],
     "feature": "Wanderer",
-    "strength": 17,
-    "intelligence": 14,
-    "wisdom": 14,
-    "dexterity": 16,
-    "constitution": 13,
-    "charisma": 14,
+    "game_edition": null,
+    "strength": 16,
+    "intelligence": 13,
+    "wisdom": 18,
+    "dexterity": 15,
+    "constitution": 14,
+    "charisma": 15,
     "class_features": {
         "Fighting Style": {
             "choices": [
@@ -154,18 +159,18 @@
         "traveling clothes"
     ],
     "strength_modifier": 3,
-    "dexterity_modifier": 3,
-    "constitution_modifier": 1,
-    "intelligence_modifier": 2,
-    "wisdom_modifier": 2,
+    "dexterity_modifier": 2,
+    "constitution_modifier": 2,
+    "intelligence_modifier": 1,
+    "wisdom_modifier": 4,
     "charisma_modifier": 2,
     "experience_points": 0,
     "level": 1,
     "proficiency_bonus": 2,
-    "armor_class": 17,
+    "armor_class": 18,
     "attack": {
-        "name": "Rapier",
+        "name": "Longsword",
         "to_hit": "+5",
-        "damage": "1d8 piercing + 3"
+        "damage": "1d8 slashing + 3"
     }
 }

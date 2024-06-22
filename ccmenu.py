@@ -3,10 +3,12 @@ from tkinter import ttk
 import json
 import os
 import subprocess
-import random  # Ensure to import random module
+import random
 from PIL import Image, ImageTk
+
+# Adjust these imports to match your file structure
 from utils.names import get_random_name
-from utils.game_editions import get_game_editions
+from utils.game_editions import get_active_game_editions
 from utils.races import get_races, get_race_details
 from utils.classes import get_classes, get_class_details
 from utils.backgrounds import get_backgrounds, get_background_details
@@ -14,11 +16,14 @@ from utils.backgrounds import get_backgrounds, get_background_details
 # Create the main application window first
 root = tk.Tk()
 root.title("Character Generator")
-root.configure(bg="#F7F6ED")  # Buff color
+root.configure(bg="#F7F6ED")
+
+# Set default window size
+root.geometry("1920x1080")
 
 # Lists of options
 genders = ["Male", "Female"]
-game_editions = get_game_editions()
+game_editions = get_active_game_editions()
 races = get_races()
 classes = get_classes()
 backgrounds = get_backgrounds()
@@ -29,24 +34,23 @@ selected_gender = tk.StringVar(value="Male")
 selected_race = tk.StringVar(value="Human")
 selected_class = tk.StringVar(value="Fighter")
 selected_background = tk.StringVar(value="Outlander")
-selected_edition = tk.StringVar(value="Champion")
 
 # Load dice icon
 dice_image = Image.open("./images/dice.png")
-dice_image = dice_image.resize((40, 40), Image.Resampling.LANCZOS)  # Resize icon to be larger
+dice_image = dice_image.resize((40, 40), Image.Resampling.LANCZOS)
 dice_icon = ImageTk.PhotoImage(dice_image)
 
 # Function to create labeled input with randomize button
 def create_labeled_input(frame, label_text, options, selected_var, randomize_command):
-    tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(side=tk.LEFT)
+    tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(side=tk.LEFT)
     create_dropdown(frame, options, selected_var)
     create_random_button(frame, randomize_command)
 
 # Function to create dropdown menus
 def create_dropdown(parent, options, selected_var):
-    dropdown = ttk.Combobox(parent, values=options, textvariable=selected_var, font=("Arial", 24))
+    dropdown = ttk.Combobox(parent, values=options, textvariable=selected_var, font=("Arial", 20))
     dropdown.pack(side=tk.LEFT, padx=5)
-    dropdown.option_add('*TCombobox*Listbox.font', ("Arial", 24))  # Double the font size for dropdown items
+    dropdown.option_add('*TCombobox*Listbox.font', ("Arial", 20))
 
 # Function to create randomize buttons with dice icon
 def create_random_button(parent, command):
@@ -60,9 +64,6 @@ def randomize_name():
 def randomize_gender():
     selected_gender.set(random.choice(genders))
 
-def randomize_edition():
-    selected_edition.set(random.choice(game_editions))
-
 def randomize_race():
     selected_race.set(random.choice(races))
 
@@ -72,36 +73,55 @@ def randomize_class():
 def randomize_background():
     selected_background.set(random.choice(backgrounds))
 
-# Create the GUI layout
-frame = tk.Frame(root, bg="#F7F6ED")
-frame.pack(pady=10)
+# Function to create checkboxes for game editions
+def create_checkbox_list(frame, label_text, options, selected_vars):
+    tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(anchor=tk.W)
+    for option in options:
+        var = tk.BooleanVar(value=(option == "Champion"))  # Select Champion by default
+        checkbox = tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20))
+        checkbox.pack(anchor=tk.W)
+        selected_vars[option] = var
 
-tk.Label(frame, text="Name:", bg="#F7F6ED", fg="darkblue", font=("Arial", 24)).pack(side=tk.LEFT)
-name_entry = tk.Entry(frame, textvariable=selected_name, font=("Arial", 24))
+# Centralize content using place
+content_frame = tk.Frame(root, bg="#F7F6ED")
+content_frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+
+# Create the GUI layout
+frame = tk.Frame(content_frame, bg="#F7F6ED")
+frame.pack(pady=20)
+
+tk.Label(frame, text="Name:", bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(side=tk.LEFT)
+name_entry = tk.Entry(frame, textvariable=selected_name, font=("Arial", 20))
 name_entry.pack(side=tk.LEFT, padx=5)
 create_random_button(frame, randomize_name)
 
 # First row frame
-frame1 = tk.Frame(root, bg="#F7F6ED")
-frame1.pack(pady=10)
+frame1 = tk.Frame(content_frame, bg="#F7F6ED")
+frame1.pack(pady=20)
 
 create_labeled_input(frame1, "Gender:", genders, selected_gender, randomize_gender)
-create_labeled_input(frame1, "Game Edition:", game_editions, selected_edition, randomize_edition)
+create_labeled_input(frame1, "Background:", backgrounds, selected_background, randomize_background)
 
 # Second row frame
-frame2 = tk.Frame(root, bg="#F7F6ED")
-frame2.pack(pady=10)
+frame2 = tk.Frame(content_frame, bg="#F7F6ED")
+frame2.pack(pady=20)
 
 create_labeled_input(frame2, "Race:", races, selected_race, randomize_race)
 create_labeled_input(frame2, "Class:", classes, selected_class, randomize_class)
-create_labeled_input(frame2, "Background:", backgrounds, selected_background, randomize_background)
+
+# Third row frame for Game Edition
+frame3 = tk.Frame(content_frame, bg="#F7F6ED")
+frame3.pack(pady=20)
+
+selected_editions = {}
+create_checkbox_list(frame3, "Game Edition:", game_editions, selected_editions)
 
 # Function to finalise character and save data
 def finalise_character():
     character_data = {
-        "name": selected_name.get() or get_random_name(),  # Ensure name is always randomized
+        "name": selected_name.get() or get_random_name(),
         "gender": selected_gender.get(),
-        "game_edition": selected_edition.get(),
+        "game_editions": [edition for edition, var in selected_editions.items() if var.get()],
         "race": selected_race.get(),
         "class": selected_class.get(),
         "background": selected_background.get()
@@ -115,7 +135,7 @@ def finalise_character():
     race_details = get_race_details(character_data["race"])
     character_data.update(race_details)
 
-    # Get detailed background information , note this does not the background features like rustic hospitality yet. No feats etc
+    # Get detailed background information
     background_details = get_background_details(character_data["background"])
     character_data.update(background_details)
 
@@ -127,8 +147,8 @@ def finalise_character():
     subprocess.run(['python', 'creator.py', './saves/character.json'])
 
 # Add finalise button
-finalise_button = tk.Button(root, text="Finalise", command=finalise_character, bg="#F7F6ED", fg="darkblue", font=("Arial", 24))
-finalise_button.pack(pady=10)
+finalise_button = tk.Button(content_frame, text="Finalise", command=finalise_character, bg="#F7F6ED", fg="darkblue", font=("Arial", 20))
+finalise_button.pack(pady=20)
 
 # Run the Tkinter event loop
 root.mainloop()
