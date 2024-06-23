@@ -25,7 +25,6 @@ root.geometry("1920x1080")
 genders = ["Male", "Female"]
 game_editions = get_active_game_editions()
 races = get_races()
-classes = get_classes()
 backgrounds = get_backgrounds()
 
 # Global variables for selected values with default selections
@@ -51,6 +50,7 @@ def create_dropdown(parent, options, selected_var):
     dropdown = ttk.Combobox(parent, values=options, textvariable=selected_var, font=("Arial", 20))
     dropdown.pack(side=tk.LEFT, padx=5)
     dropdown.option_add('*TCombobox*Listbox.font', ("Arial", 20))
+    return dropdown
 
 # Function to create randomize buttons with dice icon
 def create_random_button(parent, command):
@@ -68,17 +68,29 @@ def randomize_race():
     selected_race.set(random.choice(races))
 
 def randomize_class():
-    selected_class.set(random.choice(classes))
+    if classes:
+        selected_class.set(random.choice(classes))
 
 def randomize_background():
     selected_background.set(random.choice(backgrounds))
+
+# Function to update class options based on selected game editions
+def update_classes():
+    active_editions = [edition for edition, var in selected_editions.items() if var.get()]
+    print(f"Active Editions: {active_editions}")  # Debug print
+    global classes
+    classes = get_classes(active_editions)
+    print(f"Classes fetched: {classes}")  # Debug print
+    class_dropdown['values'] = classes
+    selected_class.set(classes[0] if classes else "")
 
 # Function to create checkboxes for game editions
 def create_checkbox_list(frame, label_text, options, selected_vars):
     tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(anchor=tk.W)
     for option in options:
         var = tk.BooleanVar(value=(option == "Champion"))  # Select Champion by default
-        checkbox = tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20))
+        checkbox = tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20),
+                                  command=update_classes)  # Update classes when checkbox is toggled
         checkbox.pack(anchor=tk.W)
         selected_vars[option] = var
 
@@ -107,7 +119,8 @@ frame2 = tk.Frame(content_frame, bg="#F7F6ED")
 frame2.pack(pady=20)
 
 create_labeled_input(frame2, "Race:", races, selected_race, randomize_race)
-create_labeled_input(frame2, "Class:", classes, selected_class, randomize_class)
+class_dropdown = create_dropdown(frame2, [], selected_class)
+create_random_button(frame2, randomize_class)
 
 # Third row frame for Game Edition
 frame3 = tk.Frame(content_frame, bg="#F7F6ED")
