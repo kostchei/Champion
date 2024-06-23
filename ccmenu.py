@@ -1,3 +1,4 @@
+# main.py
 import tkinter as tk
 from tkinter import ttk
 import json
@@ -9,7 +10,7 @@ from PIL import Image, ImageTk
 # Adjust these imports to match your file structure
 from utils.names import get_random_name
 from utils.game_editions import get_active_game_editions
-from utils.races import get_races, get_race_details
+from utils.races import get_races, get_race_details, get_races_for_editions
 from utils.classes import get_classes, get_class_details
 from utils.backgrounds import get_backgrounds, get_background_details
 
@@ -24,8 +25,10 @@ root.geometry("1920x1080")
 # Lists of options
 genders = ["Male", "Female"]
 game_editions = get_active_game_editions()
-races = get_races()
 backgrounds = get_backgrounds()
+
+# Map edition names to IDs
+edition_name_to_id = {name: id for name, id in game_editions.items()}
 
 # Global variables for selected values with default selections
 selected_name = tk.StringVar()
@@ -65,7 +68,8 @@ def randomize_gender():
     selected_gender.set(random.choice(genders))
 
 def randomize_race():
-    selected_race.set(random.choice(races))
+    if races:
+        selected_race.set(random.choice(races))
 
 def randomize_class():
     if classes:
@@ -84,13 +88,23 @@ def update_classes():
     class_dropdown['values'] = classes
     selected_class.set(classes[0] if classes else "")
 
+# Function to update race options based on selected game editions
+def update_races():
+    active_editions = [edition_name_to_id[edition] for edition, var in selected_editions.items() if var.get()]
+    print(f"Active Editions (IDs): {active_editions}")  # Debug print
+    global races
+    races = get_races_for_editions(active_editions)
+    print(f"Races fetched: {races}")  # Debug print
+    race_dropdown['values'] = races
+    selected_race.set(races[0] if races else "")
+
 # Function to create checkboxes for game editions
 def create_checkbox_list(frame, label_text, options, selected_vars):
     tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(anchor=tk.W)
     for option in options:
         var = tk.BooleanVar(value=(option == "Champion"))  # Select Champion by default
         checkbox = tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20),
-                                  command=update_classes)  # Update classes when checkbox is toggled
+                                  command=lambda: [update_classes(), update_races()])  # Update classes and races when checkbox is toggled
         checkbox.pack(anchor=tk.W)
         selected_vars[option] = var
 
@@ -118,7 +132,8 @@ create_labeled_input(frame1, "Background:", backgrounds, selected_background, ra
 frame2 = tk.Frame(content_frame, bg="#F7F6ED")
 frame2.pack(pady=20)
 
-create_labeled_input(frame2, "Race:", races, selected_race, randomize_race)
+race_dropdown = create_dropdown(frame2, [], selected_race)
+create_random_button(frame2, randomize_race)
 class_dropdown = create_dropdown(frame2, [], selected_class)
 create_random_button(frame2, randomize_class)
 
@@ -127,7 +142,7 @@ frame3 = tk.Frame(content_frame, bg="#F7F6ED")
 frame3.pack(pady=20)
 
 selected_editions = {}
-create_checkbox_list(frame3, "Game Edition:", game_editions, selected_editions)
+create_checkbox_list(frame3, "Game Edition:", game_editions.keys(), selected_editions)
 
 # Function to finalise character and save data
 def finalise_character():
