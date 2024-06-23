@@ -1,6 +1,6 @@
 # utils/classes.py
-
 import sqlite3
+import json
 
 def get_classes(active_editions):
     """
@@ -52,15 +52,21 @@ def get_class_details(class_name):
 
     if class_details:
         details = {
+            "id": class_details[0],
             "name": class_details[1],
-            "primary_stat": class_details[2],
-            "secondary_stat": class_details[3],
-            "proficiency": class_details[4],
-            "armor_proficiencies": class_details[5],
-            "weapon_proficiencies": class_details[6],
-            "skill_proficiencies": class_details[7],
-            "starting_equipment": class_details[8],
-            "tertiary_stat": class_details[9]
+            "game_edition": class_details[2],
+            "primary_stat": class_details[3],
+            "secondary_stat": class_details[4],
+            "hd_faces": class_details[5],
+            "proficiency": class_details[6],
+            "armor_proficiencies": class_details[7],
+            "weapon_proficiencies": class_details[8],
+            "skill_proficiencies": class_details[9],
+            "starting_equipment": json.loads(class_details[10]),  # Parse the JSON field
+            "tertiary_stat": class_details[11],
+            "subclass_title": class_details[12],
+            "dump_stat": class_details[13],
+            "flavour_text": class_details[14]
         }
         return details
     else:

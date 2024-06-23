@@ -1,0 +1,55 @@
+id,name,skillProficiencies,Campain Specific
+1,Acolyte,"[{""insight"": true, ""religion"": true}]",
+3,Archaeologist,"[{""history"": true, ""survival"": true}]",
+6,Athlete,"[{""acrobatics"": true, ""athletics"": true}]",
+8,Azorius Functionary,"[{""insight"": true, ""intimidation"": true}]",1
+25,Caravan Specialist,"[{""animal handling"": true, ""survival"": true}]",
+26,Celebrity Adventurer's Scion,"[{""perception"": true, ""performance"": true}]",1
+27,Charlatan,"[{""deception"": true, ""sleight of hand"": true}]",
+28,City Watch,"[{""athletics"": true, ""insight"": true}]",
+29,Clan Crafter,"[{""history"": true, ""insight"": true}]",
+35,Courtier,"[{""insight"": true, ""persuasion"": true}]",
+36,Criminal,"[{""deception"": true, ""stealth"": true}]",
+37,Custom Background,"[{""any"": 2}]",
+42,Entertainer,"[{""acrobatics"": true, ""performance"": true}]",
+43,Faceless,"[{""deception"": true, ""intimidation"": true}]",
+45,Failed Merchant,"[{""investigation"": true, ""persuasion"": true}]",
+46,Far Traveler,"[{""insight"": true, ""perception"": true}]",
+47,Feylost,"[{""deception"": true, ""survival"": true}]",
+49,Folk Hero,"[{""animal handling"": true, ""survival"": true}]",
+50,Gambler,"[{""deception"": true, ""insight"": true}]",
+52,Gate Warden,"[{""persuasion"": true, ""survival"": true}]",
+53,Giant Foundling,"[{""intimidation"": true, ""survival"": true}]",1
+55,Grinner,"[{""deception"": true, ""performance"": true}]",
+57,Gruul Anarch,"[{""animal handling"": true, ""athletics"": true}]",1
+59,Harborfolk,"[{""athletics"": true, ""sleight of hand"": true}]",
+61,Hermit,"[{""medicine"": true, ""religion"": true}]",
+63,Hillsfar Smuggler,"[{""perception"": true, ""stealth"": true}]",1
+68,Inquisitor,"[{""investigation"": true, ""religion"": true}]",
+70,Iron Route Bandit,"[{""animal handling"": true, ""stealth"": true}]",1
+71,Izzet Engineer,"[{""arcana"": true, ""investigation"": true}]",1
+80,Mercenary Veteran,"[{""athletics"": true, ""persuasion"": true}]",
+83,Noble,"[{""history"": true, ""persuasion"": true}]",
+84,Orzhov Representative,"[{""intimidation"": true, ""religion"": true}]",1
+85,Outlander,"[{""athletics"": true, ""survival"": true}]",
+87,Phlan Refugee,"[{""insight"": true, ""athletics"": true}]",1
+88,Plaintiff,"[{""medicine"": true, ""persuasion"": true}]",1
+91,Quandrix Student,"[{""arcana"": true, ""nature"": true}]",1
+93,Reformed Cultist,"[{""deception"": true, ""religion"": true}]",
+95,Rewarded,"[{""insight"": true, ""persuasion"": true}]",
+96,Rival Intern,"[{""history"": true, ""investigation"": true}]",
+97,Ruined,"[{""stealth"": true, ""survival"": true}]",
+98,Rune Carver,"[{""history"": true, ""perception"": true}]",
+99,Sage,"[{""arcana"": true, ""history"": true}]",
+100,Sailor,"[{""athletics"": true, ""perception"": true}]",
+102,Selesnya Initiate,"[{""nature"": true, ""persuasion"": true}]",1
+105,Silverquill Student,"[{""intimidation"": true, ""persuasion"": true}]",1
+106,Simic Scientist,"[{""arcana"": true, ""medicine"": true}]",1
+107,Smuggler,"[{""athletics"": true, ""deception"": true}]",
+108,Soldier,"[{""athletics"": true, ""intimidation"": true}]",
+111,Ticklebelly Nomad,"[{""animal handling"": true, ""nature"": true}]",1
+115,Urchin,"[{""sleight of hand"": true, ""stealth"": true}]",
+117,Variant City Watch (Investigator),"[{""insight"": true, ""investigation"": true}]",
+131,Vizier,"[{""history"": true, ""religion"": true}]",
+138,Witchlight Hand,"[{""performance"": true, ""sleight of hand"": true}]",1
+139,Witherbloom Student,"[{""nature"": true, ""survival"": true}]",1

@@ -110,5 +110,43 @@
     "level": 1,
     "proficiency_bonus": 2,
     "hit_points": 13,
-    "armor_class": 16
+    "armor_class": 16,
+    "athletics_bonus": 1,
+    "arcana_bonus": 0,
+    "history_bonus": 0,
+    "investigation_bonus": 0,
+    "nature_bonus": 0,
+    "religion_bonus": 0,
+    "animal_handling_bonus": 0,
+    "insight_bonus": 0,
+    "medicine_bonus": 0,
+    "perception_bonus": 0,
+    "survival_bonus": 0,
+    "acrobatics_bonus": 2,
+    "sleight_of_hand_bonus": 0,
+    "stealth_bonus": 0,
+    "deception_bonus": 2,
+    "intimidation_bonus": 4,
+    "performance_bonus": 2,
+    "persuasion_bonus": 2,
+    "str_save_bonus": 1,
+    "int_save_bonus": 0,
+    "wis_save_bonus": 0,
+    "dex_save_bonus": 0,
+    "con_save_bonus": 3,
+    "cha_save_bonus": 2,
+    "current_hp": 13,
+    "chosen_fighting_style": {
+        "name": "Dueling",
+        "description": "+2 to damage 1 weapon",
+        "effect": "+2 damage"
+    },
+    "chosen_second_wind": {
+        "level": 1,
+        "description": "Once per short rest, you can use a bonus action to regain 1d10 + your Fighter level in hit points."
+    },
+    "class_skills": [
+        "Acrobatics",
+        "Intimidation"
+    ]
 }

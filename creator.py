@@ -1,16 +1,33 @@
-# creator.py
-
 import json
 import sys
 import random
 import subprocess
 import os
+import sqlite3
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-from utils.classes import get_class_details  # Import the function from classes.py
-from utils.races import get_race_details  # Import the function from races.py
-from utils.backgrounds import get_background_details  # Import the function from backgrounds.py
+from utils.classes import get_class_details
+from utils.races import get_race_details
+from utils.backgrounds import get_background_details
+
+def get_db_connection():
+    db_path = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
+    return sqlite3.connect(db_path)
+
+def get_names():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT name FROM names')
+    names = [row[0] for row in cursor.fetchall()]
+    
+    conn.close()
+    return names
+
+def get_random_name():
+    names = get_names()
+    return random.choice(names)
 
 def load_json(file_path):
     with open(file_path, 'r') as f:
@@ -26,14 +43,6 @@ def calculate_stat_modifier(score):
         elif int(bonus["score_range"]) == score:
             return bonus["modifier"]
     return 0
-
-def get_proficiency_bonus(experience_points):
-    experience_table = load_json('./utils/experience.json')["experience"]
-    for entry in experience_table:
-        if experience_points < entry["experience_points"]:
-            return previous_entry["proficiency_bonus"], previous_entry["level"]
-        previous_entry = entry
-    return experience_table[-1]["proficiency_bonus"], experience_table[-1]["level"]
 
 def generate_character_stats(character_data):
     def roll_dice():
@@ -86,15 +95,23 @@ class StatSelectionDialog(tk.Toplevel):
         return getattr(self, "selected_option", None)
 
 def apply_class_requirements(character_data, class_details):
-    primary_stat = class_details['attributes']['primary'].lower()
-    secondary_stat = class_details['attributes']['secondary'].lower()
-    tertiary_stat = class_details['attributes']['tertiary'].lower()
+    primary_stat = class_details.get('primary_stat', '').lower()
+    secondary_stat = class_details.get('secondary_stat', '').lower()
+    tertiary_stat = class_details.get('tertiary_stat', '').lower()
     
-    if character_data[primary_stat] < 15:
+    # Debug prints to check values
+    print("Primary Stat:", primary_stat)
+    print("Secondary Stat:", secondary_stat)
+    print("Tertiary Stat:", tertiary_stat)
+    print("Character Data Keys:", character_data.keys())
+    
+    if primary_stat and primary_stat in character_data and character_data[primary_stat] < 15:
         character_data[primary_stat] = 15
     
-    if character_data[secondary_stat] < 13 and character_data[tertiary_stat] < 13:
-        character_data[secondary_stat] = 13
+    if secondary_stat and tertiary_stat:
+        if secondary_stat in character_data and tertiary_stat in character_data:
+            if character_data[secondary_stat] < 13 and character_data[tertiary_stat] < 13:
+                character_data[secondary_stat] = 13
 
 def apply_race_bonuses(character_data, race_details):
     if "ability_score_increase" in race_details:
@@ -121,22 +138,30 @@ def choose_fighter_equipment(character_data):
     dexterity = character_data["dexterity"]
     class_details = get_class_details(character_data["class"])
     
-    if dexterity <= 11:
-        equipment = class_details["class_equipment"]["options"]["Heavy"]
-    elif 12 <= dexterity <= 15:
-        equipment = class_details["class_equipment"]["options"]["Medium"]
-    else:
-        equipment = class_details["class_equipment"]["options"]["Light"]
+    starting_equipment = class_details["starting_equipment"]
     
+    print("Starting Equipment Type:", type(starting_equipment))  # Debug print
+    print("Starting Equipment Content:", starting_equipment)  # Debug print
+
+    if isinstance(starting_equipment, dict):
+        if dexterity <= 11:
+            equipment = starting_equipment["Heavy"]
+        elif 12 <= dexterity <= 15:
+            equipment = starting_equipment["Medium"]
+        else:
+            equipment = starting_equipment["Light"]
+    else:
+        raise TypeError("starting_equipment is not a dictionary")
+
     return equipment
 
 def calculate_hit_points(character_data, class_details):
     level = character_data["level"]
     constitution_modifier = character_data["constitution_modifier"]
-    base_hp = class_details["hit_points"]["level_1"]
+    base_hp = class_details["hd_faces"]
     if level > 1:
-        base_hp += sum(max(random.randint(1, int(class_details["hit_points"]["other_levels"]["die"][2:])), 
-                           class_details["hit_points"]["other_levels"]["minimum"]) + constitution_modifier for _ in range(1, level))
+        base_hp += sum(max(random.randint(1, int(class_details["hd_faces"])), 
+                           class_details["hd_faces"]) + constitution_modifier for _ in range(1, level))
     return base_hp + constitution_modifier * level
 
 def calculate_armor_class(character_data):
@@ -166,7 +191,7 @@ def finalize_character(character_data):
     class_details = get_class_details(character_data["class"])
     character_data.update({
         "class_features": class_details.get("features", {}),
-        "class_equipment": class_details.get("class_equipment", [])
+        "class_equipment": class_details.get("starting_equipment", [])
     })
     
     # Apply class requirements
@@ -191,7 +216,7 @@ def finalize_character(character_data):
         fighter_equipment = choose_fighter_equipment(character_data)
         character_data["equipment"] = fighter_equipment + background_details.get("equipment", [])
     else:
-        character_data["equipment"] = class_details.get("class_equipment", {}).get("options", []) + background_details.get("equipment", [])
+        character_data["equipment"] = class_details.get("starting_equipment", {}).get("options", []) + background_details.get("equipment", [])
 
     # Calculate and store stat modifiers
     for stat in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:
@@ -208,43 +233,42 @@ def finalize_character(character_data):
     # Calculate and store armor class
     character_data["armor_class"] = calculate_armor_class(character_data)
 
-    # Load weapons data
-    weapons_data = load_json('./utils/weapon.json')["weapons"]
-    equipped_weapon = next((weapon for weapon in weapons_data if weapon["name"] in character_data["equipment"]), None)
+    # Insert the character into the database
+    conn = sqlite3.connect('./tables/game_database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO characters (
+            name, gender, class, race, background, strength, intelligence, wisdom, dexterity, constitution, charisma,
+            level, experience_points, proficiency_bonus, hit_points, armor_class, skillProficiencies, languageProficiencies,
+            startingEquipment, entries
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        character_data['name'], character_data['gender'], character_data['class'], character_data['race'], character_data['background'],
+        character_data['strength'], character_data['intelligence'], character_data['wisdom'], character_data['dexterity'],
+        character_data['constitution'], character_data['charisma'], character_data['level'], character_data['experience_points'],
+        character_data['proficiency_bonus'], character_data['hit_points'], character_data['armor_class'],
+        json.dumps(character_data.get('skillProficiencies', [])), json.dumps(character_data.get('languageProficiencies', [])),
+        json.dumps(character_data.get('startingEquipment', [])), json.dumps(character_data.get('entries', []))
+    ))
+    character_id = cursor.lastrowid
 
-    if equipped_weapon:
-        weapon_name = equipped_weapon["name"]
-        weapon_damage = equipped_weapon["damage"]
-        finesse = "finesse" in equipped_weapon["properties"].lower()
+    # Insert the equipment into CharacterEquipment
+    for item in character_data['equipment']:
+        if isinstance(item, str):
+            item = {"item_name": item, "weight": 0, "value": 0, "size": "", "damage": "", "range": "", "spells": "", "charges": "", "effect": "", "image": "", "description": "", "personality": "", "other_statistics": ""}
+        cursor.execute('''
+            INSERT INTO CharacterEquipment (
+                character_id, item_name, weight, value, size, damage, range, spells, charges, effect, image, description, personality, other_statistics
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            character_id, item['item_name'], item.get('weight', 0), item.get('value', 0), item.get('size', ''),
+            item.get('damage', ''), item.get('range', ''), item.get('spells', ''), item.get('charges', ''),
+            item.get('effect', ''), item.get('image', ''), item.get('description', ''), item.get('personality', ''),
+            item.get('other_statistics', '')
+        ))
 
-        # Calculate to-hit and damage bonuses
-        strength_modifier = character_data["strength_modifier"]
-        dexterity_modifier = character_data["dexterity_modifier"]
-        proficiency_bonus = character_data["proficiency_bonus"]
-
-        if finesse and dexterity_modifier > strength_modifier:
-            to_hit_bonus = dexterity_modifier + proficiency_bonus
-            damage_bonus = dexterity_modifier
-        else:
-            to_hit_bonus = strength_modifier + proficiency_bonus
-            damage_bonus = strength_modifier
-
-        character_data["attack"] = {
-            "name": weapon_name,
-            "to_hit": f"+{to_hit_bonus}",
-            "damage": f"{weapon_damage} + {damage_bonus}"
-        }
-    else:
-        character_data["attack"] = {
-            "name": "None",
-            "to_hit": "+0",
-            "damage": "0"
-        }
-
-    if not os.path.exists('./saves'):
-        os.makedirs('./saves')
-    with open('./saves/character.json', 'w') as f:
-        json.dump(character_data, f)
+    conn.commit()
+    conn.close()
 
 if __name__ == "__main__":
     input_file = sys.argv[1]
