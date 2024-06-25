@@ -7,10 +7,21 @@ import random
 from PIL import Image, ImageTk
 from utils.names import get_random_name
 from utils.game_editions import get_active_game_editions
-from utils.races import get_races, get_race_details, get_races_for_editions
-from utils.classes import get_classes, get_class_details
+from utils.races import get_races_for_editions
+from utils.classes import get_classes
 from utils.backgrounds import get_backgrounds, get_background_details
+import sqlite3
+from contextlib import closing
+import logging
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Set the correct path for the database
+DB_PATH = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
+
+# Initialize the main application window
 root = tk.Tk()
 root.title("Character Generator")
 root.configure(bg="#F7F6ED")
@@ -32,38 +43,51 @@ dice_image = Image.open("./images/dice.png")
 dice_image = dice_image.resize((40, 40), Image.Resampling.LANCZOS)
 dice_icon = ImageTk.PhotoImage(dice_image)
 
+# Initialize global variables
+races = []
+classes = []
+
 def create_labeled_input(frame, label_text, options, selected_var, randomize_command):
+    """Create a labeled input field with a dropdown and a randomize button."""
     tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(side=tk.LEFT)
     create_dropdown(frame, options, selected_var)
     create_random_button(frame, randomize_command)
 
 def create_dropdown(parent, options, selected_var):
+    """Create a dropdown menu for selecting options."""
     dropdown = ttk.Combobox(parent, values=options, textvariable=selected_var, font=("Arial", 20))
     dropdown.pack(side=tk.LEFT, padx=5)
     dropdown.option_add('*TCombobox*Listbox.font', ("Arial", 20))
     return dropdown
 
 def create_random_button(parent, command):
+    """Create a button that triggers a randomization function."""
     tk.Button(parent, image=dice_icon, command=command, bg="#F7F6ED", bd=0).pack(side=tk.LEFT, padx=5)
 
 def randomize_name():
+    """Randomize the character name."""
     selected_name.set(get_random_name())
 
 def randomize_gender():
+    """Randomize the character gender."""
     selected_gender.set(random.choice(genders))
 
 def randomize_race():
+    """Randomize the character race."""
     if races:
         selected_race.set(random.choice(races))
 
 def randomize_class():
+    """Randomize the character class."""
     if classes:
         selected_class.set(random.choice(classes))
 
 def randomize_background():
+    """Randomize the character background."""
     selected_background.set(random.choice(backgrounds))
 
 def update_classes():
+    """Update the class options based on selected game editions."""
     active_editions = [edition for edition, var in selected_editions.items() if var.get()]
     global classes
     classes = get_classes(active_editions)
@@ -71,6 +95,7 @@ def update_classes():
     selected_class.set(classes[0] if classes else "")
 
 def update_races():
+    """Update the race options based on selected game editions."""
     active_editions = [edition_name_to_id[edition] for edition, var in selected_editions.items() if var.get()]
     global races
     races = get_races_for_editions(active_editions)
@@ -78,6 +103,7 @@ def update_races():
     selected_race.set(races[0] if races else "")
 
 def update_backgrounds():
+    """Update the background options based on the campaign-specific filter."""
     global backgrounds
     backgrounds = get_backgrounds()
     if not show_campaign_specific.get():
@@ -85,15 +111,65 @@ def update_backgrounds():
     background_dropdown['values'] = backgrounds
     selected_background.set(backgrounds[0] if backgrounds else "")
 
+def create_checkbox_command(option):
+    """Create a unique command function for each checkbox."""
+    def command():
+        update_classes()
+        update_races()
+        update_backgrounds()
+    return command
+
 def create_checkbox_list(frame, label_text, options, selected_vars):
+    """Create a list of checkboxes for selecting game editions."""
     tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(anchor=tk.W)
     for option in options:
         var = tk.BooleanVar(value=(option == "Champion"))
         tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20),
-                       command=lambda: [update_classes(), update_races(), update_backgrounds()]).pack(anchor=tk.W)
+                       command=create_checkbox_command(option)).pack(anchor=tk.W)
         selected_vars[option] = var
 
+def validate_inputs(data):
+    """Validate inputs before inserting into the database."""
+    if not data["name"]:
+        return False, "Name is required."
+    if data["gender"] not in genders:
+        return False, "Invalid gender."
+    if not data["game_editions"]:
+        return False, "At least one game edition must be selected."
+    if not data["race"]:
+        return False, "Race is required."
+    if not data["class"]:
+        return False, "Class is required."
+    if not data["background"]:
+        return False, "Background is required."
+    return True, ""
+
+def create_temporary_character(character_data):
+    """Create a temporary character in the database."""
+    try:
+        with closing(sqlite3.connect(DB_PATH)) as conn:
+            with closing(conn.cursor()) as cursor:
+                cursor.execute('''
+                    INSERT INTO temporary_characters 
+                    (name, gender, game_editions, race, class, background) 
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (
+                    character_data["name"],
+                    character_data["gender"],
+                    json.dumps(character_data["game_editions"]),
+                    character_data["race"],
+                    character_data["class"],
+                    character_data["background"]
+                ))
+                temp_character_id = cursor.lastrowid
+            conn.commit()
+        return temp_character_id
+    except sqlite3.Error as e:
+        logger.error(f"Database error occurred: {e}")
+        return None
+
 def finalise_character():
+    """Finalize character creation by saving to the database and running creator script."""
     character_data = {
         "name": selected_name.get() or get_random_name(),
         "gender": selected_gender.get(),
@@ -103,26 +179,19 @@ def finalise_character():
         "background": selected_background.get()
     }
     
-    class_details = get_class_details(character_data["class"])
-    character_data.update(class_details)
+    # Print the values of the global variables
+    print("Name:", character_data["name"])
+    print("Gender:", character_data["gender"])
+    print("Game Editions:", character_data["game_editions"])
+    print("Race:", character_data["race"])
+    print("Class:", character_data["class"])
+    print("Background:", character_data["background"])
     
-    race_details = get_race_details(character_data["race"])
-    character_data.update(race_details)
-
-    background_details = get_background_details(character_data["background"])
-    character_data.update({
-        "skillProficiencies": background_details.get("skillProficiencies"),
-        "languageProficiencies": background_details.get("languageProficiencies"),
-        "startingEquipment": background_details.get("startingEquipment"),
-        "entries": background_details.get("entries")
-    })
-
-    if not os.path.exists('./saves'):
-        os.makedirs('./saves')
-    with open('./saves/character.json', 'w') as f:
-        json.dump(character_data, f)
-
-    subprocess.run(['python', 'creator.py', './saves/character.json'])
+    temp_character_id = create_temporary_character(character_data)
+    if temp_character_id:
+        subprocess.run(['python', 'creator.py', str(temp_character_id)])
+    else:
+        logger.error("Failed to create temporary character")
 
 content_frame = tk.Frame(root, bg="#F7F6ED")
 content_frame.place(relx=0.1, rely=0.1, relwidth=0.6, relheight=0.8)

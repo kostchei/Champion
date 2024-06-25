@@ -4,26 +4,75 @@ import random
 import subprocess
 import os
 import sqlite3
+from contextlib import closing
 import tkinter as tk
 from tkinter import ttk, messagebox
+import logging
 
 from utils.classes import get_class_details
 from utils.races import get_race_details
 from utils.backgrounds import get_background_details
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+# Set the correct path for the database
+DB_PATH = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
+
 def get_db_connection():
-    db_path = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
-    return sqlite3.connect(db_path)
+    """Create and return a database connection."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        return conn
+    except sqlite3.Error as e:
+        logger.error(f"Error connecting to database: {e}")
+        return None
+
+def execute_db_query(query, params=None, fetch=True):
+    """Execute a database query and optionally fetch results."""
+    try:
+        with closing(get_db_connection()) as conn:
+            if conn is None:
+                return None
+            with closing(conn.cursor()) as cursor:
+                if params:
+                    cursor.execute(query, params)
+                else:
+                    cursor.execute(query)
+                if fetch:
+                    return cursor.fetchall()
+                else:
+                    conn.commit()
+                    return cursor.lastrowid
+    except sqlite3.Error as e:
+        logger.error(f"Database error occurred: {e}")
+        return None
+
+def load_temporary_character(temp_character_id):
+    """Load temporary character data from the database."""
+    with closing(sqlite3.connect(DB_PATH)) as conn:
+        with closing(conn.cursor()) as cursor:
+            cursor.execute('SELECT * FROM temporary_characters WHERE id = ?', (temp_character_id,))
+            character_data = cursor.fetchone()
+    
+    if character_data:
+        return {
+            "name": character_data[1],
+            "gender": character_data[2],
+            "game_editions": json.loads(character_data[3]),
+            "race": character_data[4],
+            "class": character_data[5],
+            "background": character_data[6]
+        }
+    else:
+        raise ValueError("Temporary character not found")
 
 def get_names():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    cursor.execute('SELECT name FROM names')
-    names = [row[0] for row in cursor.fetchall()]
-    
-    conn.close()
-    return names
+    """Fetch all names from the database."""
+    query = 'SELECT name FROM names'
+    results = execute_db_query(query)
+    return [row[0] for row in results] if results else []
 
 def get_random_name():
     names = get_names()
@@ -95,15 +144,9 @@ class StatSelectionDialog(tk.Toplevel):
         return getattr(self, "selected_option", None)
 
 def apply_class_requirements(character_data, class_details):
-    primary_stat = class_details.get('primary_stat', '').lower()
-    secondary_stat = class_details.get('secondary_stat', '').lower()
-    tertiary_stat = class_details.get('tertiary_stat', '').lower()
-    
-    # Debug prints to check values
-    print("Primary Stat:", primary_stat)
-    print("Secondary Stat:", secondary_stat)
-    print("Tertiary Stat:", tertiary_stat)
-    print("Character Data Keys:", character_data.keys())
+    primary_stat = class_details.get('primary_stat', '')
+    secondary_stat = class_details.get('secondary_stat', '')
+    tertiary_stat = class_details.get('tertiary_stat', '')
     
     if primary_stat and primary_stat in character_data and character_data[primary_stat] < 15:
         character_data[primary_stat] = 15
@@ -118,7 +161,10 @@ def apply_race_bonuses(character_data, race_details):
         bonus_type = race_details['ability_score_increase']['type']
         if bonus_type == "fixed":
             for stat, value in race_details['ability_score_increase']['values'].items():
-                character_data[stat.lower()] += value
+                try:
+                    character_data[stat] += value
+                except KeyError:
+                    logger.error(f"Invalid stat key: {stat}")
         elif bonus_type == "choice":
             root = tk.Tk()
             root.withdraw()  # Hide the root window
@@ -128,7 +174,7 @@ def apply_race_bonuses(character_data, race_details):
             stat_choice = dialog.show()
 
             if stat_choice in options:
-                character_data[stat_choice.lower()] += 2
+                character_data[stat_choice] += 2
             else:
                 messagebox.showerror("Invalid Choice", "You must choose a valid stat.")
                 root.quit()
@@ -139,9 +185,6 @@ def choose_fighter_equipment(character_data):
     class_details = get_class_details(character_data["class"])
     
     starting_equipment = class_details["starting_equipment"]
-    
-    print("Starting Equipment Type:", type(starting_equipment))  # Debug print
-    print("Starting Equipment Content:", starting_equipment)  # Debug print
 
     if isinstance(starting_equipment, dict):
         if dexterity <= 11:
@@ -173,34 +216,82 @@ def calculate_armor_class(character_data):
     
     for item in equipped_armor:
         for armor in armor_data:
-            if armor["name"].lower() == item.lower():
+            if armor["name"] == item:
                 if armor["type"] == "Light":
                     ac = armor["armor_class"] + dex_modifier
                 elif armor["type"] == "Medium":
                     ac = armor["armor_class"] + min(dex_modifier, 2)
                 elif armor["type"] == "Heavy":
                     ac = armor["armor_class"]
-                if "shield" in item.lower():
+                if "shield" in item:
                     ac += 2
                 break
     
     return ac
 
+def save_final_character(character_data, temp_character_id):
+    with closing(sqlite3.connect(DB_PATH)) as conn:
+        with closing(conn.cursor()) as cursor:
+            logger.debug(f"Saving final character: {character_data}")
+            try:
+                cursor.execute('''
+                    INSERT INTO characters (
+                        name, gender, class, race, background, strength, intelligence, wisdom, 
+                        dexterity, constitution, charisma, level, experience_points, 
+                        proficiency_bonus, hit_points, armor_class, skillProficiencies, 
+                        languageProficiencies, startingEquipment, entries
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    character_data['name'], character_data['gender'], character_data['class'],
+                    character_data['race'], character_data['background'], character_data['strength'],
+                    character_data['intelligence'], character_data['wisdom'], character_data['dexterity'],
+                    character_data['constitution'], character_data['charisma'], character_data['level'],
+                    character_data['experience_points'], character_data['proficiency_bonus'],
+                    character_data['hit_points'], character_data['armor_class'],
+                    json.dumps(character_data.get('skillProficiencies', [])),
+                    json.dumps(character_data.get('languageProficiencies', [])),
+                    json.dumps(character_data.get('startingEquipment', [])),
+                    json.dumps(character_data.get('entries', []))
+                ))
+                character_id = cursor.lastrowid
+                logger.debug(f"Final character ID: {character_id}")
+
+                # Insert equipment
+                if character_data['equipment'] is not None:
+                    for item in character_data['equipment']:
+                        cursor.execute('''
+                            INSERT INTO CharacterEquipment (
+                                Character_ID, item_name, Weight, Value, Image, Description, Personality, Other_Statistics
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        ''', (
+                            character_id, item, 0, 0, '', '', '', ''
+                        ))
+
+                # Delete temporary character
+                cursor.execute('DELETE FROM temporary_characters WHERE id = ?', (temp_character_id,))
+                conn.commit()
+                logger.debug("Character data saved to database and temporary character deleted.")
+            except sqlite3.Error as e:
+                logger.error(f"Database error while saving final character: {e}")
+                conn.rollback()
+                raise
+
 def finalize_character(character_data):
+    logger.debug(f"Finalizing character: {character_data}")
     # Get detailed class information
     class_details = get_class_details(character_data["class"])
     character_data.update({
         "class_features": class_details.get("features", {}),
         "class_equipment": class_details.get("starting_equipment", [])
     })
-    
+
     # Apply class requirements
     apply_class_requirements(character_data, class_details)
 
     # Get detailed race information
     race_details = get_race_details(character_data["race"])
     character_data.update(race_details)
-    
+
     # Apply race bonuses
     apply_race_bonuses(character_data, race_details)
 
@@ -221,7 +312,7 @@ def finalize_character(character_data):
     # Calculate and store stat modifiers
     for stat in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:
         character_data[f"{stat}_modifier"] = calculate_stat_modifier(character_data[stat])
-    
+
     # Set initial level, experience points, and proficiency bonus
     character_data["experience_points"] = 0
     character_data["level"] = 1
@@ -233,61 +324,42 @@ def finalize_character(character_data):
     # Calculate and store armor class
     character_data["armor_class"] = calculate_armor_class(character_data)
 
-    # Insert the character into the database
-    conn = sqlite3.connect('./tables/game_database.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        INSERT INTO characters (
-            name, gender, class, race, background, strength, intelligence, wisdom, dexterity, constitution, charisma,
-            level, experience_points, proficiency_bonus, hit_points, armor_class, skillProficiencies, languageProficiencies,
-            startingEquipment, entries
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (
-        character_data['name'], character_data['gender'], character_data['class'], character_data['race'], character_data['background'],
-        character_data['strength'], character_data['intelligence'], character_data['wisdom'], character_data['dexterity'],
-        character_data['constitution'], character_data['charisma'], character_data['level'], character_data['experience_points'],
-        character_data['proficiency_bonus'], character_data['hit_points'], character_data['armor_class'],
-        json.dumps(character_data.get('skillProficiencies', [])), json.dumps(character_data.get('languageProficiencies', [])),
-        json.dumps(character_data.get('startingEquipment', [])), json.dumps(character_data.get('entries', []))
-    ))
-    character_id = cursor.lastrowid
-
-    # Insert the equipment into CharacterEquipment
-    for item in character_data['equipment']:
-        if isinstance(item, str):
-            item = {"item_name": item, "weight": 0, "value": 0, "size": "", "damage": "", "range": "", "spells": "", "charges": "", "effect": "", "image": "", "description": "", "personality": "", "other_statistics": ""}
-        cursor.execute('''
-            INSERT INTO CharacterEquipment (
-                character_id, item_name, weight, value, size, damage, range, spells, charges, effect, image, description, personality, other_statistics
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            character_id, item['item_name'], item.get('weight', 0), item.get('value', 0), item.get('size', ''),
-            item.get('damage', ''), item.get('range', ''), item.get('spells', ''), item.get('charges', ''),
-            item.get('effect', ''), item.get('image', ''), item.get('description', ''), item.get('personality', ''),
-            item.get('other_statistics', '')
-        ))
-
-    conn.commit()
-    conn.close()
-
 if __name__ == "__main__":
-    input_file = sys.argv[1]
+    if len(sys.argv) != 2:
+        print("Usage: python creator.py <temp_character_id>")
+        sys.exit(1)
 
-    with open(input_file, 'r') as f:
-        character_data = json.load(f)
+    temp_character_id = int(sys.argv[1])
+    try:
+        character_data = load_temporary_character(temp_character_id)
+        if character_data:
+            logger.info(f"Processing character: {character_data['name']}")
+            logger.debug(f"Initial character data: {character_data}")
 
-    character_data["name"] = character_data.get("name") or get_random_name()  # Ensure name is always randomized
-    character_data["gender"] = character_data.get("gender")
-    character_data["game_edition"] = character_data.get("game_edition")
-    character_data["race"] = character_data.get("race")
-    character_data["class"] = character_data.get("class")
-    character_data["background"] = character_data.get("background")
-    
-    character_data = generate_character_stats(character_data)  # Generate new stats
-    finalize_character(character_data)  # Finalize the character details
+            # Ensure all required keys are present in character_data
+            required_keys = ['strength', 'intelligence', 'wisdom', 'dexterity', 'constitution', 'charisma', 'equipment']
+            for key in required_keys:
+                if key not in character_data:
+                    character_data[key] = None
 
-    with open(input_file, 'w') as f:
-        json.dump(character_data, f, indent=4)  # Save the new stats in a formatted way
+            # Generate character stats and finalize character
+            character_data = generate_character_stats(character_data)
+            logger.debug(f"Character data after generating stats: {character_data}")
 
-    # Call the csdisplay.py script
-    subprocess.run(['python', 'csdisplay.py', input_file])
+            finalize_character(character_data)
+            logger.debug(f"Character data after finalizing: {character_data}")
+
+            save_final_character(character_data, temp_character_id)
+            logger.debug(f"Character data saved to database")
+
+            # Optionally call the display script or any other next steps
+            subprocess.run(['python', 'csdisplay.py', str(character_data['id'])])
+        else:
+            logger.error("Failed to load temporary character data.")
+            sys.exit(1)
+    except ValueError as e:
+        logger.error(e)
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}")
+        sys.exit(1)

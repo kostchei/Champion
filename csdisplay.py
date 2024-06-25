@@ -3,190 +3,79 @@ import sys
 import tkinter as tk
 from tkinter import messagebox, ttk
 import os
+import sqlite3
+from contextlib import closing
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 BUFF_OFF_WHITE = "#F7F6ED"
 DARK_BLUE = "#1E2832"
 WHITE = "#EDF3FC"
 GREY = "#F0F0E6"
+DB_PATH = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
 
-def clean_nested_fields(data, nested_keys):
-    for key in nested_keys:
-        if key in data:
-            del data[key]
+def get_db_connection():
+    """Create and return a database connection."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        return conn
+    except sqlite3.Error as e:
+        logger.error(f"Error connecting to database: {e}")
+        return None
 
-def save_character(character_data):
-    if 'features' in character_data:
-        clean_nested_fields(character_data['features'], [k for k in character_data['features'] if 'choices' in character_data['features'][k]])
-    if 'class_equipment' in character_data:
-        clean_nested_fields(character_data['class_equipment'], ['options', 'choice'])
-    if 'class_features' in character_data:
-        clean_nested_fields(character_data['class_features'], [k for k in character_data['class_features'] if 'choices' in character_data['class_features'][k]])
-
-    keys_to_rename = {k: k.replace("default_", "chosen_") for k in character_data if k.startswith("default_")}
-    for old_key, new_key in keys_to_rename.items():
-        character_data[new_key] = character_data.pop(old_key)
-
-    character_name = character_data['name']
-    realm = realm_var.get() or "tier_1"
-    filename = f"./saves/{character_name}.{realm}.json"
-    with open(filename, 'w') as f:
-        json.dump(character_data, f, indent=4)
-    messagebox.showinfo("Saved", f"Character saved as {filename}")
-
-def choose_realm():
-    realms = [f.split('.')[0] for f in os.listdir("./realms") if f.endswith(".json")]
-    selected_realm = RealmSelectionDialog(root, realms).show()
-    if selected_realm:
-        realm_var.set(selected_realm)
-
-def get_class_details(class_name):
-    with open(f'./classes/{class_name}.json', 'r') as file:
-        return json.load(file)
-
-def calculate_skill_and_saving_throw_bonuses(character_data):
-    proficiency_bonus = character_data['proficiency_bonus']
-    saving_throws = character_data.get("saving_throws", [])
-    skills = {
-        "Strength": ["Athletics"], "Intelligence": ["Arcana", "History", "Investigation", "Nature", "Religion"],
-        "Wisdom": ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"], "Dexterity": ["Acrobatics", "Sleight of Hand", "Stealth"],
-        "Constitution": [], "Charisma": ["Deception", "Intimidation", "Performance", "Persuasion"]
-    }
-    saving_throws_dict = {
-        "Str Save": "strength", "Int Save": "intelligence", "Wis Save": "wisdom",
-        "Dex Save": "dexterity", "Con Save": "constitution", "Cha Save": "charisma"
-    }
+def load_character(character_id):
+    """Load character data from the database."""
+    query_character = 'SELECT * FROM characters WHERE id = ?'
+    query_equipment = 'SELECT * FROM CharacterEquipment WHERE Character_ID = ?'
     
-    for attribute, skill_list in skills.items():
-        for skill in skill_list:
-            skill_key = skill.lower().replace(" ", "_")
-            attribute_key = attribute.lower()
-            modifier = character_data[f"{attribute_key}_modifier"]
-            if skill in set(character_data.get("skills", [])).union(set(character_data.get("class_skills", []))):
-                character_data[f"{skill_key}_bonus"] = modifier + proficiency_bonus
-            else:
-                character_data[f"{skill_key}_bonus"] = modifier
+    try:
+        with closing(get_db_connection()) as conn:
+            if conn is None:
+                return None
+            with closing(conn.cursor()) as cursor:
+                cursor.execute(query_character, (character_id,))
+                character_data = cursor.fetchone()
 
-    for save, attribute in saving_throws_dict.items():
-        attribute_key = attribute.lower()
-        modifier = character_data[f"{attribute_key}_modifier"]
-        if save in saving_throws:
-            character_data[f"{save.lower().replace(' ', '_')}_bonus"] = modifier + proficiency_bonus
-        else:
-            character_data[f"{save.lower().replace(' ', '_')}_bonus"] = modifier
+                if character_data:
+                    cursor.execute(query_equipment, (character_id,))
+                    equipment = [row[2] for row in cursor.fetchall()]  # assuming item_name is in the third column
 
-def apply_fighting_style_bonuses(character_data):
-    chosen_fighting_style = character_data.get('chosen_fighting_style', {})
-    if chosen_fighting_style.get('name') == "Defense":
-        character_data['armor_class'] += 1
-    elif chosen_fighting_style.get('name') == "Dueling":
-        if 'attack' in character_data:
-            character_data['attack']['damage'] += " + 2"
-
-def choose_class_features(character_data):
-    features = get_class_details(character_data['class']).get('features', {})
-    for feature_name, feature_details in features.items():
-        if isinstance(feature_details, dict) and 'choices' in feature_details:
-            chosen_feature = FeatureSelectionDialog(root, f"Choose {feature_name}", feature_name, feature_details['choices']).show()
-            if chosen_feature:
-                character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = chosen_feature
-            else:
-                messagebox.showerror("Invalid Choice", f"You must choose a valid {feature_name}.")
-        else:
-            character_data[f"chosen_{feature_name.lower().replace(' ', '_')}"] = feature_details
-    
-    if 'features' in character_data:
-        clean_nested_fields(character_data['features'], [k for k in character_data['features'] if 'choices' in character_data['features'][k]])
-    apply_fighting_style_bonuses(character_data)
-    save_character(character_data)
-    update_character_sheet(character_data)
-
-class FeatureSelectionDialog(tk.Toplevel):
-    def __init__(self, parent, title, feature_name, feature_choices):
-        super().__init__(parent)
-        self.title(title)
-        self.geometry("300x200")
-        self.feature_name = feature_name
-        self.selected_feature = None
-        self.feature_choices = feature_choices
-
-        tk.Label(self, text=f"Choose one of the following {feature_name}:", font=("Arial", 12)).pack(pady=10)
-        self.var = tk.StringVar(self)
-        feature_display = [f"{choice['name']}: {choice['description']}" for choice in feature_choices]
-        self.dropdown = ttk.Combobox(self, textvariable=self.var, values=feature_display)
-        self.dropdown.pack(pady=10)
-        tk.Button(self, text="OK", command=self.on_select).pack(pady=10)
-
-    def on_select(self):
-        selected_index = self.dropdown.current()
-        self.selected_feature = self.feature_choices[selected_index] if selected_index != -1 else None
-        self.destroy()
-
-    def show(self):
-        self.wm_deiconify()
-        self.wait_window()
-        return self.selected_feature
-
-class RealmSelectionDialog(tk.Toplevel):
-    def __init__(self, parent, options):
-        super().__init__(parent)
-        self.title("Choose Realm")
-        self.geometry("300x100")
-        self.var = tk.StringVar(self)
-        self.var.set(options[0])
-        tk.Label(self, text="Choose a realm:").pack(pady=10)
-        self.dropdown = ttk.Combobox(self, textvariable=self.var, values=options)
-        self.dropdown.pack(pady=5)
-        tk.Button(self, text="OK", command=self.on_select).pack(pady=5)
-
-    def on_select(self):
-        self.selected_option = self.var.get()
-        self.destroy()
-
-    def show(self):
-        self.wm_deiconify()
-        self.wait_window()
-        return getattr(self, "selected_option", None)
-
-class SkillSelectionDialog(tk.Toplevel):
-    def __init__(self, parent, title, skill_choices, num_skills):
-        super().__init__(parent)
-        self.title(title)
-        self.geometry("300x300")
-        self.selected_skills = []
-        tk.Label(self, text=f"Choose {num_skills} skills:", font=("Arial", 12)).pack(pady=10)
-        self.var = tk.StringVar(self)
-        self.listbox = tk.Listbox(self, selectmode=tk.MULTIPLE, exportselection=0)
-        for skill in skill_choices:
-            self.listbox.insert(tk.END, skill)
-        self.listbox.pack(pady=10)
-        tk.Button(self, text="OK", command=self.on_select).pack(pady=10)
-
-    def on_select(self):
-        selected_indices = self.listbox.curselection()
-        self.selected_skills = [self.listbox.get(i) for i in selected_indices]
-        self.destroy()
-
-    def show(self):
-        self.wm_deiconify()
-        self.wait_window()
-        return self.selected_skills
-
-def choose_class_skills(character_data):
-    class_details = get_class_details(character_data['class'])
-    skill_options = set(class_details['skills']['options'])
-    num_skills = class_details['skills']['number_skills']
-    available_skills = skill_options - set(character_data.get("skills", []))
-    chosen_skills = SkillSelectionDialog(root, "Choose Class Skills", list(available_skills), num_skills).show()
-    if len(chosen_skills) == num_skills:
-        character_data['class_skills'] = chosen_skills
-        calculate_skill_and_saving_throw_bonuses(character_data)
-    else:
-        messagebox.showerror("Invalid Choice", f"You must choose exactly {num_skills} skills.")
-    save_character(character_data)
-    update_character_sheet(character_data)
+                    return {
+                        "id": character_data[0],
+                        "name": character_data[1],
+                        "gender": character_data[2],
+                        "game_editions": json.loads(character_data[3]),
+                        "race": character_data[4],
+                        "class": character_data[5],
+                        "background": character_data[6],
+                        "strength": character_data[7],
+                        "intelligence": character_data[8],
+                        "wisdom": character_data[9],
+                        "dexterity": character_data[10],
+                        "constitution": character_data[11],
+                        "charisma": character_data[12],
+                        "level": character_data[13],
+                        "experience_points": character_data[14],
+                        "proficiency_bonus": character_data[15],
+                        "hit_points": character_data[16],
+                        "armor_class": character_data[17],
+                        "skillProficiencies": json.loads(character_data[18]),
+                        "languageProficiencies": json.loads(character_data[19]),
+                        "startingEquipment": json.loads(character_data[20]),
+                        "entries": json.loads(character_data[21]),
+                        "equipment": equipment
+                    }
+                else:
+                    raise ValueError("Character not found")
+    except sqlite3.Error as e:
+        logger.error(f"Database error while loading character: {e}")
+        return None
 
 def display_character_sheet(character_data):
-    global root, realm_var
+    global root
     root = tk.Tk()
     root.title("Character Sheet")
     root.geometry("1200x1400")
@@ -201,7 +90,6 @@ def display_character_sheet(character_data):
     main_frame = tk.Frame(canvas, bg=BUFF_OFF_WHITE)
     canvas.create_window((0, 0), window=main_frame, anchor="nw")
     render_character_sheet(character_data)
-    realm_var = tk.StringVar(value="tier_1")
     root.mainloop()
 
 def render_character_sheet(character_data):
@@ -215,7 +103,7 @@ def render_character_sheet(character_data):
 
     details = [
         ("Character Name", character_data['name']), ("Gender", character_data['gender']),
-        ("Game Edition", character_data['game_edition']), ("Race", character_data['race']),
+        ("Game Edition", character_data['game_editions']), ("Race", character_data['race']),
         ("Class", character_data['class']), ("Background", character_data['background']),
         ("Proficiency Bonus", character_data['proficiency_bonus']), 
         ("Experience", character_data['experience_points']), ("Level", f"Level {character_data['level']}"),
@@ -277,19 +165,27 @@ def render_character_sheet(character_data):
 
     actions_frame = tk.Frame(main_frame, bg=BUFF_OFF_WHITE)
     actions_frame.grid(row=1, column=3, sticky="nsew")
-    tk.Button(actions_frame, text="Save Changes", command=lambda: [calculate_skill_and_saving_throw_bonuses(character_data), save_character(character_data)], bg=GREY, fg=DARK_BLUE).pack(pady=10)
-    tk.Button(actions_frame, text="Choose Class Features", command=lambda: choose_class_features(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
-    tk.Button(actions_frame, text="Choose Class Skills", command=lambda: choose_class_skills(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
-    tk.Button(actions_frame, text="Choose Realm", command=choose_realm, bg=GREY, fg=DARK_BLUE).pack(pady=10)
+    tk.Button(actions_frame, text="Save Changes", command=lambda: save_character(character_data), bg=GREY, fg=DARK_BLUE).pack(pady=10)
 
 def update_character_sheet(character_data):
     render_character_sheet(character_data)
 
 if __name__ == "__main__":
-    input_file = sys.argv[1]
-    with open(input_file, 'r') as f:
-        character_data = json.load(f)
-    calculate_skill_and_saving_throw_bonuses(character_data)
-    if 'current_hp' not in character_data:
-        character_data['current_hp'] = character_data['hit_points']
-    display_character_sheet(character_data)
+    if len(sys.argv) != 2:
+        print("Usage: python csdisplay.py <character_id>")
+        sys.exit(1)
+    
+    character_id = int(sys.argv[1])
+    try:
+        character_data = load_character(character_id)
+        if character_data:
+            display_character_sheet(character_data)
+        else:
+            logger.error("Failed to load character data.")
+            sys.exit(1)
+    except ValueError as e:
+        logger.error(e)
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}")
+        sys.exit(1)
