@@ -1,0 +1,153 @@
+{
+    "encounter": [
+        {
+            "name": "Medusa",
+            "source": "MM",
+            "page": 214,
+            "srd": true,
+            "basicRules": true,
+            "otherSources": [
+                {
+                    "source": "WDMM"
+                },
+                {
+                    "source": "GoS"
+                },
+                {
+                    "source": "BGDIA"
+                },
+                {
+                    "source": "ERLW"
+                },
+                {
+                    "source": "IMR"
+                },
+                {
+                    "source": "CM"
+                }
+            ],
+            "size": [
+                "M"
+            ],
+            "type": "monstrosity",
+            "alignment": [
+                "L",
+                "E"
+            ],
+            "ac": [
+                {
+                    "ac": 15,
+                    "from": [
+                        "natural armor"
+                    ]
+                }
+            ],
+            "hp": {
+                "average": 127,
+                "formula": "17d8 + 51"
+            },
+            "speed": {
+                "walk": 30
+            },
+            "str": 10,
+            "dex": 15,
+            "con": 16,
+            "int": 12,
+            "wis": 13,
+            "cha": 15,
+            "skill": {
+                "deception": "+5",
+                "insight": "+4",
+                "perception": "+4",
+                "stealth": "+5"
+            },
+            "senses": [
+                "darkvision 60 ft."
+            ],
+            "passive": 14,
+            "languages": [
+                "Common"
+            ],
+            "cr": "6",
+            "trait": [
+                {
+                    "name": "Petrifying Gaze",
+                    "entries": [
+                        "When a creature that can see the medusa's eyes starts its turn within 30 feet of the medusa, the medusa can force it to make a {@dc 14} Constitution saving throw if the medusa isn't {@condition incapacitated} and can see the creature. If the saving throw fails by 5 or more, the creature is instantly {@condition petrified}. Otherwise, a creature that fails the save begins to turn to stone and is {@condition restrained}. The {@condition restrained} creature must repeat the saving throw at the end of its next turn, becoming {@condition petrified} on a failure or ending the effect on a success. The petrification lasts until the creature is freed by the  {@spell greater restoration} spell or other magic.",
+                        "Unless {@quickref Surprise|PHB|3|0|surprised}, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.",
+                        "If the medusa sees itself reflected on a polished surface within 30 feet of it and in an area of bright light, the medusa is, due to its curse, affected by its own gaze."
+                    ]
+                }
+            ],
+            "action": [
+                {
+                    "name": "Multiattack",
+                    "entries": [
+                        "The medusa makes either three melee attacks\u2014one with its snake hair and two with its shortsword\u2014or two ranged attacks with its longbow."
+                    ]
+                },
+                {
+                    "name": "Snake Hair",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one creature. {@h}4 ({@damage 1d4 + 2}) piercing damage plus 14 ({@damage 4d6}) poison damage."
+                    ]
+                },
+                {
+                    "name": "Shortsword",
+                    "entries": [
+                        "{@atk mw} {@hit 5} to hit, reach 5 ft., one target. {@h}5 ({@damage 1d6 + 2}) piercing damage."
+                    ]
+                },
+                {
+                    "name": "Longbow",
+                    "entries": [
+                        "{@atk rw} {@hit 5} to hit, range 150/600 ft., one target. {@h}6 ({@damage 1d8 + 2}) piercing damage plus 7 ({@damage 2d6}) poison damage."
+                    ]
+                }
+            ],
+            "environment": [
+                "desert"
+            ],
+            "soundClip": {
+                "type": "internal",
+                "path": "bestiary/medusa.mp3"
+            },
+            "attachedItems": [
+                "longbow|phb",
+                "shortsword|phb"
+            ],
+            "senseTags": [
+                "D"
+            ],
+            "actionTags": [
+                "Multiattack"
+            ],
+            "languageTags": [
+                "C"
+            ],
+            "damageTags": [
+                "I",
+                "P"
+            ],
+            "miscTags": [
+                "MLW",
+                "MW",
+                "RNG",
+                "RW"
+            ],
+            "conditionInflict": [
+                "petrified",
+                "restrained"
+            ],
+            "savingThrowForced": [
+                "constitution"
+            ],
+            "hasToken": true,
+            "hasFluff": true,
+            "hasFluffImages": true
+        }
+    ],
+    "difficulty": "medium",
+    "xp_budget": 6600,
+    "terrain": "open"
+}

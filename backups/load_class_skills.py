@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 # Load JSON data
-with open('warlock.json', 'r') as file:
+with open('class-druid.json', 'r') as file:
     data = json.load(file)
 
 # Connect to SQLite database
@@ -12,28 +12,29 @@ cursor = conn.cursor()
 # Insert or update Classes data
 for cls in data['class']:
     cursor.execute('''
-        INSERT INTO Classes (name, hd_number, hd_faces, proficiency, armor_proficiencies, weapon_proficiencies, skill_proficiencies, starting_equipment, gold_alternative, subclass_title)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO Classes (name, game_edition, primary_stat, secondary_stat, hd_faces, proficiency, armor_proficiencies, weapon_proficiencies, skill_proficiencies, starting_equipment, subclass_title, dump_stat)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(name) DO UPDATE SET
-        hd_number=excluded.hd_number,
+        game_edition=excluded.game_edition,
+        primary_stat=excluded.primary_stat,
+        secondary_stat=excluded.secondary_stat,
         hd_faces=excluded.hd_faces,
         proficiency=excluded.proficiency,
         armor_proficiencies=excluded.armor_proficiencies,
         weapon_proficiencies=excluded.weapon_proficiencies,
         skill_proficiencies=excluded.skill_proficiencies,
         starting_equipment=excluded.starting_equipment,
-        gold_alternative=excluded.gold_alternative,
-        subclass_title=excluded.subclass_title
-    ''', (cls['name'], cls['hd']['number'], cls['hd']['faces'], json.dumps(cls['proficiency']),
-          json.dumps(cls['startingProficiencies']['armor']), json.dumps(cls['startingProficiencies']['weapons']),
-          json.dumps(cls['startingProficiencies']['skills']), json.dumps(cls['startingEquipment']['default']),
-          cls['startingEquipment']['goldAlternative'], cls['subclassTitle']))
+        subclass_title=excluded.subclass_title,
+        dump_stat=excluded.dump_stat
+    ''', (cls['name'], cls.get('game_edition', None), cls.get('primary_stat', None), cls.get('secondary_stat', None), 
+          cls['hd']['faces'], json.dumps(cls['proficiency']), json.dumps(cls['startingProficiencies']['armor']), 
+          json.dumps(cls['startingProficiencies']['weapons']), json.dumps(cls['startingProficiencies']['skills']), 
+          json.dumps(cls['startingEquipment']['default']), cls['subclassTitle'], cls.get('dump_stat', None)))
     class_id = cursor.execute('SELECT id FROM Classes WHERE name=?', (cls['name'],)).fetchone()[0]
 
     # Insert ClassFeatures data
     for feature in cls['classFeatures']:
         if isinstance(feature, str):
-            print(f"Processing feature: {feature}")
             feature_parts = feature.split('|')
             if len(feature_parts) == 5:
                 feature_name, feature_source, feature_page, feature_level, feature_entries = feature_parts
@@ -45,10 +46,8 @@ for cls in data['class']:
                 feature_level = 1  # Default level
                 feature_entries = ''
             else:
-                print(f"Unexpected format for feature: {feature}")
                 continue
         elif isinstance(feature, dict):
-            print(f"Processing dictionary feature with classFeature: {feature['classFeature']}")
             feature_name = feature['classFeature']
             feature_level = feature.get('level', 1)
             feature_entries = json.dumps(feature.get('entries', ''))
@@ -80,17 +79,14 @@ for subclass in data['subclass']:
     # Insert SubclassFeatures data
     for feature in subclass['subclassFeatures']:
         if isinstance(feature, str):
-            print(f"Processing subclass feature: {feature}")
             feature_parts = feature.split('|')
             if len(feature_parts) >= 4:
                 feature_name = feature_parts[0]
                 feature_level = feature_parts[3]
                 feature_entries = feature_parts[4] if len(feature_parts) > 4 else ''
             else:
-                print(f"Unexpected format for subclass feature: {feature}")
                 continue
         elif isinstance(feature, dict):
-            print(f"Processing dictionary subclass feature: {feature['name']}")
             feature_name = feature['name']
             feature_level = feature.get('level', 1)
             feature_entries = json.dumps(feature.get('entries', ''))
