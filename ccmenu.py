@@ -13,13 +13,24 @@ from utils.backgrounds import get_backgrounds, get_background_details
 import sqlite3
 from contextlib import closing
 import logging
+import sys
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def get_resource_path(relative_path):
+    """ Get the absolute path to the resource, works for both development and PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 # Set the correct path for the database
-DB_PATH = os.path.join(os.path.dirname(__file__), 'tables', 'game_database.db')
+DB_PATH = get_resource_path(os.path.join('tables', 'game_database.db'))
 
 # Initialize the main application window
 root = tk.Tk()
@@ -39,7 +50,7 @@ selected_class = tk.StringVar(value="Fighter")
 selected_background = tk.StringVar(value="Outlander")
 show_campaign_specific = tk.BooleanVar(value=False)
 
-dice_image = Image.open("./images/dice.png")
+dice_image = Image.open(get_resource_path(os.path.join("images", "dice.png")))
 dice_image = dice_image.resize((40, 40), Image.Resampling.LANCZOS)
 dice_icon = ImageTk.PhotoImage(dice_image)
 
@@ -189,7 +200,7 @@ def finalise_character():
     
     temp_character_id = create_temporary_character(character_data)
     if temp_character_id:
-        subprocess.run(['python', 'creator.py', str(temp_character_id)])
+        subprocess.run(['python', get_resource_path('creator.py'), str(temp_character_id)])
     else:
         logger.error("Failed to create temporary character")
 
