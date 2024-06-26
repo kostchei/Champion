@@ -69,6 +69,7 @@ def create_dropdown(parent, options, selected_var):
     dropdown = ttk.Combobox(parent, values=options, textvariable=selected_var, font=("Arial", 20))
     dropdown.pack(side=tk.LEFT, padx=5)
     dropdown.option_add('*TCombobox*Listbox.font', ("Arial", 20))
+    dropdown.bind("<<ComboboxSelected>>", update_descriptions)
     return dropdown
 
 def create_random_button(parent, command):
@@ -87,15 +88,18 @@ def randomize_race():
     """Randomize the character race."""
     if races:
         selected_race.set(random.choice(races))
+    update_descriptions()
 
 def randomize_class():
     """Randomize the character class."""
     if classes:
         selected_class.set(random.choice(classes))
+    update_descriptions()
 
 def randomize_background():
     """Randomize the character background."""
     selected_background.set(random.choice(backgrounds))
+    update_descriptions()
 
 def update_classes():
     """Update the class options based on selected game editions."""
@@ -104,6 +108,7 @@ def update_classes():
     classes = get_classes(active_editions)
     class_dropdown['values'] = classes
     selected_class.set(classes[0] if classes else "")
+    update_descriptions()
 
 def update_races():
     """Update the race options based on selected game editions."""
@@ -112,6 +117,7 @@ def update_races():
     races = get_races_for_editions(active_editions)
     race_dropdown['values'] = races
     selected_race.set(races[0] if races else "")
+    update_descriptions()
 
 def update_backgrounds():
     """Update the background options based on the campaign-specific filter."""
@@ -121,6 +127,7 @@ def update_backgrounds():
         backgrounds = [bg for bg in backgrounds if not get_background_details(bg).get('campaign_specific', 0)]
     background_dropdown['values'] = backgrounds
     selected_background.set(backgrounds[0] if backgrounds else "")
+    update_descriptions()
 
 def create_checkbox_command(option):
     """Create a unique command function for each checkbox."""
@@ -135,8 +142,11 @@ def create_checkbox_list(frame, label_text, options, selected_vars):
     tk.Label(frame, text=label_text, bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(anchor=tk.W)
     for option in options:
         var = tk.BooleanVar(value=(option == "Champion"))
-        tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20),
-                       command=create_checkbox_command(option)).pack(anchor=tk.W)
+        checkbox = tk.Checkbutton(frame, text=option, variable=var, bg="#F7F6ED", font=("Arial", 20),
+                       command=create_checkbox_command(option))
+        checkbox.pack(anchor=tk.W)
+        checkbox.bind("<Enter>", lambda e, opt=option: show_edition_description(opt))
+        checkbox.bind("<Leave>", lambda e: hide_edition_description())
         selected_vars[option] = var
 
 def validate_inputs(data):
@@ -204,6 +214,38 @@ def finalise_character():
     else:
         logger.error("Failed to create temporary character")
 
+def update_descriptions(event=None):
+    """Update the descriptions based on the selected background, lineage, and class."""
+    background = selected_background.get()
+    race = selected_race.get()
+    class_name = selected_class.get()
+
+    with closing(sqlite3.connect(DB_PATH)) as conn:
+        with closing(conn.cursor()) as cursor:
+            cursor.execute("SELECT desc_text FROM backgrounds WHERE name=?", (background,))
+            background_desc = cursor.fetchone()
+            cursor.execute("SELECT heritage_text FROM lineages WHERE name=?", (race,))
+            lineage_desc = cursor.fetchone()
+            cursor.execute("SELECT flavour_text FROM classes WHERE name=?", (class_name,))
+            class_desc = cursor.fetchone()
+
+    background_desc_label.config(text=background_desc[0] if background_desc else "")
+    lineage_desc_label.config(text=lineage_desc[0] if lineage_desc else "")
+    class_desc_label.config(text=class_desc[0] if class_desc else "")
+
+def show_edition_description(edition):
+    """Show the description of the game edition on mouse over."""
+    with closing(sqlite3.connect(DB_PATH)) as conn:
+        with closing(conn.cursor()) as cursor:
+            cursor.execute("SELECT fluff_description FROM gameeditions WHERE name=?", (edition,))
+            description = cursor.fetchone()
+    edition_desc_label.config(text=description[0] if description else "")
+
+def hide_edition_description():
+    """Hide the game edition description when mouse leaves."""
+    edition_desc_label.config(text="")
+
+# Create the main layout
 content_frame = tk.Frame(root, bg="#F7F6ED")
 content_frame.place(relx=0.1, rely=0.1, relwidth=0.6, relheight=0.8)
 
@@ -237,12 +279,28 @@ tk.Label(frame3, text="Class:", bg="#F7F6ED", fg="darkblue", font=("Arial", 20))
 class_dropdown = create_dropdown(frame3, [], selected_class)
 create_random_button(frame3, randomize_class)
 
+# Descriptions area at the bottom left
+description_frame = tk.Frame(root, bg="#F7F6ED")
+description_frame.place(relx=0.1, rely=0.7, relwidth=0.6, relheight=0.2)
+
+background_desc_label = tk.Label(description_frame, text="", bg="#F7F6ED", fg="black", font=("Arial", 14), wraplength=800, justify=tk.LEFT)
+background_desc_label.pack(anchor='w', pady=5)
+
+lineage_desc_label = tk.Label(description_frame, text="", bg="#F7F6ED", fg="black", font=("Arial", 14), wraplength=800, justify=tk.LEFT)
+lineage_desc_label.pack(anchor='w', pady=5)
+
+class_desc_label = tk.Label(description_frame, text="", bg="#F7F6ED", fg="black", font=("Arial", 14), wraplength=800, justify=tk.LEFT)
+class_desc_label.pack(anchor='w', pady=5)
+
 # Game Edition Selection and Finalize Button on the right
 edition_frame = tk.Frame(root, bg="#F7F6ED")
-edition_frame.place(relx=0.75, rely=0.1, relwidth=0.2, relheight=0.8)
+edition_frame.place(relx=0.6, rely=0.1, relwidth=0.35, relheight=0.8)
 
 selected_editions = {}
 create_checkbox_list(edition_frame, "Game Edition:", game_editions.keys(), selected_editions)
+
+edition_desc_label = tk.Label(edition_frame, text="", bg="#F7F6ED", fg="darkgray", font=("Arial", 12), wraplength=200, justify=tk.LEFT)
+edition_desc_label.pack(anchor='w', padx=10)
 
 finalise_button = tk.Button(edition_frame, text="Finalise", command=finalise_character, bg="#F7F6ED", fg="darkblue", font=("Arial", 20))
 finalise_button.pack(pady=20)
