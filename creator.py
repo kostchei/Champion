@@ -113,7 +113,9 @@ def save_character(character_data, stats):
                 stats["Constitution"],
                 stats["Charisma"]
             ))
+            character_id = cursor.lastrowid
             conn.commit()
+    return character_id
 
 def main(character_id):
     # Fetch the character data
@@ -155,10 +157,11 @@ def main(character_id):
     logger.info(f"Calculated Stats: {stats}")
 
     # Save the character data with stats
-    save_character(character_data, stats)
+    character_id = save_character(character_data, stats)
 
-    # Pass data to csdisplay.py (for now, just log the action)
-    logger.info(f"Character {character_data['name']} with stats {stats} ready to be displayed.")
+    # Call csdisplay.py to display the character data
+    logger.info(f"Displaying character {character_data['name']} with stats {stats}.")
+    subprocess.run(['python', get_resource_path('csdisplay.py'), str(character_id)])
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
