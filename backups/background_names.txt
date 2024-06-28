@@ -1,0 +1,54 @@
+Acolyte
+Archaeologist
+Athlete
+Azorius Functionary
+Caravan Specialist
+Celebrity Adventurer's Scion
+Charlatan
+City Watch
+Clan Crafter
+Courtier
+Criminal
+Custom Background
+Entertainer
+Faceless
+Failed Merchant
+Far Traveler
+Feylost
+Folk Hero
+Gambler
+Gate Warden
+Giant Foundling
+Grinner
+Gruul Anarch
+Harborfolk
+Hermit
+Hillsfar Smuggler
+Inquisitor
+Iron Route Bandit
+Izzet Engineer
+Mercenary Veteran
+Noble
+Orzhov Representative
+Outlander
+Phlan Refugee
+Plaintiff
+Quandrix Student
+Reformed Cultist
+Rewarded
+Rival Intern
+Ruined
+Rune Carver
+Sage
+Sailor
+Selesnya Initiate
+Silverquill Student
+Simic Scientist
+Smuggler
+Soldier
+Ticklebelly Nomad
+Urchin
+Variant City Watch (Investigator)
+Vizier
+Witchlight Hand
+Witherbloom Student
