@@ -10,13 +10,19 @@ def get_db_connection():
         print(f"Database connection error: {e}")
         return None
 
-def get_backgrounds():
+def get_backgrounds(active_editions=None):
     conn = get_db_connection()
     if not conn:
         return []
 
     cursor = conn.cursor()
-    cursor.execute("SELECT name FROM backgrounds")
+    if active_editions:
+        placeholders = ', '.join('?' for _ in active_editions)
+        query = f"SELECT name FROM backgrounds WHERE campaign_specific IN ({placeholders})"
+        cursor.execute(query, active_editions)
+    else:
+        cursor.execute("SELECT name FROM backgrounds")
+
     backgrounds = cursor.fetchall()
     conn.close()
     return [background['name'] for background in backgrounds]
@@ -28,7 +34,7 @@ def get_background_details(background_name):
 
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT name, skillProficiencies, languageProficiencies, startingEquipment, entries, campaign_specific
+        SELECT name, skillProficiencies, languageProficiencies, startingEquipment, entries, campaign_specific, desc_text
         FROM backgrounds
         WHERE name = ?
     """, (background_name,))

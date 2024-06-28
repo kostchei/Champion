@@ -1,33 +1,31 @@
+import tkinter as tk
+from tkinter import ttk
 import sqlite3
 import json
 import os
 import sys
 from contextlib import closing
 import logging
-import pygame as pg
+
+# Import tab creation functions from utils
+from utils.character_tab import create_character_frame
+from utils.inventory_tab import create_inventory_frame
+from utils.stats_tab import create_stats_frame
+from utils.log_tab import create_log_frame
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize Pygame
-pg.init()
-
-# Constants
-BUTTON_PADDING = 20
 COLORS = {
-    "button": (240, 240, 230),
-    "button_hover": (237, 243, 252),
-    "button_text": (30, 40, 50),
-    "background": (247, 246, 237),
-    "button_shadow": (200, 200, 180),
-    "popup": (255, 255, 255),
-    "popup_border": (0, 0, 0),
+    "button": "#F0F0E6",
+    "button_hover": "#EDF3FC",
+    "button_text": "#1E2832",
+    "background": "#F7F6ED",
+    "button_shadow": "#C8C8B4",
+    "popup": "#FFFFFF",
+    "popup_border": "#000000"
 }
-FONT = pg.font.SysFont('Arial', 24)
-POPUP_FONT = pg.font.SysFont('Arial', 20)
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
 
 def get_resource_path(relative_path):
     """ Get the absolute path to the resource, works for both development and PyInstaller """
@@ -35,99 +33,100 @@ def get_resource_path(relative_path):
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.abspath(".")
-
     return os.path.join(base_path, relative_path)
 
 # Set the correct path for the database
 DB_PATH = get_resource_path(os.path.join('tables', 'game_database.db'))
 
-def fetch_character_data(character_id):
-    """ Fetch finalized character data from the database using the character ID. """
+def fetch_character(character_id):
+    """ Fetch character data from the database using the character ID. """
     with closing(sqlite3.connect(DB_PATH)) as conn:
+        conn.row_factory = sqlite3.Row  # This will return rows as dictionaries
         with closing(conn.cursor()) as cursor:
             cursor.execute('''
-                SELECT name, gender, game_editions, race, class, background, strength, intelligence, wisdom, dexterity, constitution, charisma 
-                FROM characters WHERE id=?
+                SELECT * FROM characters WHERE id=?
             ''', (character_id,))
             return cursor.fetchone()
 
-def display_character_data(screen, character_data):
-    """ Display character data on the screen """
-    screen.fill(COLORS['background'])
-    
-    # Display top bar with character summary
-    summary_text = f"Name: {character_data['name']} | Gender: {character_data['gender']} | Game Editions: {', '.join(character_data['game_editions'])} | Race: {character_data['race']} | Class: {character_data['class']} | Background: {character_data['background']}"
-    summary_surface = FONT.render(summary_text, True, COLORS['button_text'])
-    screen.blit(summary_surface, (20, 20))
+def create_top_frame(root, character):
+    """ Create the top frame displaying the character's basic information. """
+    top_frame = tk.Frame(root, bg=COLORS["background"])
+    top_frame.pack(side=tk.TOP, fill=tk.X)
 
-    # Display tabs and pages
-    tab_labels = ['Stats', 'Inventory', 'Abilities', 'Notes']
-    tab_rects = []
-    tab_width = 120
-    tab_height = 40
+    labels = ["Name", "Gender", "Game Editions", "Race", "Class", "Background", "Exp"]
+    values = [
+        character['name'], character['gender'], ', '.join(json.loads(character['game_editions'])),
+        character['race'], character['class'], character['background'], character['experience_points']
+    ]
 
-    for i, label in enumerate(tab_labels):
-        tab_rect = pg.Rect(10, 100 + i * (tab_height + 10), tab_width, tab_height)
-        tab_rects.append(tab_rect)
-        pg.draw.rect(screen, COLORS['button'], tab_rect)
-        tab_surface = FONT.render(label, True, COLORS['button_text'])
-        screen.blit(tab_surface, (tab_rect.x + 10, tab_rect.y + 10))
+    for i, (label, value) in enumerate(zip(labels, values)):
+        tk.Label(top_frame, text=f"{label}: {value}", font=("Arial", 12), bg=COLORS["background"]).grid(row=0, column=i, padx=5, pady=5, sticky="w")
 
-    # Display content for the first tab (Stats)
-    stats = {
-        "Strength": character_data['strength'],
-        "Intelligence": character_data['intelligence'],
-        "Wisdom": character_data['wisdom'],
-        "Dexterity": character_data['dexterity'],
-        "Constitution": character_data['constitution'],
-        "Charisma": character_data['charisma']
-    }
-    start_y = 100
-    for stat, value in stats.items():
-        stat_text = f"{stat}: {value}"
-        stat_surface = FONT.render(stat_text, True, COLORS['button_text'])
-        screen.blit(stat_surface, (150, start_y))
-        start_y += 40
-
-    pg.display.flip()
-
-def main(character_id):
-    # Fetch the character data
-    character_data = fetch_character_data(character_id)
-    if not character_data:
+def display_character(character_id):
+    character = fetch_character(character_id)
+    if not character:
         logger.error(f"No character found with ID {character_id}")
         return
+    
+    root = tk.Tk()
+    root.title(f"Character: {character['name']}")
+    root.geometry("1902x1080")
+    root.configure(bg=COLORS["background"])
 
-    # Unpack character data
-    character_data = {
-        "name": character_data[0],
-        "gender": character_data[1],
-        "game_editions": json.loads(character_data[2]),
-        "race": character_data[3],
-        "class": character_data[4],
-        "background": character_data[5],
-        "strength": character_data[6],
-        "intelligence": character_data[7],
-        "wisdom": character_data[8],
-        "dexterity": character_data[9],
-        "constitution": character_data[10],
-        "charisma": character_data[11]
+    # Create the top frame
+    create_top_frame(root, character)
+
+    # Create a main content frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(fill=tk.BOTH, expand=True)
+
+    # Create the notebook for tabs
+    notebook = ttk.Notebook(main_frame)
+    notebook.pack(side=tk.LEFT, fill=tk.Y)
+
+    # Configure notebook to have tabs on the left
+    style = ttk.Style()
+    style.configure('TNotebook.Tab', padding=[10, 5], font=("Arial", 12))
+    style.configure('lefttab.TNotebook', tabposition='wn')
+    notebook.configure(style='lefttab.TNotebook')
+
+    # Create a frame to display the selected tab's content
+    content_frame = tk.Frame(main_frame)
+    content_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+
+    # Create frame creation functions
+    frame_creators = {
+        "Character": lambda: create_character_frame(content_frame, character),
+        "Inventory": lambda: create_inventory_frame(content_frame),
+        "Stats": lambda: create_stats_frame(content_frame, character),
+        "Log": lambda: create_log_frame(content_frame)
     }
 
-    # Initialize Pygame screen
-    screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pg.display.set_caption("Character Display")
+    # Add tabs to the notebook
+    for text, create_func in frame_creators.items():
+        frame = tk.Frame(notebook)
+        notebook.add(frame, text=text)
 
-    # Main loop
-    running = True
-    while running:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                running = False
+    def on_tab_change(event):
+        # Clear the content frame
+        for widget in content_frame.winfo_children():
+            widget.destroy()
+        
+        # Get the selected tab
+        selected_tab = notebook.index(notebook.select())
+        # Create and display the content for the selected tab
+        selected_frame = list(frame_creators.values())[selected_tab]()
+        selected_frame.pack(fill=tk.BOTH, expand=True)
 
-        display_character_data(screen, character_data)
+    notebook.bind("<<NotebookTabChanged>>", on_tab_change)
 
-    pg.quit()
+    # Trigger the tab change event for the first tab
+    root.after(100, lambda: notebook.event_generate("<<NotebookTabChanged>>"))
+
+    root.mainloop()
+
+def main(character_id):
+    display_character(character_id)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

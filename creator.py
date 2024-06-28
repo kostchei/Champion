@@ -97,8 +97,8 @@ def save_character(character_data, stats):
         with closing(conn.cursor()) as cursor:
             cursor.execute('''
                 INSERT INTO characters 
-                (name, gender, game_editions, race, class, background, strength, intelligence, wisdom, dexterity, constitution, charisma) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (name, gender, game_editions, race, class, background, strength, intelligence, wisdom, dexterity, constitution, charisma, experience_points) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 character_data["name"],
                 character_data["gender"],
@@ -111,7 +111,8 @@ def save_character(character_data, stats):
                 stats["Wisdom"],
                 stats["Dexterity"],
                 stats["Constitution"],
-                stats["Charisma"]
+                stats["Charisma"],
+                0  # Set experience points to zero
             ))
             character_id = cursor.lastrowid
             conn.commit()

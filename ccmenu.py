@@ -40,7 +40,6 @@ root.geometry("1920x1080")
 
 genders = ["Male", "Female"]
 game_editions = get_active_game_editions()
-backgrounds = get_backgrounds()
 edition_name_to_id = {name: id for name, id in game_editions.items()}
 
 selected_name = tk.StringVar()
@@ -48,7 +47,6 @@ selected_gender = tk.StringVar(value="Male")
 selected_race = tk.StringVar(value="Human")
 selected_class = tk.StringVar(value="Fighter")
 selected_background = tk.StringVar(value="Outlander")
-show_campaign_specific = tk.BooleanVar(value=False)
 
 dice_image = Image.open(get_resource_path(os.path.join("images", "dice.png")))
 dice_image = dice_image.resize((40, 40), Image.Resampling.LANCZOS)
@@ -57,6 +55,7 @@ dice_icon = ImageTk.PhotoImage(dice_image)
 # Initialize global variables
 races = []
 classes = []
+backgrounds = []
 
 def create_labeled_input(frame, label_text, options, selected_var, randomize_command):
     """Create a labeled input field with a dropdown and a randomize button."""
@@ -120,11 +119,10 @@ def update_races():
     update_descriptions()
 
 def update_backgrounds():
-    """Update the background options based on the campaign-specific filter."""
+    """Update the background options based on the selected game editions."""
+    active_editions = [edition_name_to_id[edition] for edition, var in selected_editions.items() if var.get()]
     global backgrounds
-    backgrounds = get_backgrounds()
-    if not show_campaign_specific.get():
-        backgrounds = [bg for bg in backgrounds if not get_background_details(bg).get('campaign_specific', 0)]
+    backgrounds = get_backgrounds(active_editions)
     background_dropdown['values'] = backgrounds
     selected_background.set(backgrounds[0] if backgrounds else "")
     update_descriptions()
@@ -262,10 +260,8 @@ create_labeled_input(frame1, "Gender:", genders, selected_gender, randomize_gend
 frame_bg = tk.Frame(content_frame, bg="#F7F6ED")
 frame_bg.pack(pady=10, fill='x')
 tk.Label(frame_bg, text="Background:", bg="#F7F6ED", fg="darkblue", font=("Arial", 20)).pack(side=tk.LEFT)
-background_dropdown = create_dropdown(frame_bg, backgrounds, selected_background)
+background_dropdown = create_dropdown(frame_bg, [], selected_background)
 create_random_button(frame_bg, randomize_background)
-tk.Checkbutton(frame_bg, text="Show Campaign Specific", variable=show_campaign_specific, bg="#F7F6ED", font=("Arial", 20),
-               command=update_backgrounds).pack(side=tk.LEFT, padx=5)
 
 frame2 = tk.Frame(content_frame, bg="#F7F6ED")
 frame2.pack(pady=10)
