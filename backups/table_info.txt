@@ -1,0 +1,49 @@
+Schema of the 'UniversalEquipment' table:
+Column ID: 0, Name: ID, Type: INTEGER
+Column ID: 1, Name: Creator, Type: TEXT
+Column ID: 2, Name: Item_Type, Type: TEXT
+Column ID: 3, Name: Base_Weight, Type: DECIMAL
+Column ID: 4, Name: Base_Value, Type: DECIMAL
+Column ID: 5, Name: Size, Type: CHAR(1)
+Column ID: 6, Name: Damage, Type: TEXT
+Column ID: 7, Name: Range, Type: TEXT
+Column ID: 8, Name: Spells, Type: TEXT
+Column ID: 9, Name: Charges, Type: TEXT
+Column ID: 10, Name: Effect_scope, Type: TEXT
+Column ID: 11, Name: Image, Type: TEXT
+Column ID: 12, Name: Description, Type: TEXT
+Column ID: 13, Name: Personality, Type: TEXT
+Column ID: 14, Name: Other_Statistics, Type: TEXT
+Column ID: 15, Name: Weapon_Category, Type: VARCHAR(255)
+Column ID: 16, Name: Edition, Type: VARCHAR(255)
+Column ID: 17, Name: Property, Type: TEXT
+Column ID: 18, Name: Dmg_Type, Type: VARCHAR(255)
+Column ID: 19, Name: Firearm, Type: BOOLEAN
+Column ID: 20, Name: Weapon, Type: BOOLEAN
+Column ID: 21, Name: Ammo_Type, Type: VARCHAR(255)
+Column ID: 22, Name: Arrow, Type: BOOLEAN
+Column ID: 23, Name: Pack_Contents, Type: TEXT
+Column ID: 24, Name: Axe, Type: BOOLEAN
+Column ID: 25, Name: Armor, Type: BOOLEAN
+Column ID: 26, Name: AC, Type: INT
+Column ID: 27, Name: Strength, Type: VARCHAR(255)
+Column ID: 28, Name: Stealth, Type: BOOLEAN
+Column ID: 29, Name: Club, Type: BOOLEAN
+Column ID: 30, Name: Bolt, Type: BOOLEAN
+Column ID: 31, Name: Scf_Type, Type: VARCHAR(255)
+Column ID: 32, Name: Dagger, Type: BOOLEAN
+Column ID: 33, Name: Sword, Type: BOOLEAN
+Column ID: 34, Name: Bonus_Spell_Attack, Type: VARCHAR(255)
+Column ID: 35, Name: Bonus_Spell_Save_DC, Type: VARCHAR(255)
+Column ID: 36, Name: Req_Attune, Type: VARCHAR(255)
+Column ID: 37, Name: Req_Attune_Tags, Type: TEXT
+Column ID: 38, Name: Focus, Type: TEXT
+Column ID: 39, Name: Wondrous, Type: BOOLEAN
+Column ID: 40, Name: Bonus_Weapon, Type: VARCHAR(255)
+Column ID: 41, Name: Tier, Type: VARCHAR(255)
+Column ID: 42, Name: Loot_Tables, Type: TEXT
+Column ID: 43, Name: Name, Type: VARCHAR(255)
+
+Rows with IDs 150 and 160 from the 'UniversalEquipment' table:
+(150, None, 'M', 2, 50, None, '1d6', '30/120', None, None, None, None, None, None, None, 'simple', None, '["T"]', 'P', None, 1, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'Javelin')
+(160, None, 'M', 3, 1500, None, '1d8', None, None, None, None, None, None, None, None, 'martial', None, '["V"]', 'S', None, 1, None, None, None, None, None, None, None, None, None, None, None, None, 1, None, None, None, None, None, None, None, None, None, 'Longsword')

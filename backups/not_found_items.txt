@@ -1,0 +1,26 @@
+Potion of Haste
++1 weapon
++1 shield
+Weapon of Warning
+Dragon Slayer
+Flame Tongue
+Giant Slayer
+Sword of Life Stealing
+Sword of Wounding
+Vicious Weapon
+Dragon Scale Mail
+Demon Armour
+Manual of Clear Thought
+Manual of Understanding
+Manual of Leadership and Influence
+Adamantine Armour heavy
+Adamantine Armour medium
+Frost Brand
+Nine Lives Stealer
++2 shield
++2 weapon
++3 shield
++3 weapon
+Armour of Invulnerability
+Vorpal Sword
+Defender

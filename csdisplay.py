@@ -12,6 +12,7 @@ from utils.character_tab import create_character_frame
 from utils.inventory_tab import create_inventory_frame
 from utils.stats_tab import create_stats_frame
 from utils.log_tab import create_log_frame
+from utils.db_utils import update_character_skills, update_character_saves, get_stat_modifier, fetch_data, get_db_connection, fetch_character, fetch_level_and_proficiency_bonus, update_character_level_and_proficiency
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -162,7 +163,7 @@ def get_stat_modifier(stat_value):
     
     return result["modifier"] if result else 0
 
-def apply_ability_score_increase(root, character_stats, lineage_data, character_id):
+def apply_ability_score_increase(root, character_stats, lineage_data, character_id, character):
     """ Apply ability score increases to character stats. """
     increase = json.loads(lineage_data["ability_score_increase"])
     
@@ -170,9 +171,8 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
         for stat, value in increase["stats"].items():
             character_stats[stat] += value
     elif increase["type"] == "all":
-        for stat in list(character_stats.keys()):  # Make a copy of keys
+        for stat in list(character_stats.keys()):
             character_stats[stat] += increase["increase"]
-        update_character_stats(character_id, character_stats)
     elif increase["type"] == "choice":
         choice_window = tk.Toplevel(root)
         choice_window.title("Stat Increase")
@@ -199,8 +199,28 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
         choice_window.grab_set()
         root.wait_window(choice_window)
     
-    for stat in list(character_stats.keys()):  # Make a copy of keys
+    for stat in list(character_stats.keys()):
         character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
+
+    skills = {}
+    saves = {}
+    for attribute, skills_and_saves in {
+        "Strength": ["str_save", "athletics"], 
+        "Dexterity": ["dex_save", "acrobatics", "sleight_of_hand", "stealth"],
+        "Constitution": ["con_save"], 
+        "Intelligence": ["int_save", "arcana", "history", "investigation", "nature", "religion"],
+        "Wisdom": ["wis_save", "animal_handling", "insight", "medicine", "perception", "survival"],
+        "Charisma": ["cha_save", "deception", "intimidation", "performance", "persuasion"]
+    }.items():
+        modifier = character_stats[f"{attribute}_modifier"]
+        for skill_or_save in skills_and_saves:
+            if "save" in skill_or_save:
+                saves[skill_or_save] = modifier + (character_stats['proficiency_bonus'] if skill_or_save in character.get('class_skills', []) else 0)
+            else:
+                skills[skill_or_save] = modifier + (character_stats['proficiency_bonus'] if skill_or_save in character.get('class_skills', []) else 0)
+    
+    update_character_skills(character_id, skills)
+    update_character_saves(character_id, saves)
 
 def display_character(character_id):
     character = fetch_character(character_id)
@@ -249,7 +269,7 @@ def display_character(character_id):
         "Charisma": character['charisma']
     }
 
-    apply_ability_score_increase(root, character_stats, lineage_data, character_id)
+    apply_ability_score_increase(root, character_stats, lineage_data, character_id, character)
 
     primary_stat = class_data.get('primary_stat', '')
     secondary_stat = class_data.get('secondary_stat', '')
@@ -257,7 +277,7 @@ def display_character(character_id):
     frame_creators = {
         "Character": lambda: create_character_frame(content_frame, character, lineage_data, background_data, class_data),
         "Inventory": lambda: create_inventory_frame(content_frame),
-        "Stats": lambda: create_stats_frame(content_frame, character_stats, character['level'], character['proficiency_bonus'], primary_stat, secondary_stat),
+        "Stats": lambda: create_stats_frame(content_frame, character_stats, character['level'], character['proficiency_bonus'], primary_stat, secondary_stat, character_id),
         "Log": lambda: create_log_frame(content_frame)
     }
 
