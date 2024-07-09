@@ -167,19 +167,13 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
     """ Apply ability score increases to character stats. """
     increase = json.loads(lineage_data["ability_score_increase"])
     
-    if increase["type"] == "fixed":
-        for stat, value in increase["stats"].items():
-            character_stats[stat] += value
-    elif increase["type"] == "all":
-        for stat in list(character_stats.keys()):
-            character_stats[stat] += increase["increase"]
-    elif increase["type"] == "choice":
+    if "choice" in increase:
         choice_window = tk.Toplevel(root)
         choice_window.title("Stat Increase")
         choice_window.geometry("300x200")
         choice_window.configure(bg="#F7F6ED")
 
-        tk.Label(choice_window, text=f"Choose a stat to increase by {increase['increase']} (options: {', '.join(character_stats.keys())}):", font=("Arial", 12), bg="#F7F6ED").pack(pady=10)
+        tk.Label(choice_window, text=f"Choose a stat to increase by {increase['choice']} (options: {', '.join(character_stats.keys())}):", font=("Arial", 12), bg="#F7F6ED").pack(pady=10)
         chosen_stat_var = tk.StringVar(choice_window)
         chosen_stat_dropdown = ttk.Combobox(choice_window, textvariable=chosen_stat_var, values=list(character_stats.keys()), font=("Arial", 12))
         chosen_stat_dropdown.pack(pady=10)
@@ -187,7 +181,7 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
         def on_select():
             chosen_stat = chosen_stat_var.get()
             if chosen_stat in character_stats:
-                character_stats[chosen_stat] += increase["increase"]
+                character_stats[chosen_stat] += increase["choice"]
                 update_character_stats(character_id, character_stats)
                 choice_window.destroy()
             else:
@@ -198,8 +192,14 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
         choice_window.transient(root)
         choice_window.grab_set()
         root.wait_window(choice_window)
+    else:
+        # Apply the ability score increases directly
+        for stat, value in increase.items():
+            character_stats[stat] += value
     
-    for stat in list(character_stats.keys()):
+    # Create a list of keys to avoid changing the dictionary size during iteration
+    keys = list(character_stats.keys())
+    for stat in keys:
         character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
 
     skills = {}
@@ -221,6 +221,7 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
     
     update_character_skills(character_id, skills)
     update_character_saves(character_id, saves)
+
 
 def display_character(character_id):
     character = fetch_character(character_id)

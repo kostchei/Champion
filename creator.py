@@ -17,7 +17,6 @@ def get_resource_path(relative_path):
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.abspath(".")
-
     return os.path.join(base_path, relative_path)
 
 # Set the correct path for the database
@@ -91,14 +90,14 @@ def adjust_stats_for_class(stats, class_details):
 
     return stats
 
-def save_character(character_data, stats):
+def save_character(character_data, stats, saves):
     """ Save the finalized character data to the database. """
     with closing(sqlite3.connect(DB_PATH)) as conn:
         with closing(conn.cursor()) as cursor:
             cursor.execute('''
                 INSERT INTO characters 
-                (name, gender, game_editions, race, class, background, strength, intelligence, wisdom, dexterity, constitution, charisma, experience_points) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (name, gender, game_editions, race, class, background, strength, intelligence, wisdom, dexterity, constitution, charisma, experience_points, skillProficiencies, languageProficiencies, expertise, craftingTools, vehicles, saves) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 character_data["name"],
                 character_data["gender"],
@@ -112,7 +111,13 @@ def save_character(character_data, stats):
                 stats["Dexterity"],
                 stats["Constitution"],
                 stats["Charisma"],
-                0  # Set experience points to zero
+                0,  # Set experience points to zero
+                json.dumps(character_data.get("skillProficiencies", [])),
+                json.dumps(character_data.get("languageProficiencies", [])),
+                json.dumps(character_data.get("expertise", [])),
+                json.dumps(character_data.get("craftingTools", [])),
+                json.dumps(character_data.get("vehicles", [])),
+                json.dumps(saves)
             ))
             character_id = cursor.lastrowid
             conn.commit()
@@ -132,7 +137,13 @@ def main(character_id):
         "game_editions": json.loads(character_data[2]),
         "race": character_data[3],
         "class": character_data[4],
-        "background": character_data[5]
+        "background": character_data[5],
+        "skillProficiencies": [],
+        "languageProficiencies": [],
+        "expertise": [],
+        "craftingTools": [],
+        "vehicles": [],
+        "saves": []  # Initialize empty saves list
     }
 
     # Check if the class contains "Sidekick"
@@ -153,12 +164,16 @@ def main(character_id):
     # Adjust stats based on class details
     stats = adjust_stats_for_class(stats, class_details)
 
+    # Add primary and secondary stats to saves
+    saves = [class_details[0].title(), class_details[1].title()]
+
     # Print progress
     logger.info(f"Character Data: {character_data}")
     logger.info(f"Calculated Stats: {stats}")
+    logger.info(f"Initial Saves: {saves}")
 
     # Save the character data with stats
-    character_id = save_character(character_data, stats)
+    character_id = save_character(character_data, stats, saves)
 
     # Call csdisplay.py to display the character data
     logger.info(f"Displaying character {character_data['name']} with stats {stats}.")
