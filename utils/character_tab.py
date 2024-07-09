@@ -82,9 +82,9 @@ def create_character_frame(parent, character, lineage_data, background_data, cla
     # Background Choices
     tk.Label(frame, text="Background Choices", font=("Arial", 16), bg="#F7F6ED").pack(pady=10)
     bg_skills = json.loads(background_data['skillProficiencies'])
-    if isinstance(bg_skills[0], dict) and "any" in bg_skills[0]:
+    if isinstance(bg_skills, list) and isinstance(bg_skills[0], dict) and "any" in bg_skills[0]:
         skill_options = fetch_skill_options(bg_skills)
-        create_skill_selection(frame, skill_options, character.get('skills', []), bg_skills[0]['any'], lambda skills: character.update({'skills': list(set(character.get('skills', []) + skills))}))
+        create_skill_selection(frame, skill_options, character.get('skills', []), bg_skills[0]['any'], lambda skills: update_character_skills(character['id'], list(set(character.get('skills', []) + skills))))
     else:
         # Add fixed background skills to the character's skill proficiencies
         fixed_bg_skills = fetch_skill_options(bg_skills)
@@ -95,7 +95,7 @@ def create_character_frame(parent, character, lineage_data, background_data, cla
     tk.Label(frame, text="Class Choices", font=("Arial", 16), bg="#F7F6ED").pack(pady=10)
     class_skills = json.loads(class_data['skill_proficiencies'])
     skill_options = fetch_skill_options(class_skills)
-    create_skill_selection(frame, skill_options, character.get('class_skills', []), class_skills[0]['choose']['count'], lambda skills: character.update({'class_skills': skills}))
+    create_skill_selection(frame, skill_options, character.get('class_skills', []), class_skills[0]['choose']['count'], lambda skills: update_character_skills(character['id'], list(set(character.get('skills', []) + skills))))
 
     frame.pack(fill=tk.BOTH, expand=True)
     return frame

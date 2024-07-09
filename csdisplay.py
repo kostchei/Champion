@@ -222,7 +222,6 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
     update_character_skills(character_id, skills)
     update_character_saves(character_id, saves)
 
-
 def display_character(character_id):
     character = fetch_character(character_id)
     if not character:
