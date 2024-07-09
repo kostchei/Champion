@@ -247,12 +247,14 @@ def display_character(character_id):
     main_frame = tk.Frame(root, bg="#F7F6ED")
     main_frame.pack(fill=tk.BOTH, expand=True)
 
-    notebook = ttk.Notebook(main_frame)
-    notebook.pack(side=tk.LEFT, fill=tk.Y)
-
+    # Configure the style for vertical tabs
     style = ttk.Style()
-    style.configure('lefttab.TNotebook', tabposition='wn')
-    notebook.configure(style='lefttab.TNotebook')
+    style.theme_use('clam')  # or any other theme that supports vertical tabs
+    style.configure("Vertical.TNotebook", tabposition='wn')  # 'wn' for west-north (left-top)
+    style.configure("Vertical.TNotebook.Tab", width=30, padding=50,font=("Arial", 16) )  # Adjust width and padding as needed
+
+    notebook = ttk.Notebook(main_frame, style="Vertical.TNotebook")
+    notebook.pack(side=tk.LEFT, fill=tk.Y)
 
     content_frame = tk.Frame(main_frame)
     content_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
