@@ -3,6 +3,8 @@ import json
 import os
 import sys
 import random
+import tkinter as tk
+from tkinter import ttk, messagebox
 from contextlib import closing
 import logging
 import subprocess
@@ -61,6 +63,65 @@ def fetch_class_details(class_name):
                 FROM classes WHERE name=?
             ''', (class_name,))
             return cursor.fetchone()
+
+def fetch_racial_bonuses(race):
+    """ Fetch racial bonuses from the database using the race name. """
+    with closing(sqlite3.connect(DB_PATH)) as conn:
+        with closing(conn.cursor()) as cursor:
+            cursor.execute('''
+                SELECT ability_score_increase 
+                FROM lineages WHERE name=?
+            ''', (race,))
+            result = cursor.fetchone()
+            return json.loads(result[0]) if result else None
+
+def apply_racial_bonuses(stats, racial_bonuses):
+    """ Apply racial bonuses to the stats. """
+    if "Choice" in racial_bonuses:
+        choices = racial_bonuses["Choice"]
+        root = tk.Tk()
+        root.title("Stat Increase")
+        root.geometry("400x300")
+        root.configure(bg="#F7F6ED")
+
+        tk.Label(root, text=f"Choose {choices} stats to increase by 1", font=("Arial", 16), bg="#F7F6ED").pack(pady=10)
+
+        stat_var1 = tk.StringVar()
+        stat_var2 = tk.StringVar()
+
+        stats_list = list(stats.keys())
+
+        ttk.Label(root, text="First Stat:", font=("Arial", 16), background="#F7F6ED").pack(pady=5)
+        stat_choice1 = ttk.Combobox(root, textvariable=stat_var1, values=stats_list, font=("Arial", 16))
+        stat_choice1.pack(pady=5)
+
+        ttk.Label(root, text="Second Stat (optional):", font=("Arial", 16), background="#F7F6ED").pack(pady=5)
+        stat_choice2 = ttk.Combobox(root, textvariable=stat_var2, values=stats_list, font=("Arial", 16))
+        stat_choice2.pack(pady=5)
+
+        def on_submit():
+            selected_stat1 = stat_var1.get()
+            selected_stat2 = stat_var2.get()
+
+            if not selected_stat1:
+                messagebox.showerror("Error", "You must select at least one stat.")
+                return
+
+            if selected_stat1 in stats:
+                stats[selected_stat1] += 1
+            if selected_stat2 and selected_stat2 in stats:
+                stats[selected_stat2] += 1
+            else:
+                stats[selected_stat1] += 1
+
+            root.destroy()
+
+        tk.Button(root, text="Submit", font=("Arial", 16), command=on_submit).pack(pady=20)
+        root.mainloop()
+    else:
+        for stat, bonus in racial_bonuses.items():
+            stats[stat] += bonus
+    return stats
 
 def adjust_stats_for_class(stats, class_details):
     """ Adjust stats based on the class details. """
@@ -163,6 +224,15 @@ def main(character_id):
 
     # Adjust stats based on class details
     stats = adjust_stats_for_class(stats, class_details)
+
+    # Fetch racial bonuses
+    racial_bonuses = fetch_racial_bonuses(character_data["race"])
+    if not racial_bonuses:
+        logger.error(f"No racial bonuses found for race {character_data['race']}")
+        return
+
+    # Apply racial bonuses
+    stats = apply_racial_bonuses(stats, racial_bonuses)
 
     # Add primary and secondary stats to saves
     saves = [class_details[0].title(), class_details[1].title()]

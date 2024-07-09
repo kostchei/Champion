@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk
 import sqlite3
 import json
 import os
@@ -163,66 +163,6 @@ def get_stat_modifier(stat_value):
     
     return result["modifier"] if result else 0
 
-def apply_ability_score_increase(root, character_stats, lineage_data, character_id, character):
-    """ Apply ability score increases to character stats. """
-    increase = json.loads(lineage_data["ability_score_increase"])
-    
-    if "choice" in increase:
-        choice_window = tk.Toplevel(root)
-        choice_window.title("Stat Increase")
-        choice_window.geometry("300x200")
-        choice_window.configure(bg="#F7F6ED")
-
-        tk.Label(choice_window, text=f"Choose a stat to increase by {increase['choice']} (options: {', '.join(character_stats.keys())}):", font=("Arial", 12), bg="#F7F6ED").pack(pady=10)
-        chosen_stat_var = tk.StringVar(choice_window)
-        chosen_stat_dropdown = ttk.Combobox(choice_window, textvariable=chosen_stat_var, values=list(character_stats.keys()), font=("Arial", 12))
-        chosen_stat_dropdown.pack(pady=10)
-
-        def on_select():
-            chosen_stat = chosen_stat_var.get()
-            if chosen_stat in character_stats:
-                character_stats[chosen_stat] += increase["choice"]
-                update_character_stats(character_id, character_stats)
-                choice_window.destroy()
-            else:
-                tk.messagebox.showerror("Error", f"Invalid choice. No changes made to character stats.")
-                choice_window.destroy()
-
-        tk.Button(choice_window, text="OK", command=on_select, bg="#C8C8B4", fg="#1E2832", font=("Arial", 12)).pack(pady=10)
-        choice_window.transient(root)
-        choice_window.grab_set()
-        root.wait_window(choice_window)
-    else:
-        # Apply the ability score increases directly
-        for stat, value in increase.items():
-            character_stats[stat] += value
-    
-    # Create a list of keys to avoid changing the dictionary size during iteration
-    keys = list(character_stats.keys())
-    for stat in keys:
-        if isinstance(character_stats[stat], int):  # Ensure only int values are passed to get_stat_modifier
-            character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
-
-    skills = {}
-    saves = {}
-    for attribute, skills_and_saves in {
-        "Strength": ["str_save", "athletics"], 
-        "Dexterity": ["dex_save", "acrobatics", "sleight_of_hand", "stealth"],
-        "Constitution": ["con_save"], 
-        "Intelligence": ["int_save", "arcana", "history", "investigation", "nature", "religion"],
-        "Wisdom": ["wis_save", "animal_handling", "insight", "medicine", "perception", "survival"],
-        "Charisma": ["cha_save", "deception", "intimidation", "performance", "persuasion"]
-    }.items():
-        modifier = character_stats[f"{attribute}_modifier"]
-        for skill_or_save in skills_and_saves:
-            if "save" in skill_or_save:
-                saves[skill_or_save] = modifier + (character_stats['proficiency_bonus'] if skill_or_save in character.get('class_skills', []) else 0)
-            else:
-                skills[skill_or_save] = modifier + (character_stats['proficiency_bonus'] if skill_or_save in character.get('class_skills', []) else 0)
-    
-    update_character_skills(character_id, skills)
-    update_character_saves(character_id, saves)
-
 def display_character(character_id):
     character = fetch_character(character_id)
     if not character:
@@ -251,7 +191,7 @@ def display_character(character_id):
     style = ttk.Style()
     style.theme_use('clam')  # or any other theme that supports vertical tabs
     style.configure("Vertical.TNotebook", tabposition='wn')  # 'wn' for west-north (left-top)
-    style.configure("Vertical.TNotebook.Tab", width=30, padding=50,font=("Arial", 16) )  # Adjust width and padding as needed
+    style.configure("Vertical.TNotebook.Tab", width=30, padding=50, font=("Arial", 16))  # Adjust width and padding as needed
 
     notebook = ttk.Notebook(main_frame, style="Vertical.TNotebook")
     notebook.pack(side=tk.LEFT, fill=tk.Y)
@@ -259,9 +199,9 @@ def display_character(character_id):
     content_frame = tk.Frame(main_frame)
     content_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
-    lineage_data = fetch_data("lineages", "name", character['race'])
     background_data = fetch_data("backgrounds", "name", character['background'])
     class_data = fetch_data("classes", "name", character['class'])
+    lineage_data = fetch_data("lineages", "name", character['race'])
     
     character_stats = {
         "Strength": character['strength'],
@@ -276,7 +216,9 @@ def display_character(character_id):
         "proficiency_bonus": character['proficiency_bonus']
     }
 
-    apply_ability_score_increase(root, character_stats, lineage_data, character_id, character)
+    # Calculate and add stat modifiers to character_stats
+    for stat in ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]:
+        character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
 
     primary_stat = class_data.get('primary_stat', '')
     secondary_stat = class_data.get('secondary_stat', '')
