@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, simpledialog, messagebox
+from tkinter import ttk, messagebox
 import sqlite3
 import json
 import os
@@ -200,7 +200,8 @@ def apply_ability_score_increase(root, character_stats, lineage_data, character_
     # Create a list of keys to avoid changing the dictionary size during iteration
     keys = list(character_stats.keys())
     for stat in keys:
-        character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
+        if isinstance(character_stats[stat], int):  # Ensure only int values are passed to get_stat_modifier
+            character_stats[f"{stat}_modifier"] = get_stat_modifier(character_stats[stat])
 
     skills = {}
     saves = {}
@@ -266,7 +267,11 @@ def display_character(character_id):
         "Constitution": character['constitution'],
         "Intelligence": character['intelligence'],
         "Wisdom": character['wisdom'],
-        "Charisma": character['charisma']
+        "Charisma": character['charisma'],
+        "skillProficiencies": json.loads(character['skillProficiencies']),
+        "saves": json.loads(character['saves']),
+        "level": character['level'],
+        "proficiency_bonus": character['proficiency_bonus']
     }
 
     apply_ability_score_increase(root, character_stats, lineage_data, character_id, character)

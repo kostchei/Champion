@@ -1,5 +1,6 @@
 import tkinter as tk
-from utils.db_utils import get_stat_modifier, get_skill_bonus, get_db_connection
+import json
+from utils.db_utils import get_stat_modifier, get_db_connection
 
 def create_stats_frame(parent, character_stats, level, proficiency_bonus, primary_stat, secondary_stat, character_id):
     """ Create the stats frame. """
@@ -18,11 +19,11 @@ def create_stats_frame(parent, character_stats, level, proficiency_bonus, primar
     cursor = conn.cursor()
     
     # Fetch skills and saves for the character
-    cursor.execute('SELECT skill, value FROM character_skills WHERE character_id = ?', (character_id,))
-    skills = dict(cursor.fetchall())
+    cursor.execute('SELECT skillProficiencies, saves FROM characters WHERE id = ?', (character_id,))
+    character_data = cursor.fetchone()
     
-    cursor.execute('SELECT save, value FROM character_saves WHERE character_id = ?', (character_id,))
-    saves = dict(cursor.fetchall())
+    skill_proficiencies = json.loads(character_data['skillProficiencies'])
+    saves_proficiencies = json.loads(character_data['saves'])
     
     conn.close()
 
@@ -34,10 +35,12 @@ def create_stats_frame(parent, character_stats, level, proficiency_bonus, primar
         tk.Label(frame, text=f"{attribute_value} ({attribute_modifier:+})", font=("Arial", 14), bg="#F7F6ED", fg="#1E2832").grid(row=row_offset, column=1, sticky="w", padx=10, pady=5)
         row_offset += 1
         for skill_or_save in skills_and_saves:
-            bullet = "●" if skill_or_save in character_stats.get("class_skills", []) else "○"
-            skill_bonus = skills.get(skill_or_save, 0)
-            save_bonus = saves.get(skill_or_save, 0)
-            bonus = skill_bonus if "save" not in skill_or_save else save_bonus
+            if "save" in skill_or_save:
+                proficiency = proficiency_bonus if attribute in saves_proficiencies else 0
+            else:
+                proficiency = proficiency_bonus if skill_or_save in skill_proficiencies else 0
+            bonus = attribute_modifier + proficiency
+            bullet = "●" if proficiency else "○"
             tk.Label(frame, text=f"{bullet} {skill_or_save.replace('_', ' ').title()} ({bonus:+})", font=("Arial", 14), bg="#F7F6ED", fg="#1E2832").grid(row=row_offset, column=1, sticky="w", padx=10, pady=2)
             row_offset += 1
 
