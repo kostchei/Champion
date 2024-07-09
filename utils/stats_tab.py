@@ -9,8 +9,8 @@ def create_stats_frame(parent, character_stats, level, proficiency_bonus, primar
     attributes_skills = {
         "Strength": ["str_save", "athletics"], 
         "Intelligence": ["int_save", "arcana", "history", "investigation", "nature", "religion"],
-        "Wisdom": ["wis_save", "animal_handling", "insight", "medicine", "perception", "survival"], 
-        "Dexterity": ["dex_save", "acrobatics", "sleight_of_hand", "stealth"],
+        "Wisdom": ["wis_save", "animal handling", "insight", "medicine", "perception", "survival"], 
+        "Dexterity": ["dex_save", "acrobatics", "sleight of hand", "stealth"],
         "Constitution": ["con_save"], 
         "Charisma": ["cha_save", "deception", "intimidation", "performance", "persuasion"]
     }
@@ -38,7 +38,7 @@ def create_stats_frame(parent, character_stats, level, proficiency_bonus, primar
             if "save" in skill_or_save:
                 proficiency = proficiency_bonus if attribute in saves_proficiencies else 0
             else:
-                proficiency = proficiency_bonus if skill_or_save in skill_proficiencies else 0
+                proficiency = proficiency_bonus if skill_or_save.replace("_", " ") in skill_proficiencies else 0
             bonus = attribute_modifier + proficiency
             bullet = "●" if proficiency else "○"
             tk.Label(frame, text=f"{bullet} {skill_or_save.replace('_', ' ').title()} ({bonus:+})", font=("Arial", 14), bg="#F7F6ED", fg="#1E2832").grid(row=row_offset, column=1, sticky="w", padx=10, pady=2)
