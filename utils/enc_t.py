@@ -12,7 +12,6 @@ def get_resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def get_active_character_level(db_path):
-    print(f"Database path: {db_path}")  # Debugging line
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT id, level FROM characters WHERE active = 'true'")
@@ -43,6 +42,77 @@ def determine_difficulty():
     else:
         return "hard"
 
+def get_cr_for_xp(db_path, xp_limit):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? ORDER BY xp DESC", (xp_limit,))
+    cr = cursor.fetchone()
+    conn.close()
+    return cr[0] if cr else "0"
+
+def method_solo(db_path, encounter_budget):
+    reduced_budget = encounter_budget / 1.5
+    cr = get_cr_for_xp(db_path, reduced_budget)
+    return {"CRs": [cr]}
+
+def method_ii(db_path, encounter_budget):
+    reduced_budget = encounter_budget / 4
+    cr = get_cr_for_xp(db_path, reduced_budget)
+    return {"CRs": [cr, cr]}
+
+def method_iii(db_path, encounter_budget):
+    reduced_budget = encounter_budget / 7.5
+    cr = get_cr_for_xp(db_path, reduced_budget)
+    return {"CRs": [cr, cr, cr]}
+
+def method_iv(db_path, encounter_budget):
+    reduced_budget = encounter_budget / 2
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? ORDER BY xp DESC", (reduced_budget,))
+    cr1 = cursor.fetchone()
+    if cr1:
+        cr1_id = cursor.execute("SELECT id FROM xp4cr WHERE cr = ?", (cr1[0],)).fetchone()[0]
+        cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? AND id != ? AND id IN (?, ?) ORDER BY xp DESC", 
+                       (reduced_budget - cr1[1], cr1_id, cr1_id - 1, cr1_id + 1))
+        cr2 = cursor.fetchone()
+        if cr2:
+            conn.close()
+            return {"CRs": [cr1[0], cr2[0]]}
+        else:
+            cursor.execute("SELECT cr FROM xp4cr WHERE xp <= ? AND id != ? ORDER BY xp DESC LIMIT 1", 
+                           (reduced_budget - cr1[1], cr1_id))
+            cr2 = cursor.fetchone()
+            conn.close()
+            if cr2:
+                return {"CRs": [cr1[0], cr2[0]]}
+    conn.close()
+    return {"CRs": ["0", "1/8"]}
+
+def method_v(db_path, encounter_budget):
+    reduced_budget = encounter_budget / 3
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? ORDER BY xp DESC", (reduced_budget,))
+    cr1 = cursor.fetchone()
+    if cr1:
+        cr1_id = cursor.execute("SELECT id FROM xp4cr WHERE cr = ?", (cr1[0],)).fetchone()[0]
+        cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? AND id != ? AND id IN (?, ?) ORDER BY xp DESC", 
+                       (reduced_budget - cr1[1], cr1_id, cr1_id - 1, cr1_id + 1))
+        cr2 = cursor.fetchone()
+        if cr2:
+            conn.close()
+            return {"CRs": [cr1[0], cr1[0], cr2[0]]}
+        else:
+            cursor.execute("SELECT cr FROM xp4cr WHERE xp <= ? AND id != ? ORDER BY xp DESC LIMIT 1", 
+                           (reduced_budget - cr1[1], cr1_id))
+            cr2 = cursor.fetchone()
+            conn.close()
+            if cr2:
+                return {"CRs": [cr1[0], cr1[0], cr2[0]]}
+    conn.close()
+    return {"CRs": ["0", "0", "1/8"]}
+
 def check_encounter_budget(encounter_budget):
     methods = ["solo", "method_ii", "method_iii", "method_iv", "method_v"]
     available_methods = ["solo"]
@@ -68,12 +138,24 @@ def encounter_script(db_path):
     
     method = check_encounter_budget(encounter_budget)
     
+    if method == "solo":
+        result = method_solo(db_path, encounter_budget)
+    elif method == "method_ii":
+        result = method_ii(db_path, encounter_budget)
+    elif method == "method_iii":
+        result = method_iii(db_path, encounter_budget)
+    elif method == "method_iv":
+        result = method_iv(db_path, encounter_budget)
+    elif method == "method_v":
+        result = method_v(db_path, encounter_budget)
+    
     encounter_info = {
         "character_id": character_id,
         "character_level": character_level,
         "difficulty": difficulty,
         "encounter_budget": encounter_budget,
-        "method": method
+        "method": method,
+        "CRs": result["CRs"]
     }
     
     return encounter_info
@@ -81,6 +163,5 @@ def encounter_script(db_path):
 # Example usage
 if __name__ == "__main__":
     DB_PATH = get_resource_path(os.path.join('..', 'tables', 'game_database.db'))
-    print(f"Resolved database path: {DB_PATH}")  # Debugging line
     encounter_info = encounter_script(DB_PATH)
     print(encounter_info)
