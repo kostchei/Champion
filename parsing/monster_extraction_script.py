@@ -50,6 +50,6 @@ def main(txt_path, folder_path, output_path):
 # Example usage
 txt_path = 'monsters.txt'
 folder_path = r'D:\Code\5etools\data\bestiary'
-output_path = 'completed.json'
+output_path = 'completed_new.json'
 
 main(txt_path, folder_path, output_path)

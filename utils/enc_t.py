@@ -50,6 +50,18 @@ def get_cr_for_xp(db_path, xp_limit):
     conn.close()
     return cr[0] if cr else "0"
 
+def get_actual_xp(db_path, cr_list):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    total_xp = 0
+    for cr in cr_list:
+        cursor.execute("SELECT xp FROM xp4cr WHERE cr = ?", (cr,))
+        xp = cursor.fetchone()
+        if xp:
+            total_xp += xp[0]
+    conn.close()
+    return total_xp
+
 def method_solo(db_path, encounter_budget):
     reduced_budget = encounter_budget / 1.5
     cr = get_cr_for_xp(db_path, reduced_budget)
@@ -97,7 +109,7 @@ def method_v(db_path, encounter_budget):
     cr1 = cursor.fetchone()
     if cr1:
         cr1_id = cursor.execute("SELECT id FROM xp4cr WHERE cr = ?", (cr1[0],)).fetchone()[0]
-        cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? AND id != ? AND id IN (?, ?) ORDER BY xp DESC", 
+        cursor.execute("SELECT cr, xp FROM xp4cr WHERE xp <= ? AND id != ? AND id IN (?, ?, ?) ORDER BY xp DESC", 
                        (reduced_budget - cr1[1], cr1_id, cr1_id - 1, cr1_id + 1))
         cr2 = cursor.fetchone()
         if cr2:
@@ -131,6 +143,25 @@ def check_encounter_budget(encounter_budget):
         available_methods.remove("solo")
         return random.choice(available_methods) if available_methods else "solo"
 
+def insert_encounter_info(db_path, encounter_info):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute('''
+    INSERT INTO encounter_pad (character_id, character_level, difficulty, encounter_budget, method, CR1, CR2, CR3, 
+                               monster1, hpm1, monster2, hpm2, monster3, hpm3, loot1, loot2, loot3, actualxp)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (encounter_info['character_id'], encounter_info['character_level'], encounter_info['difficulty'], 
+          encounter_info['encounter_budget'], encounter_info['method'], encounter_info['CRs'][0], 
+          encounter_info['CRs'][1] if len(encounter_info['CRs']) > 1 else None, 
+          encounter_info['CRs'][2] if len(encounter_info['CRs']) > 2 else None, 
+          encounter_info.get('monster1'), encounter_info.get('hpm1'), 
+          encounter_info.get('monster2'), encounter_info.get('hpm2'), 
+          encounter_info.get('monster3'), encounter_info.get('hpm3'), 
+          encounter_info.get('loot1'), encounter_info.get('loot2'), encounter_info.get('loot3'),
+          encounter_info['actualxp']))
+    conn.commit()
+    conn.close()
+
 def encounter_script(db_path):
     character_id, character_level = get_active_character_level(db_path)
     difficulty = determine_difficulty()
@@ -149,15 +180,28 @@ def encounter_script(db_path):
     elif method == "method_v":
         result = method_v(db_path, encounter_budget)
     
+    actual_xp = get_actual_xp(db_path, result["CRs"])
+    
     encounter_info = {
         "character_id": character_id,
         "character_level": character_level,
         "difficulty": difficulty,
         "encounter_budget": encounter_budget,
         "method": method,
-        "CRs": result["CRs"]
+        "CRs": result["CRs"],
+        "monster1": "Monster1",  # Placeholder for actual monster data
+        "hpm1": 10,              # Placeholder for actual HP
+        "monster2": "Monster2",  # Placeholder for actual monster data
+        "hpm2": 20,              # Placeholder for actual HP
+        "monster3": "Monster3",  # Placeholder for actual monster data
+        "hpm3": 30,              # Placeholder for actual HP
+        "loot1": "individual",   # Placeholder for actual loot
+        "loot2": "food",         # Placeholder for actual loot
+        "loot3": "components",   # Placeholder for actual loot
+        "actualxp": actual_xp
     }
-    
+
+    insert_encounter_info(db_path, encounter_info)
     return encounter_info
 
 # Example usage
