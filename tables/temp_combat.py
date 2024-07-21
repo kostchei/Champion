@@ -1,3 +1,4 @@
+# /tables/temp_combat.py
 import sqlite3
 import json
 import random
@@ -139,14 +140,30 @@ def apply_post_attack_conditions(attack, target_saves, condition_tracker, target
                             target_hitpoints -= damage
     return target_hitpoints
 
-# Function to resolve an attack
+# Function to resolve an attack with critical hits
 def resolve_attack(attack, target_ac, target_hitpoints, target_saves, attacker_conditions, defender_conditions):
     condition_tracker = apply_pre_attack_conditions(attacker_conditions, defender_conditions)
     tohit = parse_bonus(attack['tohit'])
     roll = determine_attack_roll(condition_tracker)
+    is_critical = False
+
+    # Check for critical hit
+    if roll == 20:
+        is_critical = True
+    elif roll >= 19 and 'improved critical 19' in attacker_conditions:
+        is_critical = True
+    elif roll >= 18 and 'improved critical 18' in attacker_conditions:
+        is_critical = True
+
     if roll + tohit >= target_ac:
         print(f"Attack {attack['name']} hits!")
         num_dice, dice_type, bonus = parse_damage(attack['damage'])
+
+        # Double the dice for critical hit
+        if is_critical:
+            num_dice *= 2
+            print(f"Critical hit! Rolling {num_dice}d{dice_type} for damage.")
+
         damage = sum(random.randint(1, dice_type) for _ in range(num_dice)) + bonus
         print(f"Damage: {damage}")
         target_hitpoints -= damage
@@ -154,6 +171,7 @@ def resolve_attack(attack, target_ac, target_hitpoints, target_saves, attacker_c
     else:
         print(f"Attack {attack['name']} misses.")
     return target_hitpoints, condition_tracker
+
 
 # Example usage
 monster_id = 30
